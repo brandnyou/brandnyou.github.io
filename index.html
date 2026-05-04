@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Brand&You | 브랜드앤유 — 면세점 MD 8년 · 유통 19년 공동구매 중계 전문</title>
-  <meta name="description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭하는 공동구매 중계. 제조사와 인플루언서를 MD의 눈으로 연결합니다."/>
-  <meta name="keywords" content="공동구매,인플루언서,공구중계,브랜드앤유,MD매칭,면세점MD,유통벤더,제조사연결"/>
-  <meta property="og:title" content="Brand&You | 면세점 MD 8년 · 유통 19년 공동구매 중계 전문"/>
-  <meta property="og:description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭합니다."/>
+  <title>브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계 전문</title>
+  <meta name="description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭하는 생활용품·뷰티 공동구매 중계. 직원 5명 이하 중소제조사 전문 파트너."/>
+  <meta name="keywords" content="공동구매,인플루언서,공구중계,브랜드앤유,MD매칭,면세점MD,생활용품공구,뷰티공구"/>
+  <meta property="og:title" content="브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계 전문"/>
+  <meta property="og:description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭합니다. 중소 제조사 전문 공동구매 중계."/>
   <meta property="og:url" content="https://brandnyu.com"/>
   <meta property="og:type" content="website"/>
   <link rel="canonical" href="https://brandnyu.com"/>
@@ -18,7 +18,7 @@
   <style>
   /* ── TOKENS ── */
   :root{
-    --teal:#00c5b4;--teal-d:#009e90;--teal-l:#e6faf8;--teal-glow:rgba(0,197,180,.18);
+    --teal:#00c5b4;--teal-d:#009e90;--teal-l:#e6faf8;--teal-glow:rgba(0,197,180,.16);
     --ink:#0a0f1e;--ink-70:rgba(10,15,30,.7);--ink-45:rgba(10,15,30,.45);--ink-10:rgba(10,15,30,.1);
     --white:#fff;--off:#f6f7fa;--warm:#fdf9f6;
     --r6:6px;--r10:10px;--r16:16px;--r999:999px;
@@ -35,15 +35,11 @@
   .container{max-width:1140px;margin:0 auto;padding:0 48px}
 
   /* ── NAV ── */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:66px;display:flex;align-items:center;padding:0 48px;background:rgba(255,255,255,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ink-10);transition:box-shadow .3s}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:66px;display:flex;align-items:center;padding:0 48px;background:rgba(255,255,255,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ink-10);transition:box-shadow .3s}
   .nav.scrolled{box-shadow:var(--shadow-md)}
   .nav-inner{width:100%;max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-
-  /* SVG 로고 */
-  .logo-svg{height:36px;width:auto}
-
   .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{font-size:13px;font-weight:500;color:var(--ink-45);transition:color .2s;letter-spacing:.1px}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--ink-45);transition:color .2s}
   .nav-links a:hover{color:var(--ink)}
   .nav-right{display:flex;gap:8px}
   .nav-kakao{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:#FEE500;color:#3B1F00;padding:9px 18px;border-radius:var(--r6);transition:all .2s}
@@ -55,193 +51,204 @@
 
   /* ── HERO ── */
   .hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:55% 45%;padding-top:66px;position:relative;overflow:hidden}
-  .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 60% 60% at 20% 50%,rgba(0,197,180,.12) 0%,transparent 70%);pointer-events:none}
-  .hero-left{padding:90px 60px 90px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
-  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,197,180,.1);border:1px solid rgba(0,197,180,.25);color:var(--teal);padding:7px 16px;border-radius:var(--r999);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:36px;width:fit-content}
-  .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
-  .hero-h1{font-family:'DM Sans',sans-serif;font-size:clamp(38px,4.2vw,62px);font-weight:900;line-height:1.08;letter-spacing:-2.5px;color:var(--white);margin-bottom:8px}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 18% 52%,rgba(0,197,180,.11) 0%,transparent 68%);pointer-events:none}
+  .hero-left{padding:88px 56px 88px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,197,180,.1);border:1px solid rgba(0,197,180,.22);color:var(--teal);padding:7px 16px;border-radius:var(--r999);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:34px;width:fit-content}
+  .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero-h1{font-family:'DM Sans',sans-serif;font-size:clamp(36px,4vw,60px);font-weight:900;line-height:1.08;letter-spacing:-2.5px;color:var(--white);margin-bottom:8px}
   .hero-h1 .accent{color:var(--teal)}
-  .hero-h1-sub{font-size:clamp(15px,1.6vw,20px);font-weight:300;color:rgba(255,255,255,.38);letter-spacing:.3px;margin-bottom:30px;font-style:italic}
-  .hero-body{font-size:16px;color:rgba(255,255,255,.6);line-height:2;margin-bottom:52px;word-break:keep-all;max-width:420px}
+  .hero-sub{font-size:clamp(14px,1.5vw,18px);font-weight:300;color:rgba(255,255,255,.36);letter-spacing:.3px;margin-bottom:28px;font-style:italic}
+  .hero-body{font-size:16px;color:rgba(255,255,255,.58);line-height:2;margin-bottom:48px;word-break:keep-all;max-width:420px}
   .hero-body b{color:var(--teal);font-weight:600}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--ink);background:var(--teal);padding:14px 26px;border-radius:var(--r6);transition:all .25s}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.2px;color:var(--ink);background:var(--teal);padding:14px 26px;border-radius:var(--r6);transition:all .25s}
   .btn-primary:hover{background:var(--teal-d);transform:translateY(-2px);box-shadow:var(--shadow-teal)}
-  .btn-outline{font-size:13px;font-weight:600;color:rgba(255,255,255,.6);border:1.5px solid rgba(255,255,255,.18);padding:13px 26px;border-radius:var(--r6);transition:all .25s}
+  .btn-outline{font-size:13px;font-weight:600;color:rgba(255,255,255,.58);border:1.5px solid rgba(255,255,255,.16);padding:13px 26px;border-radius:var(--r6);transition:all .25s}
   .btn-outline:hover{border-color:var(--teal);color:var(--teal)}
   .hero-right{position:relative;overflow:hidden}
-  .hero-right img{width:100%;height:100%;object-fit:cover;opacity:.45;filter:grayscale(15%)}
-  .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(10,15,30,.15) 45%,transparent 100%);z-index:1}
-  .hero-right::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(0deg,var(--ink),transparent);z-index:1}
-  /* 히어로 stat 뱃지 */
-  .hero-stat-col{position:absolute;right:36px;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:10px}
-  .h-stat{background:rgba(10,15,30,.72);border:1px solid rgba(0,197,180,.22);backdrop-filter:blur(16px);border-radius:var(--r10);padding:14px 18px;text-align:center;min-width:110px}
-  .h-stat-num{font-family:'DM Sans',sans-serif;font-size:26px;font-weight:900;color:var(--white);line-height:1}
+  .hero-right img{width:100%;height:100%;object-fit:cover;opacity:.42;filter:grayscale(10%)}
+  .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(10,15,30,.12) 45%,transparent 100%);z-index:1}
+  .hero-right::after{content:'';position:absolute;bottom:0;left:0;right:0;height:150px;background:linear-gradient(0,var(--ink),transparent);z-index:1}
+  .hero-stats{position:absolute;right:32px;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:10px}
+  .h-stat{background:rgba(10,15,30,.7);border:1px solid rgba(0,197,180,.2);backdrop-filter:blur(14px);border-radius:var(--r10);padding:14px 18px;text-align:center;min-width:108px}
+  .h-stat-num{font-family:'DM Sans',sans-serif;font-size:25px;font-weight:900;color:var(--white);line-height:1}
   .h-stat-num em{color:var(--teal);font-style:normal}
-  .h-stat-label{font-size:9px;color:rgba(255,255,255,.38);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+  .h-stat-lbl{font-size:9px;color:rgba(255,255,255,.36);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
 
   /* ── TICKER ── */
   .ticker{overflow:hidden;background:var(--teal);padding:10px 0}
-  .ticker-track{display:flex;width:max-content;animation:tick 24s linear infinite}
+  .ticker-track{display:flex;width:max-content;animation:tick 26s linear infinite}
   @keyframes tick{to{transform:translateX(-50%)}}
-  .ticker-item{white-space:nowrap;font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);padding:0 28px;display:flex;align-items:center;opacity:.9}
-  .ticker-item::after{content:'◆';font-size:5px;opacity:.3;margin-left:28px}
+  .t-item{white-space:nowrap;font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);padding:0 28px;display:flex;align-items:center;opacity:.88}
+  .t-item::after{content:'◆';font-size:5px;opacity:.28;margin-left:28px}
 
   /* ── STATS BAR ── */
   .stats-bar{background:var(--off)}
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
   .s-card{background:var(--white);padding:48px 36px;position:relative;overflow:hidden;transition:background .3s,transform .3s;cursor:default}
   .s-card:hover{background:var(--ink);transform:translateY(-4px)}
-  .s-card:hover .s-num,.s-card:hover .s-unit,.s-card:hover .s-label,.s-card:hover .s-desc{color:var(--white)!important}
+  .s-card:hover .s-num,.s-card:hover .s-unit,.s-card:hover .s-lbl,.s-card:hover .s-desc{color:var(--white)!important}
   .s-card:hover .s-line{background:var(--teal)}
-  .s-num{font-family:'DM Sans',sans-serif;font-size:clamp(40px,4.2vw,58px);font-weight:900;letter-spacing:-2px;color:var(--ink);line-height:1;transition:color .3s}
+  .s-num{font-family:'DM Sans',sans-serif;font-size:clamp(40px,4vw,56px);font-weight:900;letter-spacing:-2px;color:var(--ink);line-height:1;transition:color .3s}
   .s-unit{font-size:20px;color:var(--teal);transition:color .3s}
   .s-line{width:24px;height:2px;background:var(--teal);margin:12px 0;transition:background .3s}
-  .s-label{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:4px;transition:color .3s}
+  .s-lbl{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:4px;transition:color .3s}
   .s-desc{font-size:12px;color:var(--ink-45);line-height:1.75;transition:color .3s}
-  .s-bg-num{position:absolute;bottom:-10px;right:10px;font-family:'DM Sans',sans-serif;font-size:88px;font-weight:900;color:rgba(0,0,0,.025);line-height:1;pointer-events:none}
+  .s-bg{position:absolute;bottom:-10px;right:10px;font-family:'DM Sans',sans-serif;font-size:86px;font-weight:900;color:rgba(0,0,0,.024);line-height:1;pointer-events:none}
 
-  /* ── PERSON SECTION ── */
+  /* ── PERSON ── */
   .person{padding:120px 0;background:var(--white)}
   .person-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
   .person-visual{position:relative}
-  .person-img-wrap{border-radius:var(--r16);overflow:hidden;aspect-ratio:4/5;background:var(--off)}
-  .person-img-wrap img{width:100%;height:100%;object-fit:cover}
-  .person-card{position:absolute;bottom:-24px;right:-24px;background:var(--ink);border-radius:var(--r10);padding:22px 26px;box-shadow:var(--shadow-md);min-width:180px}
-  .person-card-num{font-family:'DM Sans',sans-serif;font-size:36px;font-weight:900;color:var(--teal);line-height:1}
-  .person-card-label{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:.5px}
-  .person-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
-  .person-h2{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.2;letter-spacing:-.5px;margin-bottom:22px;word-break:keep-all}
-  .person-h2 em{color:var(--teal);font-style:normal}
-  .person-body{font-size:15px;color:var(--ink-70);line-height:2;margin-bottom:36px;word-break:keep-all}
-  .timeline{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--ink-10);padding-left:24px;margin-bottom:36px}
-  .tl-item{position:relative;padding:0 0 22px 0}
+  .p-img{border-radius:var(--r16);overflow:hidden;aspect-ratio:4/5;background:var(--off)}
+  .p-img img{width:100%;height:100%;object-fit:cover}
+  .p-badge{position:absolute;bottom:-20px;right:-20px;background:var(--ink);border-radius:var(--r10);padding:20px 24px;box-shadow:var(--shadow-md);min-width:170px}
+  .p-badge-num{font-family:'DM Sans',sans-serif;font-size:34px;font-weight:900;color:var(--teal);line-height:1}
+  .p-badge-lbl{font-size:11px;color:rgba(255,255,255,.48);margin-top:4px;letter-spacing:.5px}
+  .sec-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  .sec-h2{font-size:clamp(24px,3vw,40px);font-weight:900;line-height:1.2;letter-spacing:-.5px;margin-bottom:20px;word-break:keep-all}
+  .sec-h2 em{color:var(--teal);font-style:normal}
+  .person-body{font-size:15px;color:var(--ink-70);line-height:2;margin-bottom:32px;word-break:keep-all}
+  .timeline{border-left:2px solid var(--ink-10);padding-left:24px;margin-bottom:32px;display:flex;flex-direction:column;gap:0}
+  .tl-item{position:relative;padding-bottom:22px}
   .tl-item:last-child{padding-bottom:0}
   .tl-dot{position:absolute;left:-31px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--white);border:2px solid var(--teal)}
-  .tl-year{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:3px}
+  .tl-year{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:2px}
   .tl-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
   .tl-desc{font-size:13px;color:var(--ink-45);line-height:1.6}
 
+  /* ── TARGET CLIENT SECTION ── */
+  .target{padding:80px 0;background:var(--ink)}
+  .target-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .target-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,197,180,.8);margin-bottom:16px}
+  .target-h2{font-size:clamp(22px,2.8vw,36px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:20px;word-break:keep-all}
+  .target-h2 em{color:var(--teal);font-style:normal}
+  .target-body{font-size:15px;color:rgba(255,255,255,.55);line-height:1.95;margin-bottom:32px;word-break:keep-all}
+  .target-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r10);padding:20px 18px;transition:all .3s}
+  .tc:hover{background:rgba(0,197,180,.1);border-color:rgba(0,197,180,.3);transform:translateY(-3px)}
+  .tc-icon{font-size:24px;margin-bottom:10px}
+  .tc-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+  .tc-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.65;word-break:keep-all}
+  .target-not{background:rgba(255,255,255,.04);border-left:3px solid rgba(0,197,180,.5);border-radius:0 var(--r6) var(--r6) 0;padding:18px 20px;margin-top:16px}
+  .target-not-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,197,180,.7);margin-bottom:8px}
+  .target-not p{font-size:13px;color:rgba(255,255,255,.42);line-height:1.7}
+
   /* ── FOR WHOM ── */
   .forwho{display:grid;grid-template-columns:1fr 1fr}
-  .fw-pane{padding:96px 72px;position:relative;overflow:hidden}
+  .fw-pane{padding:92px 68px;position:relative;overflow:hidden}
   .fw-pane.dark{background:var(--ink)}
   .fw-pane.light{background:var(--teal)}
-  .fw-pane::after{content:'';position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;opacity:.08}
+  .fw-pane::after{content:'';position:absolute;bottom:-80px;right:-80px;width:260px;height:260px;border-radius:50%;opacity:.07}
   .fw-pane.dark::after{background:var(--teal)}
   .fw-pane.light::after{background:var(--ink)}
-  .fw-chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:var(--r999);margin-bottom:22px}
+  .fw-chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:var(--r999);margin-bottom:20px}
   .fw-pane.dark .fw-chip{background:rgba(0,197,180,.12);color:var(--teal)}
   .fw-pane.light .fw-chip{background:rgba(10,15,30,.12);color:var(--ink)}
-  .fw-h3{font-size:clamp(22px,2.5vw,32px);font-weight:900;line-height:1.2;margin-bottom:18px;word-break:keep-all}
+  .fw-h3{font-size:clamp(20px,2.4vw,30px);font-weight:900;line-height:1.2;margin-bottom:16px;word-break:keep-all}
   .fw-pane.dark .fw-h3{color:var(--white)}
   .fw-pane.light .fw-h3{color:var(--ink)}
-  .fw-body{font-size:14px;line-height:1.95;margin-bottom:32px;word-break:keep-all}
-  .fw-pane.dark .fw-body{color:rgba(255,255,255,.55)}
-  .fw-pane.light .fw-body{color:rgba(10,15,30,.65)}
-  .fw-list{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:36px}
-  .fw-li{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;font-weight:600;word-break:keep-all}
-  .fw-pane.dark .fw-li{color:rgba(255,255,255,.82)}
+  .fw-body{font-size:14px;line-height:1.95;margin-bottom:28px;word-break:keep-all}
+  .fw-pane.dark .fw-body{color:rgba(255,255,255,.52)}
+  .fw-pane.light .fw-body{color:rgba(10,15,30,.62)}
+  .fw-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+  .fw-li{display:flex;align-items:flex-start;gap:11px;font-size:13.5px;font-weight:600;word-break:keep-all}
+  .fw-pane.dark .fw-li{color:rgba(255,255,255,.8)}
   .fw-pane.light .fw-li{color:var(--ink)}
   .fw-icon{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:13px;flex-shrink:0}
-  .fw-pane.dark .fw-icon{background:rgba(0,197,180,.14)}
+  .fw-pane.dark .fw-icon{background:rgba(0,197,180,.13)}
   .fw-pane.light .fw-icon{background:rgba(10,15,30,.1)}
   .fw-btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:13px 22px;border-radius:var(--r6);transition:all .25s}
   .fw-pane.dark .fw-btn{background:var(--teal);color:var(--ink)}
   .fw-pane.dark .fw-btn:hover{background:var(--teal-d);transform:translateY(-2px)}
   .fw-pane.light .fw-btn{background:var(--ink);color:var(--white)}
-  .fw-pane.light .fw-btn:hover{opacity:.85;transform:translateY(-2px)}
+  .fw-pane.light .fw-btn:hover{opacity:.84;transform:translateY(-2px)}
 
-  /* ── NETWORK ── */
-  .network{padding:120px 0;background:var(--off)}
-  .sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
-  .sec-h2{font-size:clamp(26px,3.2vw,42px);font-weight:900;letter-spacing:-.5px;line-height:1.2}
-  .sec-h2 em{color:var(--teal);font-style:normal}
-  .net-hdr{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px}
+  /* ── NETWORK (좁혀진 카테고리) ── */
+  .network{padding:110px 0;background:var(--off)}
+  .net-hdr{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:60px}
   .net-sub{font-size:15px;color:var(--ink-45);line-height:1.9;word-break:keep-all}
-  .cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-  .cat-card{background:var(--white);border:1.5px solid var(--ink-10);border-radius:var(--r10);padding:20px 14px;text-align:center;transition:all .25s;cursor:default}
+  /* 카테고리: 생활용품·뷰티 집중 */
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .cat-card{background:var(--white);border:1.5px solid var(--ink-10);border-radius:var(--r10);padding:22px 16px;text-align:center;transition:all .25s;cursor:default;position:relative}
+  .cat-card.main{border-color:rgba(0,197,180,.35);background:var(--teal-l)}
   .cat-card:hover{border-color:var(--teal);box-shadow:0 6px 20px rgba(0,197,180,.14);transform:translateY(-3px)}
+  .cat-badge{position:absolute;top:-8px;right:10px;background:var(--teal);color:var(--ink);font-size:9px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:var(--r999)}
   .cat-emoji{font-size:26px;margin-bottom:8px}
-  .cat-name{font-size:12px;font-weight:700;margin-bottom:2px}
-  .cat-cnt{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--teal);font-weight:600}
+  .cat-name{font-size:12px;font-weight:800;margin-bottom:2px}
+  .cat-desc{font-size:11px;color:var(--ink-45);line-height:1.4}
 
   /* ── PROMISE ── */
-  .promise{padding:100px 0;background:var(--ink)}
-  .pr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06)}
-  .pr-card{padding:52px 44px;background:var(--ink);transition:background .3s}
+  .promise{padding:96px 0;background:var(--ink)}
+  .pr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.05)}
+  .pr-card{padding:50px 42px;background:var(--ink);transition:background .3s}
   .pr-card:hover{background:rgba(255,255,255,.04)}
-  .pr-icon{font-size:34px;margin-bottom:20px}
-  .pr-bar{width:24px;height:2px;background:var(--teal);margin-bottom:18px}
-  .pr-title{font-size:17px;font-weight:800;color:var(--white);margin-bottom:10px}
-  .pr-desc{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.85;word-break:keep-all}
+  .pr-icon{font-size:32px;margin-bottom:18px}
+  .pr-bar{width:22px;height:2px;background:var(--teal);margin-bottom:16px}
+  .pr-title{font-size:16px;font-weight:800;color:var(--white);margin-bottom:9px}
+  .pr-desc{font-size:13.5px;color:rgba(255,255,255,.42);line-height:1.85;word-break:keep-all}
 
   /* ── PROCESS ── */
-  .process{padding:120px 0;background:var(--white)}
-  .proc-hdr{text-align:center;margin-bottom:80px}
+  .process{padding:110px 0;background:var(--white)}
+  .proc-hdr{text-align:center;margin-bottom:72px}
   .proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-  .proc-steps::before{content:'';position:absolute;top:32px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);z-index:0}
-  .proc-step{padding:0 20px;text-align:center}
-  .proc-circle{width:64px;height:64px;border-radius:50%;background:var(--off);border:2px solid var(--ink-10);display:grid;place-items:center;margin:0 auto 20px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;position:relative;z-index:1;transition:all .3s}
+  .proc-steps::before{content:'';position:absolute;top:31px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);z-index:0}
+  .proc-step{padding:0 18px;text-align:center}
+  .proc-circle{width:62px;height:62px;border-radius:50%;background:var(--off);border:2px solid var(--ink-10);display:grid;place-items:center;margin:0 auto 18px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;position:relative;z-index:1;transition:all .3s}
   .proc-step:hover .proc-circle{background:var(--teal);border-color:var(--teal);color:var(--ink)}
-  .proc-title{font-size:13px;font-weight:800;margin-bottom:7px}
+  .proc-title{font-size:13px;font-weight:800;margin-bottom:6px}
   .proc-desc{font-size:12px;color:var(--ink-45);line-height:1.75;word-break:keep-all}
 
   /* ── CTA ── */
-  .cta-sec{padding:120px 0;background:var(--off);text-align:center}
-  .cta-inner{max-width:700px;margin:0 auto}
-  .cta-h2{font-size:clamp(28px,4vw,50px);font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:18px;word-break:keep-all}
+  .cta-sec{padding:110px 0;background:var(--off);text-align:center}
+  .cta-inner{max-width:680px;margin:0 auto}
+  .cta-h2{font-size:clamp(26px,4vw,48px);font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:16px;word-break:keep-all}
   .cta-h2 em{color:var(--teal);font-style:normal}
-  .cta-body{font-size:16px;color:var(--ink-45);line-height:1.9;margin-bottom:48px;word-break:keep-all}
+  .cta-body{font-size:15px;color:var(--ink-45);line-height:1.9;margin-bottom:44px;word-break:keep-all}
   .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
   /* ── CONTACT ── */
-  .contact{padding:120px 0;background:var(--white)}
+  .contact{padding:110px 0;background:var(--white)}
   .contact-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:80px}
-  .ct-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
-  .ct-h2{font-size:clamp(24px,2.8vw,38px);font-weight:900;letter-spacing:-.5px;margin-bottom:14px;word-break:keep-all}
-  .ct-body{font-size:14px;color:var(--ink-45);line-height:1.9;margin-bottom:36px;word-break:keep-all}
+  .ct-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:13px}
+  .ct-h2{font-size:clamp(22px,2.8vw,36px);font-weight:900;letter-spacing:-.5px;margin-bottom:13px;word-break:keep-all}
+  .ct-body{font-size:14px;color:var(--ink-45);line-height:1.9;margin-bottom:32px;word-break:keep-all}
   .ch-list{display:flex;flex-direction:column;gap:10px}
-  .ch{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--off);border-radius:var(--r10);border:1.5px solid var(--ink-10);transition:all .2s}
+  .ch{display:flex;align-items:center;gap:14px;padding:13px 15px;background:var(--off);border-radius:var(--r10);border:1.5px solid var(--ink-10);transition:all .2s}
   .ch:hover{border-color:var(--teal);background:var(--teal-l)}
-  .ch-icon{width:38px;height:38px;border-radius:var(--r6);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+  .ch-icon{width:36px;height:36px;border-radius:var(--r6);display:grid;place-items:center;font-size:16px;flex-shrink:0}
   .ch-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-45)}
   .ch-val{font-size:13.5px;font-weight:700}
-  /* Form */
-  .form-box{background:var(--off);border-radius:var(--r16);padding:48px 40px}
-  .form-title{font-size:19px;font-weight:900;margin-bottom:4px}
-  .form-sub{font-size:13px;color:var(--ink-45);margin-bottom:28px}
-  .fg{margin-bottom:14px}
-  .fg label{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-45);display:block;margin-bottom:7px}
-  .fg input,.fg select,.fg textarea{width:100%;background:var(--white);border:1.5px solid var(--ink-10);border-radius:var(--r6);padding:12px 14px;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s}
+  .form-box{background:var(--off);border-radius:var(--r16);padding:44px 38px}
+  .form-title{font-size:18px;font-weight:900;margin-bottom:3px}
+  .form-sub{font-size:13px;color:var(--ink-45);margin-bottom:26px}
+  .fg{margin-bottom:13px}
+  .fg label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-45);display:block;margin-bottom:6px}
+  .fg input,.fg select,.fg textarea{width:100%;background:var(--white);border:1.5px solid var(--ink-10);border-radius:var(--r6);padding:11px 13px;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s}
   .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--teal)}
-  .fg textarea{resize:vertical;min-height:100px}
+  .fg textarea{resize:vertical;min-height:96px}
   .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .form-consent{display:flex;align-items:flex-start;gap:9px;margin-bottom:20px}
+  .form-consent{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px}
   .form-consent input{width:15px;height:15px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
   .form-consent label{font-size:12px;color:var(--ink-45);line-height:1.6}
-  .btn-submit{width:100%;background:var(--ink);color:var(--white);border:none;padding:14px;border-radius:var(--r6);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s;letter-spacing:.3px}
+  .btn-submit{width:100%;background:var(--ink);color:var(--white);border:none;padding:13px;border-radius:var(--r6);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s;letter-spacing:.3px}
   .btn-submit:hover{background:var(--teal-d)}
-  .form-done{display:none;text-align:center;padding:28px 0}
-  .form-done .check{font-size:44px;margin-bottom:10px}
-  .form-done h4{font-size:17px;font-weight:800;margin-bottom:6px}
-  .form-done p{font-size:13px;color:var(--ink-45)}
 
   /* ── FOOTER ── */
-  footer{background:#07080f;color:rgba(255,255,255,.35);padding:72px 48px 36px}
+  footer{background:#07080f;color:rgba(255,255,255,.32);padding:68px 48px 36px}
   .footer-inner{max-width:1140px;margin:0 auto}
-  .footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
-  .f-logo{margin-bottom:14px}
-  .f-tagline{font-size:13px;line-height:1.9;max-width:230px;word-break:keep-all}
-  .f-sns{display:flex;gap:8px;margin-top:18px}
+  .footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:44px;margin-bottom:48px}
+  .f-tagline{font-size:13px;line-height:1.9;max-width:220px;word-break:keep-all;margin-top:12px}
+  .f-sns{display:flex;gap:8px;margin-top:16px}
   .f-sns a{width:34px;height:34px;border-radius:var(--r6);background:rgba(255,255,255,.05);display:grid;place-items:center;font-size:14px;transition:background .2s}
   .f-sns a:hover{background:var(--teal)}
-  .f-col h4{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+  .f-col h4{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:14px}
   .f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
   .f-col a{font-size:13px;transition:color .2s}
   .f-col a:hover{color:var(--teal)}
-  .footer-divider{border-top:1px solid rgba(255,255,255,.05);padding:20px 0;font-size:12px;color:rgba(255,255,255,.18);line-height:1.9;word-break:keep-all}
-  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:16px}
+  .footer-divider{border-top:1px solid rgba(255,255,255,.05);padding:18px 0;font-size:12px;color:rgba(255,255,255,.18);line-height:1.9;word-break:keep-all}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:14px}
   .footer-bottom p{font-size:12px}
   .f-links{display:flex;gap:14px}
   .f-links a{font-size:12px;transition:color .2s}
@@ -250,13 +257,12 @@
   /* ── FLOAT ── */
   .float-btn{position:fixed;bottom:26px;right:26px;z-index:800;display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:12px 20px;border-radius:var(--r999);font-size:13px;font-weight:800;box-shadow:0 8px 28px rgba(0,0,0,.2);transition:all .3s}
   .float-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.24)}
-  .float-btn svg{width:17px;height:17px;flex-shrink:0}
 
   /* ── MOBILE MENU ── */
-  #mMenu{display:none;position:fixed;inset:0;background:var(--white);z-index:800;padding:86px 32px 40px;flex-direction:column;gap:22px;overflow-y:auto}
+  #mMenu{display:none;position:fixed;inset:0;background:var(--white);z-index:800;padding:84px 32px 40px;flex-direction:column;gap:22px;overflow-y:auto}
   #mMenu a{font-size:20px;font-weight:800}
-  #mMenu .mm-kakao{display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px;margin-top:8px}
-  #mMenu .mm-insta{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px}
+  #mMenu .mm-k{display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px;margin-top:8px}
+  #mMenu .mm-i{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px}
 
   /* ── RESPONSIVE ── */
   @media(max-width:960px){
@@ -265,25 +271,25 @@
     .nav-links,.nav-right{display:none}
     .hamburger{display:flex}
     .hero{grid-template-columns:1fr;min-height:auto}
-    .hero-right{height:55vw}
-    .hero-left{padding:52px 24px 48px}
-    .hero-stat-col{display:none}
+    .hero-right{height:52vw}
+    .hero-left{padding:52px 24px 44px}
+    .hero-stats{display:none}
     .stats-grid{grid-template-columns:1fr 1fr}
-    .person-inner{grid-template-columns:1fr;gap:48px}
-    .person-card{bottom:-16px;right:-16px}
+    .person-inner,.target-inner,.contact-inner{grid-template-columns:1fr;gap:44px}
+    .p-badge{bottom:-14px;right:-14px}
     .forwho{grid-template-columns:1fr}
-    .net-hdr{grid-template-columns:1fr;gap:32px}
-    .cat-grid{grid-template-columns:repeat(3,1fr)}
+    .net-hdr{grid-template-columns:1fr;gap:28px}
+    .cat-grid{grid-template-columns:repeat(2,1fr)}
     .pr-grid{grid-template-columns:1fr}
-    .proc-steps{grid-template-columns:1fr 1fr;gap:40px}
+    .proc-steps{grid-template-columns:1fr 1fr;gap:36px}
     .proc-steps::before{display:none}
-    .contact-inner{grid-template-columns:1fr;gap:40px}
-    .footer-top{grid-template-columns:1fr 1fr;gap:32px}
-    .fw-pane{padding:64px 36px}
+    .footer-top{grid-template-columns:1fr 1fr;gap:28px}
+    .fw-pane{padding:60px 34px}
+    .target-cards{grid-template-columns:1fr}
   }
   @media(max-width:600px){
     .stats-grid,.pr-grid{grid-template-columns:1fr}
-    .cat-grid{grid-template-columns:repeat(2,1fr)}
+    .cat-grid{grid-template-columns:1fr 1fr}
     .proc-steps{grid-template-columns:1fr}
     .cta-btns{flex-direction:column;align-items:center}
     .fg-row{grid-template-columns:1fr}
@@ -298,23 +304,24 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" aria-label="Brand&You 홈">
-      <!-- 인라인 SVG 로고 — 세련된 워드마크 -->
-      <svg class="logo-svg" viewBox="0 0 180 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- B&Y 심벌 -->
-        <rect width="34" height="34" rx="7" fill="#00c5b4"/>
-        <text x="17" y="24" font-family="DM Sans, sans-serif" font-size="16" font-weight="900" fill="#0a0f1e" text-anchor="middle">B&Y</text>
-        <!-- 텍스트 -->
-        <text x="44" y="24" font-family="DM Sans, sans-serif" font-size="17" font-weight="800" fill="#0a0f1e" letter-spacing="-0.5">Brand</text>
-        <text x="103" y="24" font-family="DM Sans, sans-serif" font-size="17" font-weight="300" fill="#0a0f1e" letter-spacing="-0.5">&amp;You</text>
-        <!-- 하단 태그라인 -->
-        <text x="44" y="34" font-family="Pretendard Variable, sans-serif" font-size="7.5" font-weight="600" fill="#00c5b4" letter-spacing="0.5">브랜드앤유</text>
+    <a href="#" aria-label="브랜드앤유 홈">
+      <svg viewBox="0 0 186 40" fill="none" style="height:34px;width:auto" xmlns="http://www.w3.org/2000/svg">
+        <!-- 심벌 박스 -->
+        <rect width="36" height="36" rx="8" fill="#00c5b4"/>
+        <!-- MD 텍스트 -->
+        <text x="18" y="25" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#0a0f1e" text-anchor="middle" letter-spacing="-0.5">MD</text>
+        <!-- 워드마크 -->
+        <text x="46" y="26" font-family="DM Sans,sans-serif" font-size="18" font-weight="800" fill="#0a0f1e" letter-spacing="-0.8">Brand</text>
+        <text x="107" y="26" font-family="DM Sans,sans-serif" font-size="18" font-weight="300" fill="#0a0f1e" letter-spacing="-0.5">&amp;You</text>
+        <!-- 서브라인 -->
+        <text x="46" y="36" font-family="Pretendard Variable,sans-serif" font-size="7.5" font-weight="600" fill="#00c5b4" letter-spacing="1">브랜드앤유</text>
       </svg>
     </a>
     <ul class="nav-links">
       <li><a href="#about">소개</a></li>
+      <li><a href="#target">파트너 기준</a></li>
       <li><a href="#forwho">서비스</a></li>
-      <li><a href="#network">네트워크</a></li>
+      <li><a href="#network">전문 카테고리</a></li>
       <li><a href="#process">진행절차</a></li>
       <li><a href="#contact">문의</a></li>
     </ul>
@@ -328,37 +335,38 @@
         카카오 문의
       </a>
     </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴"><span></span><span></span><span></span></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div id="mMenu">
-  <svg viewBox="0 0 180 38" style="height:32px;margin-bottom:8px" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="34" height="34" rx="7" fill="#00c5b4"/>
-    <text x="17" y="24" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#0a0f1e" text-anchor="middle">B&Y</text>
-    <text x="44" y="24" font-family="DM Sans,sans-serif" font-size="17" font-weight="800" fill="#0a0f1e" letter-spacing="-0.5">Brand</text>
-    <text x="103" y="24" font-family="DM Sans,sans-serif" font-size="17" font-weight="300" fill="#0a0f1e" letter-spacing="-0.5">&amp;You</text>
+  <svg viewBox="0 0 186 40" style="height:30px;margin-bottom:6px" fill="none">
+    <rect width="36" height="36" rx="8" fill="#00c5b4"/>
+    <text x="18" y="25" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#0a0f1e" text-anchor="middle">MD</text>
+    <text x="46" y="26" font-family="DM Sans,sans-serif" font-size="18" font-weight="800" fill="#0a0f1e" letter-spacing="-0.8">Brand</text>
+    <text x="107" y="26" font-family="DM Sans,sans-serif" font-size="18" font-weight="300" fill="#0a0f1e">&amp;You</text>
   </svg>
   <a href="#about" onclick="toggleMenu()">소개</a>
+  <a href="#target" onclick="toggleMenu()">파트너 기준</a>
   <a href="#forwho" onclick="toggleMenu()">서비스</a>
-  <a href="#network" onclick="toggleMenu()">네트워크</a>
+  <a href="#network" onclick="toggleMenu()">전문 카테고리</a>
   <a href="#process" onclick="toggleMenu()">진행절차</a>
   <a href="#contact" onclick="toggleMenu()">문의</a>
-  <a href="https://www.instagram.com/brandnyou.team" target="_blank" onclick="toggleMenu()" class="mm-insta">📸 @brandnyou.team</a>
-  <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" onclick="toggleMenu()" class="mm-kakao">💬 카카오톡 문의</a>
+  <a href="https://www.instagram.com/brandnyou.team" target="_blank" onclick="toggleMenu()" class="mm-i">📸 @brandnyou.team</a>
+  <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" onclick="toggleMenu()" class="mm-k">💬 카카오톡 문의</a>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-left">
-    <div class="hero-eyebrow">면세점 MD 8년 · 유통 19년 공동구매 중계</div>
-    <h1 class="hero-h1 dm">19년간 임원과 직원을<br>연결하던 사람이,<br>이제는 <span class="accent">제조사와<br>인플루언서</span>를 연결합니다.</h1>
-    <p class="hero-h1-sub">면세점 MD 8년차 박상권이 직접 매칭합니다</p>
+    <div class="hero-eyebrow">면세점 MD 8년 · 생활용품·뷰티 공구 전문</div>
+    <h1 class="hero-h1 dm">19년간 임원과 직원을<br>조율하던 사람이,<br>이제는 <span class="accent">제조사와<br>인플루언서</span>를 잇습니다.</h1>
+    <p class="hero-sub">면세점 MD 8년차 박상권이 직접 매칭합니다</p>
     <p class="hero-body">
-      <b>협상 귀찮고, 맞지 않는 제품 제안에 지치셨나요?</b><br>
-      인플루언서 1,000명 · 상품 1,000개 DB 보유.<br>
-      MD의 눈으로 <b>팔릴 조합만</b> 골라 연결해드립니다.
+      <b>메가 인플루언서로 한 번 데여보셨나요?</b><br>
+      생활용품·뷰티 중소제조사 전문.<br>
+      MD가 직접 눈으로 보고 고른 인플루언서만 제안합니다.
     </p>
     <div class="hero-ctas">
       <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary">
@@ -369,20 +377,11 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80" alt="Brand&You 공동구매 전문가"/>
-    <div class="hero-stat-col">
-      <div class="h-stat">
-        <div class="h-stat-num dm">1,000<em>+</em></div>
-        <div class="h-stat-label">Influencers</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num dm">1,000<em>+</em></div>
-        <div class="h-stat-label">Products</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num dm">19<em>yr</em></div>
-        <div class="h-stat-label">Experience</div>
-      </div>
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80" alt="브랜드앤유 공동구매 전문가"/>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="h-stat-num dm">1,000<em>+</em></div><div class="h-stat-lbl">Influencers</div></div>
+      <div class="h-stat"><div class="h-stat-num dm">19<em>yr</em></div><div class="h-stat-lbl">Experience</div></div>
+      <div class="h-stat"><div class="h-stat-num dm">8<em>yr</em></div><div class="h-stat-lbl">MD Career</div></div>
     </div>
   </div>
 </section>
@@ -390,22 +389,14 @@
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-item">공동구매 중계</span>
-    <span class="ticker-item">Co-Purchase Planning</span>
-    <span class="ticker-item">MD Matching</span>
-    <span class="ticker-item">인플루언서 매칭</span>
-    <span class="ticker-item">Brand&You</span>
-    <span class="ticker-item">브랜드앤유</span>
-    <span class="ticker-item">면세점 MD 8년</span>
-    <span class="ticker-item">유통 19년</span>
-    <span class="ticker-item">공동구매 중계</span>
-    <span class="ticker-item">Co-Purchase Planning</span>
-    <span class="ticker-item">MD Matching</span>
-    <span class="ticker-item">인플루언서 매칭</span>
-    <span class="ticker-item">Brand&You</span>
-    <span class="ticker-item">브랜드앤유</span>
-    <span class="ticker-item">면세점 MD 8년</span>
-    <span class="ticker-item">유통 19년</span>
+    <span class="t-item">생활용품 공구 전문</span><span class="t-item">뷰티 공구 전문</span>
+    <span class="t-item">면세점 MD 8년</span><span class="t-item">유통 19년</span>
+    <span class="t-item">Brand&You</span><span class="t-item">브랜드앤유</span>
+    <span class="t-item">MD Matching</span><span class="t-item">중소제조사 전문</span>
+    <span class="t-item">생활용품 공구 전문</span><span class="t-item">뷰티 공구 전문</span>
+    <span class="t-item">면세점 MD 8년</span><span class="t-item">유통 19년</span>
+    <span class="t-item">Brand&You</span><span class="t-item">브랜드앤유</span>
+    <span class="t-item">MD Matching</span><span class="t-item">중소제조사 전문</span>
   </div>
 </div>
 
@@ -414,78 +405,124 @@
   <div class="stats-grid">
     <div class="s-card">
       <div class="s-num dm" data-target="1000">0<span class="s-unit">+</span></div>
-      <div class="s-line"></div>
-      <div class="s-label">Influencer Pool</div>
-      <div class="s-desc">20개 카테고리<br>직접 발굴·검증</div>
-      <div class="s-bg-num dm">01</div>
+      <div class="s-line"></div><div class="s-lbl">Influencer Pool</div>
+      <div class="s-desc">생활용품·뷰티 카테고리<br>직접 발굴·검증</div>
+      <div class="s-bg dm">01</div>
     </div>
     <div class="s-card">
-      <div class="s-num dm" data-target="1000">0<span class="s-unit">+</span></div>
-      <div class="s-line"></div>
-      <div class="s-label">Product DB</div>
-      <div class="s-desc">공구 적합 상품<br>제조사 연락처 포함</div>
-      <div class="s-bg-num dm">02</div>
+      <div class="s-num dm" data-target="8">0<span class="s-unit">yr</span></div>
+      <div class="s-line"></div><div class="s-lbl">면세점 MD 경력</div>
+      <div class="s-desc">뷰티·생활용품 바이어<br>상품 선정·협상 전문</div>
+      <div class="s-bg dm">02</div>
     </div>
     <div class="s-card">
       <div class="s-num dm" data-target="19">0<span class="s-unit">yr</span></div>
-      <div class="s-line"></div>
-      <div class="s-label">유통 경력</div>
-      <div class="s-desc">면세점 MD 8년<br>공동구매 중계 전문</div>
-      <div class="s-bg-num dm">03</div>
+      <div class="s-line"></div><div class="s-lbl">유통 총 경력</div>
+      <div class="s-desc">제조사↔유통사 중계<br>가격 구조·마진 설계</div>
+      <div class="s-bg dm">03</div>
     </div>
     <div class="s-card">
-      <div class="s-num dm" data-target="20">0</div>
-      <div class="s-line"></div>
-      <div class="s-label">Categories</div>
-      <div class="s-desc">뷰티부터 육아까지<br>전 카테고리 커버</div>
-      <div class="s-bg-num dm">04</div>
+      <div class="s-num dm" data-target="5">0<span class="s-unit">명↓</span></div>
+      <div class="s-line"></div><div class="s-lbl">타겟 제조사 규모</div>
+      <div class="s-desc">직원 5명 이하<br>중소 제조사 전문</div>
+      <div class="s-bg dm">04</div>
     </div>
   </div>
 </div>
 
-<!-- PERSON SECTION (청담캔디 핵심: 사람이 메인) -->
+<!-- PERSON SECTION -->
 <section class="person" id="about">
   <div class="container">
     <div class="person-inner">
       <div class="person-visual">
-        <div class="person-img-wrap">
+        <div class="p-img">
           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="박상권 대표"/>
         </div>
-        <div class="person-card">
-          <div class="person-card-num dm">19년</div>
-          <div class="person-card-label">유통 전문 경력</div>
+        <div class="p-badge">
+          <div class="p-badge-num dm">19년</div>
+          <div class="p-badge-lbl">유통 전문 경력</div>
         </div>
       </div>
       <div>
-        <p class="person-eyebrow">About Brand&You</p>
-        <h2 class="person-h2">면세점 MD 8년,<br>유통 <em>19년</em>의 경험이<br>공동구매 중계가 됐습니다</h2>
+        <p class="sec-eye">About Brand&You</p>
+        <h2 class="sec-h2">면세점 MD 8년,<br>유통 <em>19년</em>의 눈으로<br>직접 고릅니다</h2>
         <p class="person-body">
-          MD 시절, 수백 개의 브랜드를 보며 '어떤 브랜드가 어떤 고객에게 팔리는지'를 배웠습니다.<br>
-          그 눈이 인플루언서 공동구매로 연결될 때, <strong>숫자가 아닌 관계로 매칭합니다.</strong>
+          MD 시절, 수백 개의 브랜드를 보면서 '어떤 제품이 어떤 고객에게 팔리는지'를 몸으로 배웠습니다.<br>
+          그 경험이 인플루언서 공동구매 중계로 이어졌습니다. <strong>숫자가 아닌 MD의 감각으로 매칭합니다.</strong>
         </p>
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-dot"></div>
             <div class="tl-year">2007 – 2015</div>
             <div class="tl-title">면세점 MD · 바이어</div>
-            <div class="tl-desc">뷰티·패션·건강식품 카테고리 담당. 브랜드 발굴·입점 협상 전문</div>
+            <div class="tl-desc">뷰티·생활용품 카테고리 담당. 브랜드 발굴·입점 협상 실무 총괄</div>
           </div>
           <div class="tl-item">
             <div class="tl-dot"></div>
             <div class="tl-year">2015 – 2024</div>
             <div class="tl-title">유통·벤더 기획 매니저</div>
-            <div class="tl-desc">제조사↔유통사 중계. 가격 구조·마진 설계 실무 총괄</div>
+            <div class="tl-desc">제조사↔유통사 중계 벤더. 가격 구조·마진 설계 실무 총괄</div>
           </div>
           <div class="tl-item">
             <div class="tl-dot"></div>
             <div class="tl-year">2024 –</div>
             <div class="tl-title">브랜드앤유 설립</div>
-            <div class="tl-desc">인플루언서 공동구매 전문 중계 벤더. 1호 파트너십: 기프티스트×소연 공구 성사</div>
+            <div class="tl-desc">생활용품·뷰티 중소제조사 전문 공동구매 중계 벤더. 1호 계약: 기프티스트 × 김소연 공구 성사</div>
           </div>
         </div>
         <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary" style="background:var(--ink);color:var(--white)">
-          박상권 대표에게 직접 문의하기 →
+          박상권 MD에게 직접 문의하기 →
         </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET CLIENT (캔디언니 핵심: 1등 고객 좁히기) -->
+<section class="target" id="target">
+  <div class="container">
+    <div class="target-inner">
+      <div>
+        <p class="target-eye">Who We Serve</p>
+        <h2 class="target-h2">브랜드앤유가<br>가장 잘 돕는<br><em>딱 한 분</em>이 있습니다</h2>
+        <p class="target-body">
+          모든 제조사를 다 잘 돕겠다고 하면 아무에게도 강하게 남지 않습니다.<br>
+          브랜드앤유는 <strong>이 한 분</strong>을 위해 만들어졌습니다.
+        </p>
+        <div style="background:rgba(0,197,180,.1);border:1px solid rgba(0,197,180,.25);border-radius:var(--r10);padding:24px 22px;margin-bottom:16px">
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px">1등 고객 페르소나</div>
+          <div style="font-size:15px;font-weight:800;color:#fff;line-height:1.7;word-break:keep-all">
+            직원 5명 이하의 생활용품·뷰티 중소제조사,<br>
+            혼자 마케팅 담당하면서 월 광고예산 500만원 이하,<br>
+            <span style="color:var(--teal)">메가 인플루언서로 한 번 데여본 분.</span>
+          </div>
+        </div>
+        <div class="target-not">
+          <div class="target-not-title">이런 분은 맞지 않습니다</div>
+          <p>대형 광고대행사 수준의 보고서·KPI를 원하시는 분 / 단기간 폭발적 바이럴을 원하시는 분 / 생활용품·뷰티 외 카테고리 전문 파트너를 찾으시는 분</p>
+        </div>
+      </div>
+      <div class="target-cards">
+        <div class="tc">
+          <div class="tc-icon">🏭</div>
+          <div class="tc-title">직원 5명 이하 제조사</div>
+          <div class="tc-desc">마케팅 전담 인력 없이 대표나 1인이 직접 판촉·인플루언서 섭외까지 혼자 하는 곳</div>
+        </div>
+        <div class="tc">
+          <div class="tc-icon">💸</div>
+          <div class="tc-title">월 광고예산 500만원 이하</div>
+          <div class="tc-desc">대형 MCN·광고대행사는 예산이 안 맞고, 혼자 인플루언서 찾기는 힘든 상황</div>
+        </div>
+        <div class="tc">
+          <div class="tc-icon">🧴</div>
+          <div class="tc-title">생활용품·뷰티 카테고리</div>
+          <div class="tc-desc">칫솔, 가글, 스킨케어, 헤어케어, 홈케어 등 MD가 가장 잘 아는 카테고리</div>
+        </div>
+        <div class="tc">
+          <div class="tc-icon">😤</div>
+          <div class="tc-title">메가 인플루언서에 데인 경험</div>
+          <div class="tc-desc">팔로워 100만 인플루언서 썼다가 매출은 없고 비용만 날린 경험이 있는 분</div>
+        </div>
       </div>
     </div>
   </div>
@@ -496,11 +533,11 @@
   <div class="forwho">
     <div class="fw-pane dark">
       <span class="fw-chip">For Influencers</span>
-      <h3 class="fw-h3">인플루언서를 위한<br>가장 편한 파트너</h3>
-      <p class="fw-body">브랜드 DM은 오는데 내 팔로워랑 맞는지 모르겠다면? 협상·CS·정산까지 혼자 다 하기 힘들다면?<br>브랜드앤유가 대신 다 처리합니다.</p>
+      <h3 class="fw-h3">생활용품·뷰티 공구<br>경력 있는 인플루언서</h3>
+      <p class="fw-body">팔로워 1만 이상, 릴스 1만뷰 이상, 생활용품·뷰티 카테고리 공구 경력. 이 세 가지를 갖추셨다면 먼저 연락 주세요.</p>
       <ul class="fw-list">
-        <li class="fw-li"><span class="fw-icon">🎯</span>팔로워 취향과 맞는 상품만 제안</li>
-        <li class="fw-li"><span class="fw-icon">🤝</span>협상·계약·정산까지 전담</li>
+        <li class="fw-li"><span class="fw-icon">🎯</span>내 팔로워와 맞는 상품만 제안 — 강요 없음</li>
+        <li class="fw-li"><span class="fw-icon">🤝</span>협상·계약·정산까지 전담 처리</li>
         <li class="fw-li"><span class="fw-icon">💬</span>카카오톡으로 편하게 소통</li>
         <li class="fw-li"><span class="fw-icon">✨</span>무리한 판매 목표 없는 파트너십</li>
       </ul>
@@ -512,10 +549,10 @@
     <div class="fw-pane light">
       <span class="fw-chip">For Brands</span>
       <h3 class="fw-h3">MD의 눈으로<br>직접 고른 매칭</h3>
-      <p class="fw-body">면세점 MD 8년 · 유통 19년차 박상권이 직접 보고, 직접 검증합니다. 숫자만 보는 매칭이 아니라 팔릴 조합을 만듭니다.</p>
+      <p class="fw-body">면세점 MD 8년 · 유통 19년차 박상권이 직접 봅니다. 팔로워 수만 보는 게 아니라 공구 이력·팔로워 성향·CS까지 확인한 인플루언서만 제안합니다.</p>
       <ul class="fw-list">
-        <li class="fw-li"><span class="fw-icon">👁</span>MD 경력 기반 카테고리 맞춤 매칭</li>
-        <li class="fw-li"><span class="fw-icon">📦</span>1,000종 상품 DB 검증된 기획 제안</li>
+        <li class="fw-li"><span class="fw-icon">👁</span>MD 경력 기반 카테고리 맞춤 선별</li>
+        <li class="fw-li"><span class="fw-icon">📦</span>생활용품·뷰티 1,000종 DB 검증 기획</li>
         <li class="fw-li"><span class="fw-icon">📊</span>가격 구조·마진 설계 지원</li>
         <li class="fw-li"><span class="fw-icon">📈</span>공구 완료 후 결과 리포트 제공</li>
       </ul>
@@ -526,56 +563,76 @@
   </div>
 </section>
 
-<!-- NETWORK -->
+<!-- NETWORK: 생활용품·뷰티 집중 카테고리 -->
 <section class="network" id="network">
   <div class="container">
     <div class="net-hdr">
       <div>
-        <p class="sec-eyebrow">Network</p>
-        <h2 class="sec-h2">20개 카테고리,<br><em>직접 발굴한</em> 인플루언서</h2>
+        <p class="sec-eye">전문 카테고리</p>
+        <h2 class="sec-h2">생활용품·뷰티<br><em>딱 이 범위만</em> 합니다</h2>
       </div>
-      <p class="net-sub">팔로워 수만 보지 않습니다. 공구 진행 이력, 팔로워 성향, CS 평점까지 직접 확인한 인플루언서만 DB에 등록합니다.</p>
+      <p class="net-sub">모든 카테고리를 다 잘할 수 없습니다. 면세점 MD 8년 동안 가장 깊이 판 뷰티와 생활용품, 이 두 카테고리에서만 파트너십을 운영합니다.</p>
     </div>
     <div class="cat-grid">
-      <div class="cat-card"><div class="cat-emoji">💄</div><div class="cat-name">뷰티·메이크업</div><div class="cat-cnt">TOP 카테고리</div></div>
-      <div class="cat-card"><div class="cat-emoji">🧴</div><div class="cat-name">스킨케어</div><div class="cat-cnt">TOP 카테고리</div></div>
-      <div class="cat-card"><div class="cat-emoji">💊</div><div class="cat-name">건강식품</div><div class="cat-cnt">고수요</div></div>
-      <div class="cat-card"><div class="cat-emoji">👗</div><div class="cat-name">패션·의류</div><div class="cat-cnt">고수요</div></div>
-      <div class="cat-card"><div class="cat-emoji">🍱</div><div class="cat-name">식품·음료</div><div class="cat-cnt">성장중</div></div>
-      <div class="cat-card"><div class="cat-emoji">🏠</div><div class="cat-name">홈·리빙</div><div class="cat-cnt">성장중</div></div>
-      <div class="cat-card"><div class="cat-emoji">👶</div><div class="cat-name">육아·키즈</div><div class="cat-cnt">고수요</div></div>
-      <div class="cat-card"><div class="cat-emoji">🐾</div><div class="cat-name">펫·반려동물</div><div class="cat-cnt">성장중</div></div>
-      <div class="cat-card"><div class="cat-emoji">🏋️</div><div class="cat-name">피트니스·스포츠</div><div class="cat-cnt">고수요</div></div>
-      <div class="cat-card"><div class="cat-emoji">📱</div><div class="cat-name">디지털·가전</div><div class="cat-cnt">전문채널</div></div>
+      <div class="cat-card main">
+        <div class="cat-badge">핵심</div>
+        <div class="cat-emoji">🧴</div>
+        <div class="cat-name">스킨케어·뷰티</div>
+        <div class="cat-desc">기초·색조·헤어<br>MD 전문 영역</div>
+      </div>
+      <div class="cat-card main">
+        <div class="cat-badge">핵심</div>
+        <div class="cat-emoji">🪥</div>
+        <div class="cat-name">생활용품·홈케어</div>
+        <div class="cat-desc">칫솔·가글·청소용품<br>1호 계약 카테고리</div>
+      </div>
+      <div class="cat-card main">
+        <div class="cat-badge">전문</div>
+        <div class="cat-emoji">💊</div>
+        <div class="cat-name">건강·이너뷰티</div>
+        <div class="cat-desc">영양제·건강기능식품<br>뷰티 인플루언서 수요 높음</div>
+      </div>
+      <div class="cat-card main">
+        <div class="cat-badge">전문</div>
+        <div class="cat-emoji">🌿</div>
+        <div class="cat-name">자연주의·친환경</div>
+        <div class="cat-desc">천연·유기농 생활용품<br>라이프스타일 채널 특화</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;background:var(--off);border-radius:var(--r10);padding:20px 24px;border-left:3px solid var(--ink-10)">
+      <p style="font-size:13px;color:var(--ink-45);line-height:1.8">
+        <strong style="color:var(--ink)">이 범위 밖 카테고리</strong>(패션·의류·디지털·식품·육아·펫 등)는 <strong style="color:var(--ink)">운영하지 않습니다.</strong><br>
+        좁게 가야 강하게 남는다고 믿습니다. 위 카테고리 외 문의는 정중히 거절드립니다.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- PROMISE (신뢰 3가지) -->
+<!-- PROMISE -->
 <section class="promise">
   <div class="container">
-    <div style="text-align:center;margin-bottom:60px">
-      <p class="sec-eyebrow" style="color:rgba(0,197,180,.8)">Our Promise</p>
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="sec-eye" style="color:rgba(0,197,180,.75)">Our Promise</p>
       <h2 class="sec-h2" style="color:#fff">브랜드앤유가 지키는<br><em>3가지 약속</em></h2>
     </div>
     <div class="pr-grid">
       <div class="pr-card">
-        <div class="pr-icon">🎯</div>
+        <div class="pr-icon">🔍</div>
         <div class="pr-bar"></div>
-        <div class="pr-title">과장 없는 매칭</div>
-        <div class="pr-desc">팔로워 수만 보지 않습니다. 공구 이력·팔로워 성향·CS 평점까지 직접 검증한 인플루언서만 제안합니다.</div>
+        <div class="pr-title">과장 없는 제안</div>
+        <div class="pr-desc">팔로워 수만 보지 않습니다. 공구 이력·팔로워 성향·CS 평점까지 직접 확인한 인플루언서만, 내 카테고리와 맞는 상품만 제안합니다.</div>
       </div>
       <div class="pr-card">
-        <div class="pr-icon">🤝</div>
+        <div class="pr-icon">📋</div>
         <div class="pr-bar"></div>
         <div class="pr-title">투명한 수수료</div>
-        <div class="pr-desc">수수료 구조를 계약서에 명시합니다. 숨겨진 비용 없이, 처음 협의한 조건 그대로 진행합니다.</div>
+        <div class="pr-desc">수수료 구조를 계약서에 명시합니다. 처음 협의한 조건 그대로, 숨겨진 비용 없이 진행합니다.</div>
       </div>
       <div class="pr-card">
-        <div class="pr-icon">📞</div>
+        <div class="pr-icon">👤</div>
         <div class="pr-bar"></div>
-        <div class="pr-title">대표가 직접 소통</div>
-        <div class="pr-desc">담당자가 바뀌지 않습니다. 박상권 대표가 처음부터 끝까지 직접 챙깁니다.</div>
+        <div class="pr-title">박상권 MD가 직접</div>
+        <div class="pr-desc">담당자가 바뀌지 않습니다. 상담·매칭·계약·정산 모두 박상권 대표가 처음부터 끝까지 직접 챙깁니다.</div>
       </div>
     </div>
   </div>
@@ -585,29 +642,29 @@
 <section class="process" id="process">
   <div class="container">
     <div class="proc-hdr">
-      <p class="sec-eyebrow">How It Works</p>
+      <p class="sec-eye">How It Works</p>
       <h2 class="sec-h2">공동구매 진행 <em>4단계</em></h2>
     </div>
     <div class="proc-steps">
       <div class="proc-step">
         <div class="proc-circle dm">01</div>
-        <div class="proc-title">상담 & 상품 파악</div>
-        <div class="proc-desc">카카오톡으로 간단 상담. 상품 특성·타겟·마진 구조 파악</div>
+        <div class="proc-title">카카오 상담</div>
+        <div class="proc-desc">5분 상담으로 상품·카테고리·예산 파악. 맞지 않으면 솔직히 말씀드립니다</div>
       </div>
       <div class="proc-step">
         <div class="proc-circle dm">02</div>
-        <div class="proc-title">인플루언서 매칭</div>
-        <div class="proc-desc">MD 경력 기반 카테고리 맞춤 인플루언서 3~5인 제안</div>
+        <div class="proc-title">MD가 직접 선별</div>
+        <div class="proc-desc">박상권 MD가 직접 생활용품·뷰티 인플루언서 3~5인 제안. 공구 이력·팔로워 성향 검증 완료</div>
       </div>
       <div class="proc-step">
         <div class="proc-circle dm">03</div>
         <div class="proc-title">계약 & 공구 오픈</div>
-        <div class="proc-desc">계약서 체결 후 공구 일정·가격 확정. 인플루언서 콘텐츠 제작</div>
+        <div class="proc-desc">계약서 체결, 공구 일정·가격 확정. 인플루언서 콘텐츠 제작 전 과정 서포트</div>
       </div>
       <div class="proc-step">
         <div class="proc-circle dm">04</div>
         <div class="proc-title">정산 & 리포트</div>
-        <div class="proc-desc">공구 마감 후 판매 결과 정산. 다음 공구를 위한 리포트 제공</div>
+        <div class="proc-desc">공구 마감 후 투명한 정산. 판매 결과·개선점 리포트 제공</div>
       </div>
     </div>
   </div>
@@ -616,9 +673,9 @@
 <!-- CTA -->
 <section class="cta-sec">
   <div class="cta-inner">
-    <p class="sec-eyebrow" style="display:block;margin-bottom:16px">Ready to Start?</p>
-    <h2 class="cta-h2">지금 바로 <em>상담</em>해보세요.<br>첫 상담은 무료입니다.</h2>
-    <p class="cta-body">복잡한 서류 없이, 카카오톡 메시지 하나로 시작합니다.<br>어떤 인플루언서가 내 브랜드에 맞는지, 5분 상담으로 알 수 있습니다.</p>
+    <p class="sec-eye" style="display:block;margin-bottom:14px">Ready to Start?</p>
+    <h2 class="cta-h2">첫 상담은 <em>무료</em>입니다.<br>카카오톡 메시지 하나면 됩니다.</h2>
+    <p class="cta-body">복잡한 서류 없이 시작합니다. 생활용품·뷰티 카테고리, 직원 5명 이하 제조사라면 먼저 연락 주세요. 맞지 않으면 솔직하게 말씀드립니다.</p>
     <div class="cta-btns">
       <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary" style="font-size:14px;padding:15px 30px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
@@ -634,86 +691,57 @@
   <div class="container">
     <div class="contact-inner">
       <div>
-        <p class="ct-eyebrow">Contact</p>
+        <p class="ct-eye">Contact</p>
         <h2 class="ct-h2">무엇이든<br>물어보세요</h2>
-        <p class="ct-body">인플루언서 매칭 문의, 브랜드 파트너십, 공구 기획 상담 — 어떤 내용이든 편하게 연락주세요. 박상권 대표가 직접 답변드립니다.</p>
+        <p class="ct-body">생활용품·뷰티 인플루언서 매칭 문의, 브랜드 파트너십, 공구 기획 상담 — 박상권 MD가 직접 답변드립니다.</p>
         <div class="ch-list">
           <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="ch">
-            <div class="ch-icon" style="background:#FEE500;font-size:18px">💬</div>
-            <div>
-              <div class="ch-lbl">KakaoTalk</div>
-              <div class="ch-val">카카오톡 오픈채팅</div>
-            </div>
+            <div class="ch-icon" style="background:#FEE500">💬</div>
+            <div><div class="ch-lbl">KakaoTalk</div><div class="ch-val">카카오톡 오픈채팅</div></div>
           </a>
           <a href="https://www.instagram.com/brandnyou.team" target="_blank" rel="noopener" class="ch">
             <div class="ch-icon" style="background:linear-gradient(135deg,#f09433,#dc2743);color:#fff">📸</div>
-            <div>
-              <div class="ch-lbl">Instagram</div>
-              <div class="ch-val">@brandnyou.team</div>
-            </div>
+            <div><div class="ch-lbl">Instagram</div><div class="ch-val">@brandnyou.team</div></div>
           </a>
           <a href="tel:01083351854" class="ch">
             <div class="ch-icon" style="background:var(--teal-l)">📞</div>
-            <div>
-              <div class="ch-lbl">Phone</div>
-              <div class="ch-val">010-8335-1854</div>
-            </div>
+            <div><div class="ch-lbl">Phone</div><div class="ch-val">010-8335-1854</div></div>
           </a>
           <a href="mailto:brandnyou.team@gmail.com" class="ch">
             <div class="ch-icon" style="background:var(--off)">✉️</div>
-            <div>
-              <div class="ch-lbl">Email</div>
-              <div class="ch-val">brandnyou.team@gmail.com</div>
-            </div>
+            <div><div class="ch-lbl">Email</div><div class="ch-val">brandnyou.team@gmail.com</div></div>
           </a>
         </div>
       </div>
       <div class="form-box">
         <div class="form-title">파트너십 문의</div>
-        <div class="form-sub">24시간 이내 답변드립니다</div>
+        <div class="form-sub">24시간 이내 박상권 MD가 직접 답변드립니다</div>
         <form id="contactForm" action="https://formsubmit.co/brandnyou.team@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="[브랜드앤유] 홈페이지 파트너십 문의"/>
           <input type="hidden" name="_captcha" value="false"/>
           <input type="hidden" name="_next" value="https://brandnyu.com/#contact"/>
           <div class="fg-row">
-            <div class="fg">
-              <label>이름</label>
-              <input type="text" name="name" placeholder="홍길동" required/>
-            </div>
-            <div class="fg">
-              <label>연락처</label>
-              <input type="tel" name="phone" placeholder="010-0000-0000"/>
-            </div>
+            <div class="fg"><label>이름</label><input type="text" name="name" placeholder="홍길동" required/></div>
+            <div class="fg"><label>연락처</label><input type="tel" name="phone" placeholder="010-0000-0000"/></div>
           </div>
           <div class="fg">
             <label>문의 유형</label>
             <select name="type" required>
               <option value="">선택해주세요</option>
+              <option>생활용품·뷰티 브랜드 파트너십</option>
               <option>인플루언서 파트너 신청</option>
-              <option>브랜드·제조사 파트너십</option>
               <option>공구 기획 상담</option>
               <option>기타 문의</option>
             </select>
           </div>
-          <div class="fg">
-            <label>인스타그램 계정 (인플루언서의 경우)</label>
-            <input type="text" name="instagram" placeholder="@username"/>
-          </div>
-          <div class="fg">
-            <label>문의 내용</label>
-            <textarea name="message" placeholder="문의 내용을 자유롭게 적어주세요" required></textarea>
-          </div>
+          <div class="fg"><label>인스타그램 계정 (인플루언서의 경우)</label><input type="text" name="instagram" placeholder="@username"/></div>
+          <div class="fg"><label>문의 내용</label><textarea name="message" placeholder="취급 카테고리, 현재 상황, 궁금한 점을 자유롭게 적어주세요" required></textarea></div>
           <div class="form-consent">
             <input type="checkbox" id="agree" required/>
             <label for="agree">개인정보 수집 및 이용에 동의합니다 (문의 처리 목적, 90일 보관 후 삭제)</label>
           </div>
           <button type="submit" class="btn-submit">문의 보내기 →</button>
         </form>
-        <div class="form-done" id="formDone">
-          <div class="check">✅</div>
-          <h4>문의가 접수되었습니다!</h4>
-          <p>24시간 이내에 카카오톡 또는 이메일로 연락드립니다.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -724,14 +752,12 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="f-logo">
-          <svg viewBox="0 0 160 32" style="height:28px" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="30" height="30" rx="6" fill="#00c5b4" opacity="0.9"/>
-            <text x="15" y="21" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#0a0f1e" text-anchor="middle">B&Y</text>
-            <text x="38" y="21" font-family="DM Sans,sans-serif" font-size="15" font-weight="800" fill="rgba(255,255,255,0.75)" letter-spacing="-0.5">Brand&amp;You</text>
-          </svg>
-        </div>
-        <p class="f-tagline">면세점 MD 8년 · 유통 19년<br>공동구매 중계 전문 벤더<br>박상권 대표</p>
+        <svg viewBox="0 0 160 32" style="height:26px" fill="none">
+          <rect width="30" height="30" rx="6" fill="#00c5b4" opacity="0.85"/>
+          <text x="15" y="21" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="#0a0f1e" text-anchor="middle">MD</text>
+          <text x="38" y="21" font-family="DM Sans,sans-serif" font-size="14" font-weight="800" fill="rgba(255,255,255,.72)" letter-spacing="-0.5">Brand&amp;You</text>
+        </svg>
+        <p class="f-tagline">면세점 MD 8년 · 유통 19년<br>생활용품·뷰티 공동구매 중계 전문<br>박상권 MD</p>
         <div class="f-sns">
           <a href="https://www.instagram.com/brandnyou.team" target="_blank" rel="noopener" aria-label="인스타그램">📸</a>
           <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" aria-label="카카오톡">💬</a>
@@ -746,11 +772,11 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Company</h4>
+        <h4>Specialty</h4>
         <ul>
-          <li><a href="#about">대표 소개</a></li>
-          <li><a href="#network">네트워크</a></li>
-          <li><a href="#contact">문의하기</a></li>
+          <li><a href="#network">스킨케어·뷰티</a></li>
+          <li><a href="#network">생활용품·홈케어</a></li>
+          <li><a href="#network">건강·이너뷰티</a></li>
         </ul>
       </div>
       <div class="f-col">
@@ -763,77 +789,63 @@
       </div>
     </div>
     <div class="footer-divider">
-      상호: 브랜드앤유 (Brand&You) · 대표: 박상권 · 사업자등록번호: 추후 기재<br>
+      상호: 브랜드앤유 (Brand&You) · 대표: 박상권 · 전문 분야: 생활용품·뷰티 공동구매 중계<br>
       경기도 · brandnyou.team@gmail.com · 010-8335-1854
     </div>
     <div class="footer-bottom">
       <p>© 2026 Brand&You (브랜드앤유). All rights reserved.</p>
-      <div class="f-links">
-        <a href="#">개인정보처리방침</a>
-        <a href="#">이용약관</a>
-      </div>
+      <div class="f-links"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
     </div>
   </div>
 </footer>
 
-<!-- FLOAT KAKAO -->
+<!-- FLOAT -->
 <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="float-btn" aria-label="카카오톡 문의">
   <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
   <span class="fb-t">카카오 문의</span>
 </a>
 
 <script>
-// ── NAV SCROLL ──
 const nav = document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled', window.scrollY > 10);
-}, {passive:true});
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10),{passive:true});
 
-// ── MOBILE MENU ──
 const mMenu = document.getElementById('mMenu');
-function toggleMenu(){
-  const open = mMenu.style.display === 'flex';
-  mMenu.style.display = open ? 'none' : 'flex';
-}
+function toggleMenu(){mMenu.style.display = mMenu.style.display==='flex'?'none':'flex';}
 
-// ── COUNTER ANIMATION ──
-function animateCount(el, target, suffix=''){
-  const duration = 1800;
-  const start = performance.now();
-  const update = (time) => {
-    const p = Math.min((time - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    const val = Math.round(ease * target);
-    el.innerHTML = (val >= 1000 ? (val/1000).toFixed(0)+',000' : val) + '<span class="s-unit">' + suffix + '</span>';
-    if(p < 1) requestAnimationFrame(update);
+// 카운터
+function countUp(el, target, suffix){
+  const dur=1600,start=performance.now();
+  const fn=t=>{
+    const p=Math.min((t-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const v=Math.round(ease*target);
+    const disp = target>=1000 ? (v>=1000?'1,000':'0') : String(v);
+    el.innerHTML=disp+'<span class="s-unit">'+suffix+'</span>';
+    if(p<1)requestAnimationFrame(fn);
   };
-  requestAnimationFrame(update);
+  requestAnimationFrame(fn);
 }
-
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(e.isIntersecting){
-      const cards = e.target.querySelectorAll('[data-target]');
-      cards.forEach(c => {
-        const t = parseInt(c.dataset.target);
-        const u = c.querySelector('.s-unit')?.textContent || '';
-        animateCount(c, t, u);
+      e.target.querySelectorAll('[data-target]').forEach(c=>{
+        const t=parseInt(c.dataset.target);
+        const u=c.querySelector('.s-unit')?.textContent||'';
+        countUp(c,t,u);
       });
       io.unobserve(e.target);
     }
   });
-}, {threshold: 0.2});
+},{threshold:0.2});
+const sb=document.querySelector('.stats-bar');
+if(sb)io.observe(sb);
 
-const statsBar = document.querySelector('.stats-bar');
-if(statsBar) io.observe(statsBar);
-
-// ── SMOOTH NAV ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    if(!id) return;
-    const el = document.getElementById(id);
-    if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    if(!id)return;
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
 </script>
