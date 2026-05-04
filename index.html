@@ -3,42 +3,44 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계 전문</title>
+  <title>브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계</title>
   <meta name="description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭하는 생활용품·뷰티 공동구매 중계. 직원 5명 이하 중소제조사 전문 파트너."/>
   <meta name="keywords" content="공동구매,인플루언서,공구중계,브랜드앤유,MD매칭,면세점MD,생활용품공구,뷰티공구"/>
-  <meta property="og:title" content="브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계 전문"/>
-  <meta property="og:description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭합니다. 중소 제조사 전문 공동구매 중계."/>
+  <meta property="og:title" content="브랜드앤유 | 면세점 MD 8년 · 생활용품·뷰티 공동구매 중계"/>
+  <meta property="og:description" content="면세점 MD 8년 · 유통 19년 경력의 박상권이 직접 매칭합니다."/>
   <meta property="og:url" content="https://brandnyu.com"/>
   <meta property="og:type" content="website"/>
   <link rel="canonical" href="https://brandnyu.com"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,700;9..40,800;9..40,900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
   :root{
-    --teal:#00c5b4;--teal-d:#009e90;--teal-l:#e6faf8;--teal-glow:rgba(0,197,180,.16);
+    --teal:#00c5b4;--teal-d:#009e90;--teal-l:#e6faf8;
     --ink:#0a0f1e;--ink-70:rgba(10,15,30,.7);--ink-45:rgba(10,15,30,.45);--ink-10:rgba(10,15,30,.1);
-    --white:#fff;--off:#f6f7fa;--warm:#fdf9f6;
+    --gold:#c9a84c;--gold-l:rgba(201,168,76,.12);
+    --white:#fff;--off:#f6f7fa;
     --r6:6px;--r10:10px;--r16:16px;--r999:999px;
     --shadow-sm:0 2px 12px rgba(0,0,0,.06);
     --shadow-md:0 8px 32px rgba(0,0,0,.1);
-    --shadow-teal:0 8px 28px rgba(0,197,180,.25);
+    --shadow-teal:0 8px 28px rgba(0,197,180,.22);
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
   a{text-decoration:none;color:inherit}
-  img{max-width:100%}
+  img{max-width:100%;display:block}
   .dm{font-family:'DM Sans',sans-serif}
-  .container{max-width:1140px;margin:0 auto;padding:0 48px}
+  .pf{font-family:'Playfair Display',serif}
+  .container{max-width:1160px;margin:0 auto;padding:0 48px}
 
   /* ── NAV ── */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:66px;display:flex;align-items:center;padding:0 48px;background:rgba(255,255,255,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ink-10);transition:box-shadow .3s}
-  .nav.scrolled{box-shadow:var(--shadow-md)}
-  .nav-inner{width:100%;max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;align-items:center;padding:0 48px;background:rgba(255,255,255,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ink-10);transition:box-shadow .3s}
+  .nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+  .nav-inner{width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
   .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{font-size:13px;font-weight:500;color:var(--ink-45);transition:color .2s}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--ink-45);transition:color .2s;letter-spacing:.2px}
   .nav-links a:hover{color:var(--ink)}
   .nav-right{display:flex;gap:8px}
   .nav-kakao{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:#FEE500;color:#3B1F00;padding:9px 18px;border-radius:var(--r6);transition:all .2s}
@@ -49,140 +51,171 @@
   .hamburger span{width:22px;height:2px;background:var(--ink);display:block;transition:.3s}
 
   /* ── HERO ── */
-  .hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:55% 45%;padding-top:66px;position:relative;overflow:hidden}
-  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 15% 50%,rgba(0,197,180,.09) 0%,transparent 65%);pointer-events:none}
-  .hero-left{padding:96px 56px 96px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
-  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,197,180,.08);border:1px solid rgba(0,197,180,.18);color:var(--teal);padding:7px 16px;border-radius:var(--r999);font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:40px;width:fit-content}
-  .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
-  /* 헤로 헤딩 — 자연스러운 스토리 */
-  .hero-h1{font-family:'Pretendard Variable',sans-serif;font-size:clamp(30px,3.4vw,52px);font-weight:900;line-height:1.18;letter-spacing:-1.5px;color:var(--white);margin-bottom:10px;word-break:keep-all}
+  .hero{min-height:100vh;position:relative;overflow:hidden;padding-top:68px;display:flex;align-items:center}
+  /* 면세점 배경 이미지 */
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,15,30,.88) 0%,rgba(10,15,30,.72) 45%,rgba(10,15,30,.3) 100%)}
+  .hero-content{position:relative;z-index:1;padding:80px 80px;max-width:700px}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:7px 16px;border-radius:var(--r999);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;width:fit-content}
+  .hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulse 2.5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero-h1{font-family:'Pretendard Variable',sans-serif;font-size:clamp(32px,3.8vw,58px);font-weight:900;line-height:1.15;letter-spacing:-1.5px;color:var(--white);margin-bottom:12px;word-break:keep-all}
   .hero-h1 .accent{color:var(--teal)}
-  .hero-h1 .light{font-weight:300;color:rgba(255,255,255,.55)}
-  .hero-kicker{font-size:clamp(13px,1.3vw,16px);font-weight:400;color:rgba(255,255,255,.38);letter-spacing:.2px;margin-bottom:32px;line-height:1.7;font-style:italic}
-  .hero-desc{font-size:15px;color:rgba(255,255,255,.52);line-height:2;margin-bottom:52px;word-break:keep-all;max-width:400px}
-  .hero-desc b{color:rgba(255,255,255,.82);font-weight:600}
+  .hero-h1 .serif{font-family:'Playfair Display',serif;font-weight:400;font-style:italic;color:rgba(255,255,255,.75)}
+  .hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.5);letter-spacing:.3px;margin-bottom:30px;font-style:italic}
+  .hero-desc{font-size:15px;color:rgba(255,255,255,.55);line-height:2;margin-bottom:48px;word-break:keep-all;max-width:480px}
+  .hero-desc b{color:rgba(255,255,255,.85);font-weight:600}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.2px;color:var(--ink);background:var(--teal);padding:14px 26px;border-radius:var(--r6);transition:all .25s}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink);background:var(--teal);padding:14px 26px;border-radius:var(--r6);transition:all .25s;letter-spacing:.2px}
   .btn-primary:hover{background:var(--teal-d);transform:translateY(-2px);box-shadow:var(--shadow-teal)}
-  .btn-outline{font-size:13px;font-weight:600;color:rgba(255,255,255,.48);border:1.5px solid rgba(255,255,255,.14);padding:13px 26px;border-radius:var(--r6);transition:all .25s}
-  .btn-outline:hover{border-color:var(--teal);color:var(--teal)}
-  .hero-right{position:relative;overflow:hidden}
-  .hero-right img{width:100%;height:100%;object-fit:cover;opacity:.38;filter:grayscale(15%)}
-  .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(10,15,30,.1) 42%,transparent 100%);z-index:1}
-  .hero-right::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(0,var(--ink),transparent);z-index:1}
-  .hero-stats{position:absolute;right:28px;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:10px}
-  .h-stat{background:rgba(10,15,30,.72);border:1px solid rgba(0,197,180,.18);backdrop-filter:blur(14px);border-radius:var(--r10);padding:14px 18px;text-align:center;min-width:108px}
-  .h-stat-num{font-family:'DM Sans',sans-serif;font-size:25px;font-weight:900;color:var(--white);line-height:1}
-  .h-stat-num em{color:var(--teal);font-style:normal}
-  .h-stat-lbl{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+  .btn-gold{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gold);border:1.5px solid rgba(201,168,76,.35);padding:13px 26px;border-radius:var(--r6);transition:all .25s}
+  .btn-gold:hover{border-color:var(--gold);background:rgba(201,168,76,.1);transform:translateY(-2px)}
+
+  /* ── HERO BOTTOM BADGES ── */
+  .hero-badges{position:absolute;bottom:40px;left:80px;z-index:1;display:flex;gap:12px}
+  .h-badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:var(--r10);padding:14px 20px;text-align:center;min-width:110px}
+  .h-badge-num{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:900;color:var(--white);line-height:1}
+  .h-badge-num em{color:var(--teal);font-style:normal}
+  .h-badge-lbl{font-size:9px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
 
   /* ── TICKER ── */
   .ticker{overflow:hidden;background:var(--teal);padding:10px 0}
-  .ticker-track{display:flex;width:max-content;animation:tick 28s linear infinite}
+  .ticker-track{display:flex;width:max-content;animation:tick 30s linear infinite}
   @keyframes tick{to{transform:translateX(-50%)}}
   .t-item{white-space:nowrap;font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);padding:0 28px;display:flex;align-items:center;opacity:.85}
   .t-item::after{content:'◆';font-size:5px;opacity:.25;margin-left:28px}
 
-  /* ── STATS BAR ── */
-  .stats-bar{background:var(--off)}
-  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
-  .s-card{background:var(--white);padding:48px 36px;position:relative;overflow:hidden;transition:background .3s,transform .3s;cursor:default}
-  .s-card:hover{background:var(--ink);transform:translateY(-4px)}
-  .s-card:hover .s-num,.s-card:hover .s-unit,.s-card:hover .s-lbl,.s-card:hover .s-desc{color:var(--white)!important}
-  .s-card:hover .s-line{background:var(--teal)}
-  .s-num{font-family:'DM Sans',sans-serif;font-size:clamp(40px,4vw,56px);font-weight:900;letter-spacing:-2px;color:var(--ink);line-height:1;transition:color .3s}
-  .s-unit{font-size:20px;color:var(--teal);transition:color .3s}
-  .s-line{width:24px;height:2px;background:var(--teal);margin:12px 0;transition:background .3s}
-  .s-lbl{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:4px;transition:color .3s}
-  .s-desc{font-size:12px;color:var(--ink-45);line-height:1.75;transition:color .3s}
-  .s-bg{position:absolute;bottom:-10px;right:10px;font-family:'DM Sans',sans-serif;font-size:86px;font-weight:900;color:rgba(0,0,0,.024);line-height:1;pointer-events:none}
+  /* ── INFOGRAPHIC STATS ── */
+  .infostats{padding:0;background:var(--ink)}
+  .infostats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .is-card{padding:52px 36px;border-right:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;transition:background .3s;cursor:default}
+  .is-card:last-child{border-right:none}
+  .is-card:hover{background:rgba(255,255,255,.04)}
+  .is-icon{font-size:28px;margin-bottom:20px;opacity:.8}
+  .is-num{font-family:'DM Sans',sans-serif;font-size:clamp(36px,3.5vw,52px);font-weight:900;color:var(--white);line-height:1;letter-spacing:-2px}
+  .is-num em{color:var(--teal);font-style:normal}
+  .is-bar{width:28px;height:2px;background:linear-gradient(90deg,var(--teal),rgba(0,197,180,.3));margin:14px 0}
+  .is-lbl{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:6px;letter-spacing:.3px}
+  .is-desc{font-size:12px;color:rgba(255,255,255,.28);line-height:1.75}
+  .is-bg{position:absolute;bottom:-20px;right:-10px;font-family:'DM Sans',sans-serif;font-size:100px;font-weight:900;color:rgba(255,255,255,.025);line-height:1;pointer-events:none;letter-spacing:-4px}
 
-  /* ── PERSON ── */
-  .person{padding:120px 0;background:var(--white)}
-  .person-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-  .person-visual{position:relative}
-  .p-img{border-radius:var(--r16);overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,var(--off),var(--teal-l));display:flex;align-items:center;justify-content:center}
-  .p-img-placeholder{text-align:center;padding:40px}
-  .p-img-placeholder .pi-icon{font-size:64px;margin-bottom:16px;opacity:.4}
-  .p-img-placeholder p{font-size:13px;color:var(--ink-45);line-height:1.8}
-  .p-badge{position:absolute;bottom:-20px;right:-20px;background:var(--ink);border-radius:var(--r10);padding:20px 24px;box-shadow:var(--shadow-md);min-width:170px}
-  .p-badge-num{font-family:'DM Sans',sans-serif;font-size:34px;font-weight:900;color:var(--teal);line-height:1}
-  .p-badge-lbl{font-size:11px;color:rgba(255,255,255,.48);margin-top:4px;letter-spacing:.5px}
-  .sec-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
-  .sec-h2{font-size:clamp(24px,3vw,40px);font-weight:900;line-height:1.2;letter-spacing:-.5px;margin-bottom:20px;word-break:keep-all}
+  /* ── ABOUT ── */
+  .about{padding:120px 0;background:var(--white)}
+  .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  /* 면세점 사진 그리드 */
+  .about-visual{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:10px;position:relative}
+  .av-main{grid-column:1/-1;border-radius:var(--r16);overflow:hidden;aspect-ratio:16/9}
+  .av-main img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+  .av-sub{border-radius:var(--r10);overflow:hidden;aspect-ratio:1/1}
+  .av-sub img{width:100%;height:100%;object-fit:cover}
+  .av-badge{background:var(--ink);border-radius:var(--r10);padding:20px 22px;display:flex;flex-direction:column;justify-content:center}
+  .av-badge-num{font-family:'DM Sans',sans-serif;font-size:36px;font-weight:900;color:var(--teal);line-height:1}
+  .av-badge-lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:5px;line-height:1.5}
+  .sec-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .sec-h2{font-size:clamp(24px,3vw,40px);font-weight:900;line-height:1.18;letter-spacing:-.5px;margin-bottom:20px;word-break:keep-all}
   .sec-h2 em{color:var(--teal);font-style:normal}
-  .person-body{font-size:15px;color:var(--ink-70);line-height:2;margin-bottom:32px;word-break:keep-all}
-  .timeline{border-left:2px solid var(--ink-10);padding-left:24px;margin-bottom:32px;display:flex;flex-direction:column;gap:0}
-  .tl-item{position:relative;padding-bottom:22px}
-  .tl-item:last-child{padding-bottom:0}
-  .tl-dot{position:absolute;left:-31px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--white);border:2px solid var(--teal)}
-  .tl-year{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:2px}
-  .tl-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
-  .tl-desc{font-size:13px;color:var(--ink-45);line-height:1.6}
+  .about-body{font-size:15px;color:var(--ink-70);line-height:2;margin-bottom:32px;word-break:keep-all}
+  /* 타임라인 인포그래픽 */
+  .timeline-info{margin-bottom:36px}
+  .tl-row{display:flex;align-items:stretch;gap:0;margin-bottom:4px}
+  .tl-row:last-child{margin-bottom:0}
+  .tl-left{display:flex;flex-direction:column;align-items:center;width:44px;flex-shrink:0}
+  .tl-dot-w{width:14px;height:14px;border-radius:50%;background:var(--teal);border:2px solid var(--white);box-shadow:0 0 0 2px var(--teal);flex-shrink:0;margin-top:3px}
+  .tl-line{width:2px;flex:1;background:linear-gradient(to bottom,var(--teal),rgba(0,197,180,.15));margin-top:4px;min-height:20px}
+  .tl-row:last-child .tl-line{display:none}
+  .tl-body{padding-bottom:22px;flex:1}
+  .tl-year{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+  .tl-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:3px}
+  .tl-desc{font-size:12px;color:var(--ink-45);line-height:1.65}
 
-  /* ── STORY (실패→성사 여정) ── */
-  .story{padding:100px 0;background:var(--ink);position:relative;overflow:hidden}
-  .story::before{content:'';position:absolute;top:-120px;right:-120px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,197,180,.07) 0%,transparent 70%);pointer-events:none}
-  .story-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-  .story-quote{font-family:'DM Sans',sans-serif;font-size:clamp(28px,3.2vw,44px);font-weight:900;color:#fff;line-height:1.2;letter-spacing:-1px;margin-bottom:24px;word-break:keep-all}
-  .story-quote em{color:var(--teal);font-style:normal}
-  .story-body{font-size:15px;color:rgba(255,255,255,.48);line-height:2;margin-bottom:36px;word-break:keep-all}
-  .story-body b{color:rgba(255,255,255,.78);font-weight:600}
-  .story-milestones{display:flex;flex-direction:column;gap:0}
-  .sm-item{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
-  .sm-item:last-child{border-bottom:none}
-  .sm-num{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:800;letter-spacing:1.5px;color:rgba(0,197,180,.5);min-width:32px;padding-top:2px}
-  .sm-content{}
-  .sm-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px}
-  .sm-desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;word-break:keep-all}
-  .sm-tag{display:inline-block;background:rgba(0,197,180,.12);border:1px solid rgba(0,197,180,.2);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:var(--r999);margin-top:6px}
+  /* ── STORY (여정 인포그래픽) ── */
+  .story{background:var(--ink);padding:110px 0;position:relative;overflow:hidden}
+  .story::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,197,180,.06) 0%,transparent 70%);pointer-events:none}
+  .story-hdr{text-align:center;margin-bottom:72px}
+  .story-h2{font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-1px;word-break:keep-all}
+  .story-h2 em{color:var(--teal);font-style:normal}
+  .story-sub{font-size:15px;color:rgba(255,255,255,.38);margin-top:14px;line-height:1.8;word-break:keep-all}
+  /* 4단계 여정 인포그래픽 */
+  .journey{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-bottom:72px}
+  .journey::before{content:'';position:absolute;top:52px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,rgba(0,197,180,.1),rgba(0,197,180,.5),rgba(0,197,180,.1));z-index:0}
+  .j-step{padding:0 20px;text-align:center;position:relative;z-index:1}
+  .j-circle{width:104px;height:104px;border-radius:50%;margin:0 auto 20px;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}
+  .j-circle.c1{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1)}
+  .j-circle.c2{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1)}
+  .j-circle.c3{background:rgba(0,197,180,.08);border:1.5px solid rgba(0,197,180,.25)}
+  .j-circle.c4{background:rgba(0,197,180,.15);border:2px solid rgba(0,197,180,.5)}
+  .j-icon{font-size:32px;line-height:1}
+  .j-num{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:2px;margin-top:4px}
+  .j-circle.c3 .j-num,.j-circle.c4 .j-num{color:rgba(0,197,180,.6)}
+  .j-title{font-size:14px;font-weight:800;color:rgba(255,255,255,.8);margin-bottom:8px;word-break:keep-all}
+  .j-desc{font-size:12px;color:rgba(255,255,255,.36);line-height:1.75;word-break:keep-all}
+  /* 스토리 카드 (이미지+텍스트) */
+  .story-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .sc{border-radius:var(--r16);overflow:hidden;position:relative;min-height:280px;display:flex;align-items:flex-end}
+  .sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4}
+  .sc::before{content:'';position:absolute;inset:0;background:linear-gradient(0,rgba(10,15,30,.92) 0%,rgba(10,15,30,.3) 60%,transparent 100%)}
+  .sc-body{position:relative;z-index:1;padding:28px}
+  .sc-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,197,180,.1);border:1px solid rgba(0,197,180,.2);padding:3px 10px;border-radius:var(--r999);margin-bottom:10px}
+  .sc-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3;word-break:keep-all}
+  .sc-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.75;word-break:keep-all}
 
   /* ── TARGET ── */
-  .target{padding:80px 0;background:var(--off)}
-  .target-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-  .target-eye{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
-  .target-h2{font-size:clamp(22px,2.8vw,36px);font-weight:900;color:var(--ink);line-height:1.2;margin-bottom:16px;word-break:keep-all}
+  .target{padding:100px 0;background:var(--off)}
+  .target-hdr{text-align:center;margin-bottom:64px}
+  .target-h2{font-size:clamp(26px,3.2vw,44px);font-weight:900;line-height:1.18;letter-spacing:-.5px;word-break:keep-all}
   .target-h2 em{color:var(--teal);font-style:normal}
-  .target-body{font-size:15px;color:var(--ink-45);line-height:1.95;margin-bottom:28px;word-break:keep-all}
-  .target-persona{background:var(--white);border-radius:var(--r16);padding:28px 26px;margin-bottom:16px;border:1.5px solid rgba(0,197,180,.18);box-shadow:var(--shadow-sm)}
-  .tp-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:6px}
-  .tp-label::before{content:'';width:16px;height:1.5px;background:var(--teal)}
-  .tp-text{font-size:15px;font-weight:700;color:var(--ink);line-height:1.8;word-break:keep-all}
-  .tp-text span{color:var(--teal)}
-  .target-not{background:var(--white);border-left:3px solid var(--ink-10);border-radius:0 var(--r6) var(--r6) 0;padding:16px 18px;font-size:13px;color:var(--ink-45);line-height:1.75}
-  .target-not strong{color:var(--ink);font-weight:700}
-  .target-cards{display:flex;flex-direction:column;gap:10px}
-  .tc{background:var(--white);border:1.5px solid var(--ink-10);border-radius:var(--r10);padding:20px 20px;transition:all .25s;display:flex;gap:14px;align-items:flex-start}
-  .tc:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(0,197,180,.1);transform:translateX(4px)}
-  .tc-icon{font-size:20px;flex-shrink:0;margin-top:2px}
-  .tc-title{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:4px}
-  .tc-desc{font-size:12px;color:var(--ink-45);line-height:1.65;word-break:keep-all}
+  .target-sub{font-size:15px;color:var(--ink-45);margin-top:12px;line-height:1.8}
+  /* 페르소나 인포그래픽 */
+  .persona-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+  .persona-card{background:var(--ink);border-radius:var(--r16);padding:40px;position:relative;overflow:hidden}
+  .persona-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,197,180,.12) 0%,transparent 70%)}
+  .pc-eye{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,197,180,.6);margin-bottom:18px}
+  .pc-title{font-size:clamp(18px,2vw,26px);font-weight:900;color:#fff;line-height:1.3;margin-bottom:22px;word-break:keep-all}
+  .pc-title span{color:var(--teal)}
+  .pc-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .pc-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:rgba(255,255,255,.04);border-radius:var(--r10);border:1px solid rgba(255,255,255,.06)}
+  .pc-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+  .pc-text{font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;word-break:keep-all}
+  .pc-text strong{color:#fff;font-weight:700}
+  .persona-not{background:var(--white);border-radius:var(--r16);padding:32px;border:1.5px solid var(--ink-10)}
+  .pn-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink-45);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+  .pn-title::before{content:'';width:14px;height:1.5px;background:var(--ink-10)}
+  .pn-items{display:flex;flex-direction:column;gap:10px}
+  .pn-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-45);line-height:1.6}
+  .pn-x{width:20px;height:20px;border-radius:50%;background:rgba(220,27,67,.1);display:grid;place-items:center;font-size:10px;flex-shrink:0;color:#dc1b43}
+  /* 카테고리 인포그래픽 */
+  .cat-info{margin-top:24px;background:var(--white);border-radius:var(--r16);padding:32px;border:1.5px solid var(--ink-10)}
+  .ci-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+  .ci-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ci-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--teal-l);border-radius:var(--r6);border:1px solid rgba(0,197,180,.15)}
+  .ci-emoji{font-size:18px;flex-shrink:0}
+  .ci-name{font-size:12px;font-weight:800;color:var(--ink)}
+  .ci-not{margin-top:10px;padding:12px 14px;background:var(--off);border-radius:var(--r6);font-size:12px;color:var(--ink-45)}
 
   /* ── FOR WHOM ── */
   .forwho{display:grid;grid-template-columns:1fr 1fr}
-  .fw-pane{padding:92px 68px;position:relative;overflow:hidden}
+  .fw-pane{padding:96px 72px;position:relative;overflow:hidden}
   .fw-pane.dark{background:var(--ink)}
   .fw-pane.light{background:var(--teal)}
-  .fw-pane::after{content:'';position:absolute;bottom:-80px;right:-80px;width:260px;height:260px;border-radius:50%;opacity:.07}
+  .fw-pane::after{content:'';position:absolute;bottom:-80px;right:-80px;width:280px;height:280px;border-radius:50%;opacity:.07}
   .fw-pane.dark::after{background:var(--teal)}
   .fw-pane.light::after{background:var(--ink)}
   .fw-chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:var(--r999);margin-bottom:20px}
-  .fw-pane.dark .fw-chip{background:rgba(0,197,180,.12);color:var(--teal)}
-  .fw-pane.light .fw-chip{background:rgba(10,15,30,.12);color:var(--ink)}
+  .fw-pane.dark .fw-chip{background:rgba(0,197,180,.1);color:var(--teal)}
+  .fw-pane.light .fw-chip{background:rgba(10,15,30,.1);color:var(--ink)}
   .fw-h3{font-size:clamp(20px,2.4vw,30px);font-weight:900;line-height:1.2;margin-bottom:16px;word-break:keep-all}
   .fw-pane.dark .fw-h3{color:var(--white)}
   .fw-pane.light .fw-h3{color:var(--ink)}
   .fw-body{font-size:14px;line-height:1.95;margin-bottom:28px;word-break:keep-all}
-  .fw-pane.dark .fw-body{color:rgba(255,255,255,.48)}
+  .fw-pane.dark .fw-body{color:rgba(255,255,255,.45)}
   .fw-pane.light .fw-body{color:rgba(10,15,30,.6)}
-  .fw-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
-  .fw-li{display:flex;align-items:flex-start;gap:11px;font-size:13.5px;font-weight:600;word-break:keep-all}
-  .fw-pane.dark .fw-li{color:rgba(255,255,255,.75)}
+  .fw-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:32px}
+  .fw-li{display:flex;align-items:flex-start;gap:11px;font-size:13px;font-weight:600;word-break:keep-all}
+  .fw-pane.dark .fw-li{color:rgba(255,255,255,.72)}
   .fw-pane.light .fw-li{color:var(--ink)}
   .fw-icon{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:13px;flex-shrink:0}
-  .fw-pane.dark .fw-icon{background:rgba(0,197,180,.12)}
+  .fw-pane.dark .fw-icon{background:rgba(0,197,180,.1)}
   .fw-pane.light .fw-icon{background:rgba(10,15,30,.1)}
   .fw-btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:13px 22px;border-radius:var(--r6);transition:all .25s}
   .fw-pane.dark .fw-btn{background:var(--teal);color:var(--ink)}
@@ -190,49 +223,47 @@
   .fw-pane.light .fw-btn{background:var(--ink);color:var(--white)}
   .fw-pane.light .fw-btn:hover{opacity:.84;transform:translateY(-2px)}
 
-  /* ── NETWORK ── */
-  .network{padding:110px 0;background:var(--white)}
-  .net-hdr{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:60px}
-  .net-sub{font-size:15px;color:var(--ink-45);line-height:1.9;word-break:keep-all}
-  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .cat-card{background:var(--off);border:1.5px solid var(--ink-10);border-radius:var(--r10);padding:24px 16px;text-align:center;transition:all .25s;cursor:default;position:relative}
-  .cat-card.main{border-color:rgba(0,197,180,.3);background:var(--teal-l)}
-  .cat-card:hover{border-color:var(--teal);box-shadow:0 6px 20px rgba(0,197,180,.14);transform:translateY(-3px)}
-  .cat-badge{position:absolute;top:-8px;right:10px;background:var(--teal);color:var(--ink);font-size:9px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:var(--r999)}
-  .cat-emoji{font-size:28px;margin-bottom:10px}
-  .cat-name{font-size:12px;font-weight:800;margin-bottom:3px}
-  .cat-desc{font-size:11px;color:var(--ink-45);line-height:1.4}
-  .cat-limit{margin-top:20px;background:var(--off);border-radius:var(--r10);padding:18px 22px;border-left:3px solid var(--ink-10)}
-  .cat-limit p{font-size:13px;color:var(--ink-45);line-height:1.8}
-  .cat-limit strong{color:var(--ink)}
-
   /* ── PROMISE ── */
-  .promise{padding:96px 0;background:var(--ink)}
-  .pr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.05)}
-  .pr-card{padding:50px 42px;background:var(--ink);transition:background .3s}
-  .pr-card:hover{background:rgba(255,255,255,.04)}
-  .pr-icon{font-size:32px;margin-bottom:18px}
-  .pr-bar{width:22px;height:2px;background:var(--teal);margin-bottom:16px}
-  .pr-title{font-size:16px;font-weight:800;color:var(--white);margin-bottom:9px}
-  .pr-desc{font-size:13.5px;color:rgba(255,255,255,.4);line-height:1.85;word-break:keep-all}
+  .promise{padding:100px 0;background:var(--white)}
+  .promise-hdr{text-align:center;margin-bottom:60px}
+  .promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .p-card{border-radius:var(--r16);overflow:hidden;position:relative}
+  .p-card-img{aspect-ratio:4/3;overflow:hidden;position:relative}
+  .p-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .p-card:hover .p-card-img img{transform:scale(1.05)}
+  .p-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(0,rgba(10,15,30,.75) 0%,rgba(10,15,30,.15) 60%,transparent 100%)}
+  .p-card-body{background:var(--off);padding:24px}
+  .p-card-icon{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:flex-end;padding:20px;z-index:1}
+  .p-card-num{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;color:var(--teal);letter-spacing:1px}
+  .p-card-title{font-size:15px;font-weight:800;margin-bottom:8px}
+  .p-card-desc{font-size:13px;color:var(--ink-45);line-height:1.8;word-break:keep-all}
 
   /* ── PROCESS ── */
-  .process{padding:110px 0;background:var(--off)}
-  .proc-hdr{text-align:center;margin-bottom:72px}
+  .process{padding:110px 0;background:var(--ink)}
+  .process-hdr{text-align:center;margin-bottom:72px}
+  .process-h2{font-size:clamp(26px,3.2vw,44px);font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-1px}
+  .process-h2 em{color:var(--teal);font-style:normal}
   .proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-  .proc-steps::before{content:'';position:absolute;top:31px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);z-index:0}
-  .proc-step{padding:0 18px;text-align:center}
-  .proc-circle{width:62px;height:62px;border-radius:50%;background:var(--white);border:2px solid var(--ink-10);display:grid;place-items:center;margin:0 auto 18px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;position:relative;z-index:1;transition:all .3s}
-  .proc-step:hover .proc-circle{background:var(--teal);border-color:var(--teal);color:var(--ink)}
-  .proc-title{font-size:13px;font-weight:800;margin-bottom:6px}
-  .proc-desc{font-size:12px;color:var(--ink-45);line-height:1.75;word-break:keep-all}
+  .proc-steps::before{content:'';position:absolute;top:52px;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,197,180,.4),transparent);z-index:0}
+  .proc-step{padding:0 16px;text-align:center}
+  .proc-circle{width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 22px;position:relative;z-index:1;transition:all .35s}
+  .proc-step:hover .proc-circle{background:rgba(0,197,180,.12);border-color:rgba(0,197,180,.4)}
+  .proc-num{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:2px}
+  .proc-circle:hover .proc-num{color:rgba(0,197,180,.7)}
+  .proc-emoji{font-size:30px;margin-bottom:4px}
+  .proc-title{font-size:14px;font-weight:800;color:rgba(255,255,255,.8);margin-bottom:7px;word-break:keep-all}
+  .proc-desc{font-size:12px;color:rgba(255,255,255,.32);line-height:1.75;word-break:keep-all}
 
   /* ── CTA ── */
-  .cta-sec{padding:110px 0;background:var(--ink);text-align:center}
-  .cta-inner{max-width:680px;margin:0 auto}
-  .cta-h2{font-size:clamp(26px,4vw,48px);font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:16px;word-break:keep-all;color:#fff}
+  .cta-sec{position:relative;overflow:hidden}
+  .cta-bg{position:relative}
+  .cta-bg img{width:100%;height:480px;object-fit:cover;object-position:center 60%}
+  .cta-bg::after{content:'';position:absolute;inset:0;background:rgba(10,15,30,.82)}
+  .cta-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1}
+  .cta-content{max-width:680px;padding:0 32px}
+  .cta-h2{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.12;margin-bottom:16px;word-break:keep-all;color:#fff}
   .cta-h2 em{color:var(--teal);font-style:normal}
-  .cta-body{font-size:15px;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:44px;word-break:keep-all}
+  .cta-body{font-size:15px;color:rgba(255,255,255,.45);line-height:1.9;margin-bottom:44px;word-break:keep-all}
   .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
   /* ── CONTACT ── */
@@ -259,22 +290,22 @@
   .form-consent{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px}
   .form-consent input{width:15px;height:15px;margin-top:2px;accent-color:var(--teal);flex-shrink:0}
   .form-consent label{font-size:12px;color:var(--ink-45);line-height:1.6}
-  .btn-submit{width:100%;background:var(--ink);color:var(--white);border:none;padding:13px;border-radius:var(--r6);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s;letter-spacing:.3px}
+  .btn-submit{width:100%;background:var(--ink);color:var(--white);border:none;padding:13px;border-radius:var(--r6);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .25s}
   .btn-submit:hover{background:var(--teal-d)}
 
   /* ── FOOTER ── */
-  footer{background:#07080f;color:rgba(255,255,255,.3);padding:68px 48px 36px}
-  .footer-inner{max-width:1140px;margin:0 auto}
+  footer{background:#07080f;color:rgba(255,255,255,.28);padding:68px 48px 36px}
+  .footer-inner{max-width:1160px;margin:0 auto}
   .footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:44px;margin-bottom:48px}
   .f-tagline{font-size:13px;line-height:1.9;max-width:220px;word-break:keep-all;margin-top:12px}
   .f-sns{display:flex;gap:8px;margin-top:16px}
   .f-sns a{width:34px;height:34px;border-radius:var(--r6);background:rgba(255,255,255,.05);display:grid;place-items:center;font-size:14px;transition:background .2s}
   .f-sns a:hover{background:var(--teal)}
-  .f-col h4{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:14px}
+  .f-col h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.36);margin-bottom:14px}
   .f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
   .f-col a{font-size:13px;transition:color .2s}
   .f-col a:hover{color:var(--teal)}
-  .footer-divider{border-top:1px solid rgba(255,255,255,.05);padding:18px 0;font-size:12px;color:rgba(255,255,255,.16);line-height:1.9;word-break:keep-all}
+  .footer-divider{border-top:1px solid rgba(255,255,255,.05);padding:18px 0;font-size:12px;color:rgba(255,255,255,.15);line-height:1.9;word-break:keep-all}
   .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:14px}
   .footer-bottom p{font-size:12px}
   .f-links{display:flex;gap:14px}
@@ -285,44 +316,38 @@
   .float-btn{position:fixed;bottom:26px;right:26px;z-index:800;display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:12px 20px;border-radius:var(--r999);font-size:13px;font-weight:800;box-shadow:0 8px 28px rgba(0,0,0,.18);transition:all .3s}
   .float-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.22)}
 
-  /* ── MOBILE MENU ── */
+  /* ── MOBILE ── */
   #mMenu{display:none;position:fixed;inset:0;background:var(--white);z-index:800;padding:84px 32px 40px;flex-direction:column;gap:22px;overflow-y:auto}
   #mMenu a{font-size:20px;font-weight:800}
   #mMenu .mm-k{display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px;margin-top:8px}
   #mMenu .mm-i{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px}
 
-  /* ── RESPONSIVE ── */
   @media(max-width:960px){
     .container{padding:0 24px}
     .nav,.footer{padding-left:24px;padding-right:24px}
     .nav-links,.nav-right{display:none}
     .hamburger{display:flex}
-    .hero{grid-template-columns:1fr;min-height:auto}
-    .hero-right{height:52vw}
-    .hero-left{padding:52px 24px 44px}
-    .hero-stats{display:none}
-    .stats-grid{grid-template-columns:1fr 1fr}
-    .person-inner,.story-inner,.target-inner,.contact-inner{grid-template-columns:1fr;gap:44px}
-    .p-badge{bottom:-14px;right:-14px}
-    .forwho{grid-template-columns:1fr}
-    .net-hdr{grid-template-columns:1fr;gap:28px}
-    .cat-grid{grid-template-columns:repeat(2,1fr)}
-    .pr-grid{grid-template-columns:1fr}
+    .hero-content{padding:52px 24px}
+    .hero-badges{left:24px}
+    .infostats-grid,.about-inner,.story-cards,.persona-wrap,.forwho,.promise-grid,.contact-inner{grid-template-columns:1fr}
+    .about-visual{grid-template-columns:1fr 1fr}
     .proc-steps{grid-template-columns:1fr 1fr;gap:36px}
     .proc-steps::before{display:none}
     .footer-top{grid-template-columns:1fr 1fr;gap:28px}
-    .fw-pane{padding:60px 34px}
+    .journey{grid-template-columns:1fr 1fr;gap:32px}
+    .journey::before{display:none}
   }
   @media(max-width:600px){
-    .stats-grid,.pr-grid{grid-template-columns:1fr}
-    .cat-grid{grid-template-columns:1fr 1fr}
-    .proc-steps{grid-template-columns:1fr}
+    .infostats-grid,.proc-steps{grid-template-columns:1fr 1fr}
+    .about-visual{grid-template-columns:1fr}
+    .av-sub{display:none}
     .cta-btns{flex-direction:column;align-items:center}
     .fg-row{grid-template-columns:1fr}
     .footer-top{grid-template-columns:1fr}
     .float-btn .fb-t{display:none}
     .float-btn{padding:12px}
-    .target-cards{gap:8px}
+    .ci-grid{grid-template-columns:1fr}
+    .journey{grid-template-columns:1fr}
   }
   </style>
 </head>
@@ -332,26 +357,28 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" aria-label="브랜드앤유 홈">
-      <!-- 로고 v4: B&Y 워드마크 + 틸 악센트 라인 -->
-      <svg viewBox="0 0 200 38" fill="none" style="height:32px;width:auto" xmlns="http://www.w3.org/2000/svg">
-        <!-- 틸 수직 악센트 바 -->
-        <rect x="0" y="4" width="3" height="30" rx="1.5" fill="#00c5b4"/>
-        <!-- B&Y 워드마크 -->
-        <text x="12" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#0a0f1e" letter-spacing="-1">B</text>
-        <text x="27" y="28" font-family="DM Sans,sans-serif" font-size="16" font-weight="300" fill="#00c5b4" letter-spacing="-0.5">&amp;</text>
-        <text x="38" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#0a0f1e" letter-spacing="-1">Y</text>
-        <!-- 구분선 -->
-        <line x1="60" y1="8" x2="60" y2="30" stroke="#0a0f1e" stroke-width="1" stroke-opacity="0.12"/>
-        <!-- 한글 타이포 -->
-        <text x="70" y="18" font-family="Pretendard Variable,sans-serif" font-size="11" font-weight="800" fill="#0a0f1e" letter-spacing="0.5">브랜드앤유</text>
-        <text x="70" y="30" font-family="Pretendard Variable,sans-serif" font-size="8.5" font-weight="500" fill="#00c5b4" letter-spacing="1.5">BRAND &amp; YOU</text>
+      <!-- 로고 v5: 럭셔리 리테일 워드마크 -->
+      <svg viewBox="0 0 220 42" fill="none" style="height:34px;width:auto" xmlns="http://www.w3.org/2000/svg">
+        <!-- 골드 상단 라인 -->
+        <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+        <!-- B&Y 세리프+산세리프 조합 -->
+        <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">B</text>
+        <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4" letter-spacing="1">&amp;</text>
+        <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">Y</text>
+        <!-- 가는 구분선 -->
+        <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
+        <!-- 한글 + 영문 2단 -->
+        <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e" letter-spacing="0.3">브랜드앤유</text>
+        <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
+        <!-- 골드 하단 라인 -->
+        <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
       </svg>
     </a>
     <ul class="nav-links">
       <li><a href="#about">소개</a></li>
       <li><a href="#story">우리 이야기</a></li>
       <li><a href="#target">파트너 기준</a></li>
-      <li><a href="#network">전문 카테고리</a></li>
+      <li><a href="#forwho">서비스</a></li>
       <li><a href="#process">진행절차</a></li>
       <li><a href="#contact">문의</a></li>
     </ul>
@@ -365,42 +392,46 @@
         카카오 문의
       </a>
     </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div id="mMenu">
-  <svg viewBox="0 0 200 38" style="height:28px;margin-bottom:6px" fill="none">
-    <rect x="0" y="4" width="3" height="30" rx="1.5" fill="#00c5b4"/>
-    <text x="12" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#0a0f1e" letter-spacing="-1">B</text>
-    <text x="27" y="28" font-family="DM Sans,sans-serif" font-size="16" font-weight="300" fill="#00c5b4">&amp;</text>
-    <text x="38" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#0a0f1e" letter-spacing="-1">Y</text>
-    <line x1="60" y1="8" x2="60" y2="30" stroke="#0a0f1e" stroke-width="1" stroke-opacity="0.12"/>
-    <text x="70" y="18" font-family="Pretendard Variable,sans-serif" font-size="11" font-weight="800" fill="#0a0f1e">브랜드앤유</text>
-    <text x="70" y="30" font-family="Pretendard Variable,sans-serif" font-size="8.5" font-weight="500" fill="#00c5b4" letter-spacing="1.5">BRAND &amp; YOU</text>
+  <svg viewBox="0 0 220 42" style="height:28px;margin-bottom:6px" fill="none">
+    <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+    <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">B</text>
+    <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4">&amp;</text>
+    <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">Y</text>
+    <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
+    <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e">브랜드앤유</text>
+    <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
+    <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
   </svg>
   <a href="#about" onclick="toggleMenu()">소개</a>
   <a href="#story" onclick="toggleMenu()">우리 이야기</a>
   <a href="#target" onclick="toggleMenu()">파트너 기준</a>
-  <a href="#network" onclick="toggleMenu()">전문 카테고리</a>
+  <a href="#forwho" onclick="toggleMenu()">서비스</a>
   <a href="#process" onclick="toggleMenu()">진행절차</a>
   <a href="#contact" onclick="toggleMenu()">문의</a>
   <a href="https://www.instagram.com/brandnyou.team" target="_blank" onclick="toggleMenu()" class="mm-i">📸 @brandnyou.team</a>
   <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" onclick="toggleMenu()" class="mm-k">💬 카카오톡 문의</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO — 면세점 배경 -->
 <section class="hero" id="home">
-  <div class="hero-left">
+  <div class="hero-bg">
+    <!-- 면세점 럭셔리 리테일 인테리어 -->
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1800&q=85&auto=format&fit=crop" alt="면세점 리테일 인테리어"/>
+  </div>
+  <div class="hero-content">
     <div class="hero-tag">면세점 MD 8년 · 생활용품·뷰티 전문</div>
-
     <h1 class="hero-h1">
       좋은 제품을 만들었는데<br>
       알려줄 사람이<br>
       <span class="accent">없었던 적 있으신가요.</span>
     </h1>
-    <p class="hero-kicker">그 간격을 좁히는 일을 합니다.</p>
+    <p class="hero-sub">그 간격을 좁히는 일을 합니다.</p>
     <p class="hero-desc">
       면세점 MD로 수백 개 브랜드를 직접 고르고 협상했습니다.<br>
       그 경험 그대로, <b>제조사와 인플루언서 사이</b>에 서 있습니다.
@@ -410,16 +441,13 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
         지금 상담 시작하기
       </a>
-      <a href="#story" class="btn-outline">어떤 사람인지 보기 →</a>
+      <a href="#story" class="btn-gold">어떤 사람인지 보기 →</a>
     </div>
   </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80" alt="브랜드앤유 공동구매"/>
-    <div class="hero-stats">
-      <div class="h-stat"><div class="h-stat-num dm">1,000<em>+</em></div><div class="h-stat-lbl">Influencers</div></div>
-      <div class="h-stat"><div class="h-stat-num dm">19<em>yr</em></div><div class="h-stat-lbl">Experience</div></div>
-      <div class="h-stat"><div class="h-stat-num dm">8<em>yr</em></div><div class="h-stat-lbl">MD Career</div></div>
-    </div>
+  <div class="hero-badges">
+    <div class="h-badge"><div class="h-badge-num dm" data-target="1000">0<em>+</em></div><div class="h-badge-lbl">Influencers</div></div>
+    <div class="h-badge"><div class="h-badge-num dm">19<em>yr</em></div><div class="h-badge-lbl">Experience</div></div>
+    <div class="h-badge"><div class="h-badge-num dm">8<em>yr</em></div><div class="h-badge-lbl">MD Career</div></div>
   </div>
 </section>
 
@@ -437,77 +465,94 @@
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stats-grid">
-    <div class="s-card">
-      <div class="s-num dm" data-target="1000">0<span class="s-unit">+</span></div>
-      <div class="s-line"></div><div class="s-lbl">Influencer Pool</div>
-      <div class="s-desc">생활용품·뷰티 카테고리<br>직접 발굴·검증</div>
-      <div class="s-bg dm">01</div>
+<!-- INFOGRAPHIC STATS BAR -->
+<div class="infostats">
+  <div class="infostats-grid">
+    <div class="is-card">
+      <div class="is-icon">🏬</div>
+      <div class="is-num dm" data-target="1000">0<em>+</em></div>
+      <div class="is-bar"></div>
+      <div class="is-lbl">인플루언서 풀</div>
+      <div class="is-desc">생활용품·뷰티<br>직접 발굴·검증</div>
+      <div class="is-bg dm">01</div>
     </div>
-    <div class="s-card">
-      <div class="s-num dm" data-target="8">0<span class="s-unit">yr</span></div>
-      <div class="s-line"></div><div class="s-lbl">면세점 MD 경력</div>
-      <div class="s-desc">뷰티·생활용품 바이어<br>상품 선정·협상 전문</div>
-      <div class="s-bg dm">02</div>
+    <div class="is-card">
+      <div class="is-icon">🎯</div>
+      <div class="is-num dm">8<em>yr</em></div>
+      <div class="is-bar"></div>
+      <div class="is-lbl">면세점 MD 경력</div>
+      <div class="is-desc">뷰티·생활용품 바이어<br>상품 선정·협상 전문</div>
+      <div class="is-bg dm">02</div>
     </div>
-    <div class="s-card">
-      <div class="s-num dm" data-target="19">0<span class="s-unit">yr</span></div>
-      <div class="s-line"></div><div class="s-lbl">유통 총 경력</div>
-      <div class="s-desc">제조사↔유통사 중계<br>가격 구조·마진 설계</div>
-      <div class="s-bg dm">03</div>
+    <div class="is-card">
+      <div class="is-icon">📦</div>
+      <div class="is-num dm">19<em>yr</em></div>
+      <div class="is-bar"></div>
+      <div class="is-lbl">유통 총 경력</div>
+      <div class="is-desc">제조사↔유통사 중계<br>가격 구조·마진 설계</div>
+      <div class="is-bg dm">03</div>
     </div>
-    <div class="s-card">
-      <div class="s-num dm" data-target="5">0<span class="s-unit">명↓</span></div>
-      <div class="s-line"></div><div class="s-lbl">파트너 제조사 규모</div>
-      <div class="s-desc">직원 5명 이하<br>중소 제조사 전문</div>
-      <div class="s-bg dm">04</div>
+    <div class="is-card">
+      <div class="is-icon">🤝</div>
+      <div class="is-num dm">5<em>명↓</em></div>
+      <div class="is-bar"></div>
+      <div class="is-lbl">파트너 제조사</div>
+      <div class="is-desc">직원 5명 이하<br>중소 제조사 전문</div>
+      <div class="is-bg dm">04</div>
     </div>
   </div>
 </div>
 
-<!-- PERSON SECTION -->
-<section class="person" id="about">
+<!-- ABOUT — 면세점 사진 그리드 + 타임라인 인포그래픽 -->
+<section class="about" id="about">
   <div class="container">
-    <div class="person-inner">
-      <div class="person-visual">
-        <div class="p-img">
-          <div class="p-img-placeholder">
-            <div class="pi-icon">👤</div>
-            <p>박상권 대표<br>사진 준비 중</p>
-          </div>
+    <div class="about-inner">
+      <div class="about-visual">
+        <!-- 메인: 면세점 매장 전경 -->
+        <div class="av-main">
+          <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80&auto=format&fit=crop" alt="면세점 뷰티 매장"/>
         </div>
-        <div class="p-badge">
-          <div class="p-badge-num dm">19년</div>
-          <div class="p-badge-lbl">유통 전문 경력</div>
+        <!-- 서브1: 뷰티 제품 -->
+        <div class="av-sub">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80&auto=format&fit=crop" alt="뷰티 스킨케어 제품"/>
+        </div>
+        <!-- 서브2: 숫자 배지 -->
+        <div class="av-badge">
+          <div class="av-badge-num">19년</div>
+          <div class="av-badge-lbl">유통 전문<br>경력</div>
         </div>
       </div>
       <div>
         <p class="sec-eye">About Brand&You</p>
         <h2 class="sec-h2">면세점 MD 8년,<br>유통 <em>19년</em>의 눈으로<br>직접 고릅니다</h2>
-        <p class="person-body">
-          MD 시절, 수백 개의 브랜드를 보면서 어떤 제품이 어떤 사람에게 닿는지를 몸으로 익혔습니다.<br>
-          그 감각 그대로, 지금은 제조사와 인플루언서 사이에 서 있습니다.
+        <p class="about-body">
+          MD 시절, 수백 개의 브랜드를 보면서 어떤 제품이 어떤 사람에게 닿는지를 몸으로 익혔습니다. 그 감각 그대로, 지금은 제조사와 인플루언서 사이에 서 있습니다.
         </p>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2007 – 2015</div>
-            <div class="tl-title">면세점 MD · 바이어</div>
-            <div class="tl-desc">뷰티·생활용품 카테고리. 브랜드 발굴·입점 협상 실무</div>
+        <!-- 타임라인 인포그래픽 -->
+        <div class="timeline-info">
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-dot-w"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-year">2007 – 2015</div>
+              <div class="tl-title">면세점 MD · 바이어</div>
+              <div class="tl-desc">뷰티·생활용품 카테고리. 브랜드 발굴·입점 협상 실무</div>
+            </div>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2015 – 2024</div>
-            <div class="tl-title">유통·벤더 기획</div>
-            <div class="tl-desc">제조사↔유통사 중계. 가격 구조·마진 설계 실무</div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-dot-w"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-year">2015 – 2024</div>
+              <div class="tl-title">유통·벤더 기획</div>
+              <div class="tl-desc">제조사↔유통사 중계. 가격 구조·마진 설계 실무</div>
+            </div>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2024 –</div>
-            <div class="tl-title">브랜드앤유 설립</div>
-            <div class="tl-desc">생활용품·뷰티 중소제조사 전문 공동구매 중계. 직접 발로 뛰어 첫 계약 성사</div>
+          <div class="tl-row">
+            <div class="tl-left"><div class="tl-dot-w" style="border-color:var(--teal);background:var(--teal)"></div></div>
+            <div class="tl-body">
+              <div class="tl-year" style="color:var(--teal)">2024 — 현재</div>
+              <div class="tl-title">브랜드앤유 설립</div>
+              <div class="tl-desc">생활용품·뷰티 중소제조사 전문 공동구매 중계. 발로 뛰어 첫 계약 성사</div>
+            </div>
           </div>
         </div>
         <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary" style="background:var(--ink);color:var(--white)">
@@ -518,116 +563,123 @@
   </div>
 </section>
 
-<!-- STORY: 여정 섹션 (실패→성사) -->
+<!-- STORY — 여정 인포그래픽 -->
 <section class="story" id="story">
   <div class="container">
-    <div class="story-inner">
-      <div>
-        <p class="sec-eye" style="color:rgba(0,197,180,.7)">Our Story</p>
-        <h2 class="story-quote">
-          처음엔<br>
-          아무도<br>
-          <em>문을 열어주지</em><br>
-          않았습니다.
-        </h2>
-        <p class="story-body">
-          브랜드앤유를 시작하면서 수십 개의 제조사에 직접 연락했습니다.<br>
-          대부분은 답이 없었고, 일부는 정중히 거절했습니다.<br><br>
-          <b>그 경험이 오히려 단단한 기준이 됐습니다.</b><br>
-          어떤 제품이 공구에 맞는지, 어떤 인플루언서가 진짜인지 —<br>
-          직접 부딪히면서 배운 감각입니다.
-        </p>
-        <a href="#target" class="btn-primary" style="background:rgba(0,197,180,.15);color:var(--teal);border:1px solid rgba(0,197,180,.3)">
-          어떤 파트너를 찾는지 보기 →
-        </a>
+    <div class="story-hdr">
+      <p class="sec-eye" style="color:rgba(0,197,180,.65);display:block;margin-bottom:12px">Our Story</p>
+      <h2 class="story-h2">처음엔 아무도<br><em>문을 열어주지 않았습니다.</em></h2>
+      <p class="story-sub">그 시간이 지금의 브랜드앤유를 만들었습니다.</p>
+    </div>
+
+    <!-- 4단계 여정 인포그래픽 -->
+    <div class="journey">
+      <div class="j-step">
+        <div class="j-circle c1">
+          <div class="j-icon">🚀</div>
+          <div class="j-num">STEP 01</div>
+        </div>
+        <div class="j-title">유통 19년 경력으로 다시 시작</div>
+        <div class="j-desc">면세점 MD·벤더 경력을 바탕으로, 중소 제조사와 인플루언서를 연결하는 새로운 구조를 만들기로 했습니다.</div>
       </div>
-      <div class="story-milestones">
-        <div class="sm-item">
-          <div class="sm-num">01</div>
-          <div class="sm-content">
-            <div class="sm-title">유통 19년 경력으로 시장에 다시 섰습니다</div>
-            <div class="sm-desc">면세점 MD·벤더 경력을 바탕으로 중소 제조사와 인플루언서를 연결하는 새로운 구조를 만들기로 했습니다.</div>
-          </div>
+      <div class="j-step">
+        <div class="j-circle c2">
+          <div class="j-icon">🚪</div>
+          <div class="j-num">STEP 02</div>
         </div>
-        <div class="sm-item">
-          <div class="sm-num">02</div>
-          <div class="sm-content">
-            <div class="sm-title">수십 곳에 직접 찾아가 제안했습니다</div>
-            <div class="sm-desc">서류가 아닌 전화와 이메일로, 정해진 공식 없이 한 곳 한 곳 문을 두드렸습니다. 쉽지 않았지만, 그게 바닥을 아는 방법이었습니다.</div>
-          </div>
+        <div class="j-title">수십 곳에 직접 제안</div>
+        <div class="j-desc">서류가 아닌 전화와 이메일로, 한 곳 한 곳 문을 두드렸습니다. 대부분 답이 없었습니다.</div>
+      </div>
+      <div class="j-step">
+        <div class="j-circle c3">
+          <div class="j-icon">✨</div>
+          <div class="j-num">STEP 03</div>
         </div>
-        <div class="sm-item">
-          <div class="sm-num">03</div>
-          <div class="sm-content">
-            <div class="sm-title">그리고 첫 계약이 성사됐습니다</div>
-            <div class="sm-desc">생활용품 브랜드와 인플루언서의 공동구매 계약을 이끌어냈습니다. 화려하지 않지만, 직접 만들어낸 첫 결과입니다.</div>
-            <span class="sm-tag">첫 공구 진행 중</span>
-          </div>
+        <div class="j-title">그리고 첫 계약 성사</div>
+        <div class="j-desc">생활용품 브랜드와 인플루언서의 공동구매 계약. 화려하지 않지만, 직접 만들어낸 첫 결과입니다.</div>
+      </div>
+      <div class="j-step">
+        <div class="j-circle c4">
+          <div class="j-icon">🤝</div>
+          <div class="j-num">NOW</div>
         </div>
-        <div class="sm-item">
-          <div class="sm-num">04</div>
-          <div class="sm-content">
-            <div class="sm-title">지금도 같은 방식으로 합니다</div>
-            <div class="sm-desc">보고서보다 전화 한 통, 플랫폼보다 사람. 브랜드앤유가 일하는 방식은 처음부터 지금까지 바뀌지 않았습니다.</div>
-          </div>
+        <div class="j-title">지금도 같은 방식으로</div>
+        <div class="j-desc">보고서보다 전화 한 통, 플랫폼보다 사람. 브랜드앤유가 일하는 방식은 처음부터 지금까지 바뀌지 않았습니다.</div>
+      </div>
+    </div>
+
+    <!-- 스토리 이미지 카드 2개 -->
+    <div class="story-cards">
+      <div class="sc">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop" alt="협상 미팅"/>
+        <div class="sc-body">
+          <div class="sc-tag">MD의 감각</div>
+          <div class="sc-title">팔로워 숫자가 아닌<br>MD의 눈으로 고릅니다</div>
+          <div class="sc-desc">공구 이력, 팔로워 성향, CS 평점까지 직접 확인합니다.</div>
+        </div>
+      </div>
+      <div class="sc">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&auto=format&fit=crop" alt="파트너십"/>
+        <div class="sc-body">
+          <div class="sc-tag">진행 중</div>
+          <div class="sc-title">첫 번째 공구가<br>지금 진행되고 있습니다</div>
+          <div class="sc-desc">생활용품 카테고리, 인플루언서 × 브랜드 첫 공동구매.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TARGET CLIENT -->
+<!-- TARGET — 페르소나 인포그래픽 -->
 <section class="target" id="target">
   <div class="container">
-    <div class="target-inner">
-      <div>
-        <p class="target-eye">Who We Serve</p>
-        <h2 class="target-h2">브랜드앤유가<br>가장 잘 도울 수 있는<br><em>한 분</em>이 있습니다</h2>
-        <p class="target-body">
-          모든 제조사의 파트너가 되겠다고 하면,<br>
-          어느 누구에게도 진짜 힘이 되기 어렵습니다.<br>
-          이 한 분을 위해 브랜드앤유를 만들었습니다.
-        </p>
-        <div class="target-persona">
-          <div class="tp-label">파트너 페르소나</div>
-          <div class="tp-text">
-            생활용품이나 뷰티 제품을 직접 만들고,<br>
-            마케팅은 혼자 감당하고 있고,<br>
-            <span>한 번쯤 인플루언서 공구에서 아쉬운 경험을 해본 분.</span>
-          </div>
+    <div class="target-hdr">
+      <p class="sec-eye" style="display:block;margin-bottom:12px">Who We Serve</p>
+      <h2 class="target-h2">브랜드앤유가 가장 잘 도울 수 있는<br><em>딱 한 분</em>이 있습니다</h2>
+      <p class="target-sub">모든 제조사의 파트너가 되겠다고 하면, 어느 누구에게도 진짜 힘이 되기 어렵습니다.</p>
+    </div>
+    <div class="persona-wrap">
+      <!-- 페르소나 카드 (인포그래픽) -->
+      <div class="persona-card">
+        <div class="pc-eye">파트너 페르소나</div>
+        <div class="pc-title">
+          생활용품이나 뷰티 제품을 직접 만들고,<br>
+          마케팅은 혼자 감당하고 있고,<br>
+          <span>한 번쯤 인플루언서 공구에서<br>아쉬운 경험을 해본 분.</span>
         </div>
-        <div class="target-not">
-          <strong>이런 분과는 맞지 않을 수 있습니다 —</strong><br>
-          대형 캠페인·정량 KPI를 원하시거나, 생활용품·뷰티 외 카테고리를 원하시는 분
-        </div>
+        <ul class="pc-list">
+          <li class="pc-item">
+            <div class="pc-icon">🏭</div>
+            <div class="pc-text"><strong>직원 5명 이하 제조사</strong><br>마케팅 전담 인력 없이 대표가 모든 걸 혼자 챙기는 곳</div>
+          </li>
+          <li class="pc-item">
+            <div class="pc-icon">🧴</div>
+            <div class="pc-text"><strong>생활용품·뷰티 카테고리</strong><br>칫솔, 가글, 스킨케어, 헤어케어, 홈케어 등</div>
+          </li>
+          <li class="pc-item">
+            <div class="pc-icon">💬</div>
+            <div class="pc-text"><strong>담당자와 직접 소통 원하는 분</strong><br>처음 상담한 사람이 끝까지 함께하길 원하는 분</div>
+          </li>
+        </ul>
       </div>
-      <div class="target-cards">
-        <div class="tc">
-          <div class="tc-icon">🏭</div>
-          <div>
-            <div class="tc-title">소규모 제조사</div>
-            <div class="tc-desc">대형 대행사의 최소 예산 기준이 부담스럽고, 혼자 인플루언서를 찾기엔 시간이 없는 곳</div>
+      <!-- 오른쪽: 카테고리 인포그래픽 + 아닌 분 -->
+      <div>
+        <div class="cat-info">
+          <div class="ci-title">전문 카테고리</div>
+          <div class="ci-grid">
+            <div class="ci-item"><div class="ci-emoji">🧴</div><div class="ci-name">스킨케어·뷰티</div></div>
+            <div class="ci-item"><div class="ci-emoji">🪥</div><div class="ci-name">생활용품·홈케어</div></div>
+            <div class="ci-item"><div class="ci-emoji">💊</div><div class="ci-name">건강·이너뷰티</div></div>
+            <div class="ci-item"><div class="ci-emoji">🌿</div><div class="ci-name">자연주의·친환경</div></div>
           </div>
+          <div class="ci-not">이 범위 밖(패션·식품·디지털·육아·펫 등)은 운영하지 않습니다.</div>
         </div>
-        <div class="tc">
-          <div class="tc-icon">🧴</div>
-          <div>
-            <div class="tc-title">생활용품·뷰티 카테고리</div>
-            <div class="tc-desc">칫솔, 가글, 스킨케어, 헤어케어, 홈케어 등 MD가 8년간 가장 깊이 다뤄온 품목들</div>
-          </div>
-        </div>
-        <div class="tc">
-          <div class="tc-icon">🤝</div>
-          <div>
-            <div class="tc-title">인플루언서 경험이 처음이거나 아쉬웠던 분</div>
-            <div class="tc-desc">팔로워 숫자만 보고 진행했다가 기대보다 못한 결과를 경험한 적 있는 분</div>
-          </div>
-        </div>
-        <div class="tc">
-          <div class="tc-icon">💬</div>
-          <div>
-            <div class="tc-title">담당자와 직접 소통하고 싶은 분</div>
-            <div class="tc-desc">중간 담당자가 계속 바뀌는 구조 대신, 처음 상담한 사람이 끝까지 함께하길 원하는 분</div>
+        <div class="persona-not" style="margin-top:16px">
+          <div class="pn-title">이런 분과는 맞지 않을 수 있습니다</div>
+          <div class="pn-items">
+            <div class="pn-item"><div class="pn-x">✕</div>대형 캠페인·정량 KPI를 원하시는 분</div>
+            <div class="pn-item"><div class="pn-x">✕</div>생활용품·뷰티 외 카테고리 제조사</div>
+            <div class="pn-item"><div class="pn-x">✕</div>단기간 폭발적 바이럴을 원하시는 분</div>
           </div>
         </div>
       </div>
@@ -641,9 +693,9 @@
     <div class="fw-pane dark">
       <span class="fw-chip">For Influencers</span>
       <h3 class="fw-h3">생활용품·뷰티 공구<br>경험 있는 인플루언서</h3>
-      <p class="fw-body">팔로워 1만 이상, 릴스 1만뷰 이상, 생활용품·뷰티 카테고리 공구 경험. 이 세 가지를 갖추셨다면 편하게 연락 주세요.</p>
+      <p class="fw-body">팔로워 1만 이상, 릴스 1만뷰 이상, 생활용품·뷰티 공구 경험. 이 세 가지를 갖추셨다면 편하게 연락 주세요.</p>
       <ul class="fw-list">
-        <li class="fw-li"><span class="fw-icon">🎯</span>내 채널 성향에 맞는 상품만 제안 — 강요 없음</li>
+        <li class="fw-li"><span class="fw-icon">🎯</span>내 채널 성향에 맞는 상품만 제안</li>
         <li class="fw-li"><span class="fw-icon">🤝</span>협상·계약·정산까지 전담</li>
         <li class="fw-li"><span class="fw-icon">💬</span>카카오톡으로 편하게</li>
         <li class="fw-li"><span class="fw-icon">✨</span>무리한 판매 목표 없는 구조</li>
@@ -656,10 +708,10 @@
     <div class="fw-pane light">
       <span class="fw-chip">For Brands</span>
       <h3 class="fw-h3">MD가 직접 보고<br>고른 매칭</h3>
-      <p class="fw-body">팔로워 수만 보는 게 아닙니다. 공구 이력·팔로워 성향·CS까지 확인한 인플루언서만 제안합니다. 면세점 MD 8년의 눈으로.</p>
+      <p class="fw-body">팔로워 수만 보는 게 아닙니다. 공구 이력·팔로워 성향·CS까지 확인한 인플루언서만 제안합니다.</p>
       <ul class="fw-list">
         <li class="fw-li"><span class="fw-icon">👁</span>카테고리 맞춤 인플루언서 선별</li>
-        <li class="fw-li"><span class="fw-icon">📦</span>생활용품·뷰티 중심 검증 DB</li>
+        <li class="fw-li"><span class="fw-icon">📦</span>생활용품·뷰티 검증 DB</li>
         <li class="fw-li"><span class="fw-icon">📊</span>가격 구조·마진 설계 지원</li>
         <li class="fw-li"><span class="fw-icon">📈</span>공구 완료 후 결과 리포트</li>
       </ul>
@@ -670,76 +722,43 @@
   </div>
 </section>
 
-<!-- NETWORK -->
-<section class="network" id="network">
+<!-- PROMISE — 이미지 카드 -->
+<section class="promise" id="promise">
   <div class="container">
-    <div class="net-hdr">
-      <div>
-        <p class="sec-eye">전문 카테고리</p>
-        <h2 class="sec-h2">생활용품·뷰티,<br><em>이 범위만</em> 합니다</h2>
-      </div>
-      <p class="net-sub">모든 카테고리를 다 잘하겠다고 하면 아무것도 잘 못하게 됩니다. 면세점 MD 8년 동안 가장 깊이 판 두 카테고리에서만 운영합니다.</p>
+    <div class="promise-hdr">
+      <p class="sec-eye">Our Promise</p>
+      <h2 class="sec-h2">브랜드앤유가 지키는 <em>3가지</em></h2>
     </div>
-    <div class="cat-grid">
-      <div class="cat-card main">
-        <div class="cat-badge">핵심</div>
-        <div class="cat-emoji">🧴</div>
-        <div class="cat-name">스킨케어·뷰티</div>
-        <div class="cat-desc">기초·색조·헤어<br>MD 전문 영역</div>
+    <div class="promise-grid">
+      <div class="p-card">
+        <div class="p-card-img">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop" alt="신뢰"/>
+          <div class="p-card-icon"><div class="p-card-num">01</div></div>
+        </div>
+        <div class="p-card-body">
+          <div class="p-card-title">과장 없이 제안합니다</div>
+          <div class="p-card-desc">공구 이력·팔로워 성향·CS 평점까지 직접 확인. 맞지 않으면 솔직하게 말씀드립니다.</div>
+        </div>
       </div>
-      <div class="cat-card main">
-        <div class="cat-badge">핵심</div>
-        <div class="cat-emoji">🪥</div>
-        <div class="cat-name">생활용품·홈케어</div>
-        <div class="cat-desc">칫솔·가글·청소용품<br>1호 계약 카테고리</div>
+      <div class="p-card">
+        <div class="p-card-img">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&auto=format&fit=crop" alt="투명한 계약"/>
+          <div class="p-card-icon"><div class="p-card-num">02</div></div>
+        </div>
+        <div class="p-card-body">
+          <div class="p-card-title">수수료를 명확히 합니다</div>
+          <div class="p-card-desc">수수료 구조를 계약서에 모두 적습니다. 처음 협의한 조건 그대로, 추가 비용 없이.</div>
+        </div>
       </div>
-      <div class="cat-card main">
-        <div class="cat-badge">전문</div>
-        <div class="cat-emoji">💊</div>
-        <div class="cat-name">건강·이너뷰티</div>
-        <div class="cat-desc">영양제·건강기능식품<br>뷰티 채널 수요 높음</div>
-      </div>
-      <div class="cat-card main">
-        <div class="cat-badge">전문</div>
-        <div class="cat-emoji">🌿</div>
-        <div class="cat-name">자연주의·친환경</div>
-        <div class="cat-desc">천연·유기농 생활용품<br>라이프스타일 채널 특화</div>
-      </div>
-    </div>
-    <div class="cat-limit">
-      <p>
-        <strong>이 범위 밖(패션·의류·식품·디지털·육아·펫 등)</strong>은 운영하지 않습니다.<br>
-        좁게 갈수록 강하게 남는다고 믿습니다.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- PROMISE -->
-<section class="promise">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:56px">
-      <p class="sec-eye" style="color:rgba(0,197,180,.7)">Our Promise</p>
-      <h2 class="sec-h2" style="color:#fff">브랜드앤유가 지키는<br><em>3가지</em></h2>
-    </div>
-    <div class="pr-grid">
-      <div class="pr-card">
-        <div class="pr-icon">🔍</div>
-        <div class="pr-bar"></div>
-        <div class="pr-title">과장 없이 제안합니다</div>
-        <div class="pr-desc">팔로워 수만 보지 않습니다. 공구 이력·팔로워 성향·CS 평점까지 직접 확인하고, 맞지 않으면 솔직하게 말씀드립니다.</div>
-      </div>
-      <div class="pr-card">
-        <div class="pr-icon">📋</div>
-        <div class="pr-bar"></div>
-        <div class="pr-title">수수료를 명확히 합니다</div>
-        <div class="pr-desc">수수료 구조를 계약서에 모두 적습니다. 처음 협의한 조건 그대로, 추가 비용 없이 진행합니다.</div>
-      </div>
-      <div class="pr-card">
-        <div class="pr-icon">👤</div>
-        <div class="pr-bar"></div>
-        <div class="pr-title">처음부터 끝까지 직접</div>
-        <div class="pr-desc">담당자가 바뀌지 않습니다. 상담·매칭·계약·정산 모두 박상권이 직접 챙깁니다.</div>
+      <div class="p-card">
+        <div class="p-card-img">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80&auto=format&fit=crop" alt="직접 소통"/>
+          <div class="p-card-icon"><div class="p-card-num">03</div></div>
+        </div>
+        <div class="p-card-body">
+          <div class="p-card-title">처음부터 끝까지 직접</div>
+          <div class="p-card-desc">담당자가 바뀌지 않습니다. 상담·매칭·계약·정산 모두 박상권이 직접 챙깁니다.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -748,28 +767,40 @@
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="container">
-    <div class="proc-hdr">
-      <p class="sec-eye">How It Works</p>
-      <h2 class="sec-h2">공동구매 <em>4단계</em></h2>
+    <div class="process-hdr">
+      <p class="sec-eye" style="color:rgba(0,197,180,.65);display:block;margin-bottom:12px">How It Works</p>
+      <h2 class="process-h2">공동구매 <em>4단계</em></h2>
     </div>
     <div class="proc-steps">
       <div class="proc-step">
-        <div class="proc-circle dm">01</div>
+        <div class="proc-circle">
+          <div class="proc-emoji">💬</div>
+          <div class="proc-num">01</div>
+        </div>
         <div class="proc-title">카카오 상담</div>
         <div class="proc-desc">5분 상담으로 상품·카테고리·예산 파악. 맞지 않으면 솔직히 말씀드립니다</div>
       </div>
       <div class="proc-step">
-        <div class="proc-circle dm">02</div>
+        <div class="proc-circle">
+          <div class="proc-emoji">🔍</div>
+          <div class="proc-num">02</div>
+        </div>
         <div class="proc-title">MD 직접 선별</div>
-        <div class="proc-desc">박상권이 직접 인플루언서 3~5인 제안. 공구 이력·팔로워 성향 검증 완료</div>
+        <div class="proc-desc">박상권이 직접 인플루언서 3~5인 제안. 공구 이력·팔로워 성향 검증</div>
       </div>
       <div class="proc-step">
-        <div class="proc-circle dm">03</div>
+        <div class="proc-circle">
+          <div class="proc-emoji">📋</div>
+          <div class="proc-num">03</div>
+        </div>
         <div class="proc-title">계약 & 공구 오픈</div>
         <div class="proc-desc">계약서 체결, 공구 일정·가격 확정. 콘텐츠 제작 전 과정 서포트</div>
       </div>
       <div class="proc-step">
-        <div class="proc-circle dm">04</div>
+        <div class="proc-circle">
+          <div class="proc-emoji">📊</div>
+          <div class="proc-num">04</div>
+        </div>
         <div class="proc-title">정산 & 리포트</div>
         <div class="proc-desc">공구 마감 후 투명한 정산. 판매 결과·개선점 리포트 제공</div>
       </div>
@@ -777,21 +808,26 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-sec">
+<!-- CTA — 풀 이미지 배경 -->
+<div class="cta-sec">
+  <div class="cta-bg">
+    <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=1800&q=85&auto=format&fit=crop" alt="뷰티 스킨케어 공동구매"/>
+  </div>
   <div class="cta-inner">
-    <p class="sec-eye" style="display:block;margin-bottom:14px;color:rgba(0,197,180,.7)">Ready to Start?</p>
-    <h2 class="cta-h2">첫 상담은 <em>무료</em>입니다.<br>카카오 메시지 하나면 됩니다.</h2>
-    <p class="cta-body">복잡한 서류 없이 시작합니다. 생활용품·뷰티 카테고리라면 먼저 연락 주세요. 맞지 않으면 솔직하게 말씀드립니다.</p>
-    <div class="cta-btns">
-      <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary" style="font-size:14px;padding:15px 30px">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
-        카카오로 문의하기
-      </a>
-      <a href="#contact" style="border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.55);font-size:14px;padding:14px 30px;border:1.5px solid rgba(255,255,255,.12);border-radius:var(--r6);font-weight:600;transition:all .25s" onmouseover="this.style.borderColor='#00c5b4';this.style.color='#00c5b4'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.55)'">문의폼 작성하기</a>
+    <div class="cta-content">
+      <p class="sec-eye" style="display:block;margin-bottom:14px;color:rgba(0,197,180,.7)">Ready to Start?</p>
+      <h2 class="cta-h2">첫 상담은 <em>무료</em>입니다.<br>카카오 메시지 하나면 됩니다.</h2>
+      <p class="cta-body">복잡한 서류 없이 시작합니다. 생활용품·뷰티 카테고리라면 먼저 연락 주세요.</p>
+      <div class="cta-btns">
+        <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="btn-primary" style="font-size:14px;padding:15px 30px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
+          카카오로 문의하기
+        </a>
+        <a href="#contact" class="btn-gold" style="font-size:14px;padding:14px 30px">문의폼 작성하기</a>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -800,7 +836,7 @@
       <div>
         <p class="ct-eye">Contact</p>
         <h2 class="ct-h2">무엇이든<br>물어보세요</h2>
-        <p class="ct-body">생활용품·뷰티 인플루언서 매칭 문의, 브랜드 파트너십, 공구 기획 상담 — 박상권이 직접 답변드립니다.</p>
+        <p class="ct-body">생활용품·뷰티 인플루언서 매칭, 브랜드 파트너십, 공구 기획 상담 — 박상권이 직접 답변드립니다.</p>
         <div class="ch-list">
           <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="ch">
             <div class="ch-icon" style="background:#FEE500">💬</div>
@@ -859,14 +895,15 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <svg viewBox="0 0 200 38" style="height:24px" fill="none">
-          <rect x="0" y="4" width="3" height="30" rx="1.5" fill="#00c5b4" opacity="0.7"/>
-          <text x="12" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="rgba(255,255,255,.72)" letter-spacing="-1">B</text>
-          <text x="27" y="28" font-family="DM Sans,sans-serif" font-size="16" font-weight="300" fill="#00c5b4">&amp;</text>
-          <text x="38" y="28" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="rgba(255,255,255,.72)" letter-spacing="-1">Y</text>
-          <line x1="60" y1="8" x2="60" y2="30" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-          <text x="70" y="18" font-family="Pretendard Variable,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,.45)">브랜드앤유</text>
-          <text x="70" y="30" font-family="Pretendard Variable,sans-serif" font-size="8.5" font-weight="500" fill="rgba(0,197,180,.55)" letter-spacing="1.5">BRAND &amp; YOU</text>
+        <svg viewBox="0 0 220 42" style="height:26px" fill="none">
+          <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.35"/>
+          <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="rgba(255,255,255,.65)">B</text>
+          <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="rgba(0,197,180,.6)">&amp;</text>
+          <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="rgba(255,255,255,.65)">Y</text>
+          <line x1="64" y1="5" x2="64" y2="33" stroke="rgba(255,255,255,.1)" stroke-width="0.8"/>
+          <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,.4)">브랜드앤유</text>
+          <text x="74" y="31" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="rgba(0,197,180,.45)" letter-spacing="2">BRAND &amp; YOU</text>
+          <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.35"/>
         </svg>
         <p class="f-tagline">면세점 MD 8년 · 유통 19년<br>생활용품·뷰티 공동구매 중계<br>박상권</p>
         <div class="f-sns">
@@ -885,9 +922,9 @@
       <div class="f-col">
         <h4>Specialty</h4>
         <ul>
-          <li><a href="#network">스킨케어·뷰티</a></li>
-          <li><a href="#network">생활용품·홈케어</a></li>
-          <li><a href="#network">건강·이너뷰티</a></li>
+          <li><a href="#target">스킨케어·뷰티</a></li>
+          <li><a href="#target">생활용품·홈케어</a></li>
+          <li><a href="#target">건강·이너뷰티</a></li>
         </ul>
       </div>
       <div class="f-col">
@@ -910,27 +947,25 @@
   </div>
 </footer>
 
-<!-- FLOAT -->
 <a href="https://open.kakao.com/o/sUJmM8di" target="_blank" rel="noopener" class="float-btn" aria-label="카카오톡 문의">
   <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.1 4 6.6l-1 3.6 4.1-2.7c.9.2 1.9.3 2.9.3 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/></svg>
   <span class="fb-t">카카오 문의</span>
 </a>
 
 <script>
-const nav = document.getElementById('nav');
+const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10),{passive:true});
+const mMenu=document.getElementById('mMenu');
+function toggleMenu(){mMenu.style.display=mMenu.style.display==='flex'?'none':'flex';}
 
-const mMenu = document.getElementById('mMenu');
-function toggleMenu(){mMenu.style.display = mMenu.style.display==='flex'?'none':'flex';}
-
-function countUp(el, target, suffix){
-  const dur=1600,start=performance.now();
+function countUp(el,target,suffix){
+  const dur=1800,start=performance.now();
   const fn=t=>{
     const p=Math.min((t-start)/dur,1);
     const ease=1-Math.pow(1-p,3);
     const v=Math.round(ease*target);
-    const disp = target>=1000 ? (v>=1000?'1,000':'0') : String(v);
-    el.innerHTML=disp+'<span class="s-unit">'+suffix+'</span>';
+    const disp=target>=1000?(v>=1000?'1,000':'0'):String(v);
+    el.innerHTML=disp+'<em>'+suffix+'</em>';
     if(p<1)requestAnimationFrame(fn);
   };
   requestAnimationFrame(fn);
@@ -940,15 +975,14 @@ const io=new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       e.target.querySelectorAll('[data-target]').forEach(c=>{
         const t=parseInt(c.dataset.target);
-        const u=c.querySelector('.s-unit')?.textContent||'';
+        const u=c.querySelector('em')?.textContent||'+';
         countUp(c,t,u);
       });
       io.unobserve(e.target);
     }
   });
-},{threshold:0.2});
-const sb=document.querySelector('.stats-bar');
-if(sb)io.observe(sb);
+},{threshold:0.3});
+document.querySelectorAll('.infostats,.hero-badges').forEach(el=>io.observe(el));
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
