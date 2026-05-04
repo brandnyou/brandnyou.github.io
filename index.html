@@ -51,12 +51,12 @@
   .hamburger span{width:22px;height:2px;background:var(--ink);display:block;transition:.3s}
 
   /* ── HERO ── */
-  .hero{min-height:100vh;position:relative;overflow:hidden;padding-top:68px;display:flex;align-items:center}
+  .hero{min-height:100vh;position:relative;overflow:hidden;padding-top:68px;display:flex;align-items:center;flex-direction:column;justify-content:center}
   /* 면세점 배경 이미지 */
   .hero-bg{position:absolute;inset:0;z-index:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
   .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,15,30,.88) 0%,rgba(10,15,30,.72) 45%,rgba(10,15,30,.3) 100%)}
-  .hero-content{position:relative;z-index:1;padding:80px 80px;max-width:700px}
+  .hero-content{position:relative;z-index:1;padding:80px 80px 40px 80px;max-width:700px;width:100%}
   .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:7px 16px;border-radius:var(--r999);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;width:fit-content}
   .hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulse 2.5s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
@@ -73,7 +73,7 @@
   .btn-gold:hover{border-color:var(--gold);background:rgba(201,168,76,.1);transform:translateY(-2px)}
 
   /* ── HERO BOTTOM BADGES ── */
-  .hero-badges{position:absolute;bottom:40px;left:80px;z-index:1;display:flex;gap:12px}
+  .hero-badges{position:relative;z-index:1;display:flex;gap:12px;padding:0 80px 60px 80px;align-self:flex-start;margin-top:auto}
   .h-badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:var(--r10);padding:14px 20px;text-align:center;min-width:110px}
   .h-badge-num{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:900;color:var(--white);line-height:1}
   .h-badge-num em{color:var(--teal);font-style:normal}
@@ -328,7 +328,7 @@
     .nav-links,.nav-right{display:none}
     .hamburger{display:flex}
     .hero-content{padding:52px 24px}
-    .hero-badges{left:24px}
+    .hero-badges{padding:0 24px 48px 24px}
     .infostats-grid,.about-inner,.story-cards,.persona-wrap,.forwho,.promise-grid,.contact-inner{grid-template-columns:1fr}
     .about-visual{grid-template-columns:1fr 1fr}
     .proc-steps{grid-template-columns:1fr 1fr;gap:36px}
