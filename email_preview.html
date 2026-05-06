@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>브랜드앤유 제안서</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+  background: #ffffff;
+  width: 1200px;
+  color: #1a1a2e;
+}
+
+/* ====== 섹션1: 헤더 ====== */
+.hero {
+  background: linear-gradient(135deg, #0f1f4a 0%, #1a3470 60%, #0f1f4a 100%);
+  padding: 64px 80px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-deco1 {
+  position: absolute; right: -40px; top: -40px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: rgba(232,184,75,0.08);
+}
+.hero-deco2 {
+  position: absolute; left: 60%; bottom: -60px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.brand-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+.brand-badge {
+  background: linear-gradient(135deg, #e8b84b, #f5d585);
+  color: #0f1f4a;
+  font-weight: 900;
+  font-size: 18px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+.brand-name {
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.hero-headline {
+  font-size: 40px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.hero-headline .gold { color: #e8b84b; }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  margin-top: 14px;
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ====== 섹션2: 제조사 고민 → 해결 ====== */
+.pain-section {
+  background: #f7f8fc;
+  padding: 56px 80px;
+}
+.sec-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #e8b84b;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sec-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #0f1f4a;
+  margin-bottom: 36px;
+  line-height: 1.3;
+}
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.pain-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  border-left: 4px solid #e8b84b;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  position: relative;
+}
+.pain-q {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+  font-style: italic;
+  line-height: 1.5;
+}
+.pain-q::before { content: '"'; font-size: 20px; color: #e8b84b; margin-right: 2px; }
+.pain-q::after  { content: '"'; font-size: 20px; color: #e8b84b; margin-left: 2px; }
+.pain-arrow {
+  font-size: 20px;
+  color: #e8b84b;
+  margin: 8px 0;
+  font-weight: 900;
+}
+.pain-ans {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1f4a;
+  line-height: 1.5;
+}
+
+/* ====== 섹션3: 핵심 수치 바 ====== */
+.stats-section {
+  background: #0f1f4a;
+  padding: 40px 80px;
+  display: flex;
+  gap: 0;
+}
+.stat-box {
+  flex: 1;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+}
+.stat-box:not(:last-child)::after {
+  content: '';
+  position: absolute; right: 0; top: 15%; height: 70%;
+  width: 1px; background: rgba(255,255,255,0.12);
+}
+.stat-num {
+  font-size: 42px;
+  font-weight: 900;
+  color: #e8b84b;
+  line-height: 1;
+}
+.stat-num sup { font-size: 20px; }
+.stat-desc { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.4; }
+.stat-desc strong { color: white; }
+
+/* ====== 섹션4: 왜 우리인가 (서비스 강점) ====== */
+.why-section {
+  padding: 56px 80px;
+  background: white;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 0;
+}
+.why-card {
+  padding: 30px 24px;
+  border-radius: 14px;
+  background: #f7f8fc;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.why-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, #e8b84b, #0f1f4a);
+}
+.why-icon { font-size: 40px; margin-bottom: 14px; }
+.why-title { font-size: 16px; font-weight: 900; color: #0f1f4a; margin-bottom: 10px; }
+.why-body { font-size: 13px; color: #555; line-height: 1.7; }
+.why-tag {
+  display: inline-block;
+  background: #0f1f4a; color: white;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* ====== 섹션5: 수수료 구조 비교 ====== */
+.compare-section {
+  background: #f7f8fc;
+  padding: 56px 80px;
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 0;
+}
+.compare-card {
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+.compare-card.bad {
+  background: white;
+  border: 2px solid #f0f0f0;
+  opacity: 0.7;
+}
+.compare-card.good {
+  background: linear-gradient(135deg, #0f1f4a, #1a3470);
+  border: 2px solid #e8b84b;
+  box-shadow: 0 8px 30px rgba(15,31,74,0.2);
+}
+.compare-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.compare-card.bad .compare-label { color: #aaa; }
+.compare-card.good .compare-label { color: #e8b84b; }
+.compare-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.compare-card.bad .compare-title { color: #888; }
+.compare-card.good .compare-title { color: white; }
+.compare-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.compare-card.bad .compare-item { color: #999; }
+.compare-card.good .compare-item { color: rgba(255,255,255,0.85); }
+.ci-icon { flex-shrink: 0; font-size: 16px; }
+.compare-card.bad .ci-icon { filter: grayscale(1); opacity: 0.5; }
+
+/* ====== 섹션6: 프로세스 ====== */
+.process-section {
+  background: white;
+  padding: 56px 80px;
+}
+.process-steps {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}
+.ps-item {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.ps-item:not(:last-child)::after {
+  content: '▶';
+  position: absolute; right: -14px; top: 28px;
+  color: #e8b84b; font-size: 16px;
+  z-index: 2;
+}
+.ps-num {
+  width: 52px; height: 52px;
+  background: #e8b84b;
+  color: #0f1f4a;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+}
+.ps-title { font-size: 14px; font-weight: 700; color: #0f1f4a; margin-bottom: 6px; }
+.ps-desc { font-size: 12px; color: #888; line-height: 1.5; padding: 0 6px; }
+.ps-box {
+  background: #f7f8fc;
+  border-radius: 12px;
+  padding: 20px 12px 18px;
+}
+
+/* ====== 섹션7: CTA ====== */
+.cta-section {
+  background: linear-gradient(135deg, #e8b84b 0%, #f5d07a 100%);
+  padding: 48px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.cta-left h2 {
+  font-size: 28px;
+  font-weight: 900;
+  color: #0f1f4a;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.cta-left p {
+  font-size: 15px;
+  color: rgba(15,31,74,0.7);
+  line-height: 1.6;
+}
+.cta-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #0f1f4a;
+}
+.contact-row strong { font-weight: 900; }
+.cta-btn {
+  display: inline-block;
+  background: #0f1f4a;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* 푸터 */
+.footer {
+  background: #0a1228;
+  color: rgba(255,255,255,0.45);
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.footer span { color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+
+<!-- 섹션1: 히어로 -->
+<div class="hero">
+  <div class="hero-deco1"></div>
+  <div class="hero-deco2"></div>
+  <div class="brand-tag">
+    <div class="brand-badge">B&amp;Y</div>
+    <div class="brand-name">Brand &amp; You · 공동구매 중계벤더</div>
+  </div>
+  <div class="hero-headline">
+    광고비 없이 실판매로<br>
+    <span class="gold">인플루언서 채널을 여는 방법</span>
+  </div>
+  <div class="hero-sub">
+    면세점 MD기획 8년, 유통 19년 경력이 직접 제품을 보고<br>
+    가장 잘 맞는 인플루언서에 연결해 드립니다.
+  </div>
+</div>
+
+<!-- 섹션2: 제조사 고민 → 해결 -->
+<div class="pain-section">
+  <div class="sec-label">Pain Point &amp; Solution</div>
+  <div class="sec-title">혹시 이런 고민 있으시지 않나요?</div>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-q">인플루언서 마케팅, 효과는 좋다는데<br>비용이 너무 부담스럽다</div>
+      <div class="pain-arrow">↓</div>
+      <div class="pain-ans">판매가 일어날 때만 비용 발생<br>선결제 광고비 0원, 성과 기반 수수료만</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-q">광고·협찬 해봤는데 실제 구매로<br>연결이 안 됐다</div>
+      <div class="pain-arrow">↓</div>
+      <div class="pain-ans">협찬이 아닌 공구(공동구매) 방식<br>팔로워가 직접 주문 — 실매출 발생</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-q">어떤 인플루언서가 우리 제품에<br>맞는지 판단이 어렵다</div>
+      <div class="pain-arrow">↓</div>
+      <div class="pain-ans">면세점 MD 상품 선별 기준으로<br>카테고리·팔로워층·공구 이력 직접 검토</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-q">공구 진행하면 주문·CS·정산<br>처리가 너무 복잡하다</div>
+      <div class="pain-arrow">↓</div>
+      <div class="pain-ans">인플루언서 섭외부터 주문 집계·정산까지<br>브랜드앤유가 전담, 제조사는 배송만</div>
+    </div>
+  </div>
+</div>
+
+<!-- 섹션3: 핵심 수치 -->
+<div class="stats-section">
+  <div class="stat-box">
+    <div class="stat-num">19<sup>년</sup></div>
+    <div class="stat-desc"><strong>유통·소매</strong><br>현장 경력</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">8<sup>년</sup></div>
+    <div class="stat-desc"><strong>면세점 MD기획</strong><br>상품 선별 경력</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">100<sup>+</sup></div>
+    <div class="stat-desc"><strong>인플루언서 풀</strong><br>팔로워 1만+ 공구 경험</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">0<sup>원</sup></div>
+    <div class="stat-desc"><strong>초기 비용</strong><br>광고비 선결제 없음</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">1<sup>통</sup></div>
+    <div class="stat-desc"><strong>시작 방법</strong><br>이메일 한 통으로 검토</div>
+  </div>
+</div>
+
+<!-- 섹션4: 왜 우리인가 -->
+<div class="why-section">
+  <div class="sec-label">Why Brand &amp; You</div>
+  <div class="sec-title" style="margin-bottom:28px;">일반 마케팅 대행과 다른 점</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">👁️</div>
+      <div class="why-title">MD의 눈으로 보는 매칭</div>
+      <div class="why-body">팔로워 수만 보지 않습니다.<br>제품 카테고리 적합성, 팔로워층 구성,<br>공구 진행 이력을 종합 판단합니다.</div>
+      <div class="why-tag">면세점 MD 8년 기준</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📦</div>
+      <div class="why-title">원스톱 운영</div>
+      <div class="why-body">인플루언서 섭외 · 콘텐츠 협의<br>주문 집계 · 정산까지 전 과정 담당.<br>제조사는 제품 출하만 하면 됩니다.</div>
+      <div class="why-tag">제조사 운영 부담 최소</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔄</div>
+      <div class="why-title">1회성이 아닌 채널 구축</div>
+      <div class="why-body">첫 공구 이후 재공구 일정까지 설계.<br>인플루언서별 연간 캘린더로<br>지속 가능한 판매 채널을 만듭니다.</div>
+      <div class="why-tag">장기 매출 구조 설계</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <div class="why-title">실판매 기반 수수료</div>
+      <div class="why-body">광고비 선결제 없음.<br>실제 판매된 금액에서만<br>수수료가 발생하는 구조입니다.</div>
+      <div class="why-tag">리스크 없는 시작</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📊</div>
+      <div class="why-title">투명한 데이터 공유</div>
+      <div class="why-body">주문 수 · 매출 · 인게이지먼트<br>전 수치를 제조사와 공유합니다.<br>결과를 숨기지 않습니다.</div>
+      <div class="why-tag">전 수치 투명 공유</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <div class="why-title">19년 유통 네트워크</div>
+      <div class="why-body">유통·소매 현장에서 직접 쌓은<br>네트워크로 빠른 협의 가능.<br>에이전시가 아닌 현장 출신입니다.</div>
+      <div class="why-tag">현장 경력 직접 운영</div>
+    </div>
+  </div>
+</div>
+
+<!-- 섹션5: 기존 방식 vs 브랜드앤유 -->
+<div class="compare-section">
+  <div class="sec-label">Comparison</div>
+  <div class="sec-title" style="margin-bottom:28px;">기존 인플루언서 마케팅 vs 브랜드앤유 공구 중계</div>
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <div class="compare-label">기존 방식</div>
+      <div class="compare-title">협찬·광고 의뢰</div>
+      <div class="compare-item"><span class="ci-icon">❌</span><span>선결제 협찬비 또는 광고비 발생</span></div>
+      <div class="compare-item"><span class="ci-icon">❌</span><span>게시 후 실구매 연결 불확실</span></div>
+      <div class="compare-item"><span class="ci-icon">❌</span><span>인플루언서 직접 섭외·협의 필요</span></div>
+      <div class="compare-item"><span class="ci-icon">❌</span><span>주문·CS·정산 제조사 직접 처리</span></div>
+      <div class="compare-item"><span class="ci-icon">❌</span><span>1회 캠페인으로 종료</span></div>
+    </div>
+    <div class="compare-card good">
+      <div class="compare-label">브랜드앤유 공구 중계</div>
+      <div class="compare-title" style="color:white;">성과 기반 공동구매</div>
+      <div class="compare-item"><span class="ci-icon">✅</span><span>선결제 광고비 0원 — 실판매 기반</span></div>
+      <div class="compare-item"><span class="ci-icon">✅</span><span>팔로워가 직접 주문 — 확실한 매출</span></div>
+      <div class="compare-item"><span class="ci-icon">✅</span><span>인플루언서 매칭부터 협의 전담</span></div>
+      <div class="compare-item"><span class="ci-icon">✅</span><span>주문·정산 전과정 브랜드앤유 처리</span></div>
+      <div class="compare-item"><span class="ci-icon">✅</span><span>재공구 일정 설계 — 지속 채널 구축</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 섹션6: 진행 프로세스 -->
+<div class="process-section">
+  <div class="sec-label">Process</div>
+  <div class="sec-title" style="margin-bottom:32px;">공구 진행 프로세스 — 제조사는 이것만 하면 됩니다</div>
+  <div class="process-steps">
+    <div class="ps-item">
+      <div class="ps-box">
+        <div class="ps-num">1</div>
+        <div class="ps-title">제품 정보 전달</div>
+        <div class="ps-desc">이메일로 제품 정보와<br>희망 단가 전달</div>
+      </div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-box">
+        <div class="ps-num">2</div>
+        <div class="ps-title">적합성 검토</div>
+        <div class="ps-desc">카테고리·가격·인플루언서<br>매칭 가능성 검토 회신</div>
+      </div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-box">
+        <div class="ps-num">3</div>
+        <div class="ps-title">인플루언서 매칭</div>
+        <div class="ps-desc">최적 인플루언서 제안<br>협의 및 콘텐츠 조율</div>
+      </div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-box">
+        <div class="ps-num">4</div>
+        <div class="ps-title">공구 오픈·운영</div>
+        <div class="ps-desc">주문 집계·확인<br>제조사는 배송 준비만</div>
+      </div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-box">
+        <div class="ps-num">5</div>
+        <div class="ps-title">정산 및 재공구</div>
+        <div class="ps-desc">투명한 정산 완료<br>재공구 일정 협의</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 섹션7: CTA -->
+<div class="cta-section">
+  <div class="cta-left">
+    <h2>이메일 한 통으로<br>시작할 수 있습니다</h2>
+    <p>제품 정보와 희망 단가만 보내주시면,<br>MD기획 경력으로 직접 검토 후 회신드립니다.<br>초기 비용 없이 가능성을 확인하세요.</p>
+  </div>
+  <div class="cta-right">
+    <div class="contact-row">📧 <strong>brandnyou.team@gmail.com</strong></div>
+    <div class="contact-row">🌐 <strong>brandnyu.com</strong></div>
+    <div class="contact-row">💬 카카오 오픈채팅 문의 가능</div>
+    <div class="cta-btn">협업 검토 요청하기 →</div>
+  </div>
+</div>
+
+<!-- 푸터 -->
+<div class="footer">
+  <div><span>브랜드앤유 Brand &amp; You</span> &nbsp;|&nbsp; 대표 박상권 &nbsp;|&nbsp; brandnyou.team@gmail.com</div>
+  <div>공동구매 중계벤더 &nbsp;|&nbsp; 생활용품 · 뷰티 · 홈케어</div>
+</div>
+
+
+</html>
