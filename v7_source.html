@@ -379,7 +379,7 @@ function analyzeBrand(brandName) {
   if (!name) return null;
   const key = name.toLowerCase().replace(/\s+/g,'').replace(/[()（）·]/g,'');
 
-  // 1. 60개사 BRANDS 정확 매핑
+  // 1. 50개사 BRANDS 정확 매핑
   const sentMatch = BRANDS.find(b => {
     const bk = b.brand.toLowerCase().replace(/\s+/g,'').replace(/[()（）·]/g,'');
     return bk === key || bk.includes(key) || key.includes(bk);
