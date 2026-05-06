@@ -142,7 +142,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sa
   </div>
 
   <div class="quick-panel">
-    <div class="quick-title">⚡ 발송 완료 60개사 — 클릭 시 즉시 매칭</div>
+    <div class="quick-title">⚡ 발송 완료 50개사 — 클릭 시 즉시 매칭</div>
     <div class="quick-grid" id="quick-grid"></div>
   </div>
 
@@ -165,11 +165,10 @@ document.getElementById('db-status').textContent =
 // ═══════════════════════════════════════════════════════
 const BRAND_DB = {
   // ── 스킨케어 ──
-  '아누아':     {cat:'스킨케어',kws:'어성초 트러블케어 모공 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
   
-  '기프티스트': {cat:'뷰티·스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'스킨케어·뷰티 관심 여성', tone:'깔끔하고 신뢰감'},
-  'giftist':    {cat:'뷰티·스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'스킨케어·뷰티 관심 여성', tone:'깔끔하고 신뢰감'},
-  '기프티스트(Giftist)': {cat:'뷰티·스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'스킨케어·뷰티 관심 여성', tone:'깔끔하고 신뢰감'},
+  '기프티스트': {cat:'스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'성분덕후', tone:'리얼리뷰'},
+  'giftist':    {cat:'스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'성분덕후', tone:'리얼리뷰'},
+  '아누아':     {cat:'스킨케어',kws:'어성초 트러블케어 모공 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
   '코스알엑스':  {cat:'스킨케어',kws:'달팽이 트러블 스팟패드 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
   'cosrx':      {cat:'스킨케어',kws:'달팽이 트러블 스팟패드 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
   '이니스프리':  {cat:'스킨케어',kws:'제주 그린티 수분 자연성분 스킨케어',target:'2030',tone:'감성라이프'},
