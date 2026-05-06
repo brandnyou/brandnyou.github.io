@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드앤유 | 제조사 × 인플루언서 매칭 판별기</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+
+  .header {
+    background: linear-gradient(135deg, #0f1f4a 0%, #1e3a6e 100%);
+    color: white; padding: 32px 40px;
+    box-shadow: 0 4px 20px rgba(15,31,74,0.3);
+  }
+  .header h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  .header p { font-size: 14px; opacity: 0.75; }
+  .header .badge { display: inline-block; background: #e8b84b; color: #0f1f4a; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 30px 20px; }
+
+  /* 검색 패널 */
+  .search-panel {
+    background: white; border-radius: 16px; padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 24px;
+  }
+  .search-panel h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #0f1f4a; }
+  .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .filter-item label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 6px; }
+  .filter-item select, .filter-item input {
+    width: 100%; padding: 10px 14px; border: 1.5px solid #e0e0e0; border-radius: 10px;
+    font-size: 14px; background: #fafafa; transition: border 0.2s;
+    appearance: none;
+  }
+  .filter-item select:focus, .filter-item input:focus { outline: none; border-color: #0f1f4a; background: white; }
+  .btn-search {
+    margin-top: 20px; padding: 12px 32px; background: #0f1f4a; color: white;
+    border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-search:hover { background: #1e3a6e; }
+  .btn-reset {
+    margin-top: 20px; margin-left: 10px; padding: 12px 20px; background: white; color: #555;
+    border: 1.5px solid #ddd; border-radius: 10px; font-size: 14px; cursor: pointer;
+  }
+  .btn-reset:hover { background: #f5f5f5; }
+
+  /* 제조사 선택 → 매칭 결과 */
+  .brand-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .brand-card {
+    background: white; border-radius: 14px; padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06); border: 2px solid transparent;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .brand-card:hover { border-color: #0f1f4a; box-shadow: 0 4px 20px rgba(15,31,74,0.15); transform: translateY(-2px); }
+  .brand-card.selected { border-color: #e8b84b; background: #fffbf0; }
+  .brand-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .brand-name { font-size: 16px; font-weight: 800; color: #0f1f4a; }
+  .brand-cat { font-size: 11px; background: #e8f0fe; color: #1e3a6e; padding: 3px 10px; border-radius: 20px; font-weight: 600; white-space: nowrap; }
+  .brand-email { font-size: 11px; color: #888; margin-bottom: 8px; }
+  .brand-products { font-size: 12px; color: #333; margin-bottom: 8px; line-height: 1.5; }
+  .brand-revenue { font-size: 11px; color: #aaa; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .tag {
+    font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 600;
+    background: #f0f4ff; color: #0f1f4a;
+  }
+  .sent-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+
+  /* 매칭 결과 패널 */
+  .match-panel {
+    background: linear-gradient(135deg, #0f1f4a 0%, #1e3a6e 100%);
+    color: white; border-radius: 16px; padding: 28px 32px;
+    box-shadow: 0 4px 20px rgba(15,31,74,0.3); margin-bottom: 24px;
+    display: none;
+  }
+  .match-panel.active { display: block; }
+  .match-panel h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; }
+  .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .match-card { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 20px; }
+  .match-card h4 { font-size: 13px; font-weight: 700; opacity: 0.7; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .match-card p { font-size: 14px; line-height: 1.6; }
+  .match-keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .match-keyword { background: rgba(232,184,75,0.3); color: #e8b84b; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+
+  /* 스코어카드 */
+  .score-section { margin-top: 24px; }
+  .score-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; opacity: 0.85; }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .score-item { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 14px 16px; }
+  .score-item .label { font-size: 11px; opacity: 0.65; margin-bottom: 6px; font-weight: 600; }
+  .score-item .value { font-size: 22px; font-weight: 900; color: #e8b84b; }
+  .score-item .desc { font-size: 11px; opacity: 0.65; margin-top: 3px; }
+
+  /* 판별기 입력 폼 */
+  .matcher-form {
+    background: white; border-radius: 16px; padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 24px;
+  }
+  .matcher-form h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: #0f1f4a; }
+  .matcher-form .subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .form-item label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 6px; }
+  .form-item input, .form-item select, .form-item textarea {
+    width: 100%; padding: 10px 14px; border: 1.5px solid #e0e0e0; border-radius: 10px;
+    font-size: 14px; background: #fafafa; transition: border 0.2s; font-family: inherit;
+  }
+  .form-item textarea { resize: vertical; min-height: 80px; }
+  .form-item input:focus, .form-item select:focus, .form-item textarea:focus {
+    outline: none; border-color: #0f1f4a; background: white;
+  }
+
+  /* 결과 리스트 */
+  .results-count { font-size: 14px; color: #555; margin-bottom: 16px; font-weight: 600; }
+  .results-count span { color: #0f1f4a; font-size: 18px; font-weight: 900; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab-btn {
+    padding: 8px 20px; border-radius: 30px; border: 2px solid #e0e0e0;
+    background: white; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; color: #555;
+  }
+  .tab-btn.active { background: #0f1f4a; color: white; border-color: #0f1f4a; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 16px; }
+
+  .highlight { background: #fff9e6; border-left: 4px solid #e8b84b; padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 13px; color: #555; margin-top: 16px; line-height: 1.6; }
+
+  @media (max-width: 768px) {
+    .header { padding: 20px; }
+    .container { padding: 16px; }
+    .search-panel, .match-panel, .matcher-form { padding: 20px; }
+    .brand-card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>브랜드앤유 <span class="badge">BETA</span></h1>
+  <p>제조사 × 인플루언서 매칭 판별기 — 발송 제조사 61개사 기반 · 2026.05.06 기준</p>
+</div>
+
+<div class="container">
+
+  <!-- 탭 -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('browse')">📋 제조사 브라우저</button>
+    <button class="tab-btn" onclick="switchTab('matcher')">🔍 인플루언서 판별기</button>
+    <button class="tab-btn" onclick="switchTab('criteria')">📌 판별 기준 가이드</button>
+  </div>
+
+  <!-- TAB 1: 제조사 브라우저 -->
+  <div id="tab-browse">
+    <div class="search-panel">
+      <h2>🏭 제조사 필터</h2>
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label>카테고리</label>
+          <select id="filter-cat" onchange="renderBrands()">
+            <option value="">전체</option>
+            <option value="뷰티·스킨케어">뷰티·스킨케어</option>
+            <option value="더마">더마 (의학적 스킨케어)</option>
+            <option value="메이크업">메이크업</option>
+            <option value="헤어케어">헤어케어</option>
+            <option value="건강·이너뷰티">건강·이너뷰티</option>
+            <option value="자연주의·친환경">자연주의·친환경</option>
+            <option value="생활용품·홈케어">생활용품·홈케어</option>
+            <option value="바디케어">바디케어</option>
+            <option value="여성위생">여성위생</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>발송일</label>
+          <select id="filter-date" onchange="renderBrands()">
+            <option value="">전체</option>
+            <option value="2026-05-04">5/4 발송 (생활용품 계열)</option>
+            <option value="2026-05-06">5/6 발송 (뷰티·건강 계열)</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>인플루언서 팔로워 규모</label>
+          <select id="filter-size" onchange="renderBrands()">
+            <option value="">전체</option>
+            <option value="micro">마이크로 (1만~10만)</option>
+            <option value="mid">미드티어 (10만~100만)</option>
+            <option value="mega">메가 (100만+)</option>
+            <option value="nano">나노 (1만 미만)</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>브랜드명 검색</label>
+          <input type="text" id="filter-search" placeholder="예: 아누아, 조선미녀..." oninput="renderBrands()">
+        </div>
+      </div>
+    </div>
+
+    <div class="results-count" id="results-count">총 <span>61</span>개 제조사</div>
+
+    <div class="brand-card-grid" id="brand-grid"></div>
+  </div>
+
+  <!-- TAB 2: 인플루언서 판별기 -->
+  <div id="tab-matcher" style="display:none;">
+    <div class="matcher-form">
+      <h2>🔍 인플루언서 → 제조사 매칭 판별기</h2>
+      <p class="subtitle">인플루언서 정보를 입력하면 가장 핏이 맞는 제조사 후보군을 추천합니다.</p>
+      <div class="form-grid">
+        <div class="form-item">
+          <label>팔로워 수</label>
+          <input type="number" id="m-followers" placeholder="예: 50000" oninput="runMatcher()">
+        </div>
+        <div class="form-item">
+          <label>주요 콘텐츠 유형</label>
+          <select id="m-content" onchange="runMatcher()">
+            <option value="">선택하세요</option>
+            <option value="스킨케어">스킨케어 루틴</option>
+            <option value="메이크업">메이크업·색조</option>
+            <option value="헤어케어">헤어케어</option>
+            <option value="이너뷰티">이너뷰티·건강</option>
+            <option value="다이어트">다이어트·헬스</option>
+            <option value="친환경">친환경·비건라이프</option>
+            <option value="살림">살림·홈케어</option>
+            <option value="육아">육아·맘</option>
+            <option value="바디케어">바디케어·셀프케어</option>
+            <option value="여성건강">여성건강</option>
+          </select>
+        </div>
+        <div class="form-item">
+          <label>주요 팔로워 연령대</label>
+          <select id="m-age" onchange="runMatcher()">
+            <option value="">선택하세요</option>
+            <option value="10-20">10대~20대</option>
+            <option value="20-30">20대~30대</option>
+            <option value="30-40">30대~40대</option>
+            <option value="40-50">40대~50대</option>
+          </select>
+        </div>
+        <div class="form-item">
+          <label>공구 진행 이력</label>
+          <select id="m-collab" onchange="runMatcher()">
+            <option value="">선택하세요</option>
+            <option value="많음">많음 (3회+)</option>
+            <option value="있음">있음 (1~2회)</option>
+            <option value="없음">없음</option>
+          </select>
+        </div>
+        <div class="form-item" style="grid-column: span 2;">
+          <label>키워드 (쉼표로 구분)</label>
+          <textarea id="m-keywords" placeholder="예: 트러블케어, 어성초, 민감피부, 성분덕후" oninput="runMatcher()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div id="matcher-results">
+      <div class="empty-state">
+        <div class="icon">🎯</div>
+        <p>인플루언서 정보를 입력하면<br>최적 제조사 후보군이 여기에 표시됩니다</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 판별 기준 -->
+  <div id="tab-criteria" style="display:none;">
+    <div class="matcher-form">
+      <h2>📌 인플루언서 판별 기준 가이드</h2>
+      <p class="subtitle">브랜드앤유 내부 기준 — 제조사 특성별 최적 인플루언서 선별 기준</p>
+
+      <div style="margin-top:20px;">
+        <h3 style="font-size:16px;font-weight:700;color:#0f1f4a;margin-bottom:12px;">🏆 공통 기본 기준 (모든 제조사 적용)</h3>
+        <div style="background:#f8f9fa;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
+          <ul style="font-size:14px;line-height:2;color:#333;list-style:disc;padding-left:20px;">
+            <li>최소 팔로워 <strong>10,000명 이상</strong></li>
+            <li>평균 릴스 조회수 <strong>10,000회 이상</strong></li>
+            <li>한국 여성 인플루언서 (한국어 콘텐츠)</li>
+            <li>공동구매 진행 이력 있음 (우선순위)</li>
+            <li>팔로워 대비 댓글·저장·공유 <strong>인게이지먼트 2% 이상</strong></li>
+            <li>허위 팔로워·구매 팔로워 의심 계정 제외</li>
+          </ul>
+        </div>
+
+        <h3 style="font-size:16px;font-weight:700;color:#0f1f4a;margin-bottom:12px;">🎯 카테고리별 추가 기준</h3>
+        <div id="criteria-cards"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 선택된 제조사 매칭 결과 -->
+  <div class="match-panel" id="match-panel">
+    <h2 id="match-title">📌 매칭 분석 결과</h2>
+    <div class="match-grid" id="match-grid"></div>
+    <div class="score-section">
+      <h3>📊 인플루언서 판별 점수 구성</h3>
+      <div class="score-grid" id="score-grid"></div>
+    </div>
+    <div id="match-note"></div>
+  </div>
+
+</div>
+
+<script>
+// ================================================================
+// 데이터
+// ================================================================
+const brands = [
+  {no:1,sent_date:"2026-05-04",brand:"생활공작소",email:"cs@saenggong.com",category:"자연주의·친환경",main_products:"친환경 세제·욕실용품·주방용품",revenue_est:"30~50억",current_influencer_type:"친환경라이프 인플루언서, 제로웨이스트 유튜버, 30대 주부 라이프스타일",current_collab_style:"브랜드 협찬 리뷰, 환경데이 기획전",fit_influencer:"친환경·미니멀라이프 팔로워, 20-35세 여성",fit_follower_range:"3만~20만",fit_content_type:"살림·홈케어·친환경라이프",fit_keywords:"제로웨이스트,친환경,살림,미니멀",matching_score_factors:"친환경 콘텐츠 비중, 살림 콘텐츠 여부",notes:"5/4 발송"},
+  {no:2,sent_date:"2026-05-04",brand:"해피문데이",email:"happy@happymoonday.com",category:"생활용품·여성위생",main_products:"유기농 생리대, 생리컵, 오가닉 면 제품",revenue_est:"50~100억",current_influencer_type:"여성건강·바디포지티브 인플루언서",current_collab_style:"생리주기 공감 콘텐츠, 여성건강 캠페인",fit_influencer:"20-30대 여성, 여성건강/웰니스 관심",fit_follower_range:"1만~10만",fit_content_type:"여성건강·웰니스·바디케어",fit_keywords:"생리대,여성건강,오가닉,유기농,웰니스",matching_score_factors:"여성 팔로워 비율, 웰니스/건강 콘텐츠 비중",notes:"5/4 발송"},
+  {no:3,sent_date:"2026-05-04",brand:"더블하트",email:"info@doubleheart.co.kr",category:"생활용품·홈케어",main_products:"친환경 세탁세제, 유아용 세제 라인",revenue_est:"20~40억",current_influencer_type:"주부 라이프스타일, 육아 맘",current_collab_style:"살림 언박싱, 유아 세탁 팁",fit_influencer:"25-40대 주부·육아맘, 살림 관심",fit_follower_range:"1만~10만",fit_content_type:"살림·육아·홈케어",fit_keywords:"세탁,세제,살림,육아,홈케어,친환경",matching_score_factors:"살림 콘텐츠 비중, 주부 팔로워",notes:"5/4 발송"},
+  {no:4,sent_date:"2026-05-04",brand:"한나패드",email:"hana@hanapad.com",category:"생활용품·여성위생",main_products:"천연 면 생리대, 방수 팬티",revenue_est:"10~30억",current_influencer_type:"천연/오가닉 라이프, 제로웨이스트",current_collab_style:"면 생리대 비교 리뷰",fit_influencer:"20-35세 여성, 친환경 관심",fit_follower_range:"5천~5만",fit_content_type:"친환경라이프·여성건강",fit_keywords:"면생리대,천연,오가닉,친환경",matching_score_factors:"친환경 콘텐츠, 여성 팔로워 비율",notes:"5/4 발송"},
+  {no:5,sent_date:"2026-05-04",brand:"아토팜",email:"atompalm@neo-pharm.co.kr",category:"뷰티·스킨케어(더마)",main_products:"유아·민감피부 MLE크림, 선크림",revenue_est:"200~400억",current_influencer_type:"육아맘, 민감피부 뷰티",current_collab_style:"유아 피부 교육, 피부과 추천 포맷",fit_influencer:"임산부·육아맘·민감피부, 25-40대",fit_follower_range:"1만~30만",fit_content_type:"육아·민감피부·더마",fit_keywords:"유아스킨,민감피부,아토피,더마",matching_score_factors:"육아/민감피부 콘텐츠 비중",notes:"5/4 발송"},
+  {no:6,sent_date:"2026-05-04",brand:"닥터브로너스",email:"korea@drbronner.com",category:"자연주의·친환경",main_products:"유기농 비누, 샴푸, 페이스워시",revenue_est:"50~100억",current_influencer_type:"비건·친환경·미니멀 라이프",current_collab_style:"성분 강조 교육, 환경 캠페인",fit_influencer:"비건·친환경, 20-35세",fit_follower_range:"1만~20만",fit_content_type:"친환경라이프·비건뷰티·미니멀",fit_keywords:"비건,유기농,친환경,올인원,미니멀",matching_score_factors:"비건/친환경 콘텐츠 비중",notes:"5/4 발송"},
+  {no:7,sent_date:"2026-05-04",brand:"마마스앤파파스",email:"info@mamasandpapas.co.kr",category:"생활용품·육아",main_products:"유모차, 카시트, 신생아 침구",revenue_est:"100~200억",current_influencer_type:"임신·육아 맘",current_collab_style:"임산부 브이로그, 언박싱",fit_influencer:"임산부·신생아맘, 25-38세",fit_follower_range:"1만~10만",fit_content_type:"임신·출산·육아·베이비",fit_keywords:"육아,유모차,신생아,임산부",matching_score_factors:"육아 콘텐츠 비중, 맘 팔로워",notes:"5/4 발송"},
+  {no:8,sent_date:"2026-05-04",brand:"그린핑거",email:"greenfinger@lgcare.com",category:"뷰티·스킨케어(유아)",main_products:"유아 스킨케어 로션, 선크림",revenue_est:"LG생활건강 계열",current_influencer_type:"육아맘, 유아케어",current_collab_style:"아이 피부 케어 팁",fit_influencer:"육아맘, 25-40세",fit_follower_range:"1만~10만",fit_content_type:"육아·유아케어",fit_keywords:"유아스킨,아이선크림",matching_score_factors:"육아 콘텐츠 비중",notes:"5/4 발송"},
+  {no:9,sent_date:"2026-05-04",brand:"한경희생활과학",email:"help@hankh.com",category:"생활용품·홈케어",main_products:"스팀청소기, 공기청정기, 헤어기기",revenue_est:"100~200억",current_influencer_type:"살림·홈케어·인테리어",current_collab_style:"청소 비포/애프터, 가전 언박싱",fit_influencer:"살림·홈케어 관심, 25-45세",fit_follower_range:"2만~30만",fit_content_type:"살림·인테리어·홈케어",fit_keywords:"청소,스팀청소기,살림,홈케어",matching_score_factors:"살림/홈케어 콘텐츠 비중",notes:"5/4 발송"},
+  {no:10,sent_date:"2026-05-04",brand:"뮬라웨이",email:"info@mulawear.com",category:"생활용품·여성위생",main_products:"흡수형 생리팬티, 방수 기능성 언더웨어",revenue_est:"20~50억",current_influencer_type:"여성건강·바디포지티브",current_collab_style:"흡수 팬티 비교, 운동 착용 콘텐츠",fit_influencer:"20-40대 여성, 여성건강/운동",fit_follower_range:"5천~5만",fit_content_type:"여성건강·운동·바디포지티브",fit_keywords:"흡수팬티,생리팬티,여성건강",matching_score_factors:"여성 팔로워 비율",notes:"5/4 발송"},
+  {no:11,sent_date:"2026-05-04",brand:"닥터아토지아",email:"info@draitopia.com",category:"뷰티·스킨케어(더마)",main_products:"아토피·민감피부 전용 크림, 선크림",revenue_est:"10~30억",current_influencer_type:"아토피/피부질환 인플루언서",current_collab_style:"피부 개선 전후 비교",fit_influencer:"아토피/민감피부, 20-40대",fit_follower_range:"5천~5만",fit_content_type:"민감피부·더마·아토피",fit_keywords:"아토피,민감피부,더마,진정",matching_score_factors:"민감피부/아토피 콘텐츠 비중",notes:"5/4 발송"},
+  {no:12,sent_date:"2026-05-06",brand:"라운드랩",email:"sales@roundlab.co.kr",category:"뷰티·스킨케어",main_products:"독도 토너, 자작나무 선크림, 비타나이아신 크림",revenue_est:"2,000억+",current_influencer_type:"뷰티 유튜버, 틱톡 K뷰티 계정",current_collab_style:"캐릭터 콜라보, 체험단, 해외 시딩",fit_influencer:"피부고민 콘텐츠, 20-35세",fit_follower_range:"5만~100만",fit_content_type:"뷰티리뷰·스킨케어루틴·K뷰티",fit_keywords:"독도토너,자작썬,스킨케어,K뷰티",matching_score_factors:"뷰티 콘텐츠 비중, 올리브영 언급",notes:"매출 기준 초과 발송"},
+  {no:13,sent_date:"2026-05-06",brand:"넘버즈인",email:"sales@benow.co.kr",category:"뷰티·스킨케어",main_products:"번호별 세럼·토너 라인 (1~9번)",revenue_est:"200~500억",current_influencer_type:"피부 고민별 스킨케어 인플루언서",current_collab_style:"번호별 제품 매칭, 체험단",fit_influencer:"피부 고민(모공·미백·수분), 20-35세",fit_follower_range:"1만~50만",fit_content_type:"스킨케어루틴·성분리뷰",fit_keywords:"모공케어,피부결,세럼,토너",matching_score_factors:"스킨케어 루틴 콘텐츠, 성분 설명"},
+  {no:14,sent_date:"2026-05-06",brand:"클레어스(Klairs)",email:"marketing@wishcompany.net",category:"뷰티·스킨케어",main_products:"서플 토너, 미드나잇 블루 진정크림, 비타민C 세럼",revenue_est:"100~200억",current_influencer_type:"민감피부 전문, 해외 K뷰티 소개",current_collab_style:"민감피부 루틴, 해외 메가 인플 시딩",fit_influencer:"민감피부·진정케어, 20-35세",fit_follower_range:"3만~50만",fit_content_type:"민감피부·스킨케어·K뷰티",fit_keywords:"민감피부,진정크림,토너,비타민C"},
+  {no:15,sent_date:"2026-05-06",brand:"비플레인",email:"contact@momentsco.com",category:"뷰티·스킨케어",main_products:"어성초 진정 라인, 약콩 세럼, 녹두 모공케어",revenue_est:"50~150억",current_influencer_type:"트러블·성분 중심 인플루언서",current_collab_style:"성분 교육, 루틴 추천",fit_influencer:"트러블·민감피부, 20-33세",fit_follower_range:"1만~30만",fit_content_type:"트러블케어·성분뷰티",fit_keywords:"어성초,트러블케어,민감피부,성분"},
+  {no:16,sent_date:"2026-05-06",brand:"셀퓨전씨",email:"cellfusionc_mkt@wonik.com",category:"뷰티·스킨케어(더마)",main_products:"레이저 선크림, 솔루션 토너, 더마 앰플",revenue_est:"100~200억",current_influencer_type:"더마·피부과 협력 인플루언서",current_collab_style:"성분 설명 교육, 선크림 비교",fit_influencer:"더마/피부과 관심, 25-40세",fit_follower_range:"3만~50만",fit_content_type:"더마뷰티·선크림·성분리뷰",fit_keywords:"더마,선크림,피부과,성분"},
+  {no:17,sent_date:"2026-05-06",brand:"에스더포뮬러",email:"efglobal@estherformula.co.kr",category:"건강·이너뷰티",main_products:"콜라겐, 유산균, 글루타치온, 비타민C",revenue_est:"200~300억",current_influencer_type:"건강/웰니스 30-45대 여성",current_collab_style:"영양제 루틴 공개, 먹뷰티",fit_influencer:"건강·이너뷰티·다이어트, 25-45세",fit_follower_range:"3만~100만",fit_content_type:"먹뷰티·건강루틴·다이어트",fit_keywords:"콜라겐,글루타치온,이너뷰티,다이어트"},
+  {no:18,sent_date:"2026-05-06",brand:"모다모다",email:"contact@imodamoda.com",category:"헤어케어",main_products:"프로체인지 블랙 샴푸 (자연 착색)",revenue_est:"50~100억",current_influencer_type:"30-50대 새치 고민 인플루언서",current_collab_style:"새치커버 전후 비교",fit_influencer:"30-55세, 새치/백모 고민",fit_follower_range:"1만~20만",fit_content_type:"헤어케어·새치케어",fit_keywords:"새치,백모,블랙샴푸,헤어케어"},
+  {no:19,sent_date:"2026-05-06",brand:"에이프릴스킨",email:"cs123@apr-in.com",category:"뷰티·스킨케어",main_products:"매직스노우 쿠션, 스킨케어 라인",revenue_est:"50~100억",current_influencer_type:"일상 뷰티 20대 인플루언서",current_collab_style:"GRWM, 쿠션 비교",fit_influencer:"20-30대, 일상 뷰티",fit_follower_range:"1만~30만",fit_content_type:"뷰티GRWM·메이크업·스킨케어",fit_keywords:"쿠션,메이크업,GRWM"},
+  {no:20,sent_date:"2026-05-06",brand:"뉴트리디데이(더베이글)",email:"thebagel_mkt@thebagel.kr",category:"건강·이너뷰티",main_products:"유산균 다이어트, 콜라겐 젤리, 단백질",revenue_est:"50~100억",current_influencer_type:"다이어트·이너뷰티 인플루언서",current_collab_style:"아침 루틴, 다이어트 다이어리",fit_influencer:"다이어트·이너뷰티, 20-35세",fit_follower_range:"1만~30만",fit_content_type:"다이어트·이너뷰티·건강루틴",fit_keywords:"유산균,다이어트,이너뷰티,콜라겐"},
+  {no:21,sent_date:"2026-05-06",brand:"비타민하우스",email:"vhinfo@daum.net",category:"건강·이너뷰티",main_products:"종합비타민, 글루타치온, 오메가3",revenue_est:"30~80억",current_influencer_type:"건강·영양제 중장년 여성",current_collab_style:"영양제 리뷰, 건강 루틴",fit_influencer:"30-50대, 건강·영양제",fit_follower_range:"5천~5만",fit_content_type:"건강루틴·영양제·이너뷰티",fit_keywords:"비타민,글루타치온,영양제"},
+  {no:22,sent_date:"2026-05-06",brand:"바디럽",email:"bodyluv@blankcorp.kr",category:"바디케어",main_products:"퓨어썸 샤워기 필터, 바디워시",revenue_est:"100~200억",current_influencer_type:"20-30대 욕실/셀프케어 관심",current_collab_style:"욕실 루틴, 필터 전후 차이",fit_influencer:"셀프케어·바디루틴, 20-35세",fit_follower_range:"1만~30만",fit_content_type:"셀프케어·바디루틴·홈케어",fit_keywords:"샤워기필터,바디워시,셀프케어"},
+  {no:23,sent_date:"2026-05-06",brand:"라벨영",email:"marketing@lbysales.com",category:"뷰티·스킨케어",main_products:"콜라겐 앰플, 보습 세럼·크림",revenue_est:"30~80억",current_influencer_type:"탄력·안티에이징 30-45대",current_collab_style:"탄력 전후 비교",fit_influencer:"30-45세, 탄력·안티에이징",fit_follower_range:"5천~10만",fit_content_type:"안티에이징·탄력케어",fit_keywords:"콜라겐,탄력,안티에이징,앰플"},
+  {no:24,sent_date:"2026-05-06",brand:"에이치피오(덴프스)",email:"partnership@denps.com",category:"건강·이너뷰티",main_products:"홍삼 이너뷰티, 콜라겐 드링크",revenue_est:"50~100억",current_influencer_type:"건강·홍삼 관심 30-50대",current_collab_style:"건강 루틴, 이너뷰티 먹뷰티",fit_influencer:"30-50대, 건강·홍삼",fit_follower_range:"5천~5만",fit_content_type:"건강루틴·이너뷰티·홍삼",fit_keywords:"홍삼,이너뷰티,건강기능식품"},
+  {no:25,sent_date:"2026-05-06",brand:"닥터지",email:"gmteam@gwss.co.kr",category:"뷰티·스킨케어(더마)",main_products:"레드 블레미쉬 크림, 그린 마일드 선크림",revenue_est:"2,260억",current_influencer_type:"트러블·더마 스킨케어 인플루언서",current_collab_style:"트러블케어 루틴, 성분 교육",fit_influencer:"트러블·여드름, 20-35세",fit_follower_range:"3만~100만",fit_content_type:"트러블케어·더마뷰티·선크림",fit_keywords:"트러블케어,진정크림,선크림,더마",notes:"매출 기준 초과 발송"},
+  {no:26,sent_date:"2026-05-06",brand:"제이엠솔루션",email:"jmsolution@gpclub.co.kr",category:"뷰티·스킨케어",main_products:"꿀광 마스크팩, 골드 앰플",revenue_est:"100~300억",current_influencer_type:"마스크팩 전문 인플루언서",current_collab_style:"마스크팩 챌린지, 대량 체험단",fit_influencer:"마스크팩·화이트닝 관심, 20-35세",fit_follower_range:"1만~100만",fit_content_type:"마스크팩·화이트닝",fit_keywords:"마스크팩,꿀광,화이트닝,앰플"},
+  {no:27,sent_date:"2026-05-06",brand:"동구밭",email:"collaboration@donggubat.com",category:"자연주의·친환경",main_products:"유기농 고체비누, 제로웨이스트 샴푸바",revenue_est:"10~30억",current_influencer_type:"친환경·제로웨이스트 인플루언서",current_collab_style:"제로웨이스트 챌린지, 환경 캠페인",fit_influencer:"친환경·비건·가치소비, 20-35세",fit_follower_range:"5천~5만",fit_content_type:"친환경라이프·제로웨이스트",fit_keywords:"고체비누,제로웨이스트,친환경,비건"},
+  {no:28,sent_date:"2026-05-06",brand:"멜릭서",email:"sales@melixir.com",category:"자연주의·친환경",main_products:"비타민C 세럼, 선크림, 레티놀 앰플",revenue_est:"30~70억",current_influencer_type:"비건뷰티·클린뷰티 인플루언서",current_collab_style:"비건 성분 강조, 선크림 비교",fit_influencer:"비건·클린뷰티·성분, 20-35세",fit_follower_range:"1만~20만",fit_content_type:"비건뷰티·클린스킨케어",fit_keywords:"비건뷰티,클린뷰티,비타민C,선크림"},
+  {no:29,sent_date:"2026-05-06",brand:"에코버(에코에이스)",email:"ecoace@ecoace.co.kr",category:"자연주의·친환경",main_products:"식물성 세탁세제, 주방세제, 욕실클리너",revenue_est:"50~100억",current_influencer_type:"친환경살림·제로웨이스트 인플루언서",current_collab_style:"친환경 세제 비교, 환경부 인증 강조",fit_influencer:"살림·친환경소비, 25-45세",fit_follower_range:"5천~5만",fit_content_type:"살림·친환경·홈케어",fit_keywords:"친환경세제,식물성세제,살림"},
+  {no:30,sent_date:"2026-05-06",brand:"아누아",email:"business@anua.kr",category:"뷰티·스킨케어",main_products:"어성초 77 토너, 복숭아 나이아신아마이드 세럼",revenue_est:"500~800억",current_influencer_type:"트러블·모공·MZ세대 뷰티",current_collab_style:"어성초 성분 교육, 틱톡 바이럴",fit_influencer:"트러블·모공, 20-33세",fit_follower_range:"1만~100만",fit_content_type:"트러블케어·스킨케어루틴·K뷰티",fit_keywords:"어성초,트러블케어,모공,세럼,K뷰티",notes:"매출 기준 초과 발송"},
+  {no:31,sent_date:"2026-05-06",brand:"이즈앤트리",email:"marketing@isntree.com",category:"뷰티·스킨케어",main_products:"히알루론산 토너, 세라마이드 크림, 선크림",revenue_est:"100~200억",current_influencer_type:"수분·진정케어 인플루언서",current_collab_style:"성분 교육, 루틴 추천",fit_influencer:"수분부족·건성·민감, 20-35세",fit_follower_range:"1만~30만",fit_content_type:"수분케어·진정케어·성분뷰티",fit_keywords:"히알루론산,수분케어,세라마이드"},
+  {no:32,sent_date:"2026-05-06",brand:"조선미녀",email:"cs@beautyofjoseon.com",category:"뷰티·스킨케어",main_products:"한방 선크림, 갱화수 토너, 쌀뜨물 클렌저",revenue_est:"200~500억",current_influencer_type:"K뷰티 글로벌 소개, 한방성분 관심",current_collab_style:"시딩 키트, 한방 성분 교육",fit_influencer:"K뷰티·전통성분, 20-35세",fit_follower_range:"3만~100만",fit_content_type:"K뷰티·한방스킨케어·선크림",fit_keywords:"한방성분,선크림,K뷰티"},
+  {no:33,sent_date:"2026-05-06",brand:"아크웰",email:"acwell.global@bnhcosmetics.co.kr",category:"뷰티·스킨케어",main_products:"약산성 클렌저, 리코리스 토너, 프로폴리스",revenue_est:"30~80억",current_influencer_type:"pH 밸런싱·성분 기반",current_collab_style:"pH 케어 루틴",fit_influencer:"pH·성분 관심, 20-35세",fit_follower_range:"1만~20만",fit_content_type:"성분뷰티·pH케어",fit_keywords:"약산성,pH케어,프로폴리스,성분"},
+  {no:34,sent_date:"2026-05-06",brand:"토리든",email:"mkt@torriden.com",category:"뷰티·스킨케어",main_products:"다이브인 히알루론산 세럼, 솔리드인 세라마이드 크림",revenue_est:"200~400억",current_influencer_type:"수분·장벽 강화 인플루언서",current_collab_style:"수분 레이어링, 피부장벽 교육",fit_influencer:"건성·민감·수분, 20-35세",fit_follower_range:"1만~50만",fit_content_type:"수분케어·피부장벽",fit_keywords:"히알루론산,수분케어,세라마이드,피부장벽"},
+  {no:35,sent_date:"2026-05-06",brand:"닥터린",email:"custom@doctorlean.co.kr",category:"건강·이너뷰티",main_products:"다이어트 보조제, 유산균, 콜라겐",revenue_est:"30~80억",current_influencer_type:"다이어트·이너뷰티 인플루언서",current_collab_style:"다이어트 다이어리, 유산균 후기",fit_influencer:"다이어트·이너뷰티, 20-40세",fit_follower_range:"1만~20만",fit_content_type:"다이어트·이너뷰티",fit_keywords:"다이어트,유산균,이너뷰티,슬리밍"},
+  {no:36,sent_date:"2026-05-06",brand:"마더메이드",email:"mothermade@emothermade.com",category:"자연주의·친환경",main_products:"자연유래 주방세제, 세탁세제, 욕실 라인",revenue_est:"30~70억",current_influencer_type:"친환경살림·오가닉 맘",current_collab_style:"안전한 세제 사용법, 친환경 팁",fit_influencer:"친환경·안전성분 엄마/주부, 25-40세",fit_follower_range:"5천~5만",fit_content_type:"친환경살림·오가닉",fit_keywords:"천연세제,오가닉,친환경,살림"},
+  {no:37,sent_date:"2026-05-06",brand:"원씽",email:"sales@onething.kr",category:"뷰티·스킨케어",main_products:"마카다미아 오일, 로즈힙 오일, 아르간 오일",revenue_est:"50~100억",current_influencer_type:"천연 오일·클린뷰티 인플루언서",current_collab_style:"오일 레이어링 루틴, 단일 성분 강조",fit_influencer:"천연오일·클린뷰티, 20-38세",fit_follower_range:"1만~20만",fit_content_type:"천연오일·클린뷰티",fit_keywords:"오일스킨케어,마카다미아,로즈힙,클린뷰티"},
+  {no:38,sent_date:"2026-05-06",brand:"어노브(UNOVE)",email:"un@wyattcorp.com",category:"헤어케어",main_products:"딥데미지 트리트먼트, 글로시 세럼, 헤어 에센스",revenue_est:"50~100억",current_influencer_type:"헤어케어·손상모 인플루언서",current_collab_style:"손상모 케어 루틴, 헤어팩 전후",fit_influencer:"손상모·헤어케어, 20-38세",fit_follower_range:"1만~30만",fit_content_type:"헤어케어·손상모케어",fit_keywords:"손상모,헤어케어,트리트먼트,에센스"},
+  {no:39,sent_date:"2026-05-06",brand:"SNP(에스엔피)",email:"mkting@sdbiotech.co.kr",category:"뷰티·스킨케어",main_products:"동물 마스크팩 (수달·고양이), 골드팩, 앰플",revenue_est:"100~200억",current_influencer_type:"마스크팩·캐릭터 MZ세대",current_collab_style:"동물팩 착용 챌린지, 언박싱",fit_influencer:"MZ세대·귀여운 아이템, 20-30세",fit_follower_range:"1만~50만",fit_content_type:"뷰티챌린지·마스크팩",fit_keywords:"마스크팩,동물마스크,캐릭터,귀여운"},
+  {no:40,sent_date:"2026-05-06",brand:"파파레서피",email:"paparecipe@costory.co.kr",category:"뷰티·스킨케어",main_products:"봄비 꿀 마스크팩, 허니 크림, 수분 세럼",revenue_est:"100~200억",current_influencer_type:"보습·꿀 성분 뷰티 인플루언서",current_collab_style:"꿀 보습 루틴, 마스크팩 챌린지",fit_influencer:"건성·수분부족, 20-35세",fit_follower_range:"1만~30만",fit_content_type:"수분케어·마스크팩",fit_keywords:"꿀마스크,봄비,보습,수분케어"},
+  {no:41,sent_date:"2026-05-06",brand:"데이지크(dasique)",email:"dasique@dasique.co.kr",category:"뷰티·메이크업",main_products:"블러 파우더, 아이섀도우 팔레트, 립 제품",revenue_est:"100~200억",current_influencer_type:"메이크업·색조 크리에이터",current_collab_style:"메이크업 튜토리얼, GRWM",fit_influencer:"메이크업·컬러, 20-32세",fit_follower_range:"1만~50만",fit_content_type:"메이크업·GRWM·색조",fit_keywords:"메이크업,아이섀도우,팔레트,GRWM"},
+  {no:42,sent_date:"2026-05-06",brand:"닥터포헤어",email:"df@wyattcorp.com",category:"헤어케어",main_products:"폴리겐 탈모 샴푸, 두피 앰플",revenue_est:"100~200억",current_influencer_type:"두피·탈모 고민 인플루언서",current_collab_style:"탈모 예방 루틴, 두피 전후",fit_influencer:"탈모·두피케어, 25-45세",fit_follower_range:"1만~20만",fit_content_type:"탈모케어·두피케어",fit_keywords:"탈모,두피케어,샴푸,탈모예방"},
+  {no:43,sent_date:"2026-05-06",brand:"히말라야코리아",email:"finnpin11@himalayakorea.com",category:"건강·이너뷰티",main_products:"히말라야 허브 정제, 건강기능식품",revenue_est:"30~70억",current_influencer_type:"자연주의·허브 관심 중장년",current_collab_style:"천연 허브 건강 루틴",fit_influencer:"자연건강·허브, 30-50대",fit_follower_range:"5천~5만",fit_content_type:"자연건강·허브·이너뷰티",fit_keywords:"허브,자연건강,건강기능식품"},
+  {no:44,sent_date:"2026-05-06",brand:"미팩토리",email:"sales@mefactory.co.kr",category:"뷰티·스킨케어",main_products:"3단 돼지 코팩, 미백 앰플",revenue_est:"30~70억",current_influencer_type:"모공·코팩 인플루언서",current_collab_style:"코팩 사용법, 모공케어 전후",fit_influencer:"모공·블랙헤드, 20-33세",fit_follower_range:"1만~20만",fit_content_type:"모공케어·코팩",fit_keywords:"코팩,모공,블랙헤드,피지케어"},
+  {no:45,sent_date:"2026-05-06",brand:"듀이트리(DEWYTREE)",email:"business@dewytree.com",category:"뷰티·스킨케어",main_products:"콜라겐 앰플, 레티놀 세럼, 더마 케어",revenue_est:"30~70억",current_influencer_type:"탄력·안티에이징 30대+ 인플루언서",current_collab_style:"레티놀·콜라겐 성분 교육",fit_influencer:"탄력·레티놀, 28-45세",fit_follower_range:"1만~20만",fit_content_type:"탄력케어·안티에이징·더마",fit_keywords:"레티놀,콜라겐,탄력,안티에이징"},
+  {no:46,sent_date:"2026-05-06",brand:"투쿨포스쿨",email:"seh@toocool.co.kr",category:"뷰티·메이크업",main_products:"아트클래스 섀도우, 아이라이너, 베이스 메이크업",revenue_est:"50~100억",current_influencer_type:"아트 메이크업·색조 인플루언서",current_collab_style:"예술적 메이크업 튜토리얼, 챌린지",fit_influencer:"아트메이크업·색조, 20-32세",fit_follower_range:"1만~30만",fit_content_type:"아트메이크업·색조뷰티",fit_keywords:"아트메이크업,아이섀도우,색조,립"},
+  {no:47,sent_date:"2026-05-06",brand:"셀리턴",email:"marketing@cellreturn.com",category:"뷰티·스킨케어(기기)",main_products:"LED 마스크, 홈케어 미용기기",revenue_est:"200~400억",current_influencer_type:"홈케어 기기·안티에이징 30-45대",current_collab_style:"LED 마스크 루틴, 피부 변화 전후",fit_influencer:"홈케어 투자 관심, 30-48세",fit_follower_range:"3만~100만",fit_content_type:"홈케어뷰티기기·안티에이징",fit_keywords:"LED마스크,홈케어,피부관리기기,안티에이징"},
+  {no:48,sent_date:"2026-05-06",brand:"더마에임(DERMAIM)",email:"daygy@daygy.co.kr",category:"뷰티·스킨케어(더마)",main_products:"더마 진정 세럼, 수딩 앰플",revenue_est:"10~30억",current_influencer_type:"더마·민감피부 인플루언서",current_collab_style:"제휴 협업 게시판, 더마 루틴",fit_influencer:"민감피부·더마케어, 20-40세",fit_follower_range:"5천~5만",fit_content_type:"더마뷰티·민감피부",fit_keywords:"더마,민감피부,진정케어,수딩"},
+  {no:49,sent_date:"2026-05-06",brand:"닥터원더(블랭크)",email:"marketing@blankcorp.kr",category:"뷰티·스킨케어",main_products:"원더클렌저, 진정 패드, 기초라인",revenue_est:"30~70억",current_influencer_type:"데일리 스킨케어 20대",current_collab_style:"클렌징 루틴, 데일리 스킨케어",fit_influencer:"데일리 스킨케어, 20-33세",fit_follower_range:"1만~20만",fit_content_type:"데일리스킨케어·클렌징",fit_keywords:"클렌저,진정패드,스킨케어,데일리"},
+  {no:50,sent_date:"2026-05-06",brand:"바이오던스(Biodance)",email:"contact@beautyselection.co.kr",category:"뷰티·스킨케어",main_products:"콜라겐 젤리 마스크팩, 바이오 셀룰로오스 마스크",revenue_est:"100~200억",current_influencer_type:"마스크팩·비주얼 인플루언서",current_collab_style:"젤리팩 착용샷, 팝업 연계",fit_influencer:"마스크팩·비주얼, 20-35세",fit_follower_range:"1만~50만",fit_content_type:"마스크팩·비주얼뷰티",fit_keywords:"젤리팩,콜라겐마스크,마스크팩"},
+  {no:51,sent_date:"2026-05-06",brand:"아이레시피(irecipe)",email:"mail@irecipe.com",category:"뷰티·스킨케어",main_products:"워터뱅크 세럼, 선크림, 클렌저",revenue_est:"10~30억",current_influencer_type:"데일리 스킨케어",current_collab_style:"데일리 루틴",fit_influencer:"데일리 스킨케어, 20-35세",fit_follower_range:"5천~5만",fit_content_type:"데일리스킨케어",fit_keywords:"세럼,선크림,클렌저"},
+  {no:52,sent_date:"2026-05-06",brand:"메디힐(MEDIHEAL)",email:"help@medihealcos.com",category:"뷰티·스킨케어",main_products:"NMF 앰플 마스크팩, 티트리팩, 콜라겐팩",revenue_est:"500~1,000억",current_influencer_type:"마스크팩·K뷰티 인플루언서",current_collab_style:"마스크팩 피부 적합 추천",fit_influencer:"마스크팩·K뷰티, 20-38세",fit_follower_range:"3만~100만",fit_content_type:"마스크팩·K뷰티",fit_keywords:"마스크팩,NMF,티트리,K뷰티",notes:"매출 기준 초과 발송"},
+  {no:53,sent_date:"2026-05-06",brand:"쏘내추럴(sonatural)",email:"marketing@sonatural.co.kr",category:"뷰티·스킨케어",main_products:"약산성 선크림, 콜라겐 앰플",revenue_est:"30~70억",current_influencer_type:"선크림·데일리 스킨케어",current_collab_style:"선크림 바름감 비교",fit_influencer:"선크림·데일리케어, 20-35세",fit_follower_range:"1만~20만",fit_content_type:"선크림·데일리스킨케어",fit_keywords:"선크림,약산성,콜라겐"},
+  {no:54,sent_date:"2026-05-06",brand:"에스네이처(S.NATURE)",email:"ky.kim@snature.kr",category:"자연주의·친환경",main_products:"식물유래 세탁세제, 욕실 클리너",revenue_est:"10~30억",current_influencer_type:"자연주의살림·친환경",current_collab_style:"천연 세제 사용법",fit_influencer:"친환경소비·자연주의, 25-45세",fit_follower_range:"5천~5만",fit_content_type:"자연주의살림·친환경",fit_keywords:"천연세제,자연주의,친환경,살림"},
+  {no:55,sent_date:"2026-05-06",brand:"비비랩(BB LAB)",email:"bblab@nutrione.co.kr",category:"건강·이너뷰티",main_products:"저분자 콜라겐, 이너뷰티 드링크, 글루타치온",revenue_est:"100~300억",current_influencer_type:"이너뷰티·콜라겐 30-45대",current_collab_style:"콜라겐 먹기 루틴, 이너뷰티 다이어리",fit_influencer:"이너뷰티·콜라겐, 25-45세",fit_follower_range:"3만~100만",fit_content_type:"이너뷰티·콜라겐·먹뷰티",fit_keywords:"콜라겐,이너뷰티,글루타치온,먹뷰티"},
+  {no:56,sent_date:"2026-05-06",brand:"알엑스더마(RX:DERMA)",email:"rxskinderma@gmail.com",category:"뷰티·스킨케어(더마)",main_products:"피부과 임상 더마 세럼, 수딩 크림",revenue_est:"10~30억",current_influencer_type:"더마·피부과 관심",current_collab_style:"임상결과 기반 피부케어",fit_influencer:"더마·피부과, 20-40세",fit_follower_range:"5천~3만",fit_content_type:"더마뷰티·피부과스킨케어",fit_keywords:"더마,피부과,임상,수딩,미백"},
+  {no:57,sent_date:"2026-05-06",brand:"시드물(sidmool)",email:"help@sidmool.com",category:"자연주의·친환경",main_products:"천연유래 기능성 스킨케어, 씨드 오일",revenue_est:"373억",current_influencer_type:"자연주의·클린뷰티",current_collab_style:"천연성분 스킨케어 루틴",fit_influencer:"자연주의·클린뷰티, 25-40세",fit_follower_range:"1만~20만",fit_content_type:"자연주의뷰티·클린스킨케어",fit_keywords:"천연성분,자연주의,클린뷰티,씨드오일",notes:"매출 기준 초과 발송"},
+  {no:58,sent_date:"2026-05-06",brand:"비건네이처(VeganNature)",email:"vegannature@naver.com",category:"자연주의·친환경",main_products:"비건 고체샴푸바, 트리트먼트바",revenue_est:"5~20억",current_influencer_type:"비건·제로웨이스트 인플루언서",current_collab_style:"고체샴푸바 사용법, 환경 캠페인",fit_influencer:"비건·친환경, 20-35세",fit_follower_range:"5천~5만",fit_content_type:"비건뷰티·친환경",fit_keywords:"비건샴푸,고체샴푸바,제로웨이스트,친환경"},
+  {no:59,sent_date:"2026-05-06",brand:"라카(LAKA)",email:"sns@laka.co.kr",category:"뷰티·메이크업",main_products:"글로우 틴트, 맥시글로우 틴트, 비건 메이크업 전 라인",revenue_est:"100~200억",current_influencer_type:"비건메이크업·젠더뉴트럴 MZ",current_collab_style:"컬러 메이크업 튜토리얼, 비건 가치 강조",fit_influencer:"비건메이크업·컬러, 20-30세",fit_follower_range:"1만~50만",fit_content_type:"비건메이크업·컬러뷰티·MZ",fit_keywords:"비건메이크업,틴트,젠더뉴트럴,컬러"},
+  {no:60,sent_date:"2026-05-06",brand:"믹순(Mixsoon)",email:"contactusa@pkcosm.com",category:"뷰티·스킨케어",main_products:"콩 에센스, 병풀 에센스, PDRN 콜라겐 모이스처라이저",revenue_est:"100~300억",current_influencer_type:"에센스·성분 K뷰티 인플루언서",current_collab_style:"에센스 레이어링, 성분 교육",fit_influencer:"에센스·성분 덕후, 20-35세",fit_follower_range:"1만~50만",fit_content_type:"에센스스킨케어·성분뷰티·K뷰티",fit_keywords:"콩에센스,PDRN,에센스,성분덕후,K뷰티"},
+];
+
+// ================================================================
+// 초기화
+// ================================================================
+let selectedBrand = null;
+
+function init() {
+  renderBrands();
+  renderCriteria();
+}
+
+// ================================================================
+// 탭 전환
+// ================================================================
+function switchTab(tab) {
+  ['browse','matcher','criteria'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t === tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['browse','matcher','criteria'][i] === tab);
+  });
+}
+
+// ================================================================
+// 제조사 브라우저
+// ================================================================
+function renderBrands() {
+  const cat = document.getElementById('filter-cat').value;
+  const date = document.getElementById('filter-date').value;
+  const size = document.getElementById('filter-size').value;
+  const search = document.getElementById('filter-search').value.toLowerCase();
+
+  let filtered = brands.filter(b => {
+    if (cat && !b.category.includes(cat) && !b.fit_content_type.includes(cat)) return false;
+    if (date && b.sent_date !== date) return false;
+    if (search && !b.brand.toLowerCase().includes(search) && !b.category.toLowerCase().includes(search) && !b.fit_keywords.toLowerCase().includes(search)) return false;
+    if (size) {
+      const range = b.fit_follower_range;
+      if (size === 'nano' && !range.includes('5천')) return false;
+      if (size === 'micro' && !range.match(/1만|5만|10만/)) return false;
+      if (size === 'mid' && !range.match(/10만|50만|100만/)) return false;
+      if (size === 'mega' && !range.includes('100만')) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('results-count').innerHTML = `총 <span>${filtered.length}</span>개 제조사`;
+  const grid = document.getElementById('brand-grid');
+  grid.innerHTML = filtered.map(b => `
+    <div class="brand-card ${selectedBrand && selectedBrand.no === b.no ? 'selected' : ''}" onclick="selectBrand(${b.no})">
+      <div class="brand-card-header">
+        <span class="brand-name">${b.brand}</span>
+        <span class="brand-cat">${b.category.replace('뷰티·스킨케어(','').replace(')','')}</span>
+      </div>
+      <div class="brand-email">📧 ${b.email}</div>
+      <div class="brand-products">${b.main_products}</div>
+      <div class="brand-revenue">매출 추정: ${b.revenue_est}</div>
+      <div class="tag-row">
+        ${b.fit_keywords.split(',').slice(0,4).map(k=>`<span class="tag">#${k.trim()}</span>`).join('')}
+      </div>
+      <div style="margin-top:8px;">
+        <span class="sent-badge">✅ ${b.sent_date} 발송</span>
+        ${b.notes ? `<span style="font-size:10px;color:#e57373;margin-left:6px;">⚠ ${b.notes}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectBrand(no) {
+  selectedBrand = brands.find(b => b.no === no);
+  renderBrands();
+  showMatchPanel(selectedBrand);
+  document.getElementById('match-panel').scrollIntoView({behavior:'smooth'});
+}
+
+function showMatchPanel(b) {
+  const panel = document.getElementById('match-panel');
+  panel.classList.add('active');
+  document.getElementById('match-title').textContent = `📌 ${b.brand} × 인플루언서 매칭 분석`;
+
+  document.getElementById('match-grid').innerHTML = `
+    <div class="match-card">
+      <h4>🛍 주력 제품 / 품목</h4>
+      <p>${b.main_products}</p>
+    </div>
+    <div class="match-card">
+      <h4>👥 현재 활용 인플루언서 유형</h4>
+      <p>${b.current_influencer_type}</p>
+    </div>
+    <div class="match-card">
+      <h4>🎬 현재 콜라보 스타일</h4>
+      <p>${b.current_collab_style}</p>
+    </div>
+    <div class="match-card">
+      <h4>🎯 최적 인플루언서 핏</h4>
+      <p>${b.fit_influencer}</p>
+      <div class="match-keywords">
+        ${b.fit_keywords.split(',').map(k=>`<span class="match-keyword">#${k.trim()}</span>`).join('')}
+      </div>
+    </div>
+    <div class="match-card">
+      <h4>📊 적정 팔로워 규모</h4>
+      <p style="font-size:22px;font-weight:900;color:#e8b84b;">${b.fit_follower_range}</p>
+    </div>
+    <div class="match-card">
+      <h4>📹 핏 콘텐츠 유형</h4>
+      <p>${b.fit_content_type}</p>
+    </div>
+  `;
+
+  document.getElementById('score-grid').innerHTML = `
+    <div class="score-item"><div class="label">카테고리 일치도</div><div class="value">30점</div><div class="desc">제품 카테고리 ↔ 콘텐츠 일치</div></div>
+    <div class="score-item"><div class="label">팔로워 × 공구가</div><div class="value">20점</div><div class="desc">팔로워 규모 + 예상 공구 단가</div></div>
+    <div class="score-item"><div class="label">공구 진행 이력</div><div class="value">20점</div><div class="desc">인스타 공구 이력 유무</div></div>
+    <div class="score-item"><div class="label">인게이지먼트</div><div class="value">15점</div><div class="desc">릴스 조회수 / 댓글·저장 비율</div></div>
+    <div class="score-item"><div class="label">팔로워 연령·성별 핏</div><div class="value">15점</div><div class="desc">타겟 소비자와 팔로워 일치도</div></div>
+    <div class="score-item"><div class="label">만점</div><div class="value">100점</div><div class="desc">70점 이상 → 협업 우선 추천</div></div>
+  `;
+
+  document.getElementById('match-note').innerHTML = `
+    <div class="highlight" style="background:rgba(232,184,75,0.15);border-color:#e8b84b;color:rgba(255,255,255,0.85);margin-top:20px;">
+      <strong>📌 ${b.brand} 판별 핵심 기준:</strong> ${b.matching_score_factors || b.fit_keywords}
+    </div>
+  `;
+}
+
+// ================================================================
+// 인플루언서 판별기
+// ================================================================
+function runMatcher() {
+  const followers = parseInt(document.getElementById('m-followers').value) || 0;
+  const content = document.getElementById('m-content').value;
+  const age = document.getElementById('m-age').value;
+  const collab = document.getElementById('m-collab').value;
+  const keywords = document.getElementById('m-keywords').value.toLowerCase();
+
+  if (!content && !keywords) {
+    document.getElementById('matcher-results').innerHTML = `
+      <div class="empty-state"><div class="icon">🎯</div><p>인플루언서 정보를 입력하면<br>최적 제조사 후보군이 여기에 표시됩니다</p></div>`;
+    return;
+  }
+
+  // 매칭 점수 계산
+  const scored = brands.map(b => {
+    let score = 0;
+    // 카테고리/콘텐츠 일치 (30점)
+    if (content && b.fit_content_type.includes(content)) score += 30;
+    else if (content && b.fit_keywords.includes(content)) score += 15;
+    // 키워드 매칭 (20점)
+    if (keywords) {
+      const kws = keywords.split(/[,\s]+/).filter(k=>k.length>1);
+      const matched = kws.filter(k => b.fit_keywords.toLowerCase().includes(k) || b.main_products.toLowerCase().includes(k));
+      score += Math.min(20, matched.length * 7);
+    }
+    // 팔로워 규모 (15점)
+    if (followers > 0) {
+      const range = b.fit_follower_range;
+      const min = parseInt(range.match(/(\d+)만/)?.[1] || range.match(/(\d+)천/)?.[1]/10 || 0) * 10000;
+      if (followers >= min) score += 15;
+      else if (followers >= min * 0.5) score += 8;
+    }
+    // 공구 이력 (15점)
+    if (collab === '많음') score += 15;
+    else if (collab === '있음') score += 8;
+    // 연령대 (20점)
+    if (age && b.fit_influencer.includes(age.split('-')[0]+'대')) score += 20;
+    else if (age && b.fit_influencer.includes(age.split('-')[1]+'대')) score += 10;
+
+    return { ...b, score };
+  }).filter(b => b.score > 0).sort((a,b) => b.score - a.score).slice(0, 12);
+
+  if (scored.length === 0) {
+    document.getElementById('matcher-results').innerHTML = `
+      <div class="empty-state"><div class="icon">🔍</div><p>매칭되는 제조사가 없습니다.<br>다른 조건으로 검색해보세요.</p></div>`;
+    return;
+  }
+
+  const container = document.getElementById('matcher-results');
+  container.innerHTML = `
+    <div class="results-count" style="margin-bottom:16px;">매칭된 제조사 <span>${scored.length}</span>개 (점수 높은 순)</div>
+    <div class="brand-card-grid">
+      ${scored.map(b => `
+        <div class="brand-card" onclick="selectBrand(${b.no}); switchTab('browse');">
+          <div class="brand-card-header">
+            <span class="brand-name">${b.brand}</span>
+            <span style="font-size:18px;font-weight:900;color:#e8b84b;">${b.score}점</span>
+          </div>
+          <div class="brand-email">📧 ${b.email}</div>
+          <div class="brand-products">${b.main_products}</div>
+          <div class="brand-revenue">매출: ${b.revenue_est}</div>
+          <div class="tag-row">
+            ${b.fit_keywords.split(',').slice(0,4).map(k=>`<span class="tag">#${k.trim()}</span>`).join('')}
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:#555;">💡 ${b.fit_influencer}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ================================================================
+// 판별 기준 가이드
+// ================================================================
+const criteriaData = [
+  { cat: '뷰티·스킨케어', icon: '✨', color: '#e8f0fe',
+    items: ['스킨케어 루틴 콘텐츠 50% 이상', '팔로워 중 여성 80%+', '릴스 평균 조회수 1만+', '피부 고민 해결 콘텐츠 (트러블·수분·탄력 등)', '올리브영 관련 언급 유리'] },
+  { cat: '더마·의학적 스킨케어', icon: '🏥', color: '#e8f5e9',
+    items: ['성분 설명 교육 콘텐츠', '피부과·더마 관련 정보 공유', '전문적 신뢰감 있는 계정', '30대+ 팔로워 비율 높음', '공구 진행 이력 유리'] },
+  { cat: '메이크업·색조', icon: '💄', color: '#fce4ec',
+    items: ['메이크업 튜토리얼 콘텐츠 주력', 'GRWM 콘텐츠 유무', '20-30대 여성 팔로워 집중', '색상·컬러 관련 반응 좋은 계정', '릴스 저장·공유율 높음'] },
+  { cat: '헤어케어', icon: '💆', color: '#f3e5f5',
+    items: ['헤어케어 전문 콘텐츠', '손상모·탈모·새치 관련 고민 커뮤니티', '헤어팩·트리트먼트 리뷰 이력', '25-45세 여성 팔로워', '전후 비교 사진 콘텐츠 능숙'] },
+  { cat: '건강·이너뷰티', icon: '💊', color: '#fff9e6',
+    items: ['영양제·건강기능식품 리뷰 이력', '먹뷰티 또는 다이어트 다이어리 콘텐츠', '30-50대 여성 팔로워 비율', '건강·웰니스 카테고리 계정', '장기 공구 가능 신뢰도 높은 계정'] },
+  { cat: '자연주의·친환경', icon: '🌿', color: '#e8f5e9',
+    items: ['친환경·비건·제로웨이스트 콘텐츠 주력', '가치소비 지향 팔로워층', '환경 관련 캠페인 참여 이력', '20-40대 여성 (환경 관심 세대)', '계정 전반에 자연주의 이미지 일관성'] },
+  { cat: '생활용품·홈케어', icon: '🏠', color: '#f5f5f5',
+    items: ['살림·홈케어 콘텐츠 주력', '주부·맘 팔로워 비율 높음', '청소·정리·인테리어 관련 콘텐츠', '실용적이고 정보성 강한 포맷', '공구 구매전환율 검증된 계정 우대'] },
+  { cat: '여성위생', icon: '🌸', color: '#fce4ec',
+    items: ['여성건강·바디포지티브 관련 콘텐츠', '20-40대 여성 팔로워 90%+', '진정성 있고 편견없는 톤 앤 매너', '민감한 주제 자연스럽게 다루는 계정', '소규모이지만 충성도 높은 팔로워'] },
+];
+
+function renderCriteria() {
+  document.getElementById('criteria-cards').innerHTML = criteriaData.map(c => `
+    <div style="background:${c.color};border-radius:12px;padding:16px 20px;margin-bottom:12px;">
+      <h4 style="font-size:14px;font-weight:700;color:#0f1f4a;margin-bottom:10px;">${c.icon} ${c.cat}</h4>
+      <ul style="font-size:13px;color:#333;list-style:disc;padding-left:18px;line-height:1.9;">
+        ${c.items.map(i=>`<li>${i}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+init();
+</script>
+</body>
+</html>
