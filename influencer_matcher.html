@@ -418,7 +418,7 @@ function renderBrands() {
     <div class="brand-card ${selectedBrand && selectedBrand.no === b.no ? 'selected' : ''}" onclick="selectBrand(${b.no})">
       <div class="brand-card-header">
         <span class="brand-name">${b.brand}</span>
-        <span class="brand-cat">${b.category.replace('뷰티·스킨케어(','').replace(')','')}</span>
+        <span class="brand-cat">${b.category.replace('뷰티·스킨케어(더마)','더마').replace('뷰티·스킨케어(유아)','유아스킨').replace('뷰티·스킨케어(기기)','뷰티기기').replace('뷰티·스킨케어','스킨케어').replace('자연주의·친환경','친환경').replace('건강·이너뷰티','이너뷰티').replace('생활용품·여성위생','여성위생').replace('생활용품·홈케어','홈케어').replace('생활용품·육아','육아').replace('뷰티·메이크업','메이크업')}</span>
       </div>
       <div class="brand-email">📧 ${b.email}</div>
       <div class="brand-products">${b.main_products}</div>
@@ -493,66 +493,146 @@ function showMatchPanel(b) {
 }
 
 // ================================================================
-// 인플루언서 판별기
+// 인플루언서 판별기 (v2 — 로직 수정)
 // ================================================================
+
+// 콘텐츠 유형 → fit_content_type 정확 매핑 테이블
+const CONTENT_MAP = {
+  '스킨케어': ['스킨케어루틴', '스킨케어', '수분케어', '트러블케어', '진정케어', '더마뷰티', '성분뷰티', 'K뷰티'],
+  '메이크업': ['메이크업', 'GRWM', '색조', '아트메이크업', '비건메이크업'],
+  '헤어케어': ['헤어케어', '손상모케어', '탈모케어', '두피케어', '새치케어'],
+  '이너뷰티': ['이너뷰티', '먹뷰티', '건강루틴', '영양제', '콜라겐'],
+  '다이어트': ['다이어트', '이너뷰티', '헬스'],
+  '친환경': ['친환경', '비건', '제로웨이스트', '자연주의', '클린뷰티', '오가닉'],
+  '살림': ['살림', '홈케어', '친환경살림'],
+  '육아': ['육아', '베이비', '유아케어'],
+  '바디케어': ['바디케어', '셀프케어', '바디루틴'],
+  '여성건강': ['여성건강', '바디포지티브'],
+};
+
 function runMatcher() {
   const followers = parseInt(document.getElementById('m-followers').value) || 0;
-  const content = document.getElementById('m-content').value;
-  const age = document.getElementById('m-age').value;
+  const contentRaw = document.getElementById('m-content').value;   // e.g. "스킨케어 루틴"
+  const age = document.getElementById('m-age').value;              // e.g. "20-30"
   const collab = document.getElementById('m-collab').value;
-  const keywords = document.getElementById('m-keywords').value.toLowerCase();
+  const keywords = document.getElementById('m-keywords').value.toLowerCase().trim();
 
-  if (!content && !keywords) {
+  if (!contentRaw && !keywords) {
     document.getElementById('matcher-results').innerHTML = `
       <div class="empty-state"><div class="icon">🎯</div><p>인플루언서 정보를 입력하면<br>최적 제조사 후보군이 여기에 표시됩니다</p></div>`;
     return;
   }
 
-  // 매칭 점수 계산
+  // 콘텐츠 키 추출 (예: "스킨케어 루틴" → "스킨케어")
+  const contentKey = Object.keys(CONTENT_MAP).find(k => contentRaw.includes(k)) || '';
+  const contentTags = contentKey ? CONTENT_MAP[contentKey] : [];
+
+  // 연령 파싱 (예: "20-30" → [20,30])
+  const ageNums = age ? age.split('-').map(Number) : [];
+
+  // 키워드 배열
+  const kwList = keywords ? keywords.split(/[,\s]+/).filter(k => k.length >= 2) : [];
+
   const scored = brands.map(b => {
     let score = 0;
-    // 카테고리/콘텐츠 일치 (30점)
-    if (content && b.fit_content_type.includes(content)) score += 30;
-    else if (content && b.fit_keywords.includes(content)) score += 15;
-    // 키워드 매칭 (20점)
-    if (keywords) {
-      const kws = keywords.split(/[,\s]+/).filter(k=>k.length>1);
-      const matched = kws.filter(k => b.fit_keywords.toLowerCase().includes(k) || b.main_products.toLowerCase().includes(k));
-      score += Math.min(20, matched.length * 7);
+    let detail = [];
+
+    // ── 1. 콘텐츠 유형 일치 (최대 35점) ─────────────────────────
+    if (contentTags.length > 0) {
+      const fitLower = b.fit_content_type.toLowerCase();
+      const kwLower = b.fit_keywords.toLowerCase();
+      const catLower = b.category.toLowerCase();
+      const matchedTags = contentTags.filter(t => fitLower.includes(t.toLowerCase()) || kwLower.includes(t.toLowerCase()) || catLower.includes(t.toLowerCase()));
+      if (matchedTags.length >= 2) { score += 35; detail.push(`콘텐츠 강일치(${matchedTags.length}개) +35`); }
+      else if (matchedTags.length === 1) { score += 20; detail.push(`콘텐츠 약일치 +20`); }
+      // 완전 불일치 브랜드는 0점 → 이후에 필터됨
     }
-    // 팔로워 규모 (15점)
+
+    // ── 2. 키워드 매칭 (최대 25점) ──────────────────────────────
+    if (kwList.length > 0) {
+      const haystack = [b.fit_keywords, b.main_products, b.fit_content_type, b.current_influencer_type].join(' ').toLowerCase();
+      const matchedKws = kwList.filter(k => haystack.includes(k));
+      const kwScore = Math.min(25, matchedKws.length * 9);
+      if (kwScore > 0) { score += kwScore; detail.push(`키워드 ${matchedKws.length}개 일치 +${kwScore}`); }
+    }
+
+    // ── 3. 팔로워 규모 적합성 (최대 15점) ───────────────────────
     if (followers > 0) {
       const range = b.fit_follower_range;
-      const min = parseInt(range.match(/(\d+)만/)?.[1] || range.match(/(\d+)천/)?.[1]/10 || 0) * 10000;
-      if (followers >= min) score += 15;
-      else if (followers >= min * 0.5) score += 8;
+      // 최소·최대 파싱
+      const minMatch = range.match(/^(\d+)(만|천)/);
+      const maxMatch = range.match(/~(\d+)(만|천)/);
+      const toNum = (n, unit) => unit === '만' ? n * 10000 : n * 1000;
+      const minF = minMatch ? toNum(parseInt(minMatch[1]), minMatch[2]) : 0;
+      const maxF = maxMatch ? toNum(parseInt(maxMatch[1]), maxMatch[2]) : 999999999;
+      if (followers >= minF && followers <= maxF) { score += 15; detail.push('팔로워 적정범위 +15'); }
+      else if (followers >= minF * 0.5 && followers <= maxF * 2) { score += 7; detail.push('팔로워 인접범위 +7'); }
     }
-    // 공구 이력 (15점)
-    if (collab === '많음') score += 15;
-    else if (collab === '있음') score += 8;
-    // 연령대 (20점)
-    if (age && b.fit_influencer.includes(age.split('-')[0]+'대')) score += 20;
-    else if (age && b.fit_influencer.includes(age.split('-')[1]+'대')) score += 10;
 
-    return { ...b, score };
-  }).filter(b => b.score > 0).sort((a,b) => b.score - a.score).slice(0, 12);
+    // ── 4. 공구 이력 (최대 15점) ────────────────────────────────
+    if (collab === '많음 (3회+)' || collab === '많음') { score += 15; detail.push('공구이력 많음 +15'); }
+    else if (collab === '있음 (1~2회)' || collab === '있음') { score += 8; detail.push('공구이력 있음 +8'); }
+
+    // ── 5. 팔로워 연령 핏 (최대 10점) ──────────────────────────
+    if (ageNums.length === 2) {
+      const fitText = b.fit_influencer;
+      // fit_influencer에 "20-35세", "25-45세" 같은 패턴 파싱
+      const ageMatch = fitText.match(/(\d+)-(\d+)세/);
+      if (ageMatch) {
+        const bMin = parseInt(ageMatch[1]), bMax = parseInt(ageMatch[2]);
+        // 입력 연령대와 브랜드 타겟 연령 겹치는 범위 체크
+        const overlapMin = Math.max(ageNums[0], bMin);
+        const overlapMax = Math.min(ageNums[1], bMax);
+        if (overlapMax >= overlapMin) {
+          const overlapRatio = (overlapMax - overlapMin) / (ageNums[1] - ageNums[0] || 10);
+          const ageScore = Math.round(overlapRatio * 10);
+          if (ageScore > 0) { score += ageScore; detail.push(`연령 핏 +${ageScore}`); }
+        }
+      }
+    }
+
+    return { ...b, score, detail };
+  })
+  .filter(b => b.score >= 20)                          // 20점 미만 제외 (노이즈 제거)
+  .sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score; // 1차: 점수 내림차순
+    // 2차: 키워드 매칭 수 내림차순
+    const hayA = [a.fit_keywords, a.main_products].join(' ').toLowerCase();
+    const hayB = [b.fit_keywords, b.main_products].join(' ').toLowerCase();
+    const mA = kwList.filter(k => hayA.includes(k)).length;
+    const mB = kwList.filter(k => hayB.includes(k)).length;
+    return mB - mA;
+  })
+  .slice(0, 12);
 
   if (scored.length === 0) {
     document.getElementById('matcher-results').innerHTML = `
-      <div class="empty-state"><div class="icon">🔍</div><p>매칭되는 제조사가 없습니다.<br>다른 조건으로 검색해보세요.</p></div>`;
+      <div class="empty-state"><div class="icon">🔍</div>
+      <p>조건에 맞는 제조사가 없습니다.<br>키워드를 추가하거나 콘텐츠 유형을 변경해 보세요.</p></div>`;
     return;
   }
 
+  // 추천 등급 라벨
+  const grade = s => s >= 70 ? { label:'🏆 강력 추천', color:'#2e7d32' } :
+                     s >= 50 ? { label:'✅ 추천', color:'#1565c0' } :
+                               { label:'💡 참고', color:'#888' };
+
   const container = document.getElementById('matcher-results');
   container.innerHTML = `
-    <div class="results-count" style="margin-bottom:16px;">매칭된 제조사 <span>${scored.length}</span>개 (점수 높은 순)</div>
+    <div class="results-count" style="margin-bottom:16px;">
+      매칭된 제조사 <span>${scored.length}</span>개 (점수 높은 순)
+      <span style="font-size:12px;color:#888;margin-left:12px;">🏆 70점+ 강력추천 · ✅ 50~69점 추천 · 💡 20~49점 참고</span>
+    </div>
     <div class="brand-card-grid">
-      ${scored.map(b => `
-        <div class="brand-card" onclick="selectBrand(${b.no}); switchTab('browse');">
+      ${scored.map(b => {
+        const g = grade(b.score);
+        return `
+        <div class="brand-card" onclick="selectBrand(${b.no}); switchTab('browse');" title="${b.detail.join(' | ')}">
           <div class="brand-card-header">
             <span class="brand-name">${b.brand}</span>
-            <span style="font-size:18px;font-weight:900;color:#e8b84b;">${b.score}점</span>
+            <span style="font-size:16px;font-weight:900;color:${g.color};">${b.score}점</span>
           </div>
+          <div style="font-size:11px;font-weight:700;color:${g.color};margin-bottom:6px;">${g.label}</div>
           <div class="brand-email">📧 ${b.email}</div>
           <div class="brand-products">${b.main_products}</div>
           <div class="brand-revenue">매출: ${b.revenue_est}</div>
@@ -560,8 +640,9 @@ function runMatcher() {
             ${b.fit_keywords.split(',').slice(0,4).map(k=>`<span class="tag">#${k.trim()}</span>`).join('')}
           </div>
           <div style="margin-top:8px;font-size:12px;color:#555;">💡 ${b.fit_influencer}</div>
-        </div>
-      `).join('')}
+          <div style="margin-top:6px;font-size:10px;color:#aaa;">근거: ${b.detail.join(' · ')}</div>
+        </div>`;
+      }).join('')}
     </div>
   `;
 }
