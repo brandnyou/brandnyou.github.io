@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>브랜드앤유 | 인플루언서 매칭 판별기 v9</title>
+<title>브랜드앤유 | 인플루언서 매칭 판별기 v10</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#eef0f6;color:#1a1a2e;min-height:100vh;}
@@ -87,8 +87,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sa
 .av4{background:radial-gradient(circle,#fff8e1,#ffcc02);}
 .av5{background:radial-gradient(circle,#f3e5f5,#ce93d8);}
 .av6{background:radial-gradient(circle,#e0f7fa,#4dd0e1);}
-.av9{background:radial-gradient(circle,#fbe9e7,#ff8a65);}
-.av9{background:radial-gradient(circle,#f5f5f5,#bdbdbd);}
+.av10{background:radial-gradient(circle,#fbe9e7,#ff8a65);}
+.av10{background:radial-gradient(circle,#f5f5f5,#bdbdbd);}
 .pname{font-size:15px;font-weight:800;color:#0f1f4a;}
 .pig a{color:#4a6fa5;font-weight:700;font-size:12px;text-decoration:none;}
 .pig a:hover{text-decoration:underline;}
@@ -123,7 +123,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sa
 </head>
 <body>
 <div class="header">
-  <h1>브랜드앤유 <span class="badge">v9</span> 인플루언서 매칭 판별기 <span class="real-badge">✅ 실제 계정</span></h1>
+  <h1>브랜드앤유 <span class="badge">v10</span> 인플루언서 매칭 판별기 <span class="real-badge">✅ 실제 계정</span></h1>
   <p>제조사명 입력 → 300+ 브랜드 DB 자동 매핑 → 미인식 시 카테고리 직접 선택 → 인플루언서 매칭 | 2026.05.07</p>
 </div>
 <div class="container">
@@ -351,6 +351,9 @@ const TONE_LABELS = {
   '친환경':'친환경·자연주의','감성라이프':'감성·라이프','육아맘':'육아맘 공감형',
 };
 const CONF_INFO = {
+  search_high: {icon:'🌐', label:'실시간 검색 확인', color:'#2196f3'},
+  search_mid:  {icon:'🔎', label:'검색 추론', color:'#9c27b0'},
+  search_low:  {icon:'🔍', label:'검색 기반 추정', color:'#ff9800'},
   inferred: {icon:'🔍', label:'이름 추론', color:'#9c27b0'},
   exact:{color:'#2e7d32',label:'✅ 브랜드 DB 정확 매핑'},
   alias:{color:'#1565c0',label:'✅ 브랜드 별칭 매핑'},
@@ -469,6 +472,32 @@ function onBrandInput(val) {
   renderAnalysisCard(a);
 }
 
+// v10: DB에 없는 브랜드 → 실시간 웹 서치로 분류
+async function analyzeWithSearch(brandName) {
+  // 로딩 표시
+  const card = document.getElementById('analysis-card');
+  card.className = 'analysis-card visible ac-unknown';
+  card.innerHTML = '<div style="padding:12px;text-align:center;color:#9c27b0;font-weight:700;">🔍 ' + brandName + ' 인터넷 검색 중...</div>';
+
+  try {
+    const resp = await fetch('/analyze', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({brand: brandName})
+    });
+    const data = await resp.json();
+    if (data.cat) {
+      lastAnalysis = {...data, confidence: data.confidence||'search_mid'};
+      renderAnalysisCard(lastAnalysis);
+      // 자동 매칭 실행
+      runMatch(lastAnalysis);
+    }
+  } catch(e) {
+    // 검색 실패 시 로컬 추론 결과 유지
+    renderAnalysisCard(lastAnalysis);
+  }
+}
+
 function renderAnalysisCard(a) {
   const card = document.getElementById('analysis-card');
   if (!a || !a.brand) { card.className='analysis-card'; return; }
@@ -556,7 +585,7 @@ const TONE_KW = {
 
 function parseF(s){if(!s)return 0;s=String(s).replace(/\s/g,'');const m=s.match(/[\d.]+/);if(!m)return 0;const n=parseFloat(m[0]);return s.includes('만')?n*10000:n;}
 function getGrade(s){if(s>=80)return{g:'S',lbl:'최우선',cls:'gs'};if(s>=65)return{g:'A',lbl:'강력추천',cls:'ga'};if(s>=50)return{g:'B',lbl:'추천',cls:'gb'};return{g:'C',lbl:'참고',cls:'gc'};}
-function getAvatar(cat){if(/헤어|탈모/.test(cat))return{e:'💆',c:'av2'};if(/건강|약사|이너|영양|면역/.test(cat))return{e:'💊',c:'av3'};if(/살림|세제|홈케어|인테리어/.test(cat))return{e:'🧹',c:'av4'};if(/육아|맘|신생아/.test(cat))return{e:'👶',c:'av5'};if(/친환경|비건|자연/.test(cat))return{e:'🌿',c:'av9'};if(/색조|메이크업|GRWM/.test(cat))return{e:'🎨',c:'av1'};if(/더마|피부과|의학/.test(cat))return{e:'🔬',c:'av3'};return{e:'💄',c:'av1'};}
+function getAvatar(cat){if(/헤어|탈모/.test(cat))return{e:'💆',c:'av2'};if(/건강|약사|이너|영양|면역/.test(cat))return{e:'💊',c:'av3'};if(/살림|세제|홈케어|인테리어/.test(cat))return{e:'🧹',c:'av4'};if(/육아|맘|신생아/.test(cat))return{e:'👶',c:'av5'};if(/친환경|비건|자연/.test(cat))return{e:'🌿',c:'av10'};if(/색조|메이크업|GRWM/.test(cat))return{e:'🎨',c:'av1'};if(/더마|피부과|의학/.test(cat))return{e:'🔬',c:'av3'};return{e:'💄',c:'av1'};}
 
 function scoreOne(infl, analysis) {
   const hay=[infl.category||'',infl.note||'',infl.giveaway||'',infl.fit||''].join(' ').toLowerCase();
