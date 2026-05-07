@@ -625,21 +625,21 @@ function scoreOne(infl, analysis) {
 // ─── 검색 실행 ───
 function runSearch() {
   const val = document.getElementById('brand-input').value.trim();
-  if (!val) {alert('제조사명을 입력하세요.');return;}
+  if (!val) { alert('제조사명을 입력하세요.'); return; }
 
-  // 1. 로컬 BRAND_DB로 먼저 분석
+  // 로컬 BRAND_DB 분석
   const a = analyzeBrand(val);
   lastAnalysis = a;
 
-  // 2. DB에서 찾은 경우(confidence가 found/high) → 바로 매칭
-  if (a && a.cat && a.confidence && a.confidence !== 'inferred') {
+  // DB에서 정확히 찾은 경우만 로컬 결과 사용 (exact / alias)
+  if (a && a.cat && (a.confidence === 'exact' || a.confidence === 'alias')) {
     renderAnalysisCard(a);
     const results = DB
-      .map(infl=>{const r=scoreOne(infl,a);if(!r)return null;return{...infl,...r};})
-      .filter(Boolean).sort((x,y)=>y.score-x.score).slice(0,12);
+      .map(infl => { const r = scoreOne(infl, a); if (!r) return null; return {...infl, ...r}; })
+      .filter(Boolean).sort((x, y) => y.score - x.score).slice(0, 12);
     renderResults(a, results);
   } else {
-    // 3. DB에 없음 → /analyze API로 실시간 웹서치 후 매칭
+    // DB에 없거나 추론값이면 → 실시간 웹서치 API 호출
     analyzeWithSearch(val);
   }
 }
