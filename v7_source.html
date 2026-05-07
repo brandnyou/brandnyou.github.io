@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>브랜드앤유 | 인플루언서 매칭 판별기 v8</title>
+<title>브랜드앤유 | 인플루언서 매칭 판별기 v9</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#eef0f6;color:#1a1a2e;min-height:100vh;}
@@ -87,8 +87,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sa
 .av4{background:radial-gradient(circle,#fff8e1,#ffcc02);}
 .av5{background:radial-gradient(circle,#f3e5f5,#ce93d8);}
 .av6{background:radial-gradient(circle,#e0f7fa,#4dd0e1);}
-.av8{background:radial-gradient(circle,#fbe9e7,#ff8a65);}
-.av8{background:radial-gradient(circle,#f5f5f5,#bdbdbd);}
+.av9{background:radial-gradient(circle,#fbe9e7,#ff8a65);}
+.av9{background:radial-gradient(circle,#f5f5f5,#bdbdbd);}
 .pname{font-size:15px;font-weight:800;color:#0f1f4a;}
 .pig a{color:#4a6fa5;font-weight:700;font-size:12px;text-decoration:none;}
 .pig a:hover{text-decoration:underline;}
@@ -123,7 +123,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sa
 </head>
 <body>
 <div class="header">
-  <h1>브랜드앤유 <span class="badge">v8</span> 인플루언서 매칭 판별기 <span class="real-badge">✅ 실제 계정</span></h1>
+  <h1>브랜드앤유 <span class="badge">v9</span> 인플루언서 매칭 판별기 <span class="real-badge">✅ 실제 계정</span></h1>
   <p>제조사명 입력 → 300+ 브랜드 DB 자동 매핑 → 미인식 시 카테고리 직접 선택 → 인플루언서 매칭 | 2026.05.07</p>
 </div>
 <div class="container">
@@ -351,6 +351,7 @@ const TONE_LABELS = {
   '친환경':'친환경·자연주의','감성라이프':'감성·라이프','육아맘':'육아맘 공감형',
 };
 const CONF_INFO = {
+  inferred: {icon:'🔍', label:'이름 추론', color:'#9c27b0'},
   exact:{color:'#2e7d32',label:'✅ 브랜드 DB 정확 매핑'},
   alias:{color:'#1565c0',label:'✅ 브랜드 별칭 매핑'},
   keyword:{color:'#e65100',label:'🔍 이름 키워드 추론'},
@@ -406,8 +407,8 @@ function analyzeBrand(brandName) {
   const inferred = inferFromKeyword(key);
   if (inferred) return {...inferred, brand:name, confidence:'keyword'};
 
-  // 5. 알 수 없음 → 카테고리 선택 필요
-  return {brand:name, cat:null, confidence:'unknown'};
+  // 5. 브랜드명 추론 실패 → 스킨케어/뷰티 기본 매칭 (K뷰티 플랫폼 특성)
+  return {brand:name, cat:'스킨케어', kws:'스킨케어 뷰티 K뷰티 루틴', target:'성분덕후', tone:'리얼리뷰', confidence:'inferred'};
 }
 
 function catFromSentBrand(b) {
@@ -431,15 +432,33 @@ function catFromSentBrand(b) {
 }
 
 function inferFromKeyword(key) {
-  if (/탈모|두피|헤어|샴푸|모발|트리트먼트/.test(key)) return {cat:'헤어케어',kws:'탈모 두피 헤어케어 샴푸',target:'3040',tone:'리얼리뷰'};
-  if (/살림|세제|청소|세탁|주방|홈케어/.test(key)) return {cat:'살림홈케어',kws:'살림 세제 청소 홈케어',target:'라이프스타일',tone:'공구전문'};
-  if (/콜라겐|유산균|이너|건강|비타민|영양|홍삼|면역|글루타치온/.test(key)) return {cat:'이너뷰티',kws:'이너뷰티 건강기능식품 콜라겐 영양제',target:'약사의사',tone:'신뢰전문'};
-  if (/육아|신생아|아기|임산부|유아|베이비/.test(key)) return {cat:'육아',kws:'육아 신생아 아기 임산부',target:'3040',tone:'육아맘'};
-  if (/비건|친환경|오가닉|유기농|천연|클린뷰티|제로/.test(key)) return {cat:'친환경비건',kws:'비건 친환경 자연주의 오가닉',target:'라이프스타일',tone:'친환경'};
-  if (/더마|피부과|의학|임상|아토피|트러블|여드름/.test(key)) return {cat:'의학더마',kws:'더마 피부과 민감피부 트러블케어',target:'성분덕후',tone:'신뢰전문'};
-  if (/색조|립|틴트|파운데이션|아이섀도|쿠션|메이크업|컨실러/.test(key)) return {cat:'메이크업',kws:'메이크업 색조 립 틴트 아이섀도',target:'2030',tone:'감성라이프'};
-  if (/선크림|sunscreen|spf|자외선/.test(key)) return {cat:'스킨케어',kws:'선크림 자외선차단 스킨케어',target:'성분덕후',tone:'리얼리뷰'};
-  return null;
+  const k = key.toLowerCase();
+  // ── 헤어케어 ──
+  if (/탈모|두피|헤어|샴푸|모발|트리트먼트|린스|에센스헤어|scalp|hair|ryo|kerasys|muto|unove|drfor/.test(k))
+    return {cat:'헤어케어', kws:'탈모 두피케어 헤어케어 샴푸 손상모', target:'3040', tone:'리얼리뷰'};
+  // ── 살림/홈케어 ──
+  if (/살림|세제|청소|세탁|주방|홈케어|생활용품|크린|clean|wash|laundry|fabric|방향|탈취|제균|가습|공기청정/.test(k))
+    return {cat:'살림홈케어', kws:'살림 세제 청소 홈케어 생활용품', target:'라이프스타일', tone:'공구전문'};
+  // ── 이너뷰티/건강 ──
+  if (/콜라겐|유산균|이너|건강|비타민|영양|홍삼|면역|글루타치온|프로바이오|오메가|단백질|슬리밍|다이어트|뷰티랩|이너|wellness|vital|health|nutrition|nutrione|denps/.test(k))
+    return {cat:'이너뷰티', kws:'이너뷰티 건강기능식품 콜라겐 영양제 글루타치온', target:'약사의사', tone:'신뢰전문'};
+  // ── 육아 ──
+  if (/육아|신생아|아기|임산부|유아|베이비|맘|mama|baby|infant|kids/.test(k))
+    return {cat:'육아', kws:'육아 신생아 아기 임산부 육아맘', target:'3040', tone:'육아맘'};
+  // ── 친환경/비건 ──
+  if (/비건|친환경|오가닉|유기농|천연|클린뷰티|제로|eco|organic|vegan|natural|earth|green|lush|donggubat/.test(k))
+    return {cat:'친환경비건', kws:'비건 친환경 자연주의 오가닉 클린뷰티', target:'라이프스타일', tone:'친환경'};
+  // ── 더마/의학 ──
+  if (/더마|피부과|의학|임상|아토피|트러블|여드름|derma|clinic|doctor|dr\./.test(k))
+    return {cat:'의학더마', kws:'더마 피부과 민감피부 트러블케어 진정', target:'성분덕후', tone:'신뢰전문'};
+  // ── 메이크업 ──
+  if (/색조|립|틴트|파운데이션|아이섀도|쿠션|메이크업|컨실러|블러셔|하이라이터|makeup|cosmetic|dasique|laka/.test(k))
+    return {cat:'메이크업', kws:'메이크업 색조 립 틴트 K뷰티', target:'2030', tone:'감성라이프'};
+  // ── 스킨케어 (선크림 포함) ──
+  if (/선크림|sunscreen|spf|자외선|토너|세럼|앰플|크림|수분|보습|미백|주름|skin|serum|toner|cream|essence|anua|torriden|roundlab|klairs|beplain/.test(k))
+    return {cat:'스킨케어', kws:'스킨케어 세럼 토너 수분케어 K뷰티', target:'성분덕후', tone:'리얼리뷰'};
+  // ── 기본값: 스킨케어/뷰티 (DB에 없는 브랜드도 매칭되도록) ──
+  return {cat:'스킨케어', kws:'스킨케어 뷰티 K뷰티 루틴', target:'성분덕후', tone:'리얼리뷰'};
 }
 
 // ─── 분석 UI ───
@@ -537,7 +556,7 @@ const TONE_KW = {
 
 function parseF(s){if(!s)return 0;s=String(s).replace(/\s/g,'');const m=s.match(/[\d.]+/);if(!m)return 0;const n=parseFloat(m[0]);return s.includes('만')?n*10000:n;}
 function getGrade(s){if(s>=80)return{g:'S',lbl:'최우선',cls:'gs'};if(s>=65)return{g:'A',lbl:'강력추천',cls:'ga'};if(s>=50)return{g:'B',lbl:'추천',cls:'gb'};return{g:'C',lbl:'참고',cls:'gc'};}
-function getAvatar(cat){if(/헤어|탈모/.test(cat))return{e:'💆',c:'av2'};if(/건강|약사|이너|영양|면역/.test(cat))return{e:'💊',c:'av3'};if(/살림|세제|홈케어|인테리어/.test(cat))return{e:'🧹',c:'av4'};if(/육아|맘|신생아/.test(cat))return{e:'👶',c:'av5'};if(/친환경|비건|자연/.test(cat))return{e:'🌿',c:'av8'};if(/색조|메이크업|GRWM/.test(cat))return{e:'🎨',c:'av1'};if(/더마|피부과|의학/.test(cat))return{e:'🔬',c:'av3'};return{e:'💄',c:'av1'};}
+function getAvatar(cat){if(/헤어|탈모/.test(cat))return{e:'💆',c:'av2'};if(/건강|약사|이너|영양|면역/.test(cat))return{e:'💊',c:'av3'};if(/살림|세제|홈케어|인테리어/.test(cat))return{e:'🧹',c:'av4'};if(/육아|맘|신생아/.test(cat))return{e:'👶',c:'av5'};if(/친환경|비건|자연/.test(cat))return{e:'🌿',c:'av9'};if(/색조|메이크업|GRWM/.test(cat))return{e:'🎨',c:'av1'};if(/더마|피부과|의학/.test(cat))return{e:'🔬',c:'av3'};return{e:'💄',c:'av1'};}
 
 function scoreOne(infl, analysis) {
   const hay=[infl.category||'',infl.note||'',infl.giveaway||'',infl.fit||''].join(' ').toLowerCase();
