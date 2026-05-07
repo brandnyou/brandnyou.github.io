@@ -477,7 +477,7 @@ async function analyzeWithSearch(brandName) {
   // 로딩 표시
   const card = document.getElementById('analysis-card');
   card.className = 'analysis-card visible ac-unknown';
-  card.innerHTML = '<div style="padding:12px;text-align:center;color:#9c27b0;font-weight:700;">🔍 ' + brandName + ' 인터넷 검색 중...</div>';
+  card.innerHTML = '<div style="padding:12px;text-align:center;color:#9c27b0;font-weight:700;">🌐 ' + brandName + ' 실시간 검색 중...</div>';
 
   try {
     const resp = await fetch('/analyze', {
@@ -626,18 +626,22 @@ function scoreOne(infl, analysis) {
 function runSearch() {
   const val = document.getElementById('brand-input').value.trim();
   if (!val) {alert('제조사명을 입력하세요.');return;}
-  const a = lastAnalysis || analyzeBrand(val);
-  if (!a) return;
-  if (!a.cat) {
-    renderAnalysisCard(a); // 카테고리 선택 UI 표시
-    return;
+
+  // 1. 로컬 BRAND_DB로 먼저 분석
+  const a = analyzeBrand(val);
+  lastAnalysis = a;
+
+  // 2. DB에서 찾은 경우(confidence가 found/high) → 바로 매칭
+  if (a && a.cat && a.confidence && a.confidence !== 'inferred') {
+    renderAnalysisCard(a);
+    const results = DB
+      .map(infl=>{const r=scoreOne(infl,a);if(!r)return null;return{...infl,...r};})
+      .filter(Boolean).sort((x,y)=>y.score-x.score).slice(0,12);
+    renderResults(a, results);
+  } else {
+    // 3. DB에 없음 → /analyze API로 실시간 웹서치 후 매칭
+    analyzeWithSearch(val);
   }
-  onBrandInput(val);
-  if (!lastAnalysis || !lastAnalysis.cat) return;
-  const results = DB
-    .map(infl=>{const r=scoreOne(infl,lastAnalysis);if(!r)return null;return{...infl,...r};})
-    .filter(Boolean).sort((a,b)=>b.score-a.score).slice(0,12);
-  renderResults(lastAnalysis, results);
 }
 
 // ─── 결과 렌더링 ───
