@@ -433,31 +433,31 @@ function catFromSentBrand(b) {
 
 function inferFromKeyword(key) {
   const k = key.toLowerCase();
-  // ── 헤어케어 ──
-  if (/탈모|두피|헤어|샴푸|모발|트리트먼트|린스|에센스헤어|scalp|hair|ryo|kerasys|muto|unove|drfor/.test(k))
+  // 헤어케어 — 한글 어근 + 영문
+  if (k.includes('탈모')||k.includes('두피')||k.includes('헤어')||k.includes('샴푸')||k.includes('모발')||k.includes('트리트먼트')||k.includes('린스')||k.includes('scalp')||k.includes('hair')||k.includes('ryo')||k.includes('kerasys')||k.includes('muto')||k.includes('unove'))
     return {cat:'헤어케어', kws:'탈모 두피케어 헤어케어 샴푸 손상모', target:'3040', tone:'리얼리뷰'};
-  // ── 살림/홈케어 ──
-  if (/살림|세제|청소|세탁|주방|홈케어|생활용품|크린|clean|wash|laundry|fabric|방향|탈취|제균|가습|공기청정/.test(k))
+  // 살림/홈케어
+  if (k.includes('살림')||k.includes('세제')||k.includes('청소')||k.includes('세탁')||k.includes('주방')||k.includes('홈케어')||k.includes('생활용품')||k.includes('clean')||k.includes('wash')||k.includes('laundry')||k.includes('방향')||k.includes('탈취')||k.includes('제균'))
     return {cat:'살림홈케어', kws:'살림 세제 청소 홈케어 생활용품', target:'라이프스타일', tone:'공구전문'};
-  // ── 이너뷰티/건강 ──
-  if (/콜라겐|유산균|이너|건강|비타민|영양|홍삼|면역|글루타치온|프로바이오|오메가|단백질|슬리밍|다이어트|뷰티랩|이너|wellness|vital|health|nutrition|nutrione|denps/.test(k))
+  // 이너뷰티/건강
+  if (k.includes('콜라겐')||k.includes('유산균')||k.includes('이너뷰티')||k.includes('건강기능')||k.includes('비타민')||k.includes('영양제')||k.includes('홍삼')||k.includes('면역')||k.includes('글루타치온')||k.includes('다이어트')||k.includes('health')||k.includes('vital')||k.includes('nutrition')||k.includes('nutrione'))
     return {cat:'이너뷰티', kws:'이너뷰티 건강기능식품 콜라겐 영양제 글루타치온', target:'약사의사', tone:'신뢰전문'};
-  // ── 육아 ──
-  if (/육아|신생아|아기|임산부|유아|베이비|맘|mama|baby|infant|kids/.test(k))
+  // 육아
+  if (k.includes('육아')||k.includes('신생아')||k.includes('임산부')||k.includes('유아')||k.includes('베이비')||k.includes('baby')||k.includes('infant')||k.includes('kids'))
     return {cat:'육아', kws:'육아 신생아 아기 임산부 육아맘', target:'3040', tone:'육아맘'};
-  // ── 친환경/비건 ──
-  if (/비건|친환경|오가닉|유기농|천연|클린뷰티|제로|eco|organic|vegan|natural|earth|green|lush|donggubat/.test(k))
+  // 친환경/비건
+  if (k.includes('비건')||k.includes('친환경')||k.includes('오가닉')||k.includes('유기농')||k.includes('천연')||k.includes('클린뷰티')||k.includes('제로웨이스트')||k.includes('eco')||k.includes('organic')||k.includes('vegan')||k.includes('natural')||k.includes('earth'))
     return {cat:'친환경비건', kws:'비건 친환경 자연주의 오가닉 클린뷰티', target:'라이프스타일', tone:'친환경'};
-  // ── 더마/의학 ──
-  if (/더마|피부과|의학|임상|아토피|트러블|여드름|derma|clinic|doctor|dr\./.test(k))
+  // 더마/의학
+  if (k.includes('더마')||k.includes('피부과')||k.includes('의학')||k.includes('아토피')||k.includes('트러블케어')||k.includes('derma')||k.includes('clinic')||k.includes('doctor'))
     return {cat:'의학더마', kws:'더마 피부과 민감피부 트러블케어 진정', target:'성분덕후', tone:'신뢰전문'};
-  // ── 메이크업 ──
-  if (/색조|립|틴트|파운데이션|아이섀도|쿠션|메이크업|컨실러|블러셔|하이라이터|makeup|cosmetic|dasique|laka/.test(k))
+  // 메이크업
+  if (k.includes('색조')||k.includes('틴트')||k.includes('파운데이션')||k.includes('아이섀도')||k.includes('쿠션')||k.includes('메이크업')||k.includes('makeup')||k.includes('cosmetic')||k.includes('dasique')||k.includes('laka'))
     return {cat:'메이크업', kws:'메이크업 색조 립 틴트 K뷰티', target:'2030', tone:'감성라이프'};
-  // ── 스킨케어 (선크림 포함) ──
-  if (/선크림|sunscreen|spf|자외선|토너|세럼|앰플|크림|수분|보습|미백|주름|skin|serum|toner|cream|essence|anua|torriden|roundlab|klairs|beplain/.test(k))
+  // 스킨케어
+  if (k.includes('선크림')||k.includes('spf')||k.includes('자외선')||k.includes('토너')||k.includes('세럼')||k.includes('앰플')||k.includes('수분크림')||k.includes('보습')||k.includes('미백')||k.includes('skin')||k.includes('serum')||k.includes('toner')||k.includes('essence'))
     return {cat:'스킨케어', kws:'스킨케어 세럼 토너 수분케어 K뷰티', target:'성분덕후', tone:'리얼리뷰'};
-  // ── 기본값: 스킨케어/뷰티 (DB에 없는 브랜드도 매칭되도록) ──
+  // ★ 기본값 — DB 없어도 스킨케어/뷰티로 매칭 (K뷰티 플랫폼)
   return {cat:'스킨케어', kws:'스킨케어 뷰티 K뷰티 루틴', target:'성분덕후', tone:'리얼리뷰'};
 }
 
