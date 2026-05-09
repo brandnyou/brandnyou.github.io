@@ -344,7 +344,9 @@
   #mMenu .mm-k{display:flex;align-items:center;gap:8px;background:#FEE500;color:#3B1F00;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px;margin-top:8px}
   #mMenu .mm-i{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;padding:13px 20px;border-radius:var(--r6);font-weight:800;font-size:14px}
 
+  .nav-tagline{display:flex}
   @media(max-width:960px){
+    .nav-tagline{display:none}
     .container{padding:0 24px}
     .nav,.footer{padding-left:24px;padding-right:24px}
     .nav-links,.nav-right{display:none}
@@ -378,10 +380,23 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" aria-label="브랜드앤유 홈" style="display:flex;align-items:center;gap:8px">
-      <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
-           alt="브랜드앤유 로고"
-           style="height:48px;width:48px;object-fit:contain"/>
+    <a href="#" aria-label="브랜드앤유 홈" style="display:flex;align-items:center;gap:16px;text-decoration:none">
+      <!-- 왼쪽 수식어 -->
+      <div class="nav-tagline" style="text-align:right;line-height:1.4;border-right:1px solid rgba(10,15,30,.1);padding-right:16px">
+        <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:700;color:#c9a84c;letter-spacing:2px;text-transform:uppercase">면세점 MD기획 8년</div>
+        <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:500;color:rgba(10,15,30,.45);letter-spacing:.5px">생활용품·뷰티 공구 중계</div>
+      </div>
+      <!-- 오른쪽 로고 SVG -->
+      <svg viewBox="0 0 220 42" fill="none" style="height:34px;width:auto" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+        <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">B</text>
+        <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4" letter-spacing="1">&amp;</text>
+        <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">Y</text>
+        <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
+        <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e" letter-spacing="0.3">브랜드앤유</text>
+        <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
+        <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+      </svg>
     </a>
     <ul class="nav-links">
       <li><a href="#about">소개</a></li>
@@ -408,8 +423,19 @@
 
 <!-- Mobile Menu -->
 <div id="mMenu">
-  <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
-       alt="브랜드앤유 로고" style="height:52px;width:52px;object-fit:contain;margin-bottom:6px"/>
+  <div style="margin-bottom:8px">
+    <div style="font-size:10px;font-weight:700;color:#c9a84c;letter-spacing:2px;margin-bottom:4px">면세점 MD기획 8년 · 생활용품·뷰티 공구 중계</div>
+    <svg viewBox="0 0 220 42" style="height:28px" fill="none">
+      <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+      <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">B</text>
+      <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4">&amp;</text>
+      <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">Y</text>
+      <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
+      <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e">브랜드앤유</text>
+      <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
+      <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+    </svg>
+  </div>
   <a href="#about" onclick="toggleMenu()">소개</a>
   <a href="#story" onclick="toggleMenu()">우리 이야기</a>
   <a href="#target" onclick="toggleMenu()">파트너 기준</a>
@@ -941,8 +967,16 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
-             alt="브랜드앤유 로고" style="height:44px;width:44px;object-fit:contain;opacity:0.9"/>
+        <svg viewBox="0 0 220 42" style="height:26px" fill="none">
+          <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.35"/>
+          <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="rgba(255,255,255,.65)">B</text>
+          <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="rgba(0,197,180,.6)">&amp;</text>
+          <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="rgba(255,255,255,.65)">Y</text>
+          <line x1="64" y1="5" x2="64" y2="33" stroke="rgba(255,255,255,.1)" stroke-width="0.8"/>
+          <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,.4)">브랜드앤유</text>
+          <text x="74" y="31" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="rgba(0,197,180,.45)" letter-spacing="2">BRAND &amp; YOU</text>
+          <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.35"/>
+        </svg>
         <p class="f-tagline">면세점 MD기획 8년 · 유통 19년<br>생활용품·뷰티 공동구매 중계<br>박상권</p>
         <div class="f-sns">
           <a href="https://www.instagram.com/brandnyou.team" target="_blank" rel="noopener" aria-label="인스타그램">📸</a>
