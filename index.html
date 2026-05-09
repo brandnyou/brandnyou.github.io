@@ -36,19 +36,19 @@
   .container{max-width:1160px;margin:0 auto;padding:0 48px}
 
   /* ── NAV ── */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;align-items:center;padding:0 48px;background:rgba(255,255,255,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ink-10);transition:box-shadow .3s}
-  .nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:72px;display:flex;align-items:center;padding:0 48px;background:rgba(8,8,8,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(201,168,76,.15);transition:box-shadow .3s}
+  .nav.scrolled{box-shadow:0 2px 28px rgba(0,0,0,.4)}
   .nav-inner{width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
   .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{font-size:13px;font-weight:500;color:var(--ink-45);transition:color .2s;letter-spacing:.2px}
-  .nav-links a:hover{color:var(--ink)}
+  .nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.5);transition:color .2s;letter-spacing:.2px}
+  .nav-links a:hover{color:#fff}
   .nav-right{display:flex;gap:8px}
   .nav-kakao{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:#FEE500;color:#3B1F00;padding:9px 18px;border-radius:var(--r6);transition:all .2s}
   .nav-kakao:hover{background:#f5dc00;transform:translateY(-1px)}
   .nav-insta{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;padding:9px 18px;border-radius:var(--r6);transition:all .2s}
   .nav-insta:hover{opacity:.9;transform:translateY(-1px)}
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-  .hamburger span{width:22px;height:2px;background:var(--ink);display:block;transition:.3s}
+  .hamburger span{width:22px;height:2px;background:rgba(255,255,255,.8);display:block;transition:.3s}
 
   /* ── HERO ── */
   .hero{min-height:100vh;position:relative;overflow:hidden;padding-top:68px;display:flex;align-items:center;flex-direction:column;justify-content:center}
@@ -382,21 +382,14 @@
   <div class="nav-inner">
     <a href="#" aria-label="브랜드앤유 홈" style="display:flex;align-items:center;gap:16px;text-decoration:none">
       <!-- 왼쪽 수식어 -->
-      <div class="nav-tagline" style="text-align:right;line-height:1.4;border-right:1px solid rgba(10,15,30,.1);padding-right:16px">
+      <div class="nav-tagline" style="text-align:right;line-height:1.5;border-right:1px solid rgba(201,168,76,.2);padding-right:16px">
         <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:700;color:#c9a84c;letter-spacing:2px;text-transform:uppercase">면세점 MD기획 8년</div>
-        <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:500;color:rgba(10,15,30,.45);letter-spacing:.5px">생활용품·뷰티 공구 중계</div>
+        <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.5px">생활용품·뷰티 공구 중계</div>
       </div>
-      <!-- 오른쪽 로고 SVG -->
-      <svg viewBox="0 0 220 42" fill="none" style="height:34px;width:auto" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
-        <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">B</text>
-        <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4" letter-spacing="1">&amp;</text>
-        <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e" letter-spacing="-0.5">Y</text>
-        <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
-        <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e" letter-spacing="0.3">브랜드앤유</text>
-        <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
-        <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
-      </svg>
+      <!-- 로고 이미지 -->
+      <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
+           alt="브랜드앤유 로고"
+           style="height:52px;width:52px;object-fit:contain"/>
     </a>
     <ul class="nav-links">
       <li><a href="#about">소개</a></li>
@@ -423,19 +416,8 @@
 
 <!-- Mobile Menu -->
 <div id="mMenu">
-  <div style="margin-bottom:8px">
-    <div style="font-size:10px;font-weight:700;color:#c9a84c;letter-spacing:2px;margin-bottom:4px">면세점 MD기획 8년 · 생활용품·뷰티 공구 중계</div>
-    <svg viewBox="0 0 220 42" style="height:28px" fill="none">
-      <line x1="0" y1="0" x2="220" y2="0" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
-      <text x="2" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">B</text>
-      <text x="20" y="26" font-family="DM Sans,sans-serif" font-size="14" font-weight="200" fill="#00c5b4">&amp;</text>
-      <text x="34" y="28" font-family="Playfair Display,Georgia,serif" font-size="26" font-weight="700" fill="#0a0f1e">Y</text>
-      <line x1="64" y1="5" x2="64" y2="33" stroke="#0a0f1e" stroke-width="0.8" stroke-opacity="0.15"/>
-      <text x="74" y="18" font-family="Pretendard Variable,sans-serif" font-size="13" font-weight="800" fill="#0a0f1e">브랜드앤유</text>
-      <text x="74" y="32" font-family="DM Sans,sans-serif" font-size="8" font-weight="400" fill="#00c5b4" letter-spacing="3">BRAND &amp; YOU</text>
-      <line x1="0" y1="41" x2="220" y2="41" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
-    </svg>
-  </div>
+  <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
+       alt="브랜드앤유 로고" style="height:64px;width:64px;object-fit:contain;margin-bottom:8px"/>
   <a href="#about" onclick="toggleMenu()">소개</a>
   <a href="#story" onclick="toggleMenu()">우리 이야기</a>
   <a href="#target" onclick="toggleMenu()">파트너 기준</a>
