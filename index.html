@@ -36,7 +36,7 @@
   .container{max-width:1160px;margin:0 auto;padding:0 48px}
 
   /* ── NAV ── */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:72px;display:flex;align-items:center;padding:0 48px;background:rgba(8,8,8,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(201,168,76,.15);transition:box-shadow .3s}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:80px;display:flex;align-items:center;padding:0 56px;background:rgba(8,8,8,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(201,168,76,.15);transition:box-shadow .3s}
   .nav.scrolled{box-shadow:0 2px 28px rgba(0,0,0,.4)}
   .nav-inner{width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
   .nav-links{display:flex;gap:28px;list-style:none}
@@ -380,16 +380,16 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" aria-label="브랜드앤유 홈" style="display:flex;align-items:center;gap:16px;text-decoration:none">
+    <a href="#" aria-label="브랜드앤유 홈" style="display:flex;align-items:center;gap:20px;text-decoration:none">
+      <!-- 왼쪽 수식어 -->
+      <div class="nav-tagline" style="line-height:1.6;border-right:1px solid rgba(201,168,76,.25);padding-right:20px;white-space:nowrap">
+        <div style="font-family:'Pretendard Variable',sans-serif;font-size:12px;font-weight:700;color:#c9a84c;letter-spacing:1.5px">면세점 MD기획 8년</div>
+        <div style="font-family:'Pretendard Variable',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,.5);letter-spacing:.3px">생활용품·뷰티 공구 중계</div>
+      </div>
       <!-- 로고 이미지 (대표님 제공 BN 골드실버) -->
       <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png"
            alt="브랜드앤유 로고"
-           style="height:52px;width:52px;object-fit:contain;flex-shrink:0"/>
-      <!-- 오른쪽 수식어 -->
-      <div class="nav-tagline" style="line-height:1.5;border-left:1px solid rgba(201,168,76,.2);padding-left:16px;white-space:nowrap">
-        <div style="font-family:'Pretendard Variable',sans-serif;font-size:11px;font-weight:700;color:#c9a84c;letter-spacing:1.5px">면세점 MD기획 8년</div>
-        <div style="font-family:'Pretendard Variable',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,.45)">생활용품·뷰티 공구 중계</div>
-      </div>
+           style="height:64px;width:64px;object-fit:contain;flex-shrink:0"/>
     </a>
     <ul class="nav-links">
       <li><a href="#about">소개</a></li>
