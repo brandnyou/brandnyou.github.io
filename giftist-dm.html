@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기프티스트 × 브랜드앤유</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:#f7f5f0;color:#1a1a1a}
+.wrap{max-width:680px;margin:0 auto;background:#fff}
+
+/* ── HERO : 브랜드 비주얼 ── */
+.hero{
+  position:relative;
+  background:linear-gradient(170deg,#0b1a0e 0%,#122a14 50%,#0a1a0c 100%);
+  padding:64px 32px 56px;text-align:center;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(120,200,80,0.18) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-label{
+  display:inline-block;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);
+  border-radius:30px;padding:6px 18px;
+  font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.brand-logo-area{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin-bottom:28px;
+}
+.brand-logo-area img{
+  width:56px;height:56px;border-radius:12px;object-fit:cover;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.brand-logo-area .x{font-size:18px;color:rgba(255,255,255,0.25);font-weight:300}
+.brand-logo-area .brand-name{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:1px}
+.hero h1{
+  font-size:32px;font-weight:900;color:#fff;line-height:1.25;
+  margin-bottom:14px;letter-spacing:-1px;
+}
+.hero h1 .green{color:#7ed348}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-bottom:32px}
+.hero-kv{
+  width:100%;max-width:420px;border-radius:20px;
+  overflow:hidden;margin:0 auto 0;
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+}
+.hero-kv img{width:100%;display:block}
+
+/* ── SECTION ── */
+.sec{padding:52px 28px}
+.sec+.sec{border-top:1px solid #f0ede8}
+.eyebrow{
+  font-size:10px;color:#7ed348;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sec-title{font-size:26px;font-weight:900;color:#111;line-height:1.25;margin-bottom:8px}
+.sec-sub{font-size:14px;color:#888;line-height:1.7;margin-bottom:28px}
+
+/* ── BRAND STORY ── */
+.story-img{
+  width:100%;border-radius:20px;overflow:hidden;
+  margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);
+}
+.story-img img{width:100%;display:block}
+.story-text{
+  font-size:15px;color:#444;line-height:2;
+  border-left:3px solid #7ed348;padding-left:18px;margin-bottom:24px;
+  font-weight:300;
+}
+.story-text strong{color:#111;font-weight:700}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tag{
+  background:#f0f8e8;border:1px solid #c5e89a;
+  border-radius:20px;padding:6px 14px;
+  font-size:12px;color:#3a7a10;font-weight:600;
+}
+
+/* ── BAHA SALT 원료 ── */
+.salt-visual{
+  background:linear-gradient(135deg,#0d1f0d,#162d16);
+  border-radius:24px;overflow:hidden;margin-bottom:0;
+  box-shadow:0 12px 40px rgba(0,0,0,0.12);
+}
+.salt-img-wrap{position:relative;height:220px;overflow:hidden}
+.salt-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:0.6}
+.salt-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 30%,rgba(13,31,13,0.95));
+  display:flex;align-items:flex-end;padding:24px;
+}
+.salt-img-overlay h3{font-size:20px;font-weight:900;color:#fff;line-height:1.3}
+.salt-img-overlay h3 span{color:#7ed348}
+.salt-body{padding:24px}
+.salt-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:18px}
+.salt-tags{display:flex;flex-wrap:wrap;gap:8px}
+.salt-tag{
+  background:rgba(126,211,72,0.1);border:1px solid rgba(126,211,72,0.3);
+  border-radius:20px;padding:5px 12px;
+  font-size:11px;color:#7ed348;font-weight:600;
+}
+
+/* ── 제품 그리드 ── */
+.prod-intro{
+  font-size:15px;color:#555;line-height:1.8;margin-bottom:32px;
+  padding:20px 22px;background:#f9f8f5;border-radius:16px;
+  border-left:3px solid #7ed348;
+}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.prod-grid.single{grid-template-columns:1fr}
+.prod-card{
+  background:#fff;border:1px solid #ece9e2;border-radius:20px;
+  overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  transition:transform .2s;
+}
+.prod-card:hover{transform:translateY(-4px)}
+.prod-img-box{
+  background:linear-gradient(135deg,#f8f6f1,#f0ede5);
+  height:180px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.prod-img-box.tall{height:220px}
+.prod-img-box img{
+  width:75%;height:75%;object-fit:contain;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+}
+.prod-badge{
+  position:absolute;top:12px;left:12px;
+  background:#7ed348;color:#fff;
+  border-radius:6px;padding:3px 9px;
+  font-size:10px;font-weight:800;letter-spacing:0.5px;
+}
+.prod-badge.new{background:#ff6b35}
+.prod-badge.best{background:#f0c040;color:#5a3800}
+.prod-body{padding:18px 16px}
+.prod-name{font-size:15px;font-weight:800;color:#111;margin-bottom:4px;line-height:1.3}
+.prod-eng{font-size:10px;color:#bbb;letter-spacing:0.5px;margin-bottom:10px}
+.prod-points{list-style:none}
+.prod-points li{
+  font-size:12px;color:#555;padding:4px 0;
+  border-bottom:1px solid #f5f3ef;line-height:1.5;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.prod-points li:last-child{border-bottom:none}
+.prod-points li::before{content:'✓';color:#7ed348;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ── 숫자 강조 ── */
+.nums-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;
+  margin-bottom:32px;
+}
+.num-card{
+  background:linear-gradient(135deg,#f0f9e8,#e8f5d8);
+  border:1px solid #c5e89a;border-radius:16px;
+  padding:20px 12px;text-align:center;
+}
+.num-val{font-size:24px;font-weight:900;color:#3a7a10;line-height:1;margin-bottom:4px}
+.num-label{font-size:10px;color:#6a9a30;line-height:1.4}
+
+/* ── 협업 구조 ── */
+.collab-bg{
+  background:linear-gradient(135deg,#0b1a0e,#122a14);
+  border-radius:24px;padding:36px 28px;margin-bottom:0;
+}
+.collab-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px}
+.collab-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:28px}
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-item{
+  display:flex;gap:16px;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.flow-item:last-child{border-bottom:none}
+.flow-num{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:rgba(126,211,72,0.15);border:1px solid rgba(126,211,72,0.35);
+  color:#7ed348;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+}
+.flow-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.flow-desc{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5}
+
+/* ── 브랜드앤유 소개 ── */
+.bn-sec{background:#f9f8f5}
+.bn-card{
+  background:#fff;border:1px solid #ece9e2;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+.bn-header{
+  background:linear-gradient(135deg,#0b1a0e,#122a14);
+  padding:28px 24px;display:flex;align-items:center;gap:16px;
+}
+.bn-logo{
+  width:54px;height:54px;border-radius:12px;object-fit:cover;
+  border:1px solid rgba(255,255,255,0.2);flex-shrink:0;
+}
+.bn-header-text h3{font-size:18px;font-weight:900;color:#fff;margin-bottom:2px}
+.bn-header-text p{font-size:12px;color:rgba(255,255,255,0.5)}
+.bn-body{padding:24px}
+.bn-headline{
+  font-size:16px;font-weight:800;color:#111;
+  line-height:1.5;margin-bottom:6px;
+}
+.bn-headline span{color:#3a7a10}
+.bn-desc{font-size:13px;color:#666;line-height:1.75;margin-bottom:20px}
+.bn-points{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.bn-point{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#f9f8f5;border-radius:12px;padding:14px 16px;
+}
+.bn-point-icon{font-size:20px;flex-shrink:0}
+.bn-point-title{font-size:13px;font-weight:700;color:#111;margin-bottom:2px}
+.bn-point-sub{font-size:12px;color:#888;line-height:1.45}
+
+/* ── CTA ── */
+.cta{
+  background:linear-gradient(170deg,#0b1a0e,#122a14);
+  padding:52px 28px;text-align:center;
+}
+.cta h2{font-size:26px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:12px}
+.cta h2 span{color:#7ed348}
+.cta-sub{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:32px}
+.cta-btn{
+  display:inline-block;
+  background:#7ed348;color:#000;font-size:16px;font-weight:800;
+  border-radius:50px;padding:18px 48px;text-decoration:none;
+  box-shadow:0 12px 40px rgba(126,211,72,0.4);margin-bottom:20px;
+  letter-spacing:0.3px;
+}
+.cta-info{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:16px;
+  font-size:13px;color:rgba(255,255,255,0.4);
+}
+.cta-info strong{color:rgba(255,255,255,0.7)}
+
+/* ── FOOTER ── */
+.footer{
+  padding:24px;text-align:center;
+  font-size:11px;color:#bbb;line-height:1.8;
+  background:#f9f8f5;border-top:1px solid #ece9e2;
+}
+
+/* mobile */
+@media(max-width:480px){
+  .hero h1{font-size:24px}
+  .prod-grid{grid-template-columns:1fr}
+  .nums-row{grid-template-columns:1fr}
+  .sec{padding:40px 20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-label">인플루언서 협업 제안서</div>
+  <div class="brand-logo-area">
+    <div>
+      <img src="https://cdn.imweb.me/thumbnail/20250520/70fe30da2ef1e.png" alt="기프티스트">
+      <div class="brand-name">GIFTEAST</div>
+    </div>
+    <div class="x">×</div>
+    <div>
+      <img src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png" alt="브랜드앤유">
+      <div class="brand-name">BRAND&YOU</div>
+    </div>
+  </div>
+  <h1>입 안부터<br><span class="green">온몸이 달라지는</span><br>구강케어 공구</h1>
+  <p class="hero-sub">
+    자연유래 성분으로 만든 프리미엄 구강케어 브랜드<br>
+    기프티스트와 함께하는 인플루언서 공동구매 협업 제안
+  </p>
+</div>
+
+<!-- ── 브랜드 스토리 ── -->
+<div class="sec">
+  <div class="eyebrow">🌿 Brand Story</div>
+  <div class="sec-title">기프티스트는<br>어떤 브랜드인가요?</div>
+
+  <div class="story-img">
+    <img src="https://cdn-optimized.imweb.me/upload/S202205093fabff2a3ff48/bb25c9a443a87.png"
+         onerror="this.src='https://cdn.imweb.me/thumbnail/20250520/70fe30da2ef1e.png'"
+         alt="기프티스트 브랜드">
+  </div>
+
+  <div class="story-text">
+    하나의 기프티스트 제품이 탄생하기 위해서는,<br>
+    <strong>농사와 같은 시간을 지나야 합니다.</strong><br><br>
+    믿을 수 있는 원료와 균형 잡힌 처방으로,<br>
+    온가족이 매일 사용할 수 있는 제품을 만드는 브랜드입니다.
+  </div>
+
+  <div class="nums-row">
+    <div class="num-card">
+      <div class="num-val">99.999%</div>
+      <div class="num-label">유해균<br>선택적 제거</div>
+    </div>
+    <div class="num-card">
+      <div class="num-val">5h</div>
+      <div class="num-label">항균 효과<br>지속 시간</div>
+    </div>
+    <div class="num-card">
+      <div class="num-val">7 FREE</div>
+      <div class="num-label">유해성분<br>무첨가</div>
+    </div>
+  </div>
+
+  <div class="tag-row">
+    <span class="tag">🌊 자연유래 원료</span>
+    <span class="tag">🌱 비건 인증</span>
+    <span class="tag">👨‍👩‍👧 온 가족 더마케어</span>
+    <span class="tag">🚫 무알콜·무불소</span>
+    <span class="tag">🔬 균형 잡힌 처방</span>
+    <span class="tag">✅ 코셔 인증 소금</span>
+  </div>
+</div>
+
+<!-- ── 핵심 원료 : 바하소금 ── -->
+<div class="sec" style="padding-top:0;padding-bottom:52px">
+  <div class="eyebrow">🧂 Key Ingredient</div>
+  <div class="sec-title">모든 제품의 핵심 원료<br>바하소금(Baha Salt)</div>
+  <p class="sec-sub">유네스코 지정 고래보호지역에서 3년 이상 자연결정화 과정을 거친<br>세계 최고 등급 프리미엄 천일염</p>
+
+  <div class="salt-visual">
+    <div class="salt-img-wrap">
+      <img src="https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=800&q=80" alt="바하소금 염전">
+      <div class="salt-img-overlay">
+        <h3>BAHA SALT<br><span>유네스코 지정 고래보호지역산</span><br>코셔인증 프리미엄 천일염</h3>
+      </div>
+    </div>
+    <div class="salt-body">
+      <p class="salt-desc">
+        단일 규모 세계 최대 염전(1억 평)에서 생산된 제조 순도 99.5% 이상의 푸드그레이드 소금입니다.
+        나트륨·칼륨의 이온 밸런스가 피부·체액의 이상적 염도(0.9%)와 유사해 자극 없이 깊은 구강 케어가 가능합니다.
+      </p>
+      <div class="salt-tags">
+        <span class="salt-tag">🐋 유네스코 고래보호지역산</span>
+        <span class="salt-tag">✅ 코셔(Kosher) 인증</span>
+        <span class="salt-tag">🍽 푸드그레이드</span>
+        <span class="salt-tag">⏳ 3년+ 자연결정화</span>
+        <span class="salt-tag">💎 순도 99.5% 이상</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 전 제품 라인업 ── -->
+<div class="sec" style="background:#f9f8f5">
+  <div class="eyebrow">🧴 Product Lineup</div>
+  <div class="sec-title">기프티스트 전 제품</div>
+  <p class="sec-sub">구강케어부터 바디·스킨케어까지<br>온 가족이 함께 쓰는 자연유래 라이프케어 라인</p>
+
+  <!-- 제품 1+2 -->
+  <div class="prod-grid">
+    <div class="prod-card">
+      <div class="prod-img-box">
+        <div class="prod-badge best">BEST</div>
+        <img src="https://cdn.imweb.me/thumbnail/20250520/70fe30da2ef1e.png"
+             onerror="this.src='https://cdn-optimized.imweb.me/upload/S202205093fabff2a3ff48/bb25c9a443a87.png'"
+             alt="솔트 가글">
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">바하오리진<br>솔트 가글 500ml</div>
+        <div class="prod-eng">SALT GARGLE</div>
+        <ul class="prod-points">
+          <li>바하소금 5.8% 함유</li>
+          <li>유해균만 99.999% 선택 제거</li>
+          <li>무알콜·무불소·비건</li>
+          <li>입마름 없이 촉촉</li>
+          <li>3중 케어 (구강·잇몸·입냄새)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img-box">
+        <div class="prod-badge">치약</div>
+        <img src="https://cdn-optimized.imweb.me/upload/S202205093fabff2a3ff48/abb8c4f585869.png"
+             alt="솔트 치약">
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">바하오리진<br>솔트 치약</div>
+        <div class="prod-eng">SALT TOOTHPASTE</div>
+        <ul class="prod-points">
+          <li>바하소금 5% 함유</li>
+          <li>4종 유해균 99.999% 살균</li>
+          <li>항균 효과 5시간 지속</li>
+          <li>잇몸 출혈 감소</li>
+          <li>상쾌한 마무리감</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제품 3+4 -->
+  <div class="prod-grid">
+    <div class="prod-card">
+      <div class="prod-img-box">
+        <div class="prod-badge">스틱</div>
+        <img src="https://cdn.imweb.me/thumbnail/20250809/5590aeb152210.png"
+             onerror="this.src='https://cdn.imweb.me/thumbnail/20250722/9ac5ff10eed69.png'"
+             alt="스틱 가글">
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">스트롱 가글<br>스틱 10ml×10</div>
+        <div class="prod-eng">STRONG GARGLE STICK</div>
+        <ul class="prod-points">
+          <li>일회용 스틱 타입</li>
+          <li>외출·여행 간편 휴대</li>
+          <li>입냄새 원인균 99.999% 억제</li>
+          <li>콘텐츠 활용도 최고</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img-box">
+        <div class="prod-badge new">NEW</div>
+        <img src="https://cdn-optimized.imweb.me/upload/S202205093fabff2a3ff48/bb25c9a443a87.png"
+             alt="올리비온 크림">
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">올리비온<br>모이스처 크림</div>
+        <div class="prod-eng">OLIVION CREAM</div>
+        <ul class="prod-points">
+          <li>올리브 유래 4종 콤플렉스</li>
+          <li>씨솔트 이온 바이오미메틱스</li>
+          <li>보습·진정·장벽 케어</li>
+          <li>"Wear Olive" — 피부 유사 구조</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제품 5 : 스파 바디워시 — 와이드 카드 -->
+  <div class="prod-grid single">
+    <div class="prod-card">
+      <div class="prod-img-box tall">
+        <div class="prod-badge">3-WAY</div>
+        <img src="https://cdn-optimized.imweb.me/upload/S202205093fabff2a3ff48/abb8c4f585869.png"
+             alt="SPA 바디워시"
+             style="width:45%;height:75%">
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">바하솔트 판테놀<br>오션 아로마틱 SPA 바디워시</div>
+        <div class="prod-eng">SPA BODY WASH · 3-WAY</div>
+        <ul class="prod-points">
+          <li>바디워시 + 페이스워시 + 입욕(발네오테라피) 3가지 용도</li>
+          <li>바하솔트 2.49% + 자연유래 아로마 에센셜 오일</li>
+          <li>비건인증 · 7대 유해성분 프리 · 약산성</li>
+          <li>99.999% 항균 · 저자극 · 아이부터 어른까지</li>
+          <li>욕조 10펌핑 — 풍성한 버블 홈스파</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 협업 제안 ── -->
+<div class="sec">
+  <div class="eyebrow">🤝 Collab Proposal</div>
+  <div class="sec-title">이런 분께<br>딱 맞는 공구입니다</div>
+  <div class="prod-intro">
+    구강케어·홈케어·스킨케어 팔로워를 보유한 인플루언서라면<br>
+    <strong>기프티스트의 자연주의 스토리</strong>가 콘텐츠로 살아납니다.<br>
+    "바하소금" 하나로 구강부터 피부까지 — 설명하기 쉽고 구매 전환이 높은 제품입니다.
+  </div>
+
+  <div class="collab-bg">
+    <div class="collab-title">협업이 진행되는 방식</div>
+    <div class="collab-sub">복잡한 것 없이, 포스팅에만 집중하시면 됩니다</div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div>
+          <div class="flow-title">협업 확정 → 제품 샘플 발송</div>
+          <div class="flow-desc">직접 써보고 자연스러운 콘텐츠 방향 결정</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div>
+          <div class="flow-title">계약서 작성 (브랜드앤유 전담)</div>
+          <div class="flow-desc">수수료·일정·조건 모두 문서화 — 구두 약속 없음</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div>
+          <div class="flow-title">공구 링크 수령 → 포스팅 업로드</div>
+          <div class="flow-desc">피드·릴스·스토리 자유 선택, 소재 필요 시 제공</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div>
+          <div class="flow-title">배송·CS → 기프티스트 100% 담당</div>
+          <div class="flow-desc">팔로워 문의·반품·배송 민원 인플루언서 부담 없음</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div>
+          <div class="flow-title">💰 정산 입금 — 마감 후 2주 이내</div>
+          <div class="flow-desc">판매 금액 기준 수수료 지급 · 선결제 광고비 0원</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 브랜드앤유 소개 ── -->
+<div class="sec bn-sec">
+  <div class="eyebrow">🏆 About Brand&You</div>
+  <div class="sec-title">브랜드앤유가<br>직접 연결합니다</div>
+
+  <div class="bn-card">
+    <div class="bn-header">
+      <img class="bn-logo" src="https://raw.githubusercontent.com/brandnyou/brandnyou.github.io/main/logo.png" alt="브랜드앤유">
+      <div class="bn-header-text">
+        <h3>브랜드앤유 (Brand&You)</h3>
+        <p>인플루언서 공구 중계 전문 에이전시</p>
+      </div>
+    </div>
+    <div class="bn-body">
+      <div class="bn-headline">
+        <span>면세점 MD기획 8년 출신</span>이<br>직접 운영하는 공구 에이전시
+      </div>
+      <p class="bn-desc">
+        아무 제품이나 연결하지 않습니다. 팔로워 성향을 먼저 분석하고,
+        진짜 잘 팔릴 제품만 제안합니다. 기프티스트는 구강케어·생활용품·홈케어 채널에
+        가장 잘 맞는 브랜드로 직접 선별했습니다.
+      </p>
+      <div class="bn-points">
+        <div class="bn-point">
+          <div class="bn-point-icon">🎖</div>
+          <div>
+            <div class="bn-point-title">면세점 MD기획 8년 — 검증된 제품 셀렉션</div>
+            <div class="bn-point-sub">뭐가 팔리는지, 왜 팔리는지 압니다. 브랜드 스토리를 콘텐츠로 만드는 방법도요.</div>
+          </div>
+        </div>
+        <div class="bn-point">
+          <div class="bn-point-icon">📋</div>
+          <div>
+            <div class="bn-point-title">계약서 작성부터 정산까지 — 브랜드앤유 전담</div>
+            <div class="bn-point-sub">구두 약속 없음. 모든 조건 문서로 보장. 수수료·일정·정산 기준 모두 명확합니다.</div>
+          </div>
+        </div>
+        <div class="bn-point">
+          <div class="bn-point-icon">🛡</div>
+          <div>
+            <div class="bn-point-title">배송·CS는 브랜드가 100% 담당</div>
+            <div class="bn-point-sub">인플루언서는 콘텐츠에만 집중. 팔로워 민원·환불 요청에서 완전히 자유롭습니다.</div>
+          </div>
+        </div>
+        <div class="bn-point">
+          <div class="bn-point-icon">💸</div>
+          <div>
+            <div class="bn-point-title">선결제 광고비 0원 — 판매된 만큼만 정산</div>
+            <div class="bn-point-sub">리스크 없이 시작. 팔린 금액 기준 수수료만 받습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <h2>함께하고 싶으시면<br><span>DM 한 통</span>이면 됩니다 😊</h2>
+  <p class="cta-sub">
+    복잡한 절차 없이 DM 주시면<br>
+    공구 조건·일정·제품 샘플까지 바로 안내드립니다
+  </p>
+  <a href="https://www.instagram.com/brandnyou.team/" class="cta-btn">📩 @brandnyou.team DM 바로가기</a>
+  <div class="cta-info">
+    <span>📞 <strong>010-8335-1854</strong></span>
+    <span>💬 카카오채널 <strong>브랜드앤유</strong></span>
+    <span>🌐 <strong>brandnyu.com</strong></span>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <strong>브랜드앤유 (Brand&You)</strong> · 인플루언서 공구 중계 전문 에이전시<br>
+  brandnyou.team@gmail.com · 010-8335-1854 · brandnyu.com
+</div>
+
+</div>
+</body>
+</html>
