@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; connect-src 'self' https:;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드앤유 | 인플루언서 매칭 판별기 v10</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#eef0f6;color:#1a1a2e;min-height:100vh;}
+.header{background:linear-gradient(135deg,#0f1f4a,#1e3a6e);color:white;padding:22px 36px;box-shadow:0 4px 20px rgba(15,31,74,.35);}
+.header h1{font-size:21px;font-weight:800;}
+.header p{font-size:12px;opacity:.6;margin-top:4px;}
+.badge{background:#e8b84b;color:#0f1f4a;font-size:10px;font-weight:900;padding:2px 8px;border-radius:20px;margin-left:7px;vertical-align:middle;}
+.real-badge{background:#2e7d32;color:white;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-left:5px;vertical-align:middle;}
+.container{max-width:1200px;margin:0 auto;padding:22px 16px;}
+
+/* 검색박스 */
+.search-box{background:white;border-radius:20px;padding:28px 32px;box-shadow:0 4px 24px rgba(0,0,0,.09);margin-bottom:16px;}
+.search-label{font-size:13px;font-weight:800;color:#0f1f4a;margin-bottom:10px;}
+.search-row{display:flex;gap:12px;align-items:stretch;}
+.brand-input{flex:1;padding:16px 20px;border:2.5px solid #e0e0e0;border-radius:14px;font-size:17px;font-weight:600;font-family:inherit;background:#fafafa;transition:border .15s;color:#0f1f4a;}
+.brand-input:focus{outline:none;border-color:#0f1f4a;background:white;box-shadow:0 0 0 4px rgba(15,31,74,.06);}
+.brand-input::placeholder{font-weight:400;color:#bbb;}
+.search-btn{padding:16px 32px;background:#0f1f4a;color:white;border:none;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.search-btn:hover{background:#1e3a6e;}
+
+/* 분석결과 카드 */
+.analysis-card{border-radius:14px;padding:16px 20px;margin-top:14px;display:none;flex-wrap:wrap;gap:10px;align-items:center;}
+.analysis-card.visible{display:flex;}
+.ac-found{background:#f0f4ff;border:1.5px solid #c5cae9;}
+.ac-unknown{background:#fff8e1;border:1.5px solid #ffe082;}
+.ac-title{font-size:11px;font-weight:800;color:#3949ab;margin-right:4px;white-space:nowrap;}
+.ac-title-warn{font-size:11px;font-weight:800;color:#e65100;margin-right:4px;}
+.ac-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;}
+.tag-cat{background:#e3f2fd;color:#1565c0;}
+.tag-kw{background:#fff9e6;color:#e65100;}
+.tag-target{background:#e8f5e9;color:#2e7d32;}
+.tag-tone{background:#f3e5f5;color:#7b1fa2;}
+.conf-label{font-size:10px;margin-left:6px;font-weight:700;}
+
+/* 카테고리 선택 UI (알 수 없을 때) */
+.cat-picker{width:100%;margin-top:6px;}
+.cat-picker-title{font-size:12px;font-weight:800;color:#e65100;margin-bottom:8px;}
+.cat-btns{display:flex;flex-wrap:wrap;gap:6px;}
+.cat-btn{padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:white;font-size:12px;font-weight:700;cursor:pointer;color:#555;transition:all .12s;}
+.cat-btn:hover,.cat-btn.active{background:#0f1f4a;color:white;border-color:#0f1f4a;}
+
+/* 빠른선택 */
+.quick-panel{background:white;border-radius:16px;padding:18px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:18px;}
+.quick-title{font-size:13px;font-weight:700;color:#888;margin-bottom:10px;}
+.quick-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.qbtn{padding:6px 12px;border-radius:24px;border:1.5px solid #c8e6c9;background:#f1f8e9;font-size:11px;font-weight:700;cursor:pointer;color:#2e7d32;transition:all .12s;}
+.qbtn:hover{background:#a5d6a7;}
+
+/* DB 배너 */
+.db-banner{background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:12px;padding:12px 18px;margin-bottom:18px;font-size:12px;color:#1b5e20;display:flex;align-items:center;gap:10px;}
+
+/* 결과 */
+.result-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.result-header h2{font-size:18px;font-weight:800;color:#0f1f4a;}
+.result-sub{font-size:11px;color:#aaa;}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.ldot{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:white;flex-shrink:0;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#555;}
+.infl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;}
+
+/* 카드 */
+.card{background:white;border-radius:15px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border:2px solid transparent;transition:all .18s;position:relative;}
+.card:hover{border-color:#e8b84b;transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.12);}
+.card.grade-s{border-left:4px solid #e8b84b;}
+.card.grade-a{border-left:4px solid #1e88e5;}
+.card.grade-b{border-left:4px solid #43a047;}
+.card.grade-c{border-left:4px solid #bdbdbd;}
+.rank-dot{position:absolute;top:13px;left:16px;width:22px;height:22px;border-radius:50%;background:#0f1f4a;color:white;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.score-ring{position:absolute;top:11px;right:11px;width:50px;height:50px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;}
+.gs{background:linear-gradient(135deg,#e8b84b,#f0a500);color:#fff;}
+.ga{background:linear-gradient(135deg,#1e88e5,#1565c0);color:#fff;}
+.gb{background:linear-gradient(135deg,#43a047,#2e7d32);color:#fff;}
+.gc{background:#9e9e9e;color:white;}
+.snum{font-size:16px;line-height:1;}
+.slbl{font-size:7.5px;opacity:.9;margin-top:1px;}
+.profile{display:flex;align-items:center;gap:12px;margin:34px 0 12px;padding-right:54px;}
+.avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+.av1{background:radial-gradient(circle,#fce4ec,#f48fb1);}
+.av2{background:radial-gradient(circle,#e8f5e9,#81c784);}
+.av3{background:radial-gradient(circle,#e3f2fd,#64b5f6);}
+.av4{background:radial-gradient(circle,#fff8e1,#ffcc02);}
+.av5{background:radial-gradient(circle,#f3e5f5,#ce93d8);}
+.av6{background:radial-gradient(circle,#e0f7fa,#4dd0e1);}
+.av10{background:radial-gradient(circle,#fbe9e7,#ff8a65);}
+.av10{background:radial-gradient(circle,#f5f5f5,#bdbdbd);}
+.pname{font-size:15px;font-weight:800;color:#0f1f4a;}
+.pig a{color:#4a6fa5;font-weight:700;font-size:12px;text-decoration:none;}
+.pig a:hover{text-decoration:underline;}
+.pcat{font-size:10px;color:#999;margin-top:3px;line-height:1.5;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px;}
+.stat{background:#f7f8fb;border-radius:8px;padding:7px 5px;text-align:center;}
+.slabel{font-size:8.5px;color:#aaa;font-weight:700;text-transform:uppercase;margin-bottom:3px;}
+.sval{font-size:12px;font-weight:800;color:#0f1f4a;line-height:1;}
+.match-bars{margin-bottom:10px;}
+.mbar-row{display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+.mbar-label{font-size:9px;color:#aaa;width:60px;flex-shrink:0;font-weight:700;}
+.mbar-track{flex:1;height:6px;background:#f0f0f0;border-radius:6px;overflow:hidden;}
+.mbar-fill{height:100%;border-radius:6px;}
+.fill-cat{background:linear-gradient(90deg,#e8b84b,#f0a500);}
+.fill-kw{background:linear-gradient(90deg,#1e88e5,#42a5f5);}
+.fill-target{background:linear-gradient(90deg,#43a047,#81c784);}
+.fill-collab{background:linear-gradient(90deg,#8e24aa,#ce93d8);}
+.fill-scale{background:linear-gradient(90deg,#ef6c00,#ffa726);}
+.mbar-pts{font-size:9px;font-weight:800;color:#555;width:26px;text-align:right;flex-shrink:0;}
+.why{border-top:1px solid #f0f0f0;padding-top:10px;}
+.why-title{font-size:10px;font-weight:800;color:#0f1f4a;margin-bottom:7px;display:flex;align-items:center;gap:4px;}
+.why-title::before{content:'';display:inline-block;width:3px;height:11px;background:#e8b84b;border-radius:2px;}
+.why-list{display:flex;flex-direction:column;gap:4px;}
+.why-item{font-size:11px;color:#444;line-height:1.55;display:flex;gap:5px;align-items:flex-start;}
+.why-check{color:#e8b84b;font-weight:900;flex-shrink:0;font-size:10px;margin-top:1px;}
+.mkw{background:#fff9e6;color:#e65100;font-weight:700;padding:0 2px;border-radius:3px;font-size:10px;}
+.empty{text-align:center;padding:70px 20px;color:#ccc;}
+.empty .eicon{font-size:56px;margin-bottom:14px;}
+.empty p{font-size:14px;line-height:1.8;}
+@media(max-width:700px){.search-row{flex-direction:column;}.infl-grid{grid-template-columns:1fr;}.stats{grid-template-columns:repeat(2,1fr);}.header{padding:16px;}.container{padding:10px;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>브랜드앤유 <span class="badge">v10</span> 인플루언서 매칭 판별기 <span class="real-badge">✅ 실제 계정</span></h1>
+  <p>제조사명 입력 → 300+ 브랜드 DB 자동 매핑 → 미인식 시 카테고리 직접 선택 → 인플루언서 매칭 | 2026.05.07</p>
+</div>
+<div class="container">
+  <div class="db-banner"><span>📊</span><span id="db-status">로딩 중...</span></div>
+
+  <div class="search-box">
+    <div class="search-label">🏭 제조사명 입력 — 자동으로 카테고리와 인플루언서를 매칭합니다</div>
+    <div class="search-row">
+      <input class="brand-input" id="brand-input" type="text"
+        placeholder="예: 아누아, 닥터포헤어, 생활공작소, 코스알엑스, 마녀공장..."
+        oninput="onBrandInput(this.value)"
+        onkeydown="if(event.key==='Enter')runSearch()">
+      <button class="search-btn" onclick="runSearch()">🔍 매칭 시작</button>
+    </div>
+    <div class="analysis-card" id="analysis-card"></div>
+  </div>
+
+  <div class="quick-panel">
+    <div class="quick-title">⚡ 발송 완료 50개사 — 클릭 시 즉시 매칭</div>
+    <div class="quick-grid" id="quick-grid"></div>
+  </div>
+
+  <div id="result-area">
+    <div class="empty"><div class="eicon">🎯</div>
+      <p>제조사명을 입력하면<br>300개+ 브랜드 DB에서 카테고리를 자동 인식하고<br>최적 인플루언서를 추천합니다</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const DB = [
+  {
+    "ig": "@xxjominxx",
+    "name": "조민영",
+    "followers": "160만+",
+    "reels": "10만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구 이력",
+    "note": "DM 발송 5/12",
+    "no": 1,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/xxjominxx/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@소금약사",
+    "name": "소금약사 정소민",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "건강/약사",
+    "grade": "A",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12. 바하소금 핏 최상",
+    "no": 2,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/소금약사/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@바른약",
+    "name": "바른약 최문길",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "건강/약사",
+    "grade": "A",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 3,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/바른약/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@다정한엄마약사",
+    "name": "다정한엄마약사 유니약사",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "건강/약사/육아",
+    "grade": "A",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 4,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/다정한엄마약사/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@가을맘",
+    "name": "가을맘 우다현",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "육아/살림/공구",
+    "grade": "A",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 5,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/가을맘/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@헤요이홈",
+    "name": "살림하는 헤요이홈",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "살림/생활용품",
+    "grade": "B",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 6,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/헤요이홈/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@푸드리셋",
+    "name": "푸드리셋",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "건강/식품",
+    "grade": "B",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 7,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/푸드리셋/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@쏘핏소윤",
+    "name": "쏘핏 소 윤",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티/피트니스",
+    "grade": "B",
+    "giveaway": "확인 필요",
+    "note": "DM 발송 5/12",
+    "no": 8,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/쏘핏소윤/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@queen7koo",
+    "name": "queen7koo (퀸리구)",
+    "followers": "미확인",
+    "reels": "1~2만",
+    "category": "뷰티/골프/라이프",
+    "grade": "A",
+    "giveaway": "현재 기프티스트 공구 진행 중",
+    "note": "대표님 직접 언급",
+    "no": 9,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/queen7koo/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@shortbutstunning",
+    "name": "단연",
+    "followers": "21만",
+    "reels": "10만+",
+    "category": "스킨케어/뷰티",
+    "grade": "A",
+    "giveaway": "공구 매우 활발",
+    "note": "스킨케어 공구 최다",
+    "no": 10,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/shortbutstunning/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@misszzie_",
+    "name": "미스찌_",
+    "followers": "13.6만",
+    "reels": "5~8만",
+    "category": "스킨케어",
+    "grade": "A",
+    "giveaway": "PDRN크림 공구",
+    "note": "",
+    "no": 11,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/misszzie_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@mimiwor",
+    "name": "김민희",
+    "followers": "32.2만",
+    "reels": "15만+",
+    "category": "스킨케어/뷰티",
+    "grade": "A",
+    "giveaway": "앰플 공구 활발",
+    "note": "",
+    "no": 12,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/mimiwor/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@sweet_dolly_me",
+    "name": "달콤",
+    "followers": "11.7만",
+    "reels": "3~5만",
+    "category": "뷰티/스킨케어",
+    "grade": "A",
+    "giveaway": "공구 활발",
+    "note": "",
+    "no": 13,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/sweet_dolly_me/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@luadoll",
+    "name": "루아돌",
+    "followers": "28만+유튜브303만",
+    "reels": "10만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구 진행",
+    "note": "",
+    "no": 14,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/luadoll/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@supermom_yaksa",
+    "name": "수퍼맘약사",
+    "followers": "5만+",
+    "reels": "3~5만",
+    "category": "건강기능식품/약사/육아",
+    "grade": "A",
+    "giveaway": "건기식 공구 전문",
+    "note": "",
+    "no": 15,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/supermom_yaksa/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@ppoyongnyong",
+    "name": "뽀용뇽",
+    "followers": "10만+",
+    "reels": "5만+",
+    "category": "뷰티/스킨케어",
+    "grade": "A",
+    "giveaway": "단독 공동개발",
+    "note": "",
+    "no": 16,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/ppoyongnyong/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@mi_vely1",
+    "name": "mi_vely1",
+    "followers": "5~10만",
+    "reels": "3만+",
+    "category": "건강/뷰티",
+    "grade": "A",
+    "giveaway": "건강 공구",
+    "note": "",
+    "no": 17,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/mi_vely1/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@dasolmom_",
+    "name": "선순환코치 다솔맘",
+    "followers": "88.7만",
+    "reels": "3만+",
+    "category": "육아/라이프",
+    "grade": "A",
+    "giveaway": "공구 경험",
+    "note": "",
+    "no": 18,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/dasolmom_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@oxo._.dduddu",
+    "name": "주원맘",
+    "followers": "미확인",
+    "reels": "1~2만",
+    "category": "육아/살림/공구",
+    "grade": "A",
+    "giveaway": "타이거몰 공구 활발",
+    "note": "",
+    "no": 19,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/oxo._.dduddu/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@myerry_",
+    "name": "몌",
+    "followers": "15만+유튜브13.4만",
+    "reels": "5~10만",
+    "category": "뷰티",
+    "grade": "A",
+    "giveaway": "공구 진행",
+    "note": "",
+    "no": 20,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/myerry_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@rorobeauty48791",
+    "name": "로로",
+    "followers": "15.4만",
+    "reels": "10만+",
+    "category": "뷰티",
+    "grade": "A",
+    "giveaway": "구강케어 공구 이력",
+    "note": "",
+    "no": 21,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/rorobeauty48791/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@younjeong.ing",
+    "name": "younjeong.ing",
+    "followers": "미확인",
+    "reels": "1~2만",
+    "category": "라이프/웰니스",
+    "grade": "B",
+    "giveaway": "웰니스 공구",
+    "note": "",
+    "no": 22,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/younjeong.ing/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@yooja_fits",
+    "name": "yooja_fits",
+    "followers": "미확인",
+    "reels": "1~2만",
+    "category": "육아/살림/공구",
+    "grade": "B",
+    "giveaway": "릴스 공구템",
+    "note": "",
+    "no": 23,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/yooja_fits/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@lamuqe",
+    "name": "라뮤끄",
+    "followers": "30만+(추정)",
+    "reels": "5~10만",
+    "category": "뷰티/색조",
+    "grade": "C",
+    "giveaway": "확인 필요",
+    "note": "",
+    "no": 24,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/lamuqe/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@kkelang",
+    "name": "꺌랑 김미정",
+    "followers": "21.7만",
+    "reels": "10만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구 활발",
+    "note": "",
+    "no": 25,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/kkelang/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@indre_official",
+    "name": "최인드레",
+    "followers": "28만",
+    "reels": "10만+",
+    "category": "스킨케어/뷰티",
+    "grade": "A",
+    "giveaway": "공구 다수",
+    "note": "",
+    "no": 26,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/indre_official/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@dana_danaspick",
+    "name": "다나",
+    "followers": "22.9만",
+    "reels": "10만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구 활발",
+    "note": "",
+    "no": 27,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/dana_danaspick/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@su.face_",
+    "name": "수페이스 SU",
+    "followers": "18만+유튜브11.5만",
+    "reels": "8만+",
+    "category": "뷰티/스킨케어",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 28,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/su.face_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@limeon_beauty",
+    "name": "림온",
+    "followers": "12만+유튜브17.5만",
+    "reels": "7만+",
+    "category": "뷰티",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 29,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/limeon_beauty/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@d.pharmacist",
+    "name": "D약사",
+    "followers": "18만",
+    "reels": "8만+",
+    "category": "건강/약사",
+    "grade": "A",
+    "giveaway": "건기식 공구",
+    "note": "",
+    "no": 30,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/d.pharmacist/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@inhye.choi_",
+    "name": "최인혜",
+    "followers": "28만",
+    "reels": "10만+",
+    "category": "뷰티",
+    "grade": "A",
+    "giveaway": "공구 활발",
+    "note": "",
+    "no": 31,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/inhye.choi_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@dory_mom_",
+    "name": "도리맘",
+    "followers": "2만+(성장중)",
+    "reels": "1만+",
+    "category": "육아/뷰티",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 32,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/dory_mom_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@lia_mom_beauty",
+    "name": "리아맘",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "육아/뷰티",
+    "grade": "B",
+    "giveaway": "활발",
+    "note": "",
+    "no": 33,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/lia_mom_beauty/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@kkungdong_mom",
+    "name": "쿵동맘",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "육아",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 34,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/kkungdong_mom/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@babyyun_",
+    "name": "손하윤 바비윤",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 35,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/babyyun_/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@beaute_estetic",
+    "name": "보떼 에스테틱",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티/에스테틱",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 36,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/beaute_estetic/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@clap_beauty",
+    "name": "클랍",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 37,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/clap_beauty/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@9tails_official",
+    "name": "나인즈 공구",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "공구 전문",
+    "grade": "B",
+    "giveaway": "공구 전문 채널",
+    "note": "",
+    "no": 38,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/9tails_official/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@shopbellr",
+    "name": "샵벨르",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티/공구",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 39,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/shopbellr/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@naomi_bestbrand",
+    "name": "나오미",
+    "followers": "10만+(언급)",
+    "reels": "5만+",
+    "category": "라이프/공구",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 40,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/naomi_bestbrand/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@sunpponi",
+    "name": "선뽀니",
+    "followers": "5만+",
+    "reels": "3만+",
+    "category": "뷰티/라이프",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 41,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/sunpponi/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@leojmakeup",
+    "name": "레오제이",
+    "followers": "100만+",
+    "reels": "30만+",
+    "category": "뷰티/메이크업",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 42,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/leojmakeup/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@hoesawona",
+    "name": "회사원A",
+    "followers": "50만+",
+    "reels": "20만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 43,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/hoesawona/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@ssin_sin",
+    "name": "씬님",
+    "followers": "50만+",
+    "reels": "20만+",
+    "category": "뷰티/메이크업",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 44,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/ssin_sin/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@daddoa",
+    "name": "다또아",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 45,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/daddoa/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@raonjeananim",
+    "name": "라온제나님",
+    "followers": "50만+",
+    "reels": "15만+",
+    "category": "라이프/육아",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 46,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/raonjeananim/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@about_udin",
+    "name": "유딘살림 청소팁",
+    "followers": "12만+",
+    "reels": "5만+",
+    "category": "살림/생활용품",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 47,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/about_udin/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@food.reset_furi",
+    "name": "food.reset_furi",
+    "followers": "40만+",
+    "reels": "15만+",
+    "category": "건강/식품",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 48,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/food.reset_furi/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@diy_salrim",
+    "name": "diy살림",
+    "followers": "9.9만+",
+    "reels": "4만+",
+    "category": "살림/DIY",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 49,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/diy_salrim/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@honeyhometip",
+    "name": "우리집꿀팁",
+    "followers": "10만+",
+    "reels": "4만+",
+    "category": "살림",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 50,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/honeyhometip/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@won_moony",
+    "name": "won_moony",
+    "followers": "10만+",
+    "reels": "4만+",
+    "category": "라이프",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 51,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/won_moony/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@heyoi_home",
+    "name": "살림하는 헤요이홈",
+    "followers": "20만+",
+    "reels": "8만+",
+    "category": "살림/생활용품",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 52,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/heyoi_home/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@autummom__",
+    "name": "autummom__",
+    "followers": "10만+",
+    "reels": "4만+",
+    "category": "육아/살림",
+    "grade": "B",
+    "giveaway": "미확인",
+    "note": "",
+    "no": 53,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/autummom__/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@150____cm",
+    "name": "일오공대장",
+    "followers": "3.1만+",
+    "reels": "1만+",
+    "category": "뷰티/라이프",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 54,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/150____cm/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@yedam_.k",
+    "name": "yedam_.k",
+    "followers": "60만+",
+    "reels": "20만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 55,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/yedam_.k/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@jihyolimm",
+    "name": "jihyolimm",
+    "followers": "200만+",
+    "reels": "50만+",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 56,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/jihyolimm/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@chaenymama",
+    "name": "chaenymama",
+    "followers": "50만+",
+    "reels": "15만+",
+    "category": "육아/라이프",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 57,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/chaenymama/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@dano",
+    "name": "다노 다이어트",
+    "followers": "15만+",
+    "reels": "5만+",
+    "category": "건강/다이어트",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 58,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/dano/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@ogi_salrim",
+    "name": "살림9단오기자",
+    "followers": "20만+",
+    "reels": "7만+",
+    "category": "살림",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 59,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/ogi_salrim/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@daerijubu",
+    "name": "대리주부",
+    "followers": "50만+",
+    "reels": "15만+",
+    "category": "살림/라이프",
+    "grade": "A",
+    "giveaway": "공구",
+    "note": "",
+    "no": 60,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/daerijubu/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@salrim_wang",
+    "name": "살림왕",
+    "followers": "10만+",
+    "reels": "4만+",
+    "category": "살림",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 61,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/salrim_wang/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@honeytip_home",
+    "name": "우리집꿀팁",
+    "followers": "8만+",
+    "reels": "3만+",
+    "category": "살림",
+    "grade": "B",
+    "giveaway": "공구",
+    "note": "",
+    "no": 62,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/honeytip_home/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@kangbaksalim",
+    "name": "강박살림",
+    "followers": "1.5만+",
+    "reels": "0.5만+",
+    "category": "살림",
+    "grade": "C",
+    "giveaway": "공구",
+    "note": "",
+    "no": 63,
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "verified_rebuild_0512",
+    "link": "https://www.instagram.com/kangbaksalim/",
+    "dm_sent": null,
+    "dm_status": null
+  },
+  {
+    "ig": "@여울람",
+    "name": "여울람",
+    "followers": "미확인",
+    "reels": "미확인",
+    "category": "뷰티/라이프",
+    "grade": "A",
+    "giveaway": "공구 이력",
+    "note": "대표님 직접 언급",
+    "verified": true,
+    "added_date": "2026-05-12",
+    "source": "대표님직접언급_0512",
+    "link": "https://www.instagram.com/여울람/",
+    "no": 64
+  }
+];
+const BRANDS = [{"no":1,"brand":"생활공작소","cat":"생활용품·홈케어","kw":"친환경 세제 살림 미니멀 제로웨이스트","sent":true,"sent_date":"2026-05-04"},{"no":2,"brand":"해피문데이","cat":"건강·이너뷰티","kw":"여성건강 오가닉 유기농 웰니스","sent":true,"sent_date":"2026-05-04"},{"no":3,"brand":"더블하트","cat":"생활용품·홈케어","kw":"세탁 세제 살림 육아 홈케어 친환경","sent":true,"sent_date":"2026-05-04"},{"no":4,"brand":"한나패드","cat":"자연주의·친환경","kw":"면생리대 천연 오가닉 친환경","sent":true,"sent_date":"2026-05-04"},{"no":5,"brand":"아토팜","cat":"뷰티·더마","kw":"유아스킨 민감피부 아토피 더마 MLE","sent":true,"sent_date":"2026-05-04"},{"no":6,"brand":"닥터브로너스","cat":"자연주의·친환경","kw":"비건 유기농 친환경 올인원","sent":true,"sent_date":"2026-05-04"},{"no":7,"brand":"마마스앤파파스","cat":"육아용품","kw":"육아 유모차 신생아 임산부","sent":true,"sent_date":"2026-05-04"},{"no":8,"brand":"그린핑거","cat":"뷰티·스킨케어","kw":"유아스킨 아이선크림 유아로션","sent":true,"sent_date":"2026-05-04"},{"no":9,"brand":"한경희생활과학","cat":"생활용품·홈케어","kw":"청소 스팀청소기 살림 홈케어","sent":true,"sent_date":"2026-05-04"},{"no":10,"brand":"뮬라웨이","cat":"건강·이너뷰티","kw":"흡수팬티 여성건강 운동","sent":true,"sent_date":"2026-05-04"},{"no":11,"brand":"닥터아토지아","cat":"뷰티·더마","kw":"아토피 민감피부 더마 진정","sent":true,"sent_date":"2026-05-04"},{"no":12,"brand":"라운드랩","cat":"뷰티·스킨케어","kw":"독도토너 자작나무 스킨케어 K뷰티","sent":true,"sent_date":"2026-05-06"},{"no":13,"brand":"넘버즈인","cat":"뷰티·스킨케어","kw":"모공케어 피부결 세럼 토너","sent":true,"sent_date":"2026-05-06"},{"no":14,"brand":"클레어스(Klairs)","cat":"뷰티·스킨케어","kw":"민감피부 진정크림 K뷰티 비타민C","sent":true,"sent_date":"2026-05-06"},{"no":15,"brand":"비플레인","cat":"뷰티·스킨케어","kw":"어성초 트러블케어 민감피부 성분","sent":true,"sent_date":"2026-05-06"},{"no":16,"brand":"셀퓨전씨","cat":"뷰티·더마","kw":"더마 선크림 피부과 성분","sent":true,"sent_date":"2026-05-06"},{"no":17,"brand":"에스더포뮬러","cat":"건강·이너뷰티","kw":"콜라겐 글루타치온 이너뷰티 영양제","sent":true,"sent_date":"2026-05-06"},{"no":18,"brand":"모다모다","cat":"헤어케어","kw":"새치 백모 블랙샴푸 헤어케어","sent":true,"sent_date":"2026-05-06"},{"no":19,"brand":"에이프릴스킨","cat":"뷰티·스킨케어","kw":"쿠션 메이크업 스킨케어","sent":true,"sent_date":"2026-05-06"},{"no":20,"brand":"뉴트리디데이(더베이글)","cat":"건강·이너뷰티","kw":"유산균 다이어트 이너뷰티 콜라겐","sent":true,"sent_date":"2026-05-06"},{"no":21,"brand":"비타민하우스","cat":"건강·이너뷰티","kw":"비타민 글루타치온 영양제","sent":true,"sent_date":"2026-05-06"},{"no":22,"brand":"바디럽","cat":"뷰티·스킨케어","kw":"샤워기필터 바디워시 셀프케어","sent":true,"sent_date":"2026-05-06"},{"no":23,"brand":"라벨영","cat":"뷰티·스킨케어","kw":"콜라겐 탄력 안티에이징 앰플","sent":true,"sent_date":"2026-05-06"},{"no":24,"brand":"에이치피오(덴프스)","cat":"건강·이너뷰티","kw":"홍삼 이너뷰티 건강기능식품","sent":true,"sent_date":"2026-05-06"},{"no":25,"brand":"닥터지","cat":"뷰티·더마","kw":"트러블케어 진정크림 선크림 더마","sent":true,"sent_date":"2026-05-06"},{"no":26,"brand":"제이엠솔루션","cat":"뷰티·스킨케어","kw":"마스크팩 꿀광 화이트닝 앰플","sent":true,"sent_date":"2026-05-06"},{"no":27,"brand":"동구밭","cat":"자연주의·친환경","kw":"고체비누 제로웨이스트 친환경 비건","sent":true,"sent_date":"2026-05-06"},{"no":28,"brand":"멜릭서","cat":"자연주의·친환경","kw":"비건뷰티 클린뷰티 비타민C 선크림","sent":true,"sent_date":"2026-05-06"},{"no":29,"brand":"에코버(에코에이스)","cat":"자연주의·친환경","kw":"친환경세제 식물성세제 살림","sent":true,"sent_date":"2026-05-06"},{"no":30,"brand":"아누아","cat":"뷰티·스킨케어","kw":"어성초 트러블케어 모공 세럼 K뷰티","sent":true,"sent_date":"2026-05-06"},{"no":31,"brand":"이즈앤트리","cat":"뷰티·스킨케어","kw":"히알루론산 수분케어 세라마이드 선크림","sent":true,"sent_date":"2026-05-06"},{"no":32,"brand":"조선미녀","cat":"뷰티·스킨케어","kw":"한방성분 선크림 K뷰티 갱화수","sent":true,"sent_date":"2026-05-06"},{"no":33,"brand":"아크웰","cat":"뷰티·스킨케어","kw":"약산성 pH케어 프로폴리스 성분","sent":true,"sent_date":"2026-05-06"},{"no":34,"brand":"토리든","cat":"뷰티·스킨케어","kw":"히알루론산 수분케어 세라마이드 피부장벽","sent":true,"sent_date":"2026-05-06"},{"no":35,"brand":"닥터린","cat":"건강·이너뷰티","kw":"다이어트 유산균 이너뷰티 슬리밍","sent":true,"sent_date":"2026-05-06"},{"no":36,"brand":"마더메이드","cat":"자연주의·친환경","kw":"천연세제 오가닉 친환경 살림","sent":true,"sent_date":"2026-05-06"},{"no":37,"brand":"원씽","cat":"뷰티·스킨케어","kw":"오일스킨케어 마카다미아 클린뷰티","sent":true,"sent_date":"2026-05-06"},{"no":38,"brand":"어노브(UNOVE)","cat":"헤어케어","kw":"손상모 헤어케어 트리트먼트 에센스","sent":true,"sent_date":"2026-05-06"},{"no":39,"brand":"SNP(에스엔피)","cat":"뷰티·스킨케어","kw":"마스크팩 동물마스크 캐릭터","sent":true,"sent_date":"2026-05-06"},{"no":40,"brand":"파파레서피","cat":"뷰티·스킨케어","kw":"꿀마스크 봄비 보습 수분케어","sent":true,"sent_date":"2026-05-06"},{"no":41,"brand":"데이지크(dasique)","cat":"뷰티·메이크업","kw":"메이크업 아이섀도우 팔레트 비건메이크업","sent":true,"sent_date":"2026-05-06"},{"no":42,"brand":"닥터포헤어","cat":"헤어케어","kw":"탈모 두피케어 샴푸 탈모예방","sent":true,"sent_date":"2026-05-06"},{"no":43,"brand":"히말라야코리아","cat":"건강·이너뷰티","kw":"허브 자연건강 건강기능식품","sent":true,"sent_date":"2026-05-06"},{"no":44,"brand":"미팩토리","cat":"뷰티·스킨케어","kw":"코팩 모공 블랙헤드 피지케어","sent":true,"sent_date":"2026-05-06"},{"no":45,"brand":"듀이트리(DEWYTREE)","cat":"뷰티·스킨케어","kw":"레티놀 콜라겐 탄력 안티에이징","sent":true,"sent_date":"2026-05-06"},{"no":46,"brand":"투쿨포스쿨","cat":"뷰티·메이크업","kw":"아트메이크업 아이섀도우 색조 립","sent":true,"sent_date":"2026-05-06"},{"no":47,"brand":"셀리턴","cat":"뷰티·스킨케어","kw":"LED마스크 홈케어 피부관리기기","sent":true,"sent_date":"2026-05-06"},{"no":48,"brand":"더마에임(DERMAIM)","cat":"뷰티·더마","kw":"더마 민감피부 진정케어 수딩","sent":true,"sent_date":"2026-05-06"},{"no":49,"brand":"닥터원더(블랭크)","cat":"뷰티·스킨케어","kw":"클렌저 스킨케어 데일리 진정패드","sent":true,"sent_date":"2026-05-06"},{"no":50,"brand":"바이오던스(Biodance)","cat":"뷰티·스킨케어","kw":"젤리팩 콜라겐마스크 마스크팩","sent":true,"sent_date":"2026-05-06"}];
+
+document.getElementById('db-status').textContent =
+  '실제 인플루언서 DB: '+DB.length+'명 (실제 인스타그램 계정) | 브랜드 사전: 300개+ | 미인식 시 카테고리 직접 선택 가능';
+
+// ═══════════════════════════════════════════════════════
+// 브랜드 카테고리 사전 (300+ 브랜드 수작업 분류)
+// ═══════════════════════════════════════════════════════
+const BRAND_DB = {
+  // ── 스킨케어 ──
+  
+  '기프티스트': {cat:'스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'성분덕후', tone:'리얼리뷰'},
+  'giftist':    {cat:'스킨케어', kws:'기프티스트 스킨케어 구강케어 솔트가글 선물세트 공구', target:'성분덕후', tone:'리얼리뷰'},
+  '아누아':     {cat:'스킨케어',kws:'어성초 트러블케어 모공 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '코스알엑스':  {cat:'스킨케어',kws:'달팽이 트러블 스팟패드 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  'cosrx':      {cat:'스킨케어',kws:'달팽이 트러블 스팟패드 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '이니스프리':  {cat:'스킨케어',kws:'제주 그린티 수분 자연성분 스킨케어',target:'2030',tone:'감성라이프'},
+  '이니스프리innisfree': {cat:'스킨케어',kws:'제주 그린티 수분 자연성분',target:'2030',tone:'감성라이프'},
+  '구달':       {cat:'스킨케어',kws:'비타민C 청귤 미백 수분 세럼',target:'2030',tone:'리얼리뷰'},
+  '마녀공장':   {cat:'스킨케어',kws:'갈락토미세스 마유 클렌저 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '티르티르':   {cat:'스킨케어',kws:'쿠션 마스크 선크림 미러쿠션',target:'2030',tone:'감성라이프'},
+  'tirtir':     {cat:'스킨케어',kws:'쿠션 마스크 선크림 미러쿠션',target:'2030',tone:'감성라이프'},
+  '아임from':   {cat:'스킨케어',kws:'청귤 수분 세럼 진정 스킨케어',target:'2030',tone:'리얼리뷰'},
+  'im from':    {cat:'스킨케어',kws:'청귤 수분 세럼 진정 스킨케어',target:'2030',tone:'리얼리뷰'},
+  'vt코스메틱':  {cat:'스킨케어',kws:'시카 진정 리들샷 콜라겐',target:'성분덕후',tone:'리얼리뷰'},
+  'vt cosmetic':{cat:'스킨케어',kws:'시카 진정 리들샷 콜라겐',target:'성분덕후',tone:'리얼리뷰'},
+  '제이준':     {cat:'스킨케어',kws:'마스크팩 수분 진정 안티에이징',target:'3040',tone:'리얼리뷰'},
+  '바이오힐보':  {cat:'스킨케어',kws:'프로바이오틱스 피부장벽 시카 세럼',target:'성분덕후',tone:'리얼리뷰'},
+  '유이크':     {cat:'스킨케어',kws:'비건 클린뷰티 스킨케어 성분',target:'2030',tone:'친환경'},
+  '라운드랩':   {cat:'스킨케어',kws:'독도토너 자작나무 스킨케어 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  'roundlab':   {cat:'스킨케어',kws:'독도토너 자작나무 스킨케어 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '넘버즈인':   {cat:'스킨케어',kws:'모공케어 피부결 세럼 토너',target:'성분덕후',tone:'리얼리뷰'},
+  '클레어스':   {cat:'스킨케어',kws:'민감피부 진정 비타민C K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  'klairs':     {cat:'스킨케어',kws:'민감피부 진정 비타민C K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '비플레인':   {cat:'스킨케어',kws:'어성초 트러블케어 민감피부 성분',target:'성분덕후',tone:'리얼리뷰'},
+  '조선미녀':   {cat:'스킨케어',kws:'한방 선크림 K뷰티 미소',target:'성분덕후',tone:'리얼리뷰'},
+  '아크웰':     {cat:'스킨케어',kws:'약산성 pH케어 프로폴리스 성분',target:'성분덕후',tone:'리얼리뷰'},
+  '토리든':     {cat:'스킨케어',kws:'히알루론산 수분 세라마이드 피부장벽',target:'성분덕후',tone:'리얼리뷰'},
+  '믹순':       {cat:'스킨케어',kws:'콩에센스 PDRN K뷰티 성분덕후',target:'성분덕후',tone:'리얼리뷰'},
+  '원씽':       {cat:'스킨케어',kws:'오일케어 마카다미아 클린뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '바이오던스':  {cat:'스킨케어',kws:'젤리팩 콜라겐마스크 마스크팩',target:'2030',tone:'감성라이프'},
+  'biodance':   {cat:'스킨케어',kws:'젤리팩 콜라겐마스크 마스크팩',target:'2030',tone:'감성라이프'},
+  '이즈앤트리':  {cat:'스킨케어',kws:'히알루론산 수분케어 세라마이드 선크림',target:'성분덕후',tone:'리얼리뷰'},
+  '파파레서피':  {cat:'스킨케어',kws:'꿀마스크 봄비 보습 수분케어',target:'2030',tone:'리얼리뷰'},
+  '에이프릴스킨':{cat:'스킨케어',kws:'쿠션 스킨케어 K뷰티',target:'2030',tone:'감성라이프'},
+  '메디힐':     {cat:'스킨케어',kws:'마스크팩 NMF 티트리 K뷰티',target:'2030',tone:'리얼리뷰'},
+  '미팩토리':   {cat:'스킨케어',kws:'코팩 모공 블랙헤드 피지케어',target:'2030',tone:'리얼리뷰'},
+  '라벨영':     {cat:'스킨케어',kws:'콜라겐 탄력 안티에이징 앰플',target:'3040',tone:'리얼리뷰'},
+  '쏘내추럴':   {cat:'스킨케어',kws:'선크림 약산성 콜라겐 스킨케어',target:'성분덕후',tone:'리얼리뷰'},
+  '제이엠솔루션':{cat:'스킨케어',kws:'마스크팩 꿀광 화이트닝 앰플',target:'2030',tone:'리얼리뷰'},
+  '바이오리즌':  {cat:'스킨케어',kws:'더마 세럼 스킨케어 성분',target:'성분덕후',tone:'신뢰전문'},
+  '스킨1004':   {cat:'스킨케어',kws:'마다가스카르 센텔라 진정 세럼',target:'성분덕후',tone:'리얼리뷰'},
+  'skin1004':   {cat:'스킨케어',kws:'마다가스카르 센텔라 진정 세럼',target:'성분덕후',tone:'리얼리뷰'},
+  '어뮤즈':     {cat:'스킨케어',kws:'비건 선크림 스킨케어 클린뷰티',target:'2030',tone:'감성라이프'},
+  '힌스':       {cat:'스킨케어',kws:'스킨케어 세럼 비건 K뷰티',target:'2030',tone:'감성라이프'},
+  '듀이트리':   {cat:'스킨케어',kws:'레티놀 콜라겐 탄력 안티에이징',target:'3040',tone:'리얼리뷰'},
+  '아이레시피':  {cat:'스킨케어',kws:'세럼 선크림 데일리스킨케어',target:'성분덕후',tone:'리얼리뷰'},
+  '닥터원더':   {cat:'스킨케어',kws:'클렌저 스킨케어 데일리 진정패드',target:'2030',tone:'리얼리뷰'},
+  'SNP':        {cat:'스킨케어',kws:'마스크팩 동물마스크 캐릭터 K뷰티',target:'2030',tone:'감성라이프'},
+  '더이썸':     {cat:'스킨케어',kws:'비타민 화이트닝 세럼 스킨케어',target:'2030',tone:'리얼리뷰'},
+  '피지오겔':   {cat:'스킨케어',kws:'민감피부 세라마이드 피부장벽 더마',target:'성분덕후',tone:'신뢰전문'},
+  '세타필':     {cat:'스킨케어',kws:'민감피부 더마 클렌저 보습',target:'성분덕후',tone:'신뢰전문'},
+  '닥터자르트':  {cat:'스킨케어',kws:'더마 BB크림 시카페어 스킨케어',target:'성분덕후',tone:'신뢰전문'},
+  '이니스프리':  {cat:'스킨케어',kws:'제주 그린티 수분 자연성분',target:'2030',tone:'감성라이프'},
+  '달팽이크림':  {cat:'스킨케어',kws:'달팽이 재생크림 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+  '닥터젝키':   {cat:'스킨케어',kws:'세럼 앰플 스킨케어 성분',target:'성분덕후',tone:'리얼리뷰'},
+  '에스쁘아':   {cat:'메이크업',kws:'색조 파운데이션 립 아이섀도 쿠션',target:'2030',tone:'감성라이프'},
+  '아이오페':   {cat:'스킨케어',kws:'레티놀 에어쿠션 안티에이징 스킨케어',target:'3040',tone:'신뢰전문'},
+  '헤라':       {cat:'메이크업',kws:'럭셔리 색조 립스틱 파운데이션 쿠션',target:'3040',tone:'감성라이프'},
+  '설화수':     {cat:'스킨케어',kws:'한방 럭셔리 안티에이징 자음생 스킨케어',target:'3050',tone:'신뢰전문'},
+  '후':         {cat:'스킨케어',kws:'한방 궁중 럭셔리 안티에이징',target:'3050',tone:'신뢰전문'},
+  '오휘':       {cat:'스킨케어',kws:'럭셔리 안티에이징 크림 세럼',target:'3050',tone:'신뢰전문'},
+  'the history of whoo':{cat:'스킨케어',kws:'한방 궁중 럭셔리 안티에이징',target:'3050',tone:'신뢰전문'},
+  '클리오':     {cat:'메이크업',kws:'색조 아이라이너 파운데이션 메이크업',target:'2030',tone:'감성라이프'},
+  '페리페라':   {cat:'메이크업',kws:'색조 틴트 립 아이섀도',target:'2030',tone:'감성라이프'},
+  '롬앤':       {cat:'메이크업',kws:'색조 틴트 립 쥬시래스팅',target:'2030',tone:'감성라이프'},
+  'rom&nd':     {cat:'메이크업',kws:'색조 틴트 립 쥬시래스팅',target:'2030',tone:'감성라이프'},
+  '데이지크':   {cat:'메이크업',kws:'메이크업 아이섀도 팔레트 비건',target:'2030',tone:'감성라이프'},
+  '라카':       {cat:'메이크업',kws:'비건메이크업 틴트 컬러 젠더뉴트럴',target:'2030',tone:'감성라이프'},
+  '투쿨포스쿨':  {cat:'메이크업',kws:'아트메이크업 아이섀도 색조 립',target:'2030',tone:'감성라이프'},
+  '엘니아':     {cat:'메이크업',kws:'색조 눈썹 아이라이너 메이크업',target:'2030',tone:'감성라이프'},
+  '키스미':     {cat:'메이크업',kws:'아이라이너 마스카라 색조 K메이크업',target:'2030',tone:'감성라이프'},
+  '더샘':       {cat:'메이크업',kws:'색조 파운데이션 BB 메이크업',target:'2030',tone:'감성라이프'},
+  '미샤':       {cat:'스킨케어',kws:'BB크림 스킨케어 세럼 K뷰티',target:'2030',tone:'리얼리뷰'},
+  '에뛰드':     {cat:'메이크업',kws:'색조 틴트 유쾌한 메이크업',target:'2030',tone:'감성라이프'},
+  '네이처리퍼블릭':{cat:'스킨케어',kws:'알로에 수딩젤 자연성분 스킨케어',target:'2030',tone:'리얼리뷰'},
+  '토니모리':   {cat:'스킨케어',kws:'달팽이 스킨케어 마스크팩',target:'2030',tone:'리얼리뷰'},
+  '스킨푸드':   {cat:'스킨케어',kws:'자연성분 푸드 스킨케어',target:'2030',tone:'리얼리뷰'},
+  '홀리카홀리카':{cat:'스킨케어',kws:'스킨케어 마스크팩 K뷰티',target:'2030',tone:'감성라이프'},
+  '발망':       {cat:'스킨케어',kws:'럭셔리 스킨케어 프리미엄',target:'3050',tone:'신뢰전문'},
+  '쥬비스':     {cat:'스킨케어',kws:'다이어트 슬리밍 셀룰라이트',target:'3040',tone:'신뢰전문'},
+  '아이오페':   {cat:'스킨케어',kws:'레티놀 에어쿠션 안티에이징',target:'3040',tone:'신뢰전문'},
+  '셀리턴':     {cat:'스킨케어',kws:'LED마스크 홈케어기기 안티에이징',target:'3040',tone:'신뢰전문'},
+  '바디럽':     {cat:'스킨케어',kws:'샤워기필터 바디워시 바디케어 욕실',target:'2030',tone:'감성라이프'},
+
+  // ── 더마 ──
+  '셀퓨전씨':   {cat:'의학더마',kws:'더마 선크림 피부과 성분 레이저',target:'성분덕후',tone:'신뢰전문'},
+  '닥터지':     {cat:'의학더마',kws:'트러블케어 진정크림 선크림 더마',target:'성분덕후',tone:'신뢰전문'},
+  '에스트라':   {cat:'의학더마',kws:'더마 피부과 민감피부 진정 세라마이드',target:'성분덕후',tone:'신뢰전문'},
+  '에이솔루션':  {cat:'의학더마',kws:'더마 민감피부 수딩 진정케어',target:'성분덕후',tone:'신뢰전문'},
+  '더마에임':   {cat:'의학더마',kws:'더마 민감피부 진정케어 수딩',target:'성분덕후',tone:'신뢰전문'},
+  '알엑스더마':  {cat:'의학더마',kws:'더마 피부과 수딩 미백 성분',target:'성분덕후',tone:'신뢰전문'},
+  '퓨리토':     {cat:'의학더마',kws:'순한 성분 민감피부 선크림 세럼',target:'성분덕후',tone:'신뢰전문'},
+  '닥터아토지아':{cat:'의학더마',kws:'아토피 민감피부 더마 진정',target:'3040',tone:'신뢰전문'},
+  '아토팜':     {cat:'의학더마',kws:'유아스킨 아토피 민감피부 MLE',target:'3040',tone:'신뢰전문'},
+
+  // ── 헤어케어 ──
+  '닥터포헤어':  {cat:'헤어케어',kws:'탈모 두피케어 샴푸 탈모예방',target:'3040',tone:'리얼리뷰'},
+  '어노브':     {cat:'헤어케어',kws:'손상모 헤어케어 트리트먼트 에센스',target:'2030',tone:'리얼리뷰'},
+  'unove':      {cat:'헤어케어',kws:'손상모 헤어케어 트리트먼트 에센스',target:'2030',tone:'리얼리뷰'},
+  '모다모다':   {cat:'헤어케어',kws:'새치 백모 블랙샴푸 헤어케어',target:'3050',tone:'리얼리뷰'},
+  '비건네이처':  {cat:'헤어케어',kws:'비건샴푸 고체샴푸바 친환경 두피',target:'라이프스타일',tone:'친환경'},
+  '려':         {cat:'헤어케어',kws:'한방 탈모 두피케어 영양샴푸',target:'3040',tone:'신뢰전문'},
+  '케라시스':   {cat:'헤어케어',kws:'헤어케어 샴푸 트리트먼트 광택',target:'2030',tone:'리얼리뷰'},
+  '미쟝센':     {cat:'헤어케어',kws:'헤어에센스 샴푸 트리트먼트 헤어케어',target:'2030',tone:'리얼리뷰'},
+  '팬틴':       {cat:'헤어케어',kws:'헤어케어 샴푸 손상모 영양',target:'2030',tone:'리얼리뷰'},
+  '일라이야':   {cat:'헤어케어',kws:'탈모 두피케어 샴푸 헤어오일',target:'3040',tone:'리얼리뷰'},
+  '리엔':       {cat:'헤어케어',kws:'한방 탈모 두피케어 샴푸',target:'3040',tone:'신뢰전문'},
+  '나리끼리':   {cat:'헤어케어',kws:'헤어케어 모발영양 탈모케어',target:'3040',tone:'리얼리뷰'},
+  '에고인':     {cat:'헤어케어',kws:'두피케어 탈모 샴푸 비건',target:'3040',tone:'신뢰전문'},
+  '파로파':     {cat:'헤어케어',kws:'두피케어 탈모 샴푸 스케일링',target:'3040',tone:'리얼리뷰'},
+
+  // ── 이너뷰티·건강 ──
+  '에스더포뮬러': {cat:'이너뷰티',kws:'콜라겐 글루타치온 이너뷰티 다이어트 영양제',target:'약사의사',tone:'신뢰전문'},
+  '비비랩':     {cat:'이너뷰티',kws:'콜라겐 이너뷰티 글루타치온 먹뷰티',target:'약사의사',tone:'신뢰전문'},
+  'bblab':      {cat:'이너뷰티',kws:'콜라겐 이너뷰티 글루타치온 먹뷰티',target:'약사의사',tone:'신뢰전문'},
+  '뉴트리디데이': {cat:'이너뷰티',kws:'유산균 다이어트 이너뷰티 콜라겐 영양제',target:'약사의사',tone:'신뢰전문'},
+  '비타민하우스': {cat:'이너뷰티',kws:'비타민 글루타치온 영양제 건강기능식품',target:'약사의사',tone:'신뢰전문'},
+  '에이치피오':  {cat:'이너뷰티',kws:'홍삼 이너뷰티 건강기능식품 면역',target:'약사의사',tone:'신뢰전문'},
+  '덴프스':     {cat:'이너뷰티',kws:'홍삼 이너뷰티 건강기능식품',target:'약사의사',tone:'신뢰전문'},
+  '닥터린':     {cat:'이너뷰티',kws:'다이어트 유산균 이너뷰티 슬리밍',target:'약사의사',tone:'신뢰전문'},
+  '히말라야':   {cat:'이너뷰티',kws:'허브 자연건강 건강기능식품',target:'약사의사',tone:'신뢰전문'},
+  '뮬라웨이':   {cat:'이너뷰티',kws:'흡수팬티 여성건강 이너뷰티 운동',target:'2030',tone:'리얼리뷰'},
+  'gnm자연의품격':{cat:'이너뷰티',kws:'건강기능식품 홍삼 유산균 이너뷰티',target:'약사의사',tone:'신뢰전문'},
+  '마이프로틴':  {cat:'이너뷰티',kws:'단백질 프로틴 운동 다이어트 영양',target:'2030',tone:'리얼리뷰'},
+  '솔가':       {cat:'이너뷰티',kws:'비타민 영양제 건강기능식품 항산화',target:'약사의사',tone:'신뢰전문'},
+  'gnc':        {cat:'이너뷰티',kws:'영양제 건강기능식품 프로틴 비타민',target:'약사의사',tone:'신뢰전문'},
+  '뉴트리원':   {cat:'이너뷰티',kws:'유산균 콜라겐 건강기능식품 이너뷰티',target:'약사의사',tone:'신뢰전문'},
+  '뉴트리케어':  {cat:'이너뷰티',kws:'건강기능식품 이너뷰티 비타민',target:'약사의사',tone:'신뢰전문'},
+  '하이뮨':     {cat:'이너뷰티',kws:'프로틴 단백질 면역 건강기능식품',target:'3050',tone:'신뢰전문'},
+  '랩노쉬':     {cat:'이너뷰티',kws:'단백질쉐이크 다이어트 식단 프로틴',target:'2030',tone:'리얼리뷰'},
+  '닥터뮬라':   {cat:'이너뷰티',kws:'영양제 건강기능식품 이너뷰티 다이어트',target:'약사의사',tone:'신뢰전문'},
+  '내추럴플러스': {cat:'이너뷰티',kws:'건강기능식품 자연 이너뷰티 영양제',target:'약사의사',tone:'신뢰전문'},
+  '네슈라':     {cat:'이너뷰티',kws:'건강기능식품 이너뷰티 영양제',target:'약사의사',tone:'신뢰전문'},
+  '다노':       {cat:'이너뷰티',kws:'다이어트 식단 건강 프로그램',target:'2030',tone:'감성라이프'},
+  '푸드나무':   {cat:'이너뷰티',kws:'다이어트 건강식 프로틴 영양',target:'2030',tone:'리얼리뷰'},
+  '비바웨이브':  {cat:'이너뷰티',kws:'건강기능식품 이너뷰티 미용',target:'약사의사',tone:'신뢰전문'},
+  '라보니타':   {cat:'이너뷰티',kws:'이너뷰티 건강기능식품 콜라겐',target:'약사의사',tone:'신뢰전문'},
+  '이퀄라이브':  {cat:'이너뷰티',kws:'건강기능식품 이너뷰티 비건',target:'약사의사',tone:'신뢰전문'},
+  '바나브코리아': {cat:'이너뷰티',kws:'건강기능식품 이너뷰티 영양제',target:'약사의사',tone:'신뢰전문'},
+  '오브리에르':  {cat:'이너뷰티',kws:'이너뷰티 건강기능식품 콜라겐 영양',target:'약사의사',tone:'신뢰전문'},
+
+  // ── 살림·홈케어 ──
+  '생활공작소':  {cat:'살림홈케어',kws:'친환경 세제 살림 미니멀 제로웨이스트',target:'라이프스타일',tone:'공구전문'},
+  '마더메이드':  {cat:'살림홈케어',kws:'천연세제 오가닉 친환경 살림',target:'라이프스타일',tone:'친환경'},
+  '한경희생활과학':{cat:'살림홈케어',kws:'청소 스팀청소기 살림 홈케어',target:'라이프스타일',tone:'공구전문'},
+  '에코버':     {cat:'살림홈케어',kws:'친환경세제 식물성세제 살림 제로웨이스트',target:'라이프스타일',tone:'친환경'},
+  '에스네이처':  {cat:'살림홈케어',kws:'천연세제 자연주의 친환경 살림',target:'라이프스타일',tone:'친환경'},
+  '더블하트':   {cat:'살림홈케어',kws:'세탁 세제 살림 육아 홈케어 친환경',target:'라이프스타일',tone:'공구전문'},
+  '피죤':       {cat:'살림홈케어',kws:'섬유유연제 세탁 살림 홈케어',target:'라이프스타일',tone:'공구전문'},
+  '클린애프터':  {cat:'살림홈케어',kws:'청소 세제 살림 생활용품',target:'라이프스타일',tone:'공구전문'},
+  '아이클린':   {cat:'살림홈케어',kws:'친환경세제 청소 생활용품 살림',target:'라이프스타일',tone:'친환경'},
+
+  // ── 친환경·비건 ──
+  '동구밭':     {cat:'친환경비건',kws:'고체비누 제로웨이스트 친환경 비건',target:'라이프스타일',tone:'친환경'},
+  '멜릭서':     {cat:'친환경비건',kws:'비건뷰티 클린뷰티 비타민C 선크림',target:'라이프스타일',tone:'친환경'},
+  '시드물':     {cat:'친환경비건',kws:'천연성분 클린뷰티 씨드오일 비건',target:'라이프스타일',tone:'친환경'},
+  '아로마티카':  {cat:'친환경비건',kws:'비건 천연 오가닉 아로마 클린뷰티',target:'라이프스타일',tone:'친환경'},
+  '한나패드':   {cat:'친환경비건',kws:'면생리대 천연 오가닉 친환경',target:'2030',tone:'친환경'},
+  '닥터브로너스': {cat:'친환경비건',kws:'비건 유기농 친환경 올인원 페어트레이드',target:'라이프스타일',tone:'친환경'},
+  '해피문데이':  {cat:'친환경비건',kws:'여성건강 오가닉 유기농 생리대 웰니스',target:'2030',tone:'친환경'},
+  '러쉬':       {cat:'친환경비건',kws:'비건 핸드메이드 친환경 동물실험반대',target:'2030',tone:'친환경'},
+
+  // ── 육아 ──
+  '마마스앤파파스':{cat:'육아',kws:'육아 유모차 신생아 임산부 유아용품',target:'3040',tone:'육아맘'},
+  '그린핑거':   {cat:'육아',kws:'유아스킨 아이선크림 유아로션 저자극',target:'3040',tone:'육아맘'},
+  '베베숲':     {cat:'육아',kws:'유아 신생아 아기 저자극 베이비스킨',target:'3040',tone:'육아맘'},
+  '엘르베베':   {cat:'육아',kws:'유아 신생아 육아용품 임산부',target:'3040',tone:'육아맘'},
+  '보령메디앙스': {cat:'육아',kws:'유아 신생아 베이비 저자극 더마',target:'3040',tone:'육아맘'},
+};
+
+// ─── 분석 함수 ───
+const CAT_LABELS = {
+  '스킨케어':'💄 스킨케어/뷰티','의학더마':'🔬 더마/피부과급','메이크업':'🎨 메이크업/색조',
+  '이너뷰티':'💊 이너뷰티/건강','헤어케어':'💆 헤어케어','친환경비건':'🌿 친환경/비건',
+  '살림홈케어':'🧹 살림/홈케어','육아':'👶 육아용품',
+};
+const TARGET_LABELS = {
+  '2030':'20~30대 여성','3040':'30~40대 여성','3050':'40~50대 여성','성분덕후':'성분덕후/피부고민',
+  '약사의사':'전문가 신뢰형','라이프스타일':'라이프스타일','공구전문':'공구 전문채널',
+};
+const TONE_LABELS = {
+  '신뢰전문':'신뢰·전문성','리얼리뷰':'솔직 리얼리뷰','공구전문':'공구·판매 전문',
+  '친환경':'친환경·자연주의','감성라이프':'감성·라이프','육아맘':'육아맘 공감형',
+};
+const CONF_INFO = {
+  search_high: {icon:'🌐', label:'실시간 검색 확인', color:'#2196f3'},
+  search_mid:  {icon:'🔎', label:'검색 추론', color:'#9c27b0'},
+  search_low:  {icon:'🔍', label:'검색 기반 추정', color:'#ff9800'},
+  inferred: {icon:'🔍', label:'이름 추론', color:'#9c27b0'},
+  exact:{color:'#2e7d32',label:'✅ 브랜드 DB 정확 매핑'},
+  alias:{color:'#1565c0',label:'✅ 브랜드 별칭 매핑'},
+  keyword:{color:'#e65100',label:'🔍 이름 키워드 추론'},
+  selected:{color:'#7b1fa2',label:'👤 직접 선택'},
+  unknown:{color:'#9e9e9e',label:'❓ 미인식 — 카테고리 선택 필요'},
+};
+
+// 카테고리 선택 후 매핑할 기본 프로필
+const CAT_PROFILES = {
+  '스킨케어': {cat:'스킨케어',kws:'스킨케어 세럼 앰플 보습 피부',target:'성분덕후',tone:'리얼리뷰'},
+  '의학더마':  {cat:'의학더마',kws:'더마 피부과 민감피부 트러블케어 성분',target:'성분덕후',tone:'신뢰전문'},
+  '메이크업':  {cat:'메이크업',kws:'메이크업 색조 립 틴트 아이섀도',target:'2030',tone:'감성라이프'},
+  '이너뷰티':  {cat:'이너뷰티',kws:'이너뷰티 건강기능식품 콜라겐 영양제',target:'약사의사',tone:'신뢰전문'},
+  '헤어케어':  {cat:'헤어케어',kws:'탈모 두피 헤어케어 샴푸 모발',target:'3040',tone:'리얼리뷰'},
+  '친환경비건': {cat:'친환경비건',kws:'비건 친환경 자연주의 오가닉 클린뷰티',target:'라이프스타일',tone:'친환경'},
+  '살림홈케어': {cat:'살림홈케어',kws:'살림 세제 청소 홈케어 생활용품',target:'라이프스타일',tone:'공구전문'},
+  '육아':      {cat:'육아',kws:'육아 신생아 아기 임산부 육아맘',target:'3040',tone:'육아맘'},
+};
+
+// ─── 브랜드 분석 ───
+let lastAnalysis = null;
+let manualCatSelected = null;
+
+function analyzeBrand(brandName) {
+  const name = brandName.trim();
+  if (!name) return null;
+  const key = name.toLowerCase().replace(/\\s+/g,'').replace(/[()（）·]/g,'');
+
+  // 1. 50개사 BRANDS 정확 매핑
+  const sentMatch = BRANDS.find(b => {
+    const bk = b.brand.toLowerCase().replace(/\\s+/g,'').replace(/[()（）·]/g,'');
+    return bk === key || bk.includes(key) || key.includes(bk);
+  });
+  if (sentMatch) {
+    const p = catFromSentBrand(sentMatch);
+    return {...p, brand:name, confidence:'exact'};
+  }
+
+  // 2. BRAND_DB 정확 매핑
+  if (BRAND_DB[name]) return {...BRAND_DB[name], brand:name, confidence:'exact'};
+  // 키 소문자 매핑
+  const dbKey = Object.keys(BRAND_DB).find(k => k.toLowerCase().replace(/\\s+/g,'') === key);
+  if (dbKey) return {...BRAND_DB[dbKey], brand:name, confidence:'alias'};
+
+  // 3. 부분 매칭 (포함 관계)
+  const partialKey = Object.keys(BRAND_DB).find(k => {
+    const kk = k.toLowerCase().replace(/\\s+/g,'');
+    return kk.length>=2 && (key.includes(kk) || kk.includes(key));
+  });
+  if (partialKey) return {...BRAND_DB[partialKey], brand:name, confidence:'alias'};
+
+  // 4. 이름 키워드 추론
+  const inferred = inferFromKeyword(key);
+  if (inferred) return {...inferred, brand:name, confidence:'keyword'};
+
+  // 5. 브랜드명 추론 실패 → 스킨케어/뷰티 기본 매칭 (K뷰티 플랫폼 특성)
+  return {brand:name, cat:'스킨케어', kws:'스킨케어 뷰티 K뷰티 루틴', target:'성분덕후', tone:'리얼리뷰', confidence:'inferred'};
+}
+
+function catFromSentBrand(b) {
+  const CAT_MAP = {
+    '뷰티·스킨케어':'스킨케어','뷰티·더마':'의학더마','뷰티·메이크업':'메이크업',
+    '건강·이너뷰티':'이너뷰티','헤어케어':'헤어케어','자연주의·친환경':'친환경비건',
+    '생활용품·홈케어':'살림홈케어','육아용품':'육아','바디케어':'스킨케어',
+  };
+  const PROFILE_MAP = {
+    '스킨케어': {kws:b.kw||'스킨케어 세럼 K뷰티',target:'성분덕후',tone:'리얼리뷰'},
+    '의학더마':  {kws:b.kw||'더마 피부과 민감피부',target:'성분덕후',tone:'신뢰전문'},
+    '메이크업':  {kws:b.kw||'메이크업 색조 K뷰티',target:'2030',tone:'감성라이프'},
+    '이너뷰티':  {kws:b.kw||'이너뷰티 콜라겐 영양제',target:'약사의사',tone:'신뢰전문'},
+    '헤어케어':  {kws:b.kw||'헤어케어 두피 샴푸',target:'3040',tone:'리얼리뷰'},
+    '친환경비건': {kws:b.kw||'비건 친환경 클린뷰티',target:'라이프스타일',tone:'친환경'},
+    '살림홈케어': {kws:b.kw||'살림 세제 홈케어',target:'라이프스타일',tone:'공구전문'},
+    '육아':      {kws:b.kw||'육아 신생아 유아스킨',target:'3040',tone:'육아맘'},
+  };
+  const cat = CAT_MAP[b.cat] || '스킨케어';
+  return {cat, ...(PROFILE_MAP[cat]||PROFILE_MAP['스킨케어'])};
+}
+
+function inferFromKeyword(key) {
+  const k = key.toLowerCase();
+  // 헤어케어 — 한글 어근 + 영문
+  if (k.includes('탈모')||k.includes('두피')||k.includes('헤어')||k.includes('샴푸')||k.includes('모발')||k.includes('트리트먼트')||k.includes('린스')||k.includes('scalp')||k.includes('hair')||k.includes('ryo')||k.includes('kerasys')||k.includes('muto')||k.includes('unove'))
+    return {cat:'헤어케어', kws:'탈모 두피케어 헤어케어 샴푸 손상모', target:'3040', tone:'리얼리뷰'};
+  // 살림/홈케어
+  if (k.includes('살림')||k.includes('세제')||k.includes('청소')||k.includes('세탁')||k.includes('주방')||k.includes('홈케어')||k.includes('생활용품')||k.includes('clean')||k.includes('wash')||k.includes('laundry')||k.includes('방향')||k.includes('탈취')||k.includes('제균'))
+    return {cat:'살림홈케어', kws:'살림 세제 청소 홈케어 생활용품', target:'라이프스타일', tone:'공구전문'};
+  // 이너뷰티/건강
+  if (k.includes('콜라겐')||k.includes('유산균')||k.includes('이너뷰티')||k.includes('건강기능')||k.includes('비타민')||k.includes('영양제')||k.includes('홍삼')||k.includes('면역')||k.includes('글루타치온')||k.includes('다이어트')||k.includes('health')||k.includes('vital')||k.includes('nutrition')||k.includes('nutrione'))
+    return {cat:'이너뷰티', kws:'이너뷰티 건강기능식품 콜라겐 영양제 글루타치온', target:'약사의사', tone:'신뢰전문'};
+  // 육아
+  if (k.includes('육아')||k.includes('신생아')||k.includes('임산부')||k.includes('유아')||k.includes('베이비')||k.includes('baby')||k.includes('infant')||k.includes('kids'))
+    return {cat:'육아', kws:'육아 신생아 아기 임산부 육아맘', target:'3040', tone:'육아맘'};
+  // 친환경/비건
+  if (k.includes('비건')||k.includes('친환경')||k.includes('오가닉')||k.includes('유기농')||k.includes('천연')||k.includes('클린뷰티')||k.includes('제로웨이스트')||k.includes('eco')||k.includes('organic')||k.includes('vegan')||k.includes('natural')||k.includes('earth'))
+    return {cat:'친환경비건', kws:'비건 친환경 자연주의 오가닉 클린뷰티', target:'라이프스타일', tone:'친환경'};
+  // 더마/의학
+  if (k.includes('더마')||k.includes('피부과')||k.includes('의학')||k.includes('아토피')||k.includes('트러블케어')||k.includes('derma')||k.includes('clinic')||k.includes('doctor'))
+    return {cat:'의학더마', kws:'더마 피부과 민감피부 트러블케어 진정', target:'성분덕후', tone:'신뢰전문'};
+  // 메이크업
+  if (k.includes('색조')||k.includes('틴트')||k.includes('파운데이션')||k.includes('아이섀도')||k.includes('쿠션')||k.includes('메이크업')||k.includes('makeup')||k.includes('cosmetic')||k.includes('dasique')||k.includes('laka'))
+    return {cat:'메이크업', kws:'메이크업 색조 립 틴트 K뷰티', target:'2030', tone:'감성라이프'};
+  // 스킨케어
+  if (k.includes('선크림')||k.includes('spf')||k.includes('자외선')||k.includes('토너')||k.includes('세럼')||k.includes('앰플')||k.includes('수분크림')||k.includes('보습')||k.includes('미백')||k.includes('skin')||k.includes('serum')||k.includes('toner')||k.includes('essence'))
+    return {cat:'스킨케어', kws:'스킨케어 세럼 토너 수분케어 K뷰티', target:'성분덕후', tone:'리얼리뷰'};
+  // ★ 기본값 — DB 없어도 스킨케어/뷰티로 매칭 (K뷰티 플랫폼)
+  return {cat:'스킨케어', kws:'스킨케어 뷰티 K뷰티 루틴', target:'성분덕후', tone:'리얼리뷰'};
+}
+
+// ─── 분석 UI ───
+function onBrandInput(val) {
+  manualCatSelected = null;
+  const a = analyzeBrand(val);
+  lastAnalysis = a;
+  renderAnalysisCard(a);
+}
+
+// v10: DB에 없는 브랜드 → 실시간 웹 서치로 분류
+async function analyzeWithSearch(brandName) {
+  // 로딩 표시
+  const card = document.getElementById('analysis-card');
+  card.className = 'analysis-card visible ac-unknown';
+  card.innerHTML = '<div style="padding:12px;text-align:center;color:#9c27b0;font-weight:700;">🌐 ' + brandName + ' 실시간 검색 중...</div>';
+
+  try {
+    const resp = await fetch('https://brandnyu-matcher.brandnyou-team.workers.dev/analyze', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({brand: brandName})
+    });
+    const data = await resp.json();
+    if (data.cat) {
+      lastAnalysis = {...data, confidence: data.confidence||'search_mid'};
+      renderAnalysisCard(lastAnalysis);
+      // 자동 매칭 실행
+      runMatch(lastAnalysis);
+    }
+  } catch(e) {
+    // 검색 실패 시 로컬 추론 결과 유지
+    renderAnalysisCard(lastAnalysis);
+  }
+}
+
+function renderAnalysisCard(a) {
+  const card = document.getElementById('analysis-card');
+  if (!a || !a.brand) { card.className='analysis-card'; return; }
+
+  const ci = CONF_INFO[a.confidence] || CONF_INFO.unknown;
+
+  if (a.confidence === 'unknown') {
+    // 카테고리 선택 UI
+    card.className = 'analysis-card visible ac-unknown';
+    card.innerHTML =
+      '<div style="width:100%">' +
+      '<div class="ac-title-warn">⚠️ "'+a.brand+'" — 브랜드 DB에 없습니다. 카테고리를 직접 선택해주세요.</div>' +
+      '<div class="cat-btns" style="margin-top:8px">' +
+      Object.keys(CAT_PROFILES).map(cat =>
+        '<button class="cat-btn" onclick="selectCat(\\''+cat+'\\')">'+(CAT_LABELS[cat]||cat)+'</button>'
+      ).join('') +
+      '</div></div>';
+  } else {
+    // 자동 분석 성공
+    card.className = 'analysis-card visible ac-found';
+    let html = '<span class="ac-title">자동 분석:</span>';
+    html += '<span class="ac-tag tag-cat">'+(CAT_LABELS[a.cat]||a.cat)+'</span>';
+    if (a.target) html += '<span class="ac-tag tag-target">👥 '+(TARGET_LABELS[a.target]||a.target)+'</span>';
+    if (a.tone)   html += '<span class="ac-tag tag-tone">🎭 '+(TONE_LABELS[a.tone]||a.tone)+'</span>';
+    if (a.kws) a.kws.split(/\\s+/).slice(0,4).forEach(k => {
+      if (k.length>=2) html += '<span class="ac-tag tag-kw">#'+k+'</span>';
+    });
+    html += '<span class="conf-label" style="color:'+ci.color+'">'+ci.label+'</span>';
+    card.innerHTML = html;
+  }
+}
+
+function selectCat(cat) {
+  manualCatSelected = cat;
+  const p = CAT_PROFILES[cat];
+  const brandName = document.getElementById('brand-input').value.trim();
+  lastAnalysis = {...p, brand:brandName, confidence:'selected'};
+
+  // 선택 버튼 활성화
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.includes(CAT_LABELS[cat].replace(/^./,'')));
+  });
+
+  // 선택 완료 표시 업데이트
+  const card = document.getElementById('analysis-card');
+  card.className = 'analysis-card visible ac-found';
+  const ci = CONF_INFO['selected'];
+  let html = '<span class="ac-title">선택된 카테고리:</span>';
+  html += '<span class="ac-tag tag-cat">'+(CAT_LABELS[cat]||cat)+'</span>';
+  html += '<span class="ac-tag tag-target">👥 '+(TARGET_LABELS[p.target]||p.target)+'</span>';
+  html += '<span class="ac-tag tag-tone">🎭 '+(TONE_LABELS[p.tone]||p.tone)+'</span>';
+  html += '<span class="conf-label" style="color:'+ci.color+'">'+ci.label+'</span>';
+  html += '<button style="margin-left:auto;padding:6px 14px;background:#0f1f4a;color:white;border:none;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;" onclick="runSearch()">▶ 이 카테고리로 매칭 시작</button>';
+  card.innerHTML = html;
+}
+
+// ─── 매칭 점수 ───
+const CAT_KW = {
+  '스킨케어':   ['스킨케어','뷰티','진정','수분','앰플','세럼','크림','토너','선크림','피부','보습','에센스','광채','루틴','클렌저','마스크팩','성분','K뷰티'],
+  '의학더마':   ['더마','피부과','의학','성분','임상','트러블','여드름','민감성','수딩','진정','처방','아토피','세라마이드'],
+  '헤어케어':   ['헤어','모발','두피','탈모','샴푸','트리트먼트','에센스','새치','손상모','두피케어'],
+  '살림홈케어':  ['살림','세제','청소','홈케어','인테리어','주방','생활용품','세탁','캡슐세제','청결'],
+  '이너뷰티':   ['건강','이너뷰티','영양제','콜라겐','유산균','비타민','건강기능식품','약사','면역','웰니스','홍삼','글루타치온','다이어트','단백질'],
+  '친환경비건':  ['친환경','비건','자연','오가닉','유기농','제로웨이스트','클린뷰티','천연','동물실험반대'],
+  '메이크업':   ['색조','메이크업','립','파운데이션','쿠션','아이섀도','틴트','GRWM','컨실러','BB'],
+  '육아':       ['육아','신생아','맘','엄마','어린이','아기','출산','임산부','유아','베이비'],
+  '식품음료':   ['먹방','음식','요리','레시피','카페','커피','치킨','디저트','맛집','홈쿡','식품','베이킹','음료','배달','맛스타그램'],
+  '패션의류':   ['패션','코디','OOTD','옷','스타일','아우터','트렌드','무신사','하울','쇼핑','데일리룩','스트릿'],
+  '스포츠피트니스':['운동','헬스','홈트','다이어트','요가','필라테스','러닝','골프','피트니스','운동복','스포츠'],
+  '전자IT':     ['전자','가전','테크','IT','스마트홈','언박싱','리뷰','디지털','앱','소프트웨어','가젯'],
+  '반려동물':   ['강아지','고양이','반려','펫','펫푸드','동물','반려견','반려묘','펫케어'],
+  '인테리어홈데코':['인테리어','홈데코','가구','집꾸미기','방꾸미기','소품','리빙','홈스타일'],
+  '미디어엔터': ['유튜브','넷플릭스','드라마','영화','OTT','콘텐츠','아이돌','K팝','연예','방송'],
+};
+const TARGET_KW = {
+  '2030':['20~30대','대학생','사회초년','트렌디','젊은'],
+  '3040':['30~40대','맘','육아맘','주부','엄마','살림','30대','40대'],
+  '3050':['30~50대','안티에이징','탄력','주름','40대','50대'],
+  '성분덕후':['성분','성분분석','민감성','피부과','트러블','분석','성분연구'],
+  '약사의사':['약사','의사','피부과','전문','의학','임상','건강기능식품','전문가'],
+  '라이프스타일':['라이프','살림','인테리어','일상','홈','라이프스타일'],
+  '공구전문':['공구','라방','벤더','판매','이력','채널'],
+};
+const TONE_KW = {
+  '신뢰전문':['성분','전문','약사','의사','피부과','임상','신뢰','분석','교육','전문가'],
+  '리얼리뷰':['솔직','리얼','리뷰','후기','신뢰도'],
+  '공구전문':['공구','라방','벤더','판매','이력'],
+  '친환경':['친환경','비건','자연','유기농','오가닉','클린'],
+  '감성라이프':['감성','라이프','일상','코디','여행','무드'],
+  '육아맘':['육아','맘','엄마','신생아','아기','출산'],
+};
+
+function parseF(s){if(!s)return 0;s=String(s).replace(/\\s/g,'');const m=s.match(/[\\d.]+/);if(!m)return 0;const n=parseFloat(m[0]);return s.includes('만')?n*10000:n;}
+function getGrade(s){if(s>=80)return{g:'S',lbl:'최우선',cls:'gs'};if(s>=65)return{g:'A',lbl:'강력추천',cls:'ga'};if(s>=50)return{g:'B',lbl:'추천',cls:'gb'};return{g:'C',lbl:'참고',cls:'gc'};}
+function getAvatar(cat){if(/헤어|탈모/.test(cat))return{e:'💆',c:'av2'};if(/건강|약사|이너|영양|면역/.test(cat))return{e:'💊',c:'av3'};if(/살림|세제|홈케어|인테리어/.test(cat))return{e:'🧹',c:'av4'};if(/육아|맘|신생아/.test(cat))return{e:'👶',c:'av5'};if(/친환경|비건|자연/.test(cat))return{e:'🌿',c:'av10'};if(/색조|메이크업|GRWM/.test(cat))return{e:'🎨',c:'av1'};if(/더마|피부과|의학/.test(cat))return{e:'🔬',c:'av3'};return{e:'💄',c:'av1'};}
+
+function scoreOne(infl, analysis) {
+  const hay=[infl.category||'',infl.note||'',infl.giveaway||'',infl.fit||''].join(' ').toLowerCase();
+  const catKw=CAT_KW[analysis.cat]||[];
+  const userKw=(analysis.kws||'').split(/\\s+/).filter(k=>k.length>=2);
+  const catM=catKw.filter(k=>hay.includes(k.toLowerCase()));
+  const catScore=catM.length>=4?35:catM.length>=2?25:catM.length===1?15:0;
+  if(catScore===0)return null;
+  const kwM=userKw.filter(k=>hay.includes(k.toLowerCase()));
+  const kwScore=kwM.length>0?Math.min(25,kwM.length*9):Math.round(catScore*0.4);
+  let targetScore=0,toneScore=0;
+  if(analysis.target&&TARGET_KW[analysis.target]){const tM=TARGET_KW[analysis.target].filter(k=>hay.includes(k.toLowerCase()));targetScore=Math.min(10,tM.length*4);}
+  if(analysis.tone&&TONE_KW[analysis.tone]){const nM=TONE_KW[analysis.tone].filter(k=>hay.includes(k.toLowerCase()));toneScore=Math.min(10,nM.length*4);}
+  const gw=infl.giveaway||'',nt=infl.note||'';
+  let collabScore=0;
+  if(gw.includes('매우 활발')||nt.includes('최다')||nt.includes('풍부')||gw.includes('다수'))collabScore=15;
+  else if(gw.includes('공구')||nt.includes('공구'))collabScore=8;
+  const f=parseF(infl.followers);
+  const scaleScore=f>=200000?5:f>=100000?4:f>=50000?3:f>=10000?2:1;
+  const total=catScore+kwScore+targetScore+toneScore+collabScore+scaleScore;
+  const reasons=[];
+  if(catM.length>0)reasons.push('카테고리 일치: '+catM.slice(0,3).join(', '));
+  if(kwM.length>0)reasons.push('키워드 일치: '+kwM.slice(0,3).join(', '));
+  if(targetScore+toneScore>0)reasons.push('타겟·분위기 일치');
+  if(collabScore>=15)reasons.push('공구 매우 활발 — 검증된 판매력');
+  else if(collabScore>0)reasons.push('공구 이력 있음');
+  return{score:total,breakdown:{cat:catScore,kw:kwScore,target:targetScore+toneScore,collab:collabScore,scale:scaleScore},reasons,matchedKws:[...new Set([...catM,...kwM])]};
+}
+
+// ─── 검색 실행 ───
+function runSearch() {
+  const val = document.getElementById('brand-input').value.trim();
+  if (!val) { alert('제조사명을 입력하세요.'); return; }
+
+  // 로컬 BRAND_DB 분석
+  const a = analyzeBrand(val);
+  lastAnalysis = a;
+
+  // DB에서 정확히 찾은 경우만 로컬 결과 사용 (exact / alias)
+  if (a && a.cat && (a.confidence === 'exact' || a.confidence === 'alias')) {
+    renderAnalysisCard(a);
+    const results = DB
+      .map(infl => { const r = scoreOne(infl, a); if (!r) return null; return {...infl, ...r}; })
+      .filter(Boolean).sort((x, y) => y.score - x.score).slice(0, 12);
+    renderResults(a, results);
+  } else {
+    // DB에 없거나 추론값이면 → 실시간 웹서치 API 호출
+    analyzeWithSearch(val);
+  }
+}
+
+// ─── 결과 렌더링 ───
+function renderResults(analysis, results) {
+  const area = document.getElementById('result-area');
+  if (!results.length) {area.innerHTML='<div class="empty"><div class="eicon">🔍</div><p>해당 카테고리 인플루언서 DB 확장 중 (매일 +30명 추가).</p></div>';return;}
+  const allKw=(analysis.kws||'').split(/\\s+/).concat(CAT_KW[analysis.cat]||[]).map(k=>k.toLowerCase()).filter(k=>k.length>=2);
+  area.innerHTML=
+    '<div class="result-header"><h2>'+analysis.brand+' — 추천 인플루언서 <span style="color:#e8b84b">'+results.length+'명</span></h2>'+
+    '<span class="result-sub">'+DB.length+'명 실제 계정 DB · 5차원 자동 매칭 · 점수 높은 순</span></div>'+
+    '<div class="legend"><span class="legend-item"><span class="ldot gs">S</span> 최우선(80+)</span><span class="legend-item"><span class="ldot ga">A</span> 강력추천(65~79)</span><span class="legend-item"><span class="ldot gb">B</span> 추천(50~64)</span><span class="legend-item"><span class="ldot gc">C</span> 참고(~49)</span></div>'+
+    '<div class="infl-grid">'+results.map((m,i)=>renderCard(m,i+1,allKw)).join('')+'</div>';
+}
+
+function pct(v,mx){return Math.round(v/mx*100)+'%';}
+function hl(text,kwList){let t=String(text||'');kwList.forEach(k=>{if(k.length<2)return;const re=new RegExp('('+k.replace(/[.*+?^\${}()|[\\]\\\\]/g,'\\\\$&')+')','gi');t=t.replace(re,'<span class="mkw">$1</span>');});return t;}
+
+function renderCard(m,rank,kwList){
+  const av=getAvatar(m.category||'');const g=getGrade(m.score);
+  const igLink=m.link||(m.ig?'https://www.instagram.com/'+m.ig.replace('@',''):'#');
+  const bars=[
+    {lbl:'카테고리',v:m.breakdown.cat,mx:35,cls:'fill-cat'},
+    {lbl:'키워드',v:m.breakdown.kw,mx:25,cls:'fill-kw'},
+    {lbl:'타겟·톤',v:m.breakdown.target,mx:20,cls:'fill-target'},
+    {lbl:'공구이력',v:m.breakdown.collab,mx:15,cls:'fill-collab'},
+    {lbl:'팔로워',v:m.breakdown.scale,mx:5,cls:'fill-scale'},
+  ];
+  return '<div class="card grade-'+g.g.toLowerCase()+'">' +
+    '<div class="rank-dot">'+rank+'</div>'+
+    '<div class="score-ring '+g.cls+'"><div class="snum">'+m.score+'</div><div class="slbl">'+g.lbl+'</div></div>'+
+    '<div class="profile"><div class="avatar '+av.c+'">'+av.e+'</div><div>'+
+    '<div class="pname">'+(m.name||'').split(' (')[0]+'</div>'+
+    '<div class="pig"><a href="'+igLink+'" target="_blank">'+(m.ig||'')+'↗</a></div>'+
+    '<div class="pcat">'+hl((m.category||'').substring(0,40),kwList)+'</div></div></div>'+
+    '<div class="stats">'+
+    '<div class="stat"><div class="slabel">팔로워</div><div class="sval">'+(m.followers||'-')+'</div></div>'+
+    '<div class="stat"><div class="slabel">릴스</div><div class="sval">'+(m.reels||'-')+'</div></div>'+
+    '<div class="stat"><div class="slabel">등급</div><div class="sval">'+(m.grade||'-')+'등급</div></div>'+
+    '<div class="stat"><div class="slabel">점수</div><div class="sval">'+m.score+'</div></div></div>'+
+    '<div class="match-bars">'+bars.map(b=>'<div class="mbar-row"><div class="mbar-label">'+b.lbl+'</div><div class="mbar-track"><div class="mbar-fill '+b.cls+'" style="width:'+pct(b.v,b.mx)+'"></div></div><div class="mbar-pts">'+b.v+'</div></div>').join('')+'</div>'+
+    '<div class="why"><div class="why-title">이 제조사에 적합한 이유</div><div class="why-list">'+
+    m.reasons.slice(0,3).map(r=>'<div class="why-item"><span class="why-check">✓</span>'+hl(r,kwList)+'</div>').join('')+
+    (m.note?'<div class="why-item"><span class="why-check">✓</span>'+hl((m.note||'').substring(0,55),kwList)+'</div>':'')+
+    '</div></div></div>';
+}
+
+// ─── 빠른 선택 ───
+document.getElementById('quick-grid').innerHTML=BRANDS.map(b=>
+  '<button class="qbtn" onclick="quickPick('+b.no+')">'+b.brand+'</button>').join('');
+
+function quickPick(no){
+  const b=BRANDS.find(x=>x.no===no);if(!b)return;
+  document.getElementById('brand-input').value=b.brand;
+  onBrandInput(b.brand);
+  if(lastAnalysis&&lastAnalysis.cat) setTimeout(runSearch,50);
+}
+</script>
+</body>
+</html>
