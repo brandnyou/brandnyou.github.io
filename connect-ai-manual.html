@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect AI 비즈니스 완전 매뉴얼 A-Z</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Malgun Gothic','맑은 고딕',sans-serif; background:#0a0a1a; color:#e0e0e0; line-height:1.7; }
+
+/* 네비게이션 */
+nav {
+  position: fixed; top:0; left:0; width:260px; height:100vh;
+  background:#0d0d24; border-right:1px solid #c9a84c33;
+  overflow-y:auto; z-index:100; padding:20px 0;
+}
+nav .nav-logo { padding:16px 20px 24px; border-bottom:1px solid #c9a84c22; margin-bottom:16px; }
+nav .nav-logo h2 { font-size:14px; color:#c9a84c; letter-spacing:2px; }
+nav .nav-logo p { font-size:11px; color:#666; margin-top:4px; }
+nav a { display:block; padding:8px 20px; font-size:13px; color:#999; text-decoration:none; transition:all 0.2s; border-left:3px solid transparent; }
+nav a:hover, nav a.active { color:#c9a84c; border-left-color:#c9a84c; background:#c9a84c11; }
+nav .nav-section { padding:12px 20px 4px; font-size:10px; color:#555; letter-spacing:2px; text-transform:uppercase; }
+
+/* 메인 */
+main { margin-left:260px; padding:60px 60px 100px; max-width:960px; }
+
+/* 헤더 */
+.hero {
+  background:linear-gradient(135deg,#0d0d2b,#1a1a3e);
+  border:1px solid #c9a84c33; border-radius:16px;
+  padding:60px 50px; margin-bottom:60px; position:relative; overflow:hidden;
+}
+.hero::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,#c9a84c,#f0d080,#c9a84c); }
+.hero .tag { display:inline-block; background:#c9a84c22; border:1px solid #c9a84c; color:#c9a84c; padding:6px 16px; border-radius:20px; font-size:12px; letter-spacing:2px; margin-bottom:20px; }
+.hero h1 { font-size:42px; font-weight:900; color:#fff; line-height:1.2; margin-bottom:16px; }
+.hero h1 span { color:#c9a84c; }
+.hero p { font-size:16px; color:#aaa; max-width:600px; }
+
+/* 섹션 */
+.section { margin-bottom:60px; scroll-margin-top:40px; }
+.section-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid #c9a84c22; }
+.section-num { background:#c9a84c; color:#000; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; flex-shrink:0; }
+.section h2 { font-size:26px; font-weight:800; color:#fff; }
+.section h2 span { color:#c9a84c; }
+
+/* 카드 */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-bottom:20px; }
+.card { background:#ffffff08; border:1px solid #c9a84c22; border-radius:12px; padding:24px; }
+.card .icon { font-size:28px; margin-bottom:12px; }
+.card h3 { font-size:16px; color:#c9a84c; margin-bottom:8px; }
+.card p, .card li { font-size:13px; color:#bbb; line-height:1.7; }
+.card ul { padding-left:16px; }
+.card.highlight { border-color:#c9a84c66; background:#c9a84c11; }
+
+/* 코드 블록 */
+.code-block { background:#000010; border:1px solid #c9a84c33; border-radius:8px; padding:20px 24px; margin:16px 0; font-family:'Courier New',monospace; font-size:13px; color:#90EE90; line-height:1.8; position:relative; }
+.code-block .code-title { font-size:11px; color:#c9a84c; letter-spacing:2px; margin-bottom:10px; font-family:'Malgun Gothic',sans-serif; font-weight:700; }
+
+/* 스텝 */
+.steps { display:flex; flex-direction:column; gap:16px; }
+.step { display:flex; gap:20px; background:#ffffff06; border:1px solid #ffffff11; border-radius:10px; padding:20px; }
+.step-num { background:#c9a84c; color:#000; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; flex-shrink:0; margin-top:2px; }
+.step-content h4 { font-size:15px; color:#fff; margin-bottom:6px; }
+.step-content p { font-size:13px; color:#aaa; }
+.step-content code { background:#c9a84c22; color:#c9a84c; padding:2px 8px; border-radius:4px; font-size:12px; font-family:monospace; }
+
+/* 테이블 */
+table { width:100%; border-collapse:collapse; margin:16px 0; }
+th { background:#c9a84c22; color:#c9a84c; padding:12px 16px; text-align:left; font-size:13px; border:1px solid #c9a84c33; }
+td { padding:11px 16px; font-size:13px; color:#ccc; border:1px solid #ffffff11; }
+tr:nth-child(even) td { background:#ffffff05; }
+
+/* 알림 박스 */
+.alert { padding:16px 20px; border-radius:8px; margin:16px 0; font-size:13px; }
+.alert.info { background:#1a3a4a; border-left:3px solid #4db6e4; color:#7dd0f0; }
+.alert.warn { background:#3a2a0a; border-left:3px solid #c9a84c; color:#e0c070; }
+.alert.success { background:#0a2a1a; border-left:3px solid #4ade80; color:#70d090; }
+.alert strong { font-weight:700; }
+
+/* 비교 */
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.compare-box { background:#ffffff08; border:1px solid #ffffff11; border-radius:10px; padding:20px; }
+.compare-box h3 { font-size:15px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid #ffffff11; }
+.compare-box.yes h3 { color:#4ade80; }
+.compare-box.no h3 { color:#f87171; }
+.compare-box li { font-size:13px; color:#bbb; line-height:1.8; padding-left:4px; list-style:none; }
+.compare-box.yes li::before { content:'✅ '; }
+.compare-box.no li::before { content:'❌ '; }
+
+/* 프롬프트 박스 */
+.prompt-box { background:#000818; border:1px solid #c9a84c44; border-radius:10px; padding:20px 24px; margin:16px 0; }
+.prompt-box .prompt-label { font-size:11px; color:#c9a84c; letter-spacing:2px; margin-bottom:10px; font-weight:700; }
+.prompt-box .prompt-text { font-size:13px; color:#ccc; line-height:1.9; }
+
+/* 뱃지 */
+.badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700; margin-right:4px; }
+.badge.free { background:#0a2a1a; color:#4ade80; border:1px solid #4ade80; }
+.badge.paid { background:#2a1a0a; color:#c9a84c; border:1px solid #c9a84c; }
+.badge.new { background:#1a0a2a; color:#b987f5; border:1px solid #b987f5; }
+
+/* 수익 모델 */
+.revenue-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.revenue-card { background:#ffffff08; border:1px solid #c9a84c33; border-radius:10px; padding:20px; text-align:center; }
+.revenue-card .amount { font-size:28px; font-weight:900; color:#c9a84c; }
+.revenue-card .label { font-size:12px; color:#888; margin-top:4px; }
+
+hr { border:none; border-top:1px solid #c9a84c22; margin:40px 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <h2>CONNECT AI</h2>
+    <p>비즈니스 완전 매뉴얼 A-Z</p>
+  </div>
+  <div class="nav-section">개요</div>
+  <a href="#what">A. Connect AI란?</a>
+  <a href="#philosophy">B. Jay Jung 철학</a>
+  <div class="nav-section">설치 & 설정</div>
+  <a href="#install">C. 설치 방법</a>
+  <a href="#lmstudio">D. LM Studio 연동</a>
+  <a href="#setup">E. 초기 세팅</a>
+  <div class="nav-section">핵심 기능</div>
+  <a href="#features">F. 핵심 기능</a>
+  <a href="#agents">G. AI 에이전트 구조</a>
+  <a href="#prompts">H. 프롬프트 설계</a>
+  <div class="nav-section">비즈니스 활용</div>
+  <a href="#business">I. 비즈니스 모델</a>
+  <a href="#solopreneur">J. 솔로프리너 전략</a>
+  <a href="#automation">K. 업무 자동화</a>
+  <div class="nav-section">실전 운영</div>
+  <a href="#workflow">L. 일일 워크플로우</a>
+  <a href="#tips">M. 실전 팁</a>
+  <a href="#limits">N. 한계 & 보완</a>
+</nav>
+
+<main>
+
+<div class="hero">
+  <div class="tag">CONNECT AI LAB — JAY JUNG (WONSEOK JUNG)</div>
+  <h1>Connect AI<br><span>비즈니스 완전 매뉴얼</span><br>A — Z</h1>
+  <p>GitHub 공식 문서 + YouTube 채널 + 소로프리너 AI 에이전트 레포 기반<br>실제 데이터 100% 반영 | 2026년 5월 최신판</p>
+</div>
+
+<!-- A. Connect AI란? -->
+<div class="section" id="what">
+  <div class="section-header">
+    <div class="section-num">A</div>
+    <h2>Connect AI<span>란?</span></h2>
+  </div>
+  <div class="card-grid">
+    <div class="card highlight">
+      <div class="icon">🤖</div>
+      <h3>공식 정의</h3>
+      <p><strong>Connect AI v2 (P-Reinforce)</strong><br>100% Local, 100% Offline<br>Autonomous Knowledge Engine<br><br>VS Code / Cursor IDE에서 동작하는<br>자율 AI 에이전트 시스템</p>
+    </div>
+    <div class="card">
+      <div class="icon">👨‍💻</div>
+      <h3>만든 사람</h3>
+      <ul>
+        <li>Jay Jung (Wonseok Jung)</li>
+        <li>ConnexionAI CEO</li>
+        <li>YouTube: @CONNECT-AI-LAB</li>
+        <li>구독자 11.2만</li>
+        <li>이메일: jay@connexionai.kr</li>
+        <li>GitHub: wonseokjung</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">💡</div>
+      <h3>핵심 철학</h3>
+      <p>"AI 소비자에서 AI 생산자로"<br><br>누구나 AI를 소비만 할 게 아니라<br>AI를 <strong style="color:#c9a84c">직접 만들고 운영</strong>하는<br>시대가 왔다는 관점</p>
+    </div>
+  </div>
+  <div class="alert info">
+    <strong>핵심 포인트:</strong> Connect AI는 ChatGPT/Claude 같은 유료 구독이 아니라, 내 PC에서 돌아가는 완전 로컬 AI입니다. 한 번 설치하면 월 0원으로 무한 사용 가능.
+  </div>
+</div>
+
+<!-- B. Jay Jung 철학 -->
+<div class="section" id="philosophy">
+  <div class="section-header">
+    <div class="section-num">B</div>
+    <h2>Jay Jung의 <span>핵심 철학</span></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>AI 소비자 → AI 생산자</h4>
+        <p>ChatGPT에 돈 내고 질문만 하는 게 아니라, 내 로컬에서 AI를 직접 운영해 비즈니스에 쓰는 것. 비용 0원, 데이터 외부 유출 없음.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>1인 기업 + AI = 유니콘 가능성</h4>
+        <p>2026년 글로벌 트렌드: AI를 팀원으로 쓰는 솔로프리너(1인 창업자)가 기존 10명 팀 이상의 생산성을 낼 수 있는 시대. Jay Jung의 solopreneur-ai-agents 레포가 이 철학의 실체.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Agent University (A.U) 시스템</h4>
+        <p>단순 채팅 AI가 아니라, 자율적으로 <strong>파일 생성·편집·삭제·명령 실행·Git 자동 동기화</strong>까지 하는 에이전트 시스템. "시키면 알아서 한다"가 핵심.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>P-Reinforce 아키텍처</h4>
+        <p>단순 답변 → 자율 행동(Autonomous Gardener). AI가 스스로 지식을 정리하고, 코드를 쓰고, Git에 올리는 루프를 만드는 구조.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C. 설치 방법 -->
+<div class="section" id="install">
+  <div class="section-header">
+    <div class="section-num">C</div>
+    <h2><span>설치 방법</span> (이미 완료)</h2>
+  </div>
+  <div class="alert success">
+    <strong>✅ 설치 완료 상태:</strong> Connect AI v2.1.31 설치됨 | VS Code 설치됨 | LM Studio 0.4.13 설치됨 | Qwen2.5-1.5B 모델 로드됨 | 서버 Running
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>필수 도구 3가지</h3>
+      <ul>
+        <li><strong style="color:#c9a84c">VS Code</strong> — 편집기 (설치 완료)</li>
+        <li><strong style="color:#c9a84c">LM Studio</strong> — 로컬 AI 서버 (설치 완료)</li>
+        <li><strong style="color:#c9a84c">Connect AI</strong> — VS Code 확장 (설치 완료)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>VSIX 설치 경로</h3>
+      <ul>
+        <li>공식 GitHub: <code style="color:#c9a84c;font-size:11px;">github.com/wonseokjung/connect-ai</code></li>
+        <li>Releases → 최신 .vsix 다운로드</li>
+        <li>현재 버전: v2.89.88 (설치된 버전)</li>
+        <li>또는 VS Code Marketplace 검색</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- D. LM Studio 연동 -->
+<div class="section" id="lmstudio">
+  <div class="section-header">
+    <div class="section-num">D</div>
+    <h2>LM Studio <span>연동 & 모델</span></h2>
+  </div>
+  <table>
+    <tr><th>모델명</th><th>크기</th><th>용도</th><th>RAM 요구량</th></tr>
+    <tr><td>Qwen2.5-1.5B-Instruct <span class="badge free">현재 사용 중</span></td><td>940MB</td><td>일반 업무, 텍스트 생성</td><td>4GB+</td></tr>
+    <tr><td>Qwen2.5-7B-Instruct</td><td>~4.5GB</td><td>더 높은 품질의 답변</td><td>8GB+</td></tr>
+    <tr><td>Gemma3-4B-it</td><td>~2.5GB</td><td>균형잡힌 성능</td><td>8GB+</td></tr>
+    <tr><td>Llama3-8B</td><td>~5GB</td><td>코딩 + 일반 업무</td><td>12GB+</td></tr>
+    <tr><td>gemma-4-E4B <span class="badge new">현재 설치됨</span></td><td>6.3GB</td><td>고품질 (RAM 부족으로 로드 실패)</td><td>16GB+</td></tr>
+  </table>
+  <div class="alert warn">
+    <strong>대표님 PC 상황:</strong> RAM 16GB → Qwen2.5-1.5B (940MB) 현재 정상 작동 중. 더 좋은 답변 원하면 Qwen2.5-7B 추천 (4.5GB, 8GB RAM 이상 필요).
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>LM Studio 매일 시작 루틴</h4>
+        <p>PC 켤 때 → LM Studio 실행 → Developer 탭 → <code>Start Server</code> → 초록불 확인 → VS Code 열기</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>서버 주소 확인</h4>
+        <p>LM Studio Developer 탭에서 <code>http://127.0.0.1:1234</code> 확인. Connect AI가 이 주소로 자동 연결됨.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- E. 초기 세팅 -->
+<div class="section" id="setup">
+  <div class="section-header">
+    <div class="section-num">E</div>
+    <h2>초기 <span>세팅 & 설정</span></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Agent University (A.U) 브레인 팩 설치</h4>
+        <p>VS Code에서 포트 <code>4825</code>로 브레인 팩 접근 가능. <code>~/.connect-ai-brain</code> 폴더에 지식 베이스 저장됨.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>작업 폴더 열기</h4>
+        <p>VS Code → File → Open Folder → 작업할 폴더 선택. Connect AI는 이 폴더 내 파일을 자동으로 읽고 편집함.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>시스템 프롬프트 설정</h4>
+        <p>Connect AI 채팅창 상단 설정에서 System Prompt 입력. 회사 맥락, 역할, 규칙을 여기에 넣으면 매번 자동 적용됨.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Auto-Git Sync 활성화 (선택)</h4>
+        <p>Git 연동 시 파일 변경사항을 자동 commit/push. GitHub 토큰 필요. 협업·버전관리에 유용.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- F. 핵심 기능 -->
+<div class="section" id="features">
+  <div class="section-header">
+    <div class="section-num">F</div>
+    <h2>Connect AI <span>핵심 기능</span></h2>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">📁</div>
+      <h3>파일 자율 관리</h3>
+      <ul>
+        <li>파일 생성 (Create Files)</li>
+        <li>파일 편집 (Edit Files)</li>
+        <li>파일 삭제 (Delete Files)</li>
+        <li>파일 읽기 (Read Files)</li>
+        <li>폴더 탐색 (Browse Directories)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>명령 실행</h3>
+      <ul>
+        <li><code>npm run build</code> 자동 실행</li>
+        <li><code>git push</code> 자동화</li>
+        <li>스크립트 실행</li>
+        <li>패키지 설치</li>
+        <li>서버 시작/종료</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">🔄</div>
+      <h3>Auto-Git Sync</h3>
+      <ul>
+        <li>PC 종료 전 자동 git add</li>
+        <li>자동 commit (변경사항 감지)</li>
+        <li>자동 push to GitHub</li>
+        <li>버전 이력 자동 관리</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Zero-Interaction Styling</h3>
+      <ul>
+        <li>Raw 데이터 → 자동 Markdown 정리</li>
+        <li>10_Wiki / 00_Raw / Skills 폴더 구조</li>
+        <li>지식 베이스 자동 구축</li>
+        <li>P-Reinforce 루프 실행</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">📡</div>
+      <h3>Dynamic Model Detection</h3>
+      <ul>
+        <li>Ollama API 자동 감지</li>
+        <li>LM Studio API 자동 감지</li>
+        <li>모델 목록 UI 자동 업데이트</li>
+        <li>모델 전환 간편</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3>완전 로컬 (보안)</h3>
+      <ul>
+        <li>Zero Cloud API</li>
+        <li>Zero Telemetry</li>
+        <li>인터넷 없어도 동작</li>
+        <li>데이터 외부 유출 없음</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- G. AI 에이전트 구조 -->
+<div class="section" id="agents">
+  <div class="section-header">
+    <div class="section-num">G</div>
+    <h2>AI 에이전트 <span>구조 설계</span></h2>
+  </div>
+  <p style="color:#aaa;margin-bottom:20px;">Jay Jung의 solopreneur-ai-agents 레포 기반 — 1인 기업에서 AI를 팀원처럼 쓰는 구조</p>
+  <div class="card-grid">
+    <div class="card highlight">
+      <div class="icon">🏗️</div>
+      <h3>Kodari (코다리) — 개발 에이전트</h3>
+      <p>"잘됐어, 계속하자, 화이팅!"<br>Full-Stack 개발, 자동화, 시스템 구축 담당.<br>코드 작성, 배포, 오류 수정 자율 실행.</p>
+    </div>
+    <div class="card highlight">
+      <div class="icon">🎨</div>
+      <h3>Youngja (영자) — 디자인 에이전트</h3>
+      <p>"오빠~ 이렇게 하면 어때요~ "UI/UX 디자인, Figma 자동화, 마케팅 자료 생성 담당.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📋</div>
+      <h3>커스텀 에이전트 만들기</h3>
+      <p>.cursorrules 파일에 에이전트 성격·역할 정의 → ChatGPT/Claude System Prompt로도 사용 가능. 브랜드앤유 맞춤 에이전트 설계 가능.</p>
+    </div>
+  </div>
+  <div class="alert info">
+    <strong>브랜드앤유 적용:</strong> 섭외왕(DM 자동화), 발굴기(제조사 이메일), 매칭봇(판별기), 리포터(주간리포트), 아마존봇 — 각각 Connect AI 에이전트로 구현 가능
+  </div>
+</div>
+
+<!-- H. 프롬프트 설계 -->
+<div class="section" id="prompts">
+  <div class="section-header">
+    <div class="section-num">H</div>
+    <h2>비즈니스 <span>프롬프트 설계</span></h2>
+  </div>
+  <p style="color:#aaa;margin-bottom:20px;">Connect AI에서 원하는 결과를 얻는 프롬프트 설계 원칙</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔴 시스템 프롬프트 (항상 먼저)</h3>
+      <p>회사 정보, 역할, 규칙, 금지사항을 정의.<br>매 대화 시작 시 복붙하거나 VS Code settings.json에 고정 설정.</p>
+    </div>
+    <div class="card">
+      <h3>🟡 컨텍스트 주입</h3>
+      <p>관련 파일을 대화창에 드래그 앤 드롭 → Connect AI가 해당 파일 읽고 맥락 이해. 인플루언서 DB, 제조사 리스트 등 파일 직접 넣기.</p>
+    </div>
+    <div class="card">
+      <h3>🟢 구체적 지시</h3>
+      <p>모호한 지시 ❌ → 구체적 결과물 명시 ✅<br>"DM 써줘" → "기프티스트 구강케어 공구 섭외 DM을 @[계정] 육아 인플루언서에게 Pain→CTA 흐름으로 5줄 써줘"</p>
+    </div>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-label">▼ 시스템 프롬프트 황금 템플릿</div>
+    <div class="prompt-text">
+      당신은 [회사명]의 [역할]입니다.<br>
+      [핵심 정보: 사업 구조, 현재 상황, 주요 데이터]<br>
+      [절대 금지 사항 명시]<br>
+      [출력 형식 명시: 길이, 스타일, 포함/제외 요소]<br>
+      이 맥락에서만 답하세요.
+    </div>
+  </div>
+</div>
+
+<!-- I. 비즈니스 모델 -->
+<div class="section" id="business">
+  <div class="section-header">
+    <div class="section-num">I</div>
+    <h2>Connect AI로 <span>할 수 있는 비즈니스</span></h2>
+  </div>
+  <div class="card-grid">
+    <div class="card highlight">
+      <div class="icon">💼</div>
+      <h3>① AI 자동화 에이전시</h3>
+      <p>소상공인·중소기업에 AI 업무 자동화 세팅해주는 서비스. 이메일 자동화, 콘텐츠 생성, 고객 응대 봇 구축. <strong style="color:#c9a84c">월 수익: 100~500만원/고객사</strong></p>
+    </div>
+    <div class="card highlight">
+      <div class="icon">📧</div>
+      <h3>② 이메일/DM 자동화 서비스</h3>
+      <p>특정 업종 대상 이메일 마케팅 자동화. Connect AI로 업종별 맞춤 이메일 대량 생성. <strong style="color:#c9a84c">브랜드앤유 현재 활용 중</strong></p>
+    </div>
+    <div class="card highlight">
+      <div class="icon">📝</div>
+      <h3>③ 콘텐츠 생산 자동화</h3>
+      <p>블로그, SNS 포스팅, 유튜브 스크립트 자동 생성. 월 100편 생성도 가능. 인플루언서 대행사에 납품 가능.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔍</div>
+      <h3>④ 데이터 분석 자동화</h3>
+      <p>CSV·Excel 파일 읽어서 분석 리포트 자동 생성. 주간/월간 리포트 자동화. <strong style="color:#c9a84c">브랜드앤유 weekly_report.js 적용 중</strong></p>
+    </div>
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>⑤ 이커머스 자동화</h3>
+      <p>상품 상세페이지 자동 작성, 리뷰 분석, 경쟁사 모니터링. 아마존 셀러 리스팅 자동화.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>⑥ AI 교육 서비스</h3>
+      <p>Connect AI 세팅 방법, 로컬 AI 구축법 강의. Jay Jung이 실제로 하는 비즈니스 모델. 강의 1개 30~100만원.</p>
+    </div>
+  </div>
+</div>
+
+<!-- J. 솔로프리너 전략 -->
+<div class="section" id="solopreneur">
+  <div class="section-header">
+    <div class="section-num">J</div>
+    <h2>솔로프리너 <span>AI 전략</span></h2>
+  </div>
+  <p style="color:#aaa;margin-bottom:20px;">Jay Jung 철학: "1인 기업 + AI = 10인 팀 이상의 생산성"</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>AI 팀원 역할 분담 설계</h4>
+        <p>사람 직원 대신 AI 에이전트에게 역할 부여. 마케터 AI, 개발자 AI, 분석가 AI, 영업 AI를 각각 Connect AI 프롬프트로 설계.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>반복 작업 100% 자동화</h4>
+        <p>이메일 발송, 리포트 생성, 데이터 정리, SNS 포스팅 초안 — 반복되는 일은 모두 스크립트화 후 AI에게 위임.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>인간은 판단·관계에만 집중</h4>
+        <p>AI가 못하는 것: 실제 계약 판단, 신뢰 관계 구축, 창의적 전략 결정. 이것만 인간이 하고 나머지는 AI에게.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>수익 모델 레버리지</h4>
+        <p>AI로 생산성 10배 → 고객 수 10배 → 수익 10배. 혼자서 월 1,000만원 가능한 구조 설계.</p>
+      </div>
+    </div>
+  </div>
+  <div class="revenue-grid" style="margin-top:24px;">
+    <div class="revenue-card">
+      <div class="amount">10배</div>
+      <div class="label">생산성 향상</div>
+    </div>
+    <div class="revenue-card">
+      <div class="amount">0원</div>
+      <div class="label">AI 도구 비용</div>
+    </div>
+    <div class="revenue-card">
+      <div class="amount">1인</div>
+      <div class="label">= 10인 팀</div>
+    </div>
+  </div>
+</div>
+
+<!-- K. 업무 자동화 -->
+<div class="section" id="automation">
+  <div class="section-header">
+    <div class="section-num">K</div>
+    <h2>업무 <span>자동화 레시피</span></h2>
+  </div>
+  <table>
+    <tr><th>업무</th><th>Connect AI 활용법</th><th>효과</th></tr>
+    <tr><td>이메일 초안</td><td>시스템 프롬프트 + 수신자 정보 입력 → 초안 즉시 생성</td><td>시간 90% 절감</td></tr>
+    <tr><td>SNS 포스팅</td><td>브랜드 톤 학습 후 주제 입력 → 포스팅 자동 생성</td><td>일 10편 생산 가능</td></tr>
+    <tr><td>데이터 분석</td><td>CSV 파일 드래그 → "이 데이터 분석해줘" → 리포트</td><td>엑셀 작업 80% 감소</td></tr>
+    <tr><td>제안서 작성</td><td>클라이언트 정보 입력 → 맞춤 제안서 초안 생성</td><td>초안 5분 완성</td></tr>
+    <tr><td>회의록 정리</td><td>메모 붙여넣기 → 구조화된 회의록으로 변환</td><td>정리 시간 제로</td></tr>
+    <tr><td>코드 작성</td><td>원하는 기능 설명 → 코드 자동 생성·수정</td><td>개발 속도 5배</td></tr>
+    <tr><td>번역</td><td>텍스트 붙여넣기 → 언어 지정 → 즉시 번역</td><td>번역 비용 0원</td></tr>
+    <tr><td>리서치 정리</td><td>키워드 입력 → 알고 있는 지식 기반 정리</td><td>빠른 초안 확보</td></tr>
+  </table>
+</div>
+
+<!-- L. 일일 워크플로우 -->
+<div class="section" id="workflow">
+  <div class="section-header">
+    <div class="section-num">L</div>
+    <h2>일일 <span>워크플로우</span></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">☀️</div>
+      <div class="step-content">
+        <h4>아침 루틴 (5분)</h4>
+        <p>① LM Studio 실행 → Developer → <code>Start Server</code><br>② VS Code 열기 → Connect AI 사이드바 클릭<br>③ 시스템 프롬프트 붙여넣기 → 오늘 업무 시작</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">💼</div>
+      <div class="step-content">
+        <h4>업무 시간 (핵심 루프)</h4>
+        <p>① 해야 할 일 Connect AI에 입력<br>② AI가 초안/분석 생성<br>③ 내가 검토·수정·판단<br>④ 실행 (발송, 업로드, 게시)</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">🌙</div>
+      <div class="step-content">
+        <h4>마무리 루틴 (5분)</h4>
+        <p>① 오늘 한 일 Connect AI에 요약 요청<br>② 내일 우선순위 3가지 생성<br>③ LM Studio 서버 종료</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- M. 실전 팁 -->
+<div class="section" id="tips">
+  <div class="section-header">
+    <div class="section-num">M</div>
+    <h2>실전 <span>팁 & 노하우</span></h2>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>💡 팁 1: 파일 드래그로 컨텍스트 주입</h3>
+      <p>엑셀, 텍스트, JSON 파일을 Connect AI 입력창에 드래그하면 AI가 해당 파일 내용을 읽고 답변. 인플루언서 DB 파일 넣고 "A등급 추려줘" 가능.</p>
+    </div>
+    <div class="card">
+      <h3>💡 팁 2: 역할 페르소나 고정</h3>
+      <p>시스템 프롬프트에 "당신은 면세점 MD 8년 경력 박상권의 AI 직원입니다"처럼 구체적 역할 지정. 답변 품질 크게 향상.</p>
+    </div>
+    <div class="card">
+      <h3>💡 팁 3: 결과물 반복 개선</h3>
+      <p>"더 짧게", "더 친근하게", "2번째 문단 다시 써줘"처럼 이어서 수정 지시. 처음 결과물보다 3~4번 수정한 게 훨씬 좋음.</p>
+    </div>
+    <div class="card">
+      <h3>💡 팁 4: 배치 작업</h3>
+      <p>"인플루언서 10명에게 보낼 DM 10개 한번에 써줘 - 계정명 목록: [목록]" → 한 번에 대량 생성 가능.</p>
+    </div>
+    <div class="card">
+      <h3>💡 팁 5: .cursorrules 활용</h3>
+      <p>프로젝트 폴더에 .cursorrules 파일 생성 → 해당 폴더 열 때마다 자동으로 규칙 적용. 브랜드앤유 폴더에 규칙 고정 가능.</p>
+    </div>
+    <div class="card">
+      <h3>💡 팁 6: 더 강력한 모델로 업그레이드</h3>
+      <p>Qwen2.5-1.5B → Qwen2.5-7B로 바꾸면 답변 품질 크게 향상. LM Studio에서 모델 검색 후 다운로드 (4.5GB). RAM 8GB+ 권장.</p>
+    </div>
+  </div>
+</div>
+
+<!-- N. 한계 & 보완 -->
+<div class="section" id="limits">
+  <div class="section-header">
+    <div class="section-num">N</div>
+    <h2>한계 &amp; <span>보완 전략</span></h2>
+  </div>
+  <div class="compare">
+    <div class="compare-box yes">
+      <h3>✅ Connect AI가 잘하는 것</h3>
+      <ul>
+        <li>DM / 이메일 초안 작성</li>
+        <li>문서 요약 및 정리</li>
+        <li>콘텐츠 아이디어 생성</li>
+        <li>업무 우선순위 정리</li>
+        <li>코드 작성 & 수정</li>
+        <li>데이터 구조화 (파일 기반)</li>
+        <li>번역 & 교정</li>
+        <li>완전 무료 & 보안 우수</li>
+      </ul>
+    </div>
+    <div class="compare-box no">
+      <h3>❌ 한계 (Genspark AI로 보완)</h3>
+      <ul>
+        <li>실시간 인터넷 검색 불가</li>
+        <li>실제 이메일 발송 불가</li>
+        <li>구글 드라이브 연동 불가</li>
+        <li>인스타그램 실시간 검색 불가</li>
+        <li>최신 정보 반영 안됨</li>
+        <li>1.5B 모델은 복잡한 추론 한계</li>
+        <li>한국어 품질이 영어보다 낮을 수 있음</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert success" style="margin-top:24px;">
+    <strong>🎯 최적 조합:</strong> Connect AI (로컬, 무료, 보안) + Genspark AI (인터넷, 실행, 자동화) = 1인 기업의 완전한 AI 팀
+  </div>
+
+  <hr>
+
+  <div style="text-align:center;padding:40px 0;">
+    <div style="font-size:13px;color:#666;margin-bottom:12px;">참고 자료</div>
+    <div style="font-size:14px;color:#888;line-height:2;">
+      GitHub: github.com/wonseokjung/connect-ai &nbsp;|&nbsp;
+      Solopreneur: github.com/wonseokjung/solopreneur-ai-agents<br>
+      YouTube: @CONNECT-AI-LAB &nbsp;|&nbsp;
+      이메일: jay@connexionai.kr
+    </div>
+    <div style="margin-top:24px;font-size:13px;color:#555;">
+      작성: 2026-05-14 | GitHub 공식 문서 + YouTube 채널 분석 기반 | 실제 데이터 100%
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// 스크롤 시 네비게이션 활성화
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
