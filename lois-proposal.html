@@ -9,253 +9,245 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#1a1209;}
 
-/* ── 히어로 ── */
+/* ════ 히어로 ════ */
 .hero{
-  background:linear-gradient(150deg,#1a1209 0%,#2d1f0a 50%,#3d2a0f 100%);
-  display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;
-  position:relative;overflow:hidden;min-height:100vh;
+  background:linear-gradient(150deg,#1a1209 0%,#2d1f0a 60%,#3d2a0f 100%);
+  padding:80px 5% 80px;
+  display:grid;
+  grid-template-columns:55% 45%;
+  align-items:center;
+  gap:40px;
+  min-height:100vh;
 }
-@media(max-width:768px){.hero{grid-template-columns:1fr;}}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 20%,rgba(212,165,80,0.15),transparent 55%),
-             radial-gradient(ellipse at 10% 80%,rgba(255,220,100,0.07),transparent 45%);
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 32px;}
 }
-.hero-left{
-  padding:80px 60px;position:relative;z-index:1;
-  display:flex;flex-direction:column;justify-content:center;
-}
-@media(max-width:768px){.hero-left{padding:60px 32px;}}
+
+/* 히어로 왼쪽 */
+.hero-left{}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(212,165,80,0.15);border:1px solid rgba(212,165,80,0.4);
   color:#f0c96a;font-size:12px;font-weight:700;letter-spacing:3px;
-  padding:8px 20px;border-radius:50px;margin-bottom:32px;width:fit-content;
+  padding:8px 20px;border-radius:50px;margin-bottom:28px;
 }
-.hero-left h1{font-size:clamp(30px,3.5vw,50px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:24px;}
-.hero-left h1 em{font-style:normal;color:#f0c96a;display:block;}
-.hero-left .lead{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px;max-width:420px;}
-
+.hero-left h1{
+  font-size:clamp(32px,4vw,54px);font-weight:900;color:#fff;
+  line-height:1.1;margin-bottom:20px;
+}
+.hero-left h1 em{font-style:normal;color:#f0c96a;}
+.hero-lead{
+  font-size:16px;color:rgba(255,255,255,0.6);line-height:1.8;
+  margin-bottom:32px;
+}
 .target-box{
   background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-  border-radius:16px;padding:20px 24px;margin-bottom:32px;
+  border-radius:14px;padding:18px 22px;margin-bottom:32px;
 }
-.target-box .tb-label{font-size:11px;letter-spacing:2px;color:#f0c96a;font-weight:700;margin-bottom:12px;}
+.target-box .tb-label{
+  font-size:11px;letter-spacing:2px;color:#f0c96a;font-weight:700;margin-bottom:10px;
+}
 .target-tags{display:flex;flex-wrap:wrap;gap:8px;}
 .target-tag{
-  background:rgba(240,201,106,0.15);border:1px solid rgba(240,201,106,0.3);
+  background:rgba(240,201,106,0.12);border:1px solid rgba(240,201,106,0.28);
   color:#f0c96a;font-size:12px;font-weight:600;padding:5px 12px;border-radius:50px;
 }
-
-.hero-cta-btn{
+.hero-btn{
   display:inline-block;background:#f0c96a;color:#1a1209;
-  font-size:16px;font-weight:900;padding:18px 44px;border-radius:50px;
-  text-decoration:none;letter-spacing:1px;transition:transform 0.2s;width:fit-content;
+  font-size:16px;font-weight:900;padding:16px 40px;border-radius:50px;
+  text-decoration:none;
 }
-.hero-cta-btn:hover{transform:translateY(-2px);}
 
-/* ── 히어로 오른쪽: 이미지 + 배지 (정렬 수정) ── */
+/* 히어로 오른쪽 — 단순 block, overflow hidden 없음 */
 .hero-right{
-  position:relative;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:60px 40px 60px 20px;gap:20px;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
 }
-@media(max-width:768px){.hero-right{padding:40px 32px;}}
-.hero-right .product-img-main{
-  width:100%;max-width:420px;border-radius:20px;
-  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);
-  flex-shrink:0;
+.product-img-box{
+  width:100%;max-width:380px;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
-.hero-right .product-img-main img{
-  width:100%;display:block;
-  /* 세로 이미지 — 중앙 집중 크롭 */
-  height:380px;object-fit:cover;object-position:center 40%;
+/* 정사각형 썸네일 이미지 → 있는 그대로 표시 */
+.product-img-box img{
+  width:100%;height:auto;display:block;
 }
-/* 배지 행: 이미지 아래 가로 정렬 */
-.hero-badges-row{
-  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;width:100%;max-width:420px;
+.cert-pills{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  width:100%;max-width:380px;
 }
-.hero-badge-item{
-  background:rgba(26,18,9,0.85);backdrop-filter:blur(12px);
-  border:1px solid rgba(240,201,106,0.35);border-radius:12px;
-  padding:12px 16px;color:#fff;flex:1;min-width:140px;
-  display:flex;align-items:center;gap:10px;
+.cert-pill{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(240,201,106,0.3);
+  color:#f0c96a;font-size:12px;font-weight:700;padding:8px 14px;border-radius:50px;
 }
-.hero-badge-item .hbi-icon{font-size:20px;flex-shrink:0;}
-.hero-badge-item .hbi-text{}
-.hero-badge-item .hbi-title{font-size:12px;font-weight:700;color:#f0c96a;line-height:1.3;}
-.hero-badge-item .hbi-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;}
 
-/* ── "이게 나한테 맞는 제품인가" 섹션 ── */
-.match-section{background:#faf8f4;padding:80px 40px;}
-.match-inner{max-width:960px;margin:0 auto;}
-.sec-tag{font-size:11px;font-weight:700;letter-spacing:3px;color:#b8860b;margin-bottom:12px;}
-.sec-title{font-size:clamp(24px,3.5vw,38px);font-weight:900;line-height:1.2;margin-bottom:12px;}
-.sec-desc{font-size:16px;color:#888;line-height:1.8;margin-bottom:48px;}
-.match-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+/* ════ 공통 섹션 ════ */
+.sec{padding:80px 5%;}
+.sec-inner{max-width:960px;margin:0 auto;}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:3px;color:#b8860b;margin-bottom:10px;}
+.sec-title{font-size:clamp(22px,3vw,36px);font-weight:900;line-height:1.2;margin-bottom:10px;}
+.sec-desc{font-size:15px;color:#888;line-height:1.8;margin-bottom:44px;}
+
+/* ════ 매칭 ════ */
+.sec-match{background:#faf8f4;}
+.match-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
 .match-card{
-  background:#fff;border-radius:20px;padding:28px 24px;
+  background:#fff;border-radius:18px;padding:24px;
   border-left:4px solid #d4a520;
-  transition:transform 0.2s;
 }
-.match-card:hover{transform:translateY(-4px);}
-.match-card .mc-check{font-size:24px;margin-bottom:12px;}
-.match-card h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+.match-card .mc-icon{font-size:22px;margin-bottom:10px;}
+.match-card h3{font-size:15px;font-weight:700;margin-bottom:6px;}
 .match-card p{font-size:13px;color:#888;line-height:1.6;}
 
-/* ── 제품 이미지 쇼케이스 ── */
-.showcase-section{background:#1a1209;padding:80px 40px;}
-.showcase-inner{max-width:960px;margin:0 auto;}
-.showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:24px;overflow:hidden;margin-bottom:48px;}
+/* ════ 제품 쇼케이스 ════ */
+.sec-showcase{background:#1a1209;}
+.sec-showcase .sec-tag{color:#f0c96a;}
+.sec-showcase .sec-title{color:#fff;}
+.showcase-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  border-radius:20px;overflow:hidden;margin-bottom:32px;
+}
 @media(max-width:600px){.showcase-grid{grid-template-columns:1fr;}}
 .showcase-item{position:relative;overflow:hidden;}
-.showcase-item img{width:100%;height:360px;object-fit:cover;display:block;transition:transform 0.4s;}
-.showcase-item:hover img{transform:scale(1.03);}
-.showcase-item .si-overlay{
+.showcase-item img{width:100%;height:320px;object-fit:cover;display:block;}
+.si-overlay{
   position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(0deg,rgba(26,18,9,0.9),transparent);
-  padding:24px 20px 20px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.8));
+  padding:40px 18px 18px;
 }
-.showcase-item .si-badge{
+.si-label{
   display:inline-block;background:#f0c96a;color:#1a1209;
-  font-size:12px;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:8px;
+  font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:6px;
 }
-.showcase-item .si-text{font-size:15px;font-weight:700;color:#fff;}
-
-.cert-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-.cert-pill{
-  background:rgba(255,255,255,0.06);border:1px solid rgba(240,201,106,0.3);
-  color:#f0c96a;font-size:13px;font-weight:700;padding:10px 24px;border-radius:50px;
-  display:flex;align-items:center;gap:8px;
+.si-text{font-size:14px;font-weight:700;color:#fff;}
+.cert-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.cert-pill2{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(240,201,106,0.3);
+  color:#f0c96a;font-size:13px;font-weight:700;padding:10px 22px;border-radius:50px;
 }
 
-/* ── 특장점 ── */
-.features-section{background:#fff;padding:80px 40px;}
-.features-inner{max-width:960px;margin:0 auto;}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;}
-.feat-card{
-  background:#faf8f4;border-radius:20px;padding:28px 20px;text-align:center;
-  transition:all 0.2s;
-}
-.feat-card:hover{background:#fff;box-shadow:0 12px 40px rgba(0,0,0,0.08);transform:translateY(-4px);}
-.feat-card .fc-ico{font-size:40px;margin-bottom:14px;}
-.feat-card h3{font-size:15px;font-weight:700;margin-bottom:8px;}
-.feat-card p{font-size:12px;color:#888;line-height:1.6;}
-.feat-card .fc-tag{
+/* ════ 특장점 ════ */
+.sec-features{background:#fff;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;}
+.feat-card{background:#faf8f4;border-radius:18px;padding:24px 18px;text-align:center;}
+.feat-card .fi{font-size:36px;margin-bottom:12px;}
+.feat-card h3{font-size:14px;font-weight:700;margin-bottom:6px;}
+.feat-card p{font-size:12px;color:#888;line-height:1.5;}
+.feat-tag{
   display:inline-block;background:#fef9ec;border:1px solid #f0c96a;
-  color:#7a5c00;font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-top:12px;
+  color:#7a5c00;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-top:10px;
 }
 
-/* ── 수익 힌트 ── */
-.earn-section{
-  background:linear-gradient(135deg,#2d1f0a,#1a1209);
-  padding:80px 40px;color:#fff;text-align:center;
-}
-.earn-inner{max-width:760px;margin:0 auto;}
-.earn-inner .sec-title{color:#fff;margin-bottom:16px;}
-.earn-inner .sec-desc{color:rgba(255,255,255,0.5);}
-.earn-cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:48px 0;}
+/* ════ 수익 ════ */
+.sec-earn{background:linear-gradient(135deg,#2d1f0a,#1a1209);}
+.sec-earn .sec-tag{color:#f0c96a;}
+.sec-earn .sec-title{color:#fff;}
+.sec-earn .sec-desc{color:rgba(255,255,255,0.45);}
+.earn-cards{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;}
 .earn-card{
   background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-  border-radius:16px;padding:28px 24px;min-width:180px;text-align:center;
+  border-radius:16px;padding:24px 20px;min-width:160px;text-align:center;flex:1;max-width:200px;
 }
-.earn-card.highlight{background:rgba(240,201,106,0.12);border-color:rgba(240,201,106,0.4);}
-.earn-card .ec-ico{font-size:28px;margin-bottom:10px;}
-.earn-card .ec-title{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px;}
-.earn-card .ec-val{font-size:18px;font-weight:700;color:#fff;line-height:1.4;}
-.earn-card.highlight .ec-val{color:#f0c96a;}
+.earn-card.hl{background:rgba(240,201,106,0.1);border-color:rgba(240,201,106,0.4);}
+.earn-card .ei{font-size:26px;margin-bottom:8px;}
+.earn-card .et{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
+.earn-card .ev{font-size:16px;font-weight:700;color:#fff;line-height:1.4;}
+.earn-card.hl .ev{color:#f0c96a;}
 .earn-note{
-  font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;
-  background:rgba(255,255,255,0.04);border-radius:12px;padding:20px 28px;
-  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;padding:20px 24px;
+  font-size:14px;color:rgba(255,255,255,0.6);line-height:1.8;text-align:center;
 }
 .earn-note strong{color:#f0c96a;}
 
-/* ── 후기 ── */
-.reviews-section{background:#faf8f4;padding:80px 40px;}
-.reviews-inner{max-width:960px;margin:0 auto;}
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-.review-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-.review-card .stars{color:#d4a520;font-size:16px;margin-bottom:12px;}
-.review-card p{font-size:14px;color:#444;line-height:1.7;margin-bottom:12px;}
-.review-card .reviewer{font-size:12px;color:#bbb;}
+/* ════ 후기 ════ */
+.sec-reviews{background:#faf8f4;}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.review-card{background:#fff;border-radius:16px;padding:22px;}
+.review-card .stars{color:#d4a520;margin-bottom:10px;font-size:15px;}
+.review-card p{font-size:13px;color:#444;line-height:1.7;margin-bottom:10px;}
+.review-card .rv{font-size:12px;color:#bbb;}
 
-/* ── 진행 구조 ── */
-.flow-section{background:#fff;padding:80px 40px;}
-.flow-inner{max-width:960px;margin:0 auto;}
-.flow-steps{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+/* ════ 진행흐름 ════ */
+.sec-flow{background:#fff;}
+.flow-steps{
+  display:flex;align-items:flex-start;gap:0;
+  flex-wrap:wrap;justify-content:center;margin-bottom:40px;
+}
 .flow-step{
-  background:#faf8f4;border-radius:16px;padding:24px 16px;text-align:center;
-  flex:1;min-width:130px;max-width:160px;
+  flex:1;min-width:110px;max-width:140px;
+  background:#faf8f4;border-radius:14px;padding:20px 12px;text-align:center;
 }
-.flow-step .fs-num{
-  width:32px;height:32px;border-radius:50%;background:#d4a520;color:#fff;
-  font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;
-  margin:0 auto 10px;
+.fs-num{
+  width:28px;height:28px;border-radius:50%;background:#d4a520;color:#fff;
+  font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 8px;
 }
-.flow-step h4{font-size:13px;font-weight:700;margin-bottom:4px;}
-.flow-step p{font-size:11px;color:#888;line-height:1.5;}
-.flow-arrow{font-size:18px;color:#d4a520;padding:0 4px;flex-shrink:0;}
-
-.promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.flow-step h4{font-size:12px;font-weight:700;margin-bottom:4px;}
+.flow-step p{font-size:11px;color:#888;line-height:1.4;}
+.flow-arr{font-size:16px;color:#d4a520;padding:0 2px;align-self:center;flex-shrink:0;}
+.promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
 .promise-item{
-  background:#faf8f4;border-radius:14px;padding:20px;
-  display:flex;align-items:flex-start;gap:12px;
+  background:#faf8f4;border-radius:14px;padding:18px;
+  display:flex;align-items:flex-start;gap:10px;
 }
-.promise-item .pi-ico{font-size:24px;flex-shrink:0;}
-.promise-item h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+.promise-item .pi{font-size:22px;flex-shrink:0;}
+.promise-item h4{font-size:14px;font-weight:700;margin-bottom:3px;}
 .promise-item p{font-size:12px;color:#888;line-height:1.5;}
 
-/* ── 브랜드앤유 ── */
-.bny-section{background:linear-gradient(135deg,#1a1209,#2d1f0a);padding:80px 40px;}
-.bny-inner{max-width:960px;margin:0 auto;color:#fff;}
-.bny-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+/* ════ 브랜드앤유 ════ */
+.sec-bny{background:linear-gradient(135deg,#1a1209,#2d1f0a);}
+.sec-bny .sec-tag{color:#f0c96a;}
+.bny-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
 @media(max-width:640px){.bny-grid{grid-template-columns:1fr;}}
-.bny-left h2{font-size:clamp(24px,3vw,34px);font-weight:900;line-height:1.2;margin-bottom:16px;}
-.bny-left h2 span{color:#f0c96a;}
-.bny-left p{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:28px;}
-.bny-points{list-style:none;}
-.bny-points li{
-  display:flex;align-items:flex-start;gap:10px;padding:10px 0;
+.bny-grid h2{font-size:clamp(22px,2.8vw,32px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:14px;}
+.bny-grid h2 span{color:#f0c96a;}
+.bny-grid p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:24px;}
+.bny-pts{list-style:none;}
+.bny-pts li{
+  display:flex;align-items:flex-start;gap:8px;padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,0.07);
-  font-size:14px;color:rgba(255,255,255,0.75);
+  font-size:13px;color:rgba(255,255,255,0.7);
 }
-.bny-points li strong{color:#f0c96a;display:block;}
-.bny-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.bny-pts li strong{color:#f0c96a;display:block;}
+.bny-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .bny-stat{
   background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
-  border-radius:14px;padding:20px 16px;text-align:center;
+  border-radius:12px;padding:18px 14px;text-align:center;
 }
-.bny-stat .bs-num{font-size:26px;font-weight:900;color:#f0c96a;}
-.bny-stat .bs-lbl{font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;}
+.bny-stat .bn{font-size:22px;font-weight:900;color:#f0c96a;}
+.bny-stat .bl{font-size:11px;color:rgba(255,255,255,0.35);margin-top:3px;}
 
-/* ── CTA ── */
-.cta-section{background:#f0c96a;padding:80px 40px;text-align:center;}
-.cta-section h2{font-size:clamp(28px,4vw,44px);font-weight:900;color:#1a1209;margin-bottom:16px;line-height:1.2;}
-.cta-section p{font-size:17px;color:rgba(26,18,9,0.65);margin-bottom:48px;line-height:1.7;}
-.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+/* ════ CTA ════ */
+.sec-cta{background:#f0c96a;text-align:center;}
+.sec-cta h2{font-size:clamp(26px,4vw,42px);font-weight:900;color:#1a1209;margin-bottom:14px;line-height:1.2;}
+.sec-cta p{font-size:16px;color:rgba(26,18,9,0.6);margin-bottom:40px;line-height:1.7;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
 .cta-btn{
   display:inline-block;background:#1a1209;color:#f0c96a;
-  font-size:17px;font-weight:900;padding:20px 52px;border-radius:50px;
-  text-decoration:none;transition:transform 0.2s;
+  font-size:16px;font-weight:900;padding:18px 44px;border-radius:50px;
+  text-decoration:none;
 }
-.cta-btn:hover{transform:translateY(-2px);}
-.cta-btn.white{background:#fff;color:#1a1209;}
-.contact-row{font-size:14px;color:rgba(26,18,9,0.55);line-height:2;}
+.cta-btn.w{background:#fff;color:#1a1209;}
+.contact-row{font-size:13px;color:rgba(26,18,9,0.5);line-height:2.2;}
 .contact-row a{color:#1a1209;font-weight:700;text-decoration:none;}
 
-footer{background:#111;color:rgba(255,255,255,0.2);padding:24px 40px;text-align:center;font-size:12px;}
+footer{background:#111;color:rgba(255,255,255,0.2);padding:20px;text-align:center;font-size:11px;}
 </style>
 </head>
 <body>
 
-<!-- ══ 히어로 ══ -->
+<!-- ════ 히어로 ════ -->
 <div class="hero">
+
+  <!-- 왼쪽 텍스트 -->
   <div class="hero-left">
     <div class="hero-eyebrow">💌 인플루언서 공구 제안</div>
     <h1>내 팔로워가<br>진짜 필요한<br><em>탈모 솔루션</em></h1>
-    <p class="lead">식약처 인증 + 특허 성분으로 근거 있게,<br>선결제 없이 수익 쉐어 구조로 부담 없이.<br>브랜드앤유가 A-Z 함께합니다.</p>
-
+    <p class="hero-lead">
+      식약처 인증 + 특허 성분으로 근거 있게,<br>
+      선결제 없이 수익 쉐어 구조로 부담 없이.<br>
+      브랜드앤유가 A-Z 함께합니다.
+    </p>
     <div class="target-box">
       <div class="tb-label">이런 팔로워를 가진 분께 딱 맞아요</div>
       <div class="target-tags">
@@ -266,246 +258,187 @@ footer{background:#111;color:rgba(255,255,255,0.2);padding:24px 40px;text-align:
         <span class="target-tag">💆 두피 고민</span>
       </div>
     </div>
-
-    <a href="#cta" class="hero-cta-btn">📩 공구 제안 받아보기</a>
+    <a href="#cta" class="hero-btn">📩 공구 제안 받아보기</a>
   </div>
 
+  <!-- 오른쪽 이미지 — position 없이 순수 flex -->
   <div class="hero-right">
-    <div class="product-img-main">
-      <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/q89/image/vendor_inventory/f8c0/380510f956e853cbc8ffe6067f76dea955cd46cfb394ade9c639fd62f366.jpg" alt="LOIS REPAIR SHAMPOO">
+    <div class="product-img-box">
+      <!-- 정사각형 썸네일 → 잘림 없음 -->
+      <img
+        src="https://thumbnail.coupangcdn.com/thumbnails/remote/300x300ex/image/retail/images/66481485103695-79668efa-5352-4631-a50f-bd4ecd47646e.jpg"
+        alt="LOIS REPAIR SHAMPOO"
+      >
     </div>
-    <div class="hero-badges-row">
-      <div class="hero-badge-item">
-        <div class="hbi-icon">🏛️</div>
-        <div class="hbi-text">
-          <div class="hbi-title">식약처 인증 완료</div>
-          <div class="hbi-sub">탈모 증상 완화 기능성</div>
-        </div>
-      </div>
-      <div class="hero-badge-item">
-        <div class="hbi-icon">🧬</div>
-        <div class="hbi-text">
-          <div class="hbi-title">BotaCair 특허 성분</div>
-          <div class="hbi-sub">특허청 공식 인증 원료</div>
-        </div>
-      </div>
-      <div class="hero-badge-item">
-        <div class="hbi-icon">🌱</div>
-        <div class="hbi-text">
-          <div class="hbi-title">EWG 그린 등급</div>
-          <div class="hbi-sub">저자극 안심 성분</div>
-        </div>
-      </div>
+    <div class="cert-pills">
+      <span class="cert-pill">🏛️ 식약처 인증</span>
+      <span class="cert-pill">🧬 특허 성분</span>
+      <span class="cert-pill">🌱 EWG 그린</span>
     </div>
   </div>
+
 </div>
 
-<!-- ══ 이게 나한테 맞나? ══ -->
-<div class="match-section">
-  <div class="match-inner">
+<!-- ════ 이런 분께 맞아요 ════ -->
+<div class="sec sec-match">
+  <div class="sec-inner">
     <div class="sec-tag">IS THIS FOR ME?</div>
     <h2 class="sec-title">이런 분이라면 딱 맞아요</h2>
     <p class="sec-desc">팔로워 성향이 아래에 해당된다면, 로이스 리페어는 자연스러운 콘텐츠로 이어질 수 있어요.</p>
     <div class="match-grid">
       <div class="match-card">
-        <div class="mc-check">✅</div>
+        <div class="mc-icon">✅</div>
         <h3>헤어케어·뷰티 팔로워</h3>
-        <p>샴푸, 두피 케어, 모발 관리에 관심 있는 팔로워가 많은 계정. 제품 추천 콘텐츠 반응률이 높아요.</p>
+        <p>샴푸, 두피 케어, 모발 관리에 관심 있는 팔로워가 많은 계정. 추천 콘텐츠 반응률이 높아요.</p>
       </div>
       <div class="match-card">
-        <div class="mc-check">✅</div>
+        <div class="mc-icon">✅</div>
         <h3>2030~4050 여성 팔로워</h3>
-        <p>산후 탈모, 스트레스성 탈모를 경험한 연령대. 공감 콘텐츠로 자연스러운 구매 유도 가능.</p>
+        <p>산후 탈모, 스트레스성 탈모 경험 연령대. 공감 콘텐츠로 자연스러운 구매 유도 가능.</p>
       </div>
       <div class="match-card">
-        <div class="mc-check">✅</div>
-        <h3>성분·기능 중시하는 팔로워</h3>
-        <p>식약처 인증, 특허 성분 같은 근거를 중요하게 여기는 팔로워층에게 설득력 있는 제품이에요.</p>
+        <div class="mc-icon">✅</div>
+        <h3>성분·기능 중시 팔로워</h3>
+        <p>식약처 인증, 특허 성분 같은 근거를 중요하게 여기는 팔로워층에게 설득력 있어요.</p>
       </div>
       <div class="match-card">
-        <div class="mc-check">✅</div>
+        <div class="mc-icon">✅</div>
         <h3>육아·살림 팔로워</h3>
-        <p>온 가족이 쓸 수 있는 순한 성분. 아이 있는 가정 팔로워에게 "우리 가족 샴푸"로 어필 가능.</p>
+        <p>온 가족이 쓰는 순한 성분. 아이 있는 가정 팔로워에게 "우리 가족 샴푸"로 어필 가능.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ 실제 제품 이미지 쇼케이스 ══ -->
-<div class="showcase-section">
-  <div class="showcase-inner">
-    <div class="sec-tag" style="color:#f0c96a;">PRODUCT</div>
-    <h2 class="sec-title" style="color:#fff;margin-bottom:48px;">LOIS REPAIR SHAMPOO</h2>
+<!-- ════ 제품 쇼케이스 ════ -->
+<div class="sec sec-showcase">
+  <div class="sec-inner">
+    <div class="sec-tag">PRODUCT</div>
+    <h2 class="sec-title" style="color:#fff;margin-bottom:40px;">LOIS REPAIR SHAMPOO</h2>
     <div class="showcase-grid">
       <div class="showcase-item">
-        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/q89/image/vendor_inventory/f8c0/380510f956e853cbc8ffe6067f76dea955cd46cfb394ade9c639fd62f366.jpg" alt="로이스 리페어 샴푸 공식 이미지">
+        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/q89/image/vendor_inventory/f8c0/380510f956e853cbc8ffe6067f76dea955cd46cfb394ade9c639fd62f366.jpg" alt="로이스 리페어 상세">
         <div class="si-overlay">
-          <div class="si-badge">식약처 인증 완료</div>
+          <div class="si-label">식약처 인증 완료</div>
           <div class="si-text">탈모 증상 완화 기능성 제품</div>
         </div>
       </div>
       <div class="showcase-item">
-        <img src="https://cdn3.wadiz.kr/studio/images/2025/10/29/1fd5c79e-5356-4185-9c8a-0312d2ebd505.jpeg" alt="로이스 리페어 샴푸 브랜드">
+        <img src="https://cdn3.wadiz.kr/studio/images/2025/10/29/1fd5c79e-5356-4185-9c8a-0312d2ebd505.jpeg" alt="로이스 리페어 와디즈">
         <div class="si-overlay">
-          <div class="si-badge">BotaCair 특허 성분</div>
+          <div class="si-label">BotaCair 특허 성분</div>
           <div class="si-text">모발 성장 유전자 활성화</div>
         </div>
       </div>
     </div>
     <div class="cert-row">
-      <div class="cert-pill">🏛️ 특허청 인증 원료</div>
-      <div class="cert-pill">🇰🇷 식약처 기능성 인증</div>
-      <div class="cert-pill">🌱 EWG 저자극 그린</div>
-      <div class="cert-pill">🌿 아르간 오일 함유</div>
+      <div class="cert-pill2">🏛️ 특허청 인증 원료</div>
+      <div class="cert-pill2">🇰🇷 식약처 기능성 인증</div>
+      <div class="cert-pill2">🌱 EWG 저자극 그린</div>
+      <div class="cert-pill2">🌿 아르간 오일</div>
     </div>
   </div>
 </div>
 
-<!-- ══ 특장점 ══ -->
-<div class="features-section">
-  <div class="features-inner">
+<!-- ════ 특장점 ════ -->
+<div class="sec sec-features">
+  <div class="sec-inner">
     <div class="sec-tag">WHY LOIS</div>
     <h2 class="sec-title">흔한 샴푸와 다른 점</h2>
     <p class="sec-desc">콘텐츠에서 자신 있게 말할 수 있는 근거가 있어야 해요.</p>
-    <div class="features-grid">
-      <div class="feat-card">
-        <div class="fc-ico">🧬</div>
-        <h3>BotaCair 특허 성분</h3>
-        <p>모낭 형성 + 발모세포 활성화. 특허청 공식 인증 원료.</p>
-        <div class="fc-tag">특허 원료</div>
-      </div>
-      <div class="feat-card">
-        <div class="fc-ico">🔬</div>
-        <h3>식약처 인증</h3>
-        <p>탈모 증상 완화 기능성. 임상시험 완료. 근거 있는 효능.</p>
-        <div class="fc-tag">식약처 인증</div>
-      </div>
-      <div class="feat-card">
-        <div class="fc-ico">🌿</div>
-        <h3>아르간 오일</h3>
-        <p>모로코산 아르간 오일. 세정 후 찰랑·윤기 동시 케어.</p>
-        <div class="fc-tag">자연 성분</div>
-      </div>
-      <div class="feat-card">
-        <div class="fc-ico">💧</div>
-        <h3>EWG 그린 등급</h3>
-        <p>민감 두피 OK. 두피 진정 + 유수분 밸런스.</p>
-        <div class="fc-tag">저자극</div>
-      </div>
-      <div class="feat-card">
-        <div class="fc-ico">✨</div>
-        <h3>찰랑 + 볼륨</h3>
-        <p>탈모 케어하면서 동시에 머릿결 개선. 뿌리 볼륨감.</p>
-        <div class="fc-tag">즉각 효과</div>
-      </div>
-      <div class="feat-card">
-        <div class="fc-ico">👨‍👩‍👧</div>
-        <h3>온 가족 OK</h3>
-        <p>순한 성분으로 아이부터 부모까지. 높은 객단가 유리.</p>
-        <div class="fc-tag">전 연령</div>
-      </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fi">🧬</div><h3>BotaCair 특허 성분</h3><p>모낭 형성 + 발모세포 활성화. 특허청 공식 인증 원료.</p><div class="feat-tag">특허 원료</div></div>
+      <div class="feat-card"><div class="fi">🔬</div><h3>식약처 인증</h3><p>탈모 증상 완화 기능성. 임상시험 완료. 근거 있는 효능.</p><div class="feat-tag">식약처 인증</div></div>
+      <div class="feat-card"><div class="fi">🌿</div><h3>아르간 오일</h3><p>세정 후 찰랑·윤기 동시 케어.</p><div class="feat-tag">자연 성분</div></div>
+      <div class="feat-card"><div class="fi">💧</div><h3>EWG 그린 등급</h3><p>민감 두피 OK. 두피 진정 + 유수분 밸런스.</p><div class="feat-tag">저자극</div></div>
+      <div class="feat-card"><div class="fi">✨</div><h3>찰랑 + 볼륨</h3><p>탈모 케어하면서 동시에 머릿결 개선. 뿌리 볼륨감.</p><div class="feat-tag">즉각 효과</div></div>
+      <div class="feat-card"><div class="fi">👨‍👩‍👧</div><h3>온 가족 OK</h3><p>순한 성분으로 아이부터 부모까지.</p><div class="feat-tag">전 연령</div></div>
     </div>
   </div>
 </div>
 
-<!-- ══ 수익 힌트 ══ -->
-<div class="earn-section">
-  <div class="earn-inner">
-    <div class="sec-tag" style="color:#f0c96a;">EARNING</div>
+<!-- ════ 수익 구조 ════ -->
+<div class="sec sec-earn">
+  <div class="sec-inner" style="text-align:center;">
+    <div class="sec-tag">EARNING</div>
     <h2 class="sec-title">수익 구조, 이렇게 됩니다</h2>
-    <p class="sec-desc">구체적인 조건은 팔로워 규모·릴스 조회수 기준으로 1:1 협의해요.<br>먼저 매칭 여부를 확인하고, 조건은 그 다음에 투명하게 정해드립니다.</p>
+    <p class="sec-desc">구체적 조건은 팔로워 규모·릴스 조회수 기준으로 1:1 협의해요.<br>매칭 여부 먼저 확인하고, 조건은 그 다음에 투명하게.</p>
     <div class="earn-cards">
-      <div class="earn-card">
-        <div class="ec-ico">📦</div>
-        <div class="ec-title">샘플 제공</div>
-        <div class="ec-val">무상<br><small style="font-weight:400;opacity:0.6;font-size:13px">선결제 없음</small></div>
-      </div>
-      <div class="earn-card highlight">
-        <div class="ec-ico">💰</div>
-        <div class="ec-title">인플루언서 수익</div>
-        <div class="ec-val">판매 실적 기반<br><small style="font-weight:400;opacity:0.8;font-size:13px">조건은 DM으로 협의</small></div>
-      </div>
-      <div class="earn-card">
-        <div class="ec-ico">🚚</div>
-        <div class="ec-title">배송·CS</div>
-        <div class="ec-val">제조사 전담<br><small style="font-weight:400;opacity:0.6;font-size:13px">인플루언서 부담 없음</small></div>
-      </div>
-      <div class="earn-card">
-        <div class="ec-ico">📅</div>
-        <div class="ec-title">정산</div>
-        <div class="ec-val">마감 후 2주<br><small style="font-weight:400;opacity:0.6;font-size:13px">계약서 기준 명확히</small></div>
-      </div>
+      <div class="earn-card"><div class="ei">📦</div><div class="et">샘플 제공</div><div class="ev">무상<br><small style="opacity:.6;font-weight:400;font-size:12px">선결제 없음</small></div></div>
+      <div class="earn-card hl"><div class="ei">💰</div><div class="et">인플루언서 수익</div><div class="ev">판매 실적 기반<br><small style="opacity:.7;font-weight:400;font-size:12px">조건은 DM 협의</small></div></div>
+      <div class="earn-card"><div class="ei">🚚</div><div class="et">배송·CS</div><div class="ev">제조사 전담<br><small style="opacity:.6;font-weight:400;font-size:12px">인플루언서 부담 없음</small></div></div>
+      <div class="earn-card"><div class="ei">📅</div><div class="et">정산</div><div class="ev">마감 후 2주<br><small style="opacity:.6;font-weight:400;font-size:12px">계약서 기준</small></div></div>
     </div>
     <div class="earn-note">
-      💡 <strong>브랜드앤유 약속</strong> — 조건 협의 전, 팔로워 성향 분석 먼저 솔직하게 말씀드려요.<br>
-      "맞지 않는다" 싶으면 진행 권유하지 않습니다. 억지로 연결하는 공구는 서로에게 손해니까요.
+      💡 <strong>브랜드앤유 약속</strong> — 팔로워 성향 분석 먼저, 솔직하게.<br>
+      "맞지 않는다" 싶으면 진행 권유하지 않습니다.
     </div>
   </div>
 </div>
 
-<!-- ══ 실사용 후기 ══ -->
-<div class="reviews-section">
-  <div class="reviews-inner">
+<!-- ════ 실사용 후기 ════ -->
+<div class="sec sec-reviews">
+  <div class="sec-inner">
     <div class="sec-tag">REAL REVIEWS</div>
     <h2 class="sec-title">실사용 후기가 콘텐츠가 됩니다</h2>
-    <p class="sec-desc" style="margin-bottom:40px;">직접 써보고 좋았던 경험 — 그게 가장 강한 콘텐츠예요.</p>
-    <div class="reviews-grid">
+    <p class="sec-desc" style="margin-bottom:36px;">직접 써보고 좋았던 경험 — 그게 가장 강한 콘텐츠예요.</p>
+    <div class="review-grid">
       <div class="review-card">
         <div class="stars">★★★★★</div>
-        <p>"샴푸만 했는데도 엉킴 없이 찰랑거리고 윤기가 돌아요. 뿌리 볼륨이 살아나서 머리숱이 훨씬 풍성해 보이는 효과가 있어요."</p>
-        <div class="reviewer">쿠팡 실구매자</div>
+        <p>"샴푸만 했는데도 엉킴 없이 찰랑거리고 윤기가 돌아요. 뿌리 볼륨이 살아나서 머리숱이 풍성해 보이는 효과가 있어요."</p>
+        <div class="rv">쿠팡 실구매자</div>
       </div>
       <div class="review-card">
         <div class="stars">★★★★★</div>
-        <p>"둘째 출산 후 바람만 불어도 머리가 빠졌는데, 로이스 쓰고 나서 눈에 띄게 달라졌어요. 더는 샴푸 유목민 안 해도 될 것 같아요."</p>
-        <div class="reviewer">인스타그램 체험 후기</div>
+        <p>"둘째 출산 후 바람만 불어도 머리가 빠졌는데, 로이스 쓰고 나서 눈에 띄게 달라졌어요."</p>
+        <div class="rv">인스타그램 체험 후기</div>
       </div>
       <div class="review-card">
         <div class="stars">★★★★★</div>
-        <p>"해외 유명 브랜드도 써봤지만 너무 비쌌어요. 로이스는 좋은 성분에 합리적인 가격이라 만족해요. 두피 진정 효과도 확실히 느껴져요."</p>
-        <div class="reviewer">오마이컴퍼니 펀딩 참여자</div>
+        <p>"해외 유명 브랜드도 써봤지만 너무 비쌌어요. 로이스는 좋은 성분에 합리적인 가격이라 만족해요."</p>
+        <div class="rv">오마이컴퍼니 펀딩 참여자</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ 진행 구조 ══ -->
-<div class="flow-section">
-  <div class="flow-inner">
+<!-- ════ 진행 흐름 ════ -->
+<div class="sec sec-flow">
+  <div class="sec-inner">
     <div class="sec-tag">HOW IT WORKS</div>
     <h2 class="sec-title">진행 순서, 복잡하지 않아요</h2>
-    <p class="sec-desc" style="margin-bottom:40px;">콘텐츠 제작에만 집중하면 됩니다. 나머지는 브랜드앤유가 처리해요.</p>
+    <p class="sec-desc" style="margin-bottom:36px;">콘텐츠 제작에만 집중하면 됩니다. 나머지는 브랜드앤유가 처리해요.</p>
     <div class="flow-steps">
-      <div class="flow-step"><div class="fs-num">1</div><h4>DM 문의</h4><p>관심 있으면<br>DM 한 줄이면 돼요</p></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="fs-num">2</div><h4>팔로워 분석</h4><p>매칭 여부<br>솔직하게 확인</p></div>
-      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="fs-num">1</div><h4>DM 문의</h4><p>관심 있으면<br>DM 한 줄</p></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-step"><div class="fs-num">2</div><h4>팔로워 분석</h4><p>매칭 여부<br>솔직 확인</p></div>
+      <div class="flow-arr">→</div>
       <div class="flow-step"><div class="fs-num">3</div><h4>조건 협의</h4><p>수익 구조<br>1:1 협의</p></div>
-      <div class="flow-arrow">→</div>
+      <div class="flow-arr">→</div>
       <div class="flow-step"><div class="fs-num">4</div><h4>샘플 발송</h4><p>무상 제공<br>직접 체험</p></div>
-      <div class="flow-arrow">→</div>
+      <div class="flow-arr">→</div>
       <div class="flow-step"><div class="fs-num">5</div><h4>콘텐츠·공구</h4><p>릴스·피드<br>공구 오픈</p></div>
-      <div class="flow-arrow">→</div>
+      <div class="flow-arr">→</div>
       <div class="flow-step"><div class="fs-num">6</div><h4>정산</h4><p>마감 후<br>2주 이내</p></div>
     </div>
     <div class="promise-grid">
-      <div class="promise-item"><div class="pi-ico">📋</div><div><h4>계약서 발행</h4><p>브랜드앤유 표준 계약서로 조건 명확히 보장</p></div></div>
-      <div class="promise-item"><div class="pi-ico">🏷️</div><div><h4>인스타 최저가 보장</h4><p>팔로워에게 가장 좋은 가격 제공 가능</p></div></div>
-      <div class="promise-item"><div class="pi-ico">🚚</div><div><h4>배송·CS 부담 없음</h4><p>주문 처리·소비자 CS는 제조사가 전담</p></div></div>
-      <div class="promise-item"><div class="pi-ico">💬</div><div><h4>솔직한 소통</h4><p>안 맞으면 진행 권유 안 함. 맞으면 최선 다함</p></div></div>
+      <div class="promise-item"><div class="pi">📋</div><div><h4>계약서 발행</h4><p>브랜드앤유 표준 계약서로 조건 명확히</p></div></div>
+      <div class="promise-item"><div class="pi">🏷️</div><div><h4>인스타 최저가 보장</h4><p>팔로워에게 가장 좋은 가격 제공 가능</p></div></div>
+      <div class="promise-item"><div class="pi">🚚</div><div><h4>배송·CS 부담 없음</h4><p>소비자 CS는 제조사가 전담</p></div></div>
+      <div class="promise-item"><div class="pi">💬</div><div><h4>솔직한 소통</h4><p>안 맞으면 진행 권유 안 함</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- ══ 브랜드앤유 ══ -->
-<div class="bny-section">
-  <div class="bny-inner">
+<!-- ════ 브랜드앤유 ════ -->
+<div class="sec sec-bny">
+  <div class="sec-inner">
     <div class="bny-grid">
-      <div class="bny-left">
-        <div class="sec-tag" style="color:#f0c96a;">BRAND&YOU</div>
+      <div>
+        <div class="sec-tag">BRAND&YOU</div>
         <h2>면세점 MD 8년이<br><span>직접 매칭</span>하는<br>공구 에이전시</h2>
         <p>인플루언서와 제조사 사이에서 최적 매칭과 공구 운영 A-Z를 전담합니다.</p>
-        <ul class="bny-points">
+        <ul class="bny-pts">
           <li>✅<div><strong>팔로워 성향 분석 후 매칭</strong>맞지 않으면 솔직히 말씀드려요</div></li>
           <li>✅<div><strong>일정·정산 책임 관리</strong>놓치는 것 없이 직접 챙깁니다</div></li>
           <li>✅<div><strong>선결제 광고비 없음</strong>인플루언서가 먼저 돈 쓸 일 없어요</div></li>
@@ -513,29 +446,31 @@ footer{background:#111;color:rgba(255,255,255,0.2);padding:24px 40px;text-align:
         </ul>
       </div>
       <div class="bny-stats">
-        <div class="bny-stat"><div class="bs-num">83개사</div><div class="bs-lbl">파트너 제조사</div></div>
-        <div class="bny-stat"><div class="bs-num">MD 8년</div><div class="bs-lbl">면세점 경력</div></div>
-        <div class="bny-stat"><div class="bs-num">공구 운영</div><div class="bs-lbl">현재 직접 진행 중</div></div>
-        <div class="bny-stat"><div class="bs-num">계약서</div><div class="bs-lbl">조건 투명 보장</div></div>
+        <div class="bny-stat"><div class="bn">83개사</div><div class="bl">파트너 제조사</div></div>
+        <div class="bny-stat"><div class="bn">MD 8년</div><div class="bl">면세점 경력</div></div>
+        <div class="bny-stat"><div class="bn">공구 운영</div><div class="bl">현재 직접 진행 중</div></div>
+        <div class="bny-stat"><div class="bn">계약서</div><div class="bl">조건 투명 보장</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ CTA ══ -->
-<div class="cta-section" id="cta">
-  <h2>관심 있으시면<br>DM 한 줄만 보내주세요</h2>
-  <p>팔로워 분석 → 매칭 여부 솔직하게 → 조건 협의 순서로 진행해요.<br>부담 없이 "궁금해요" 한 줄이면 충분합니다 😊</p>
-  <div class="cta-btns">
-    <a href="https://www.instagram.com/brandnyou.team" class="cta-btn">📩 인스타 DM 보내기</a>
-    <a href="https://open.kakao.com/o/sUJmM8di" class="cta-btn white">💬 카카오톡 문의</a>
-  </div>
-  <div class="contact-row">
-    브랜드앤유 박상권 대표 · 📞 <a href="tel:01083351854">010-8335-1854</a><br>
-    @<a href="https://www.instagram.com/brandnyou.team">brandnyou.team</a> · <a href="https://brandnyu.com">brandnyu.com</a>
+<!-- ════ CTA ════ -->
+<div class="sec sec-cta" id="cta">
+  <div class="sec-inner">
+    <h2>관심 있으시면<br>DM 한 줄만 보내주세요</h2>
+    <p>팔로워 분석 → 매칭 여부 솔직하게 → 조건 협의 순서로 진행해요.<br>"궁금해요" 한 줄이면 충분합니다 😊</p>
+    <div class="cta-btns">
+      <a href="https://www.instagram.com/brandnyou.team" class="cta-btn">📩 인스타 DM 보내기</a>
+      <a href="https://open.kakao.com/o/sUJmM8di" class="cta-btn w">💬 카카오톡 문의</a>
+    </div>
+    <div class="contact-row">
+      브랜드앤유 박상권 대표 · 📞 <a href="tel:01083351854">010-8335-1854</a><br>
+      @<a href="https://www.instagram.com/brandnyou.team">brandnyou.team</a> · <a href="https://brandnyu.com">brandnyu.com</a>
+    </div>
   </div>
 </div>
 
-<footer>© 2026 Brand&You (브랜드앤유) · 인플루언서 공구 제안 목적 제작 · 제조사: 미스도스(MTHOS) · 제품: 로이스 리페어 탈모샴푸</footer>
+<footer>© 2026 Brand&You (브랜드앤유) · 인플루언서 공구 제안 목적 · 제조사: 미스도스(MTHOS) · 제품: 로이스 리페어 탈모샴푸</footer>
 </body>
 </html>
