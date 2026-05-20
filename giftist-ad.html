@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#111; display:flex; flex-direction:column; gap:20px; padding:20px; font-family:'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
+
+  /* ── 소재 A: 긴급 마감 ── */
+  .ad-a {
+    width:1080px; height:1080px;
+    background:linear-gradient(145deg, #0a2010 0%, #0d3018 40%, #051508 100%);
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+  }
+  .ad-a .bg-circle {
+    position:absolute; border-radius:50%;
+    background:radial-gradient(circle, rgba(100,200,80,0.12), transparent 70%);
+  }
+  .ad-a .bc1 { width:900px; height:900px; top:-200px; right:-200px; }
+  .ad-a .bc2 { width:600px; height:600px; bottom:-150px; left:-150px; }
+
+  .badge-red {
+    background:#e53935; color:#fff; font-size:36px; font-weight:900;
+    padding:14px 40px; border-radius:50px; margin-bottom:40px;
+    letter-spacing:2px; animation:pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+
+  .ad-a h1 {
+    font-size:88px; font-weight:900; color:#fff; line-height:1.1;
+    margin-bottom:20px; text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  }
+  .ad-a h1 span { color:#7ed957; }
+
+  .ad-a .sub {
+    font-size:38px; color:rgba(255,255,255,0.7); margin-bottom:48px; line-height:1.4;
+  }
+
+  .sold-box {
+    background:rgba(255,255,255,0.08); border:2px solid rgba(126,217,87,0.4);
+    border-radius:20px; padding:24px 56px; margin-bottom:48px;
+  }
+  .sold-box .num { font-size:72px; font-weight:900; color:#7ed957; }
+  .sold-box .lbl { font-size:28px; color:rgba(255,255,255,0.6); margin-top:4px; }
+
+  .price-tag {
+    background:linear-gradient(135deg,#7ed957,#4caf50);
+    border-radius:16px; padding:20px 48px; margin-bottom:20px;
+  }
+  .price-tag .p1 { font-size:28px; color:rgba(0,0,0,0.6); text-decoration:line-through; }
+  .price-tag .p2 { font-size:52px; font-weight:900; color:#000; }
+
+  .date-badge {
+    font-size:30px; color:rgba(255,255,255,0.5);
+    border:1px solid rgba(255,255,255,0.15); border-radius:50px;
+    padding:10px 36px;
+  }
+
+  .watermark {
+    position:absolute; bottom:32px; right:40px;
+    font-size:24px; color:rgba(255,255,255,0.2); font-weight:700; letter-spacing:2px;
+  }
+
+  /* ── 소재 B: 제품 강조 ── */
+  .ad-b {
+    width:1080px; height:1080px;
+    background:#fff;
+    position:relative; overflow:hidden;
+    display:flex;
+  }
+  .ad-b .left {
+    width:520px; height:100%;
+    background:linear-gradient(180deg,#e8f5e9,#c8e6c9);
+    display:flex; flex-direction:column; justify-content:center;
+    align-items:center; padding:60px 40px; text-align:center;
+  }
+  .ad-b .right {
+    flex:1; display:flex; flex-direction:column;
+    justify-content:center; padding:60px 48px;
+  }
+
+  .product-icon {
+    width:200px; height:260px;
+    background:linear-gradient(180deg,#2e7d32,#1b5e20);
+    border-radius:24px; margin-bottom:32px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.2);
+  }
+  .product-icon .pi-text { font-size:22px; font-weight:900; color:#fff; text-align:center; line-height:1.3; }
+  .product-icon .pi-sub  { font-size:14px; color:rgba(255,255,255,0.7); margin-top:8px; }
+
+  .brand-tag-b {
+    font-size:18px; font-weight:700; color:#2e7d32;
+    background:#e8f5e9; border-radius:8px; padding:6px 18px;
+    margin-bottom:16px; display:inline-block;
+  }
+  .ad-b .left h2 { font-size:40px; font-weight:900; color:#1b5e20; line-height:1.2; }
+
+  .benefit-list { list-style:none; margin-bottom:32px; }
+  .benefit-list li {
+    font-size:26px; color:#333; padding:10px 0;
+    border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:12px;
+  }
+  .benefit-list li .icon { font-size:28px; }
+
+  .price-section { margin-bottom:32px; }
+  .price-section .orig { font-size:24px; color:#999; text-decoration:line-through; margin-bottom:4px; }
+  .price-section .sale { font-size:56px; font-weight:900; color:#e53935; }
+  .price-section .unit { font-size:22px; color:#888; margin-left:8px; }
+
+  .cta-btn {
+    background:#2e7d32; color:#fff; font-size:30px; font-weight:900;
+    border-radius:16px; padding:22px 0; text-align:center;
+    letter-spacing:1px;
+  }
+
+  .ad-b .deadline {
+    background:#e53935; color:#fff; font-size:22px; font-weight:700;
+    padding:12px 24px; border-radius:10px; margin-bottom:24px;
+    display:inline-block;
+  }
+
+  /* ── 소재 C: 스토리형 세로 (9:16) ── */
+  .ad-c {
+    width:607px; height:1080px;
+    background:linear-gradient(180deg,#1b5e20 0%,#2e7d32 30%,#fff 30%);
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .ad-c .top { padding:48px 40px 40px; color:#fff; }
+  .ad-c .top .badge-c { font-size:20px; background:rgba(255,255,255,0.2); border-radius:50px; padding:8px 20px; display:inline-block; margin-bottom:20px; }
+  .ad-c .top h1 { font-size:52px; font-weight:900; line-height:1.15; }
+  .ad-c .top h1 span { color:#a5d6a7; }
+  .ad-c .bottom { flex:1; background:#fff; padding:36px 40px; display:flex; flex-direction:column; justify-content:space-between; }
+
+  .feature-card {
+    background:#f9f9f9; border-radius:14px; padding:18px 20px;
+    display:flex; align-items:center; gap:16px; margin-bottom:14px;
+  }
+  .feature-card .fc-icon { font-size:32px; }
+  .feature-card .fc-text { font-size:20px; font-weight:700; color:#222; }
+  .feature-card .fc-sub  { font-size:16px; color:#888; margin-top:2px; }
+
+  .price-c {
+    background:linear-gradient(135deg,#2e7d32,#1b5e20);
+    border-radius:16px; padding:24px 28px; color:#fff; text-align:center;
+  }
+  .price-c .pc-orig { font-size:20px; text-decoration:line-through; opacity:0.6; }
+  .price-c .pc-sale { font-size:52px; font-weight:900; }
+  .price-c .pc-sub  { font-size:18px; opacity:0.8; margin-top:4px; }
+
+  .deadline-c {
+    background:#e53935; color:#fff; font-size:20px; font-weight:700;
+    text-align:center; padding:14px; border-radius:12px; margin-top:14px;
+  }
+
+  .label { font-size:16px; font-weight:700; color:#666; margin-bottom:16px; border-bottom:2px solid #eee; padding-bottom:8px; }
+</style>
+</head>
+<body>
+
+<p style="color:#fff; font-size:20px; font-weight:700; padding:10px 0;">📌 소재 A — 마감 긴급 (인스타 정사각 1:1 / 1080×1080)</p>
+<!-- ══════ 소재 A ══════ -->
+<div class="ad-a">
+  <div class="bg-circle bc1"></div>
+  <div class="bg-circle bc2"></div>
+
+  <div class="badge-red">⏰ 마감 D-2</div>
+
+  <h1>이미 <span>22개</span><br>판매됐어요</h1>
+
+  <p class="sub">소연아씨 × 기프티스트 1차 공구<br>5월 22일(목) 자정 마감</p>
+
+  <div class="sold-box">
+    <div class="num">가글 3개 묶음</div>
+    <div class="lbl">정상가 75,000원 → <strong style="color:#7ed957; font-size:32px;">47,400원</strong></div>
+  </div>
+
+  <div class="price-tag">
+    <div class="p1">1개당 정상가 25,000원</div>
+    <div class="p2">→ 1개당 15,800원 🔥</div>
+  </div>
+
+  <div class="date-badge">📅 5.18(월) ~ 5.22(목) 단 5일</div>
+
+  <div class="watermark">@soyeon.yd × GIFTEAST</div>
+</div>
+
+<p style="color:#fff; font-size:20px; font-weight:700; padding:10px 0;">📌 소재 B — 제품 가치 강조 (1:1 / 1080×1080)</p>
+<!-- ══════ 소재 B ══════ -->
+<div class="ad-b">
+  <div class="left">
+    <div class="product-icon">
+      <div style="font-size:48px; margin-bottom:8px;">🌿</div>
+      <div class="pi-text">BAHA<br>ORIGIN<br>SALT</div>
+      <div class="pi-sub">솔트 가글 500ml</div>
+    </div>
+    <div class="brand-tag-b">비건 인증 완료 🌱</div>
+    <h2>매일 쓰는 가글,<br>이제 성분<br>걱정 없이</h2>
+  </div>
+  <div class="right">
+    <div class="deadline">⏰ 5월 22일(목) 마감</div>
+
+    <ul class="benefit-list">
+      <li><span class="icon">🦠</span><div><div>99.999% 항균력</div><div style="font-size:18px; color:#888;">5분 만에 입속 세균 완벽 제거</div></div></li>
+      <li><span class="icon">🚫</span><div><div>무알콜·무색소</div><div style="font-size:18px; color:#888;">자극 없이 순하게, 온 가족 사용 가능</div></div></li>
+      <li><span class="icon">🌱</span><div><div>솔트 비건 인증</div><div style="font-size:18px; color:#888;">자연 성분, 성분 걱정 제로</div></div></li>
+      <li><span class="icon">🎁</span><div><div>전 고객 사은품 증정</div><div style="font-size:18px; color:#888;">가글스틱 2개 무조건 증정</div></div></li>
+    </ul>
+
+    <div class="price-section">
+      <div class="orig">정상가 75,000원 (3개)</div>
+      <div><span class="sale">47,400원</span><span class="unit">/ 3개 세트</span></div>
+    </div>
+
+    <div class="cta-btn">👉 지금 바로 구매하기</div>
+  </div>
+</div>
+
+<p style="color:#fff; font-size:20px; font-weight:700; padding:10px 0;">📌 소재 C — 스토리/세로형 (9:16 / 607×1080) — 인스타 스토리 광고용</p>
+<!-- ══════ 소재 C ══════ -->
+<div class="ad-c">
+  <div class="top">
+    <div class="badge-c">소연아씨 × 기프티스트 1차 공구</div>
+    <h1>매일 쓰는<br>가글, <span>성분부터</span><br>다릅니다</h1>
+  </div>
+  <div class="bottom">
+    <div>
+      <div class="label">왜 바하오리진 솔트인가요?</div>
+      <div class="feature-card">
+        <div class="fc-icon">🦠</div>
+        <div><div class="fc-text">99.999% 항균</div><div class="fc-sub">5분 만에 입속 세균 제거</div></div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🚫</div>
+        <div><div class="fc-text">무알콜·무색소</div><div class="fc-sub">온 가족 자극 없이 사용 가능</div></div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🌱</div>
+        <div><div class="fc-text">비건 인증 완료</div><div class="fc-sub">자연 성분, 성분 걱정 ZERO</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="price-c">
+        <div class="pc-orig">정상가 75,000원 (3개)</div>
+        <div class="pc-sale">47,400원</div>
+        <div class="pc-sub">1개당 15,800원 🔥 최대 혜택</div>
+      </div>
+      <div class="deadline-c">⏰ 5월 22일(목) 자정 마감 — D-2</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
