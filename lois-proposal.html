@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로이스 리페어 × 브랜드앤유 — 인플루언서 공구 제안</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Noto Sans KR',sans-serif;background:#f8f8f6;color:#222;}
+
+  /* ── 히어로 ── */
+  .hero{
+    background:linear-gradient(135deg,#1a1a2e 0%,#16213e 40%,#0f3460 100%);
+    color:#fff;padding:80px 40px 60px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 30%,rgba(76,175,80,0.15),transparent 60%),
+               radial-gradient(ellipse at 20% 80%,rgba(255,193,7,0.08),transparent 50%);
+  }
+  .hero-badge{
+    display:inline-block;background:rgba(76,175,80,0.2);border:1px solid rgba(76,175,80,0.5);
+    color:#81c784;font-size:13px;font-weight:700;letter-spacing:3px;
+    padding:8px 24px;border-radius:50px;margin-bottom:28px;
+  }
+  .hero h1{font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.15;margin-bottom:16px;}
+  .hero h1 span{color:#81c784;}
+  .hero p{font-size:18px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:600px;margin:0 auto 40px;}
+  .hero-product{
+    display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap;
+    margin-top:40px;
+  }
+  .product-visual{
+    width:180px;height:240px;
+    background:linear-gradient(160deg,#2d5a27,#4caf50 40%,#81c784);
+    border-radius:24px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;box-shadow:0 30px 80px rgba(0,0,0,0.4);
+    position:relative;overflow:hidden;
+  }
+  .product-visual::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:50%;
+    background:linear-gradient(180deg,rgba(255,255,255,0.15),transparent);
+    border-radius:24px 24px 0 0;
+  }
+  .product-visual .pv-text{font-size:13px;font-weight:900;color:#fff;text-align:center;line-height:1.4;z-index:1;}
+  .product-visual .pv-cap{
+    width:60px;height:18px;background:rgba(255,255,255,0.3);
+    border-radius:4px;margin-bottom:16px;z-index:1;
+  }
+  .product-visual .pv-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;z-index:1;}
+  .product-visual .pv-sub{font-size:11px;color:rgba(255,255,255,0.7);z-index:1;}
+
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;}
+  .stat-box{text-align:center;}
+  .stat-box .num{font-size:36px;font-weight:900;color:#81c784;}
+  .stat-box .lbl{font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;}
+
+  /* ── 공통 섹션 ── */
+  .section{padding:80px 40px;max-width:960px;margin:0 auto;}
+  .section-tag{font-size:12px;font-weight:700;letter-spacing:3px;color:#4caf50;margin-bottom:12px;}
+  .section-title{font-size:clamp(24px,3.5vw,36px);font-weight:900;line-height:1.2;margin-bottom:16px;}
+  .section-desc{font-size:16px;color:#666;line-height:1.8;margin-bottom:48px;}
+
+  /* ── 왜 탈모샴푸인가 ── */
+  .why-bg{background:#fff;}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+  .why-card{
+    background:#f9fafb;border-radius:20px;padding:32px 28px;
+    border-left:4px solid #4caf50;
+  }
+  .why-card .wc-icon{font-size:36px;margin-bottom:16px;}
+  .why-card h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .why-card p{font-size:14px;color:#666;line-height:1.7;}
+  .why-card .wc-data{font-size:28px;font-weight:900;color:#4caf50;margin-bottom:4px;}
+
+  /* ── 제품 특장점 ── */
+  .feature-bg{background:#f0f7f0;}
+  .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+  .feature-card{
+    background:#fff;border-radius:20px;padding:28px 24px;text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:transform 0.2s;
+  }
+  .feature-card:hover{transform:translateY(-4px);}
+  .feature-card .fc-icon{font-size:40px;margin-bottom:16px;}
+  .feature-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
+  .feature-card p{font-size:13px;color:#888;line-height:1.6;}
+  .feature-card .fc-badge{
+    display:inline-block;background:#e8f5e9;color:#2e7d32;
+    font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-top:12px;
+  }
+
+  /* ── 인증 배지 ── */
+  .cert-bg{background:#1a1a2e;}
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+  .cert-card{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;padding:28px 20px;text-align:center;color:#fff;
+  }
+  .cert-card .cc-icon{font-size:36px;margin-bottom:12px;}
+  .cert-card h3{font-size:15px;font-weight:700;color:#81c784;margin-bottom:6px;}
+  .cert-card p{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;}
+
+  /* ── 공구 구조 ── */
+  .structure-bg{background:#fff;}
+  .flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+  .flow-item{
+    background:#f9fafb;border-radius:16px;padding:24px 20px;text-align:center;
+    min-width:160px;flex:1;max-width:180px;
+  }
+  .flow-item .fi-icon{font-size:32px;margin-bottom:10px;}
+  .flow-item h4{font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
+  .flow-item p{font-size:12px;color:#888;}
+  .flow-arrow{font-size:24px;color:#ccc;padding:0 8px;flex-shrink:0;}
+
+  .commission-box{
+    background:linear-gradient(135deg,#e8f5e9,#f1f8e9);
+    border-radius:20px;padding:40px;text-align:center;border:2px solid #a5d6a7;
+  }
+  .commission-box h3{font-size:20px;font-weight:700;margin-bottom:24px;color:#1b5e20;}
+  .commission-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .commission-item{
+    background:#fff;border-radius:14px;padding:20px 28px;min-width:180px;text-align:center;
+    box-shadow:0 4px 16px rgba(0,0,0,0.06);
+  }
+  .commission-item .ci-num{font-size:36px;font-weight:900;color:#4caf50;}
+  .commission-item .ci-lbl{font-size:13px;color:#888;margin-top:4px;}
+  .commission-item.highlight{background:#4caf50;color:#fff;}
+  .commission-item.highlight .ci-num{color:#fff;}
+  .commission-item.highlight .ci-lbl{color:rgba(255,255,255,0.7);}
+
+  /* ── 브랜드앤유 소개 ── */
+  .brandnyu-bg{background:linear-gradient(135deg,#0f3460,#16213e);}
+  .brandnyu-inner{max-width:960px;margin:0 auto;padding:80px 40px;color:#fff;}
+  .brandnyu-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  @media(max-width:640px){.brandnyu-grid{grid-template-columns:1fr;}}
+  .brandnyu-left .bl-tag{font-size:12px;letter-spacing:3px;color:#81c784;font-weight:700;margin-bottom:12px;}
+  .brandnyu-left h2{font-size:clamp(24px,3vw,36px);font-weight:900;line-height:1.2;margin-bottom:20px;}
+  .brandnyu-left h2 span{color:#81c784;}
+  .brandnyu-left p{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:24px;}
+  .strength-list{list-style:none;}
+  .strength-list li{
+    display:flex;align-items:flex-start;gap:12px;
+    font-size:14px;color:rgba(255,255,255,0.8);padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .strength-list li .sl-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+  .strength-list li strong{color:#fff;display:block;margin-bottom:2px;}
+  .brandnyu-right{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .bn-stat{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;padding:24px 16px;text-align:center;
+  }
+  .bn-stat .bs-num{font-size:32px;font-weight:900;color:#81c784;}
+  .bn-stat .bs-lbl{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;}
+
+  /* ── CTA ── */
+  .cta-section{
+    background:linear-gradient(135deg,#2e7d32,#1b5e20);
+    padding:80px 40px;text-align:center;color:#fff;
+  }
+  .cta-section h2{font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:16px;line-height:1.2;}
+  .cta-section h2 span{color:#a5d6a7;}
+  .cta-section p{font-size:17px;color:rgba(255,255,255,0.7);margin-bottom:48px;line-height:1.7;}
+  .cta-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+  .cta-card{
+    background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+    border-radius:16px;padding:28px 32px;min-width:220px;text-align:left;
+  }
+  .cta-card .cc-title{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:500;}
+  .cta-card .cc-val{font-size:20px;font-weight:700;color:#fff;}
+  .cta-card .cc-icon{font-size:28px;margin-bottom:12px;}
+  .cta-btn{
+    display:inline-block;background:#fff;color:#1b5e20;
+    font-size:18px;font-weight:900;padding:20px 56px;border-radius:50px;
+    text-decoration:none;letter-spacing:1px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.2);transition:transform 0.2s;
+    margin:0 8px;
+  }
+  .cta-btn:hover{transform:translateY(-2px);}
+  .cta-btn.outline{
+    background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);
+  }
+  .contact-info{margin-top:32px;color:rgba(255,255,255,0.5);font-size:14px;}
+  .contact-info a{color:#a5d6a7;text-decoration:none;}
+
+  /* ── 푸터 ── */
+  footer{background:#111;color:rgba(255,255,255,0.3);padding:32px 40px;text-align:center;font-size:13px;}
+</style>
+</head>
+<body>
+
+<!-- ══════ 히어로 ══════ -->
+<div class="hero">
+  <div class="hero-badge">인플루언서 공구 제안서</div>
+  <h1>팔로워가 살 이유가 있는<br><span>탈모샴푸</span>를 함께 팔아요</h1>
+  <p>로이스 리페어 탈모샴푸 × 브랜드앤유<br>특허 성분 + 식약처 인증 + 선결제 없는 공구 구조</p>
+
+  <div class="hero-product">
+    <div class="product-visual">
+      <div class="pv-cap"></div>
+      <div class="pv-name">LOIS</div>
+      <div class="pv-text">REPAIR<br>SHAMPOO</div>
+      <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.6);z-index:1;">탈모 증상 완화</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="num">특허</div><div class="lbl">BotaCair 특허 성분</div></div>
+      <div class="stat-box"><div class="num">식약처</div><div class="lbl">탈모 증상 완화 인증</div></div>
+      <div class="stat-box"><div class="num">EWG</div><div class="lbl">저자극 그린 등급</div></div>
+      <div class="stat-box"><div class="num">0원</div><div class="lbl">선결제 광고비 없음</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 왜 탈모샴푸인가 ══════ -->
+<div class="why-bg">
+  <div class="section">
+    <div class="section-tag">WHY HAIR LOSS SHAMPOO</div>
+    <h2 class="section-title">탈모 케어, 지금이 기회입니다</h2>
+    <p class="section-desc">국내 탈모 인구 1,000만 시대. 팔로워들도 분명 고민 중입니다.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="wc-icon">👥</div>
+        <div class="wc-data">1,000만+</div>
+        <h3>국내 탈모 인구</h3>
+        <p>20~40대 여성 탈모 비율 급증. 팔로워 중 최소 20~30%는 탈모·두피 고민 보유 추정.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon">🛒</div>
+        <div class="wc-data">반복 구매</div>
+        <h3>샴푸는 소모품</h3>
+        <p>한 번 마음에 들면 반복 구매. 팔로워 충성도가 높은 계정일수록 재구매율↑ → 구매 전환 효율 높음.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon">💬</div>
+        <div class="wc-data">직접 체험</div>
+        <h3>체험 후기의 힘</h3>
+        <p>제품 샘플 무상 제공 → 직접 써보고 솔직한 후기 콘텐츠 → 팔로워 신뢰 기반 자연스러운 구매 유도.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 제품 특장점 ══════ -->
+<div class="feature-bg">
+  <div class="section">
+    <div class="section-tag">PRODUCT FEATURES</div>
+    <h2 class="section-title">로이스 리페어, 이래서 다릅니다</h2>
+    <p class="section-desc">단순히 "좋다"가 아닌, 특허청·식약처가 인증한 근거 있는 성분.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="fc-icon">🧬</div>
+        <h3>BotaCair 특허 성분</h3>
+        <p>모낭을 형성하고 발모세포를 깨우는 '모발 성장 유전자'. 특허청 공식 인증 원료.</p>
+        <div class="fc-badge">특허 원료</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🌿</div>
+        <h3>아르간 오일 함유</h3>
+        <p>모로코산 아르간 오일로 손상된 모발 집중 리페어. 세정 후에도 윤기·볼륨 유지.</p>
+        <div class="fc-badge">자연 성분</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🔬</div>
+        <h3>식약처 탈모 인증</h3>
+        <p>탈모 증상 완화 기능성 제품. 임상시험 완료. 효과를 숫자로 증명.</p>
+        <div class="fc-badge">식약처 인증</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">💧</div>
+        <h3>저자극 EWG 그린</h3>
+        <p>EWG 저자극 성분으로 민감한 두피도 안전하게. 유수분 밸런스 + 두피 진정 동시.</p>
+        <div class="fc-badge">EWG 그린</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">✨</div>
+        <h3>찰랑·볼륨 효과</h3>
+        <p>탈모 케어와 동시에 머릿결 개선. 엉킴 없이 찰랑, 뿌리 볼륨 살아나는 이중 효과.</p>
+        <div class="fc-badge">결과 체감 가능</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">👨‍👩‍👧</div>
+        <h3>온 가족 사용 가능</h3>
+        <p>남녀노소 자극 없는 순한 성분. 가족 공유 제품으로 객단가 높이기 유리.</p>
+        <div class="fc-badge">전 연령 OK</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 인증 배지 ══════ -->
+<div class="cert-bg">
+  <div class="section" style="max-width:960px;margin:0 auto;padding:80px 40px;">
+    <div class="section-tag" style="color:#81c784;">CERTIFICATIONS</div>
+    <h2 class="section-title" style="color:#fff;">숫자와 인증이 증명합니다</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);">"썼더니 좋더라"가 아닌, 공식 기관이 검증한 효능.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cc-icon">🏛️</div>
+        <h3>특허청 인증</h3>
+        <p>BotaCair 특허 성분. 모발 성장 유전자 활성화 공식 특허 취득.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cc-icon">🇰🇷</div>
+        <h3>식약처 인증</h3>
+        <p>탈모 증상 완화 기능성 화장품 공식 인증. 임상시험 데이터 보유.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cc-icon">🌱</div>
+        <h3>EWG 저자극</h3>
+        <p>미국 환경실무그룹 EWG 그린 등급. 민감 두피도 안심 사용.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cc-icon">⭐</div>
+        <h3>실사용 후기</h3>
+        <p>산후 탈모, 가늘어진 모발 개선 후기 다수. 체험 기반 신뢰 콘텐츠 제작 가능.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 공구 구조 ══════ -->
+<div class="structure-bg">
+  <div class="section">
+    <div class="section-tag">HOW IT WORKS</div>
+    <h2 class="section-title">공구 진행 구조 — 이렇게 합니다</h2>
+    <p class="section-desc">인플루언서는 콘텐츠에만 집중하세요. 나머지는 브랜드앤유가 합니다.</p>
+
+    <div class="flow">
+      <div class="flow-item">
+        <div class="fi-icon">🤝</div>
+        <h4>섭외·협의</h4>
+        <p>브랜드앤유</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="fi-icon">📦</div>
+        <h4>샘플 발송</h4>
+        <p>로이스 리페어<br>(무상 제공)</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="fi-icon">📸</div>
+        <h4>콘텐츠 제작</h4>
+        <p>인플루언서<br>(릴스·피드·스토리)</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="fi-icon">🛒</div>
+        <h4>공구 링크</h4>
+        <p>로이스 스토어<br>(최저가 보장)</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="fi-icon">💰</div>
+        <h4>정산</h4>
+        <p>제조사 정산 완료<br>후 2주 이내</p>
+      </div>
+    </div>
+
+    <div class="commission-box">
+      <h3>💰 수수료 구조 — 선결제 광고비 없음</h3>
+      <div class="commission-row">
+        <div class="commission-item">
+          <div class="ci-num">20~30%</div>
+          <div class="ci-lbl">인플루언서 수수료<br>(팔로워·릴스 조회수 기준)</div>
+        </div>
+        <div class="commission-item highlight">
+          <div class="ci-num">8%</div>
+          <div class="ci-lbl">브랜드앤유 수수료<br>(섭외·계약·정산 전담)</div>
+        </div>
+        <div class="commission-item">
+          <div class="ci-num">배송·CS</div>
+          <div class="ci-lbl">로이스 리페어 담당<br>(인플루언서 부담 없음)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 브랜드앤유 소개 ══════ -->
+<div class="brandnyu-bg">
+  <div class="brandnyu-inner">
+    <div class="brandnyu-grid">
+      <div class="brandnyu-left">
+        <div class="bl-tag">ABOUT BRAND&YOU</div>
+        <h2>면세점 MD 8년이<br><span>직접 매칭</span>하는<br>공구 에이전시</h2>
+        <p>브랜드앤유는 인플루언서와 제조사 사이에서 최적의 매칭과 공구 운영을 전담합니다. 팔로워 성향 분석부터 계약·정산까지, 인플루언서가 콘텐츠에만 집중할 수 있는 구조를 만들어드립니다.</p>
+        <ul class="strength-list">
+          <li>
+            <span class="sl-icon">✅</span>
+            <div><strong>팔로워 성향 매칭</strong>팔로워와 제품 카테고리가 맞는 공구만 연결합니다.</div>
+          </li>
+          <li>
+            <span class="sl-icon">✅</span>
+            <div><strong>일정·정산 책임 관리</strong>공구 일정과 수수료 정산을 브랜드앤유가 직접 추적합니다.</div>
+          </li>
+          <li>
+            <span class="sl-icon">✅</span>
+            <div><strong>선결제 광고비 없음</strong>인플루언서가 먼저 돈 쓸 일 없는 구조.</div>
+          </li>
+          <li>
+            <span class="sl-icon">✅</span>
+            <div><strong>공구 이력 없어도 OK</strong>처음 공구 도전하는 분도 A-Z 지원합니다.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="brandnyu-right">
+        <div class="bn-stat"><div class="bs-num">83개사</div><div class="bs-lbl">파트너 제조사 발굴</div></div>
+        <div class="bn-stat"><div class="bs-num">8%</div><div class="bs-lbl">투명한 브랜드앤유 수수료</div></div>
+        <div class="bn-stat"><div class="bs-num">공구 이력</div><div class="bs-lbl">구강케어 공구 직접 운영 중</div></div>
+        <div class="bn-stat"><div class="bs-num">MD 8년</div><div class="bs-lbl">면세점 MD 경력 기반</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ CTA ══════ -->
+<div class="cta-section">
+  <h2>지금 함께하면<br><span>이런 조건입니다</span></h2>
+  <p>로이스 리페어 공구, 관심 있으시면 DM 주세요.<br>팔로워 분석 후 맞춤 제안 드립니다.</p>
+
+  <div class="cta-cards">
+    <div class="cta-card">
+      <div class="cc-icon">📦</div>
+      <div class="cc-title">샘플 제공</div>
+      <div class="cc-val">무상 제공<br><span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);">직접 써보고 결정하세요</span></div>
+    </div>
+    <div class="cta-card">
+      <div class="cc-icon">💰</div>
+      <div class="cc-title">인플루언서 수수료</div>
+      <div class="cc-val">20~30%<br><span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);">영향력에 따라 협의</span></div>
+    </div>
+    <div class="cta-card">
+      <div class="cc-icon">🏷️</div>
+      <div class="cc-title">공구 가격</div>
+      <div class="cc-val">인스타 최저가<br><span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);">보장 조건 확보</span></div>
+    </div>
+    <div class="cta-card">
+      <div class="cc-icon">📅</div>
+      <div class="cc-title">정산 시기</div>
+      <div class="cc-val">마감 후 2주 이내<br><span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);">제조사 정산 완료 후</span></div>
+    </div>
+  </div>
+
+  <a href="https://www.instagram.com/brandnyou.team" class="cta-btn">📩 인스타 DM 문의</a>
+  <a href="https://open.kakao.com/o/sUJmM8di" class="cta-btn outline">💬 카카오톡 문의</a>
+
+  <div class="contact-info">
+    브랜드앤유 박상권 대표 · 📞 010-8335-1854 · 🌐 <a href="https://brandnyu.com">brandnyu.com</a><br>
+    인스타그램: <a href="https://www.instagram.com/brandnyou.team">@brandnyou.team</a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Brand&You (브랜드앤유) · 본 제안서는 인플루언서 공구 제안 목적으로 제작되었습니다.
+</footer>
+
+</body>
+</html>
