@@ -188,6 +188,59 @@ body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#1a1209;}
 .contact-row a{color:#1a1209;font-weight:700;text-decoration:none;}
 
 footer{background:#111;color:rgba(255,255,255,0.2);padding:20px;text-align:center;font-size:11px;}
+
+/* ══ ABOUT 개편 ══ */
+.sec-bny2{background:linear-gradient(160deg,#1a1209 0%,#2d1f0a 100%);padding:80px 5%;}
+.bny2-inner{max-width:960px;margin:0 auto;}
+.bny2-tag{font-size:11px;font-weight:700;letter-spacing:3px;color:#f0c96a;margin-bottom:12px;}
+.bny2-headline{font-size:clamp(26px,3.5vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:8px;}
+.bny2-headline em{font-style:normal;color:#f0c96a;}
+.bny2-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:40px;}
+
+/* 대표 카드 */
+.ceo-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(240,201,106,0.25);
+  border-radius:20px;padding:32px 36px;margin-bottom:32px;
+  display:flex;align-items:flex-start;gap:28px;
+}
+@media(max-width:640px){.ceo-card{flex-direction:column;gap:18px;padding:24px 22px;}}
+.ceo-badge{
+  flex-shrink:0;width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,#f0c96a,#d4a520);
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;
+}
+.ceo-info{flex:1;}
+.ceo-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;}
+.ceo-title{font-size:13px;color:#f0c96a;font-weight:700;letter-spacing:1px;margin-bottom:14px;}
+.ceo-career{display:flex;flex-direction:column;gap:8px;}
+.career-item{display:flex;align-items:flex-start;gap:10px;}
+.career-dot{width:6px;height:6px;border-radius:50%;background:#f0c96a;margin-top:7px;flex-shrink:0;}
+.career-item p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;}
+.career-item strong{color:#fff;}
+
+/* 강점 그리드 */
+.bny2-strengths{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:32px;}
+.str-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
+  border-radius:16px;padding:22px 18px;
+}
+.str-card.gold{border-color:rgba(240,201,106,0.35);background:rgba(240,201,106,0.07);}
+.str-icon{font-size:24px;margin-bottom:10px;}
+.str-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;}
+.str-title em{font-style:normal;color:#f0c96a;}
+.str-desc{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.55;}
+
+/* 숫자 행 */
+.bny2-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
+.bny2-stat{flex:1;padding:22px 14px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);}
+.bny2-stat:last-child{border-right:none;}
+.bny2-stat .bn{font-size:26px;font-weight:900;color:#f0c96a;}
+.bny2-stat .bl{font-size:11px;color:rgba(255,255,255,0.35);margin-top:3px;}
+@media(max-width:540px){
+  .bny2-stats{flex-wrap:wrap;}
+  .bny2-stat{flex:1 1 45%;border-right:1px solid rgba(255,255,255,0.08);}
+}
 </style>
 </head>
 <body>
@@ -483,44 +536,80 @@ footer{background:#111;color:rgba(255,255,255,0.2);padding:20px;text-align:cente
 </div>
 
 <!-- ══ 브랜드앤유 ══ -->
-<div class="sec sec-bny">
-  <div class="sec-inner">
-    <div class="sec-tag">ABOUT</div>
-    <div class="bny-grid">
-      <div>
-        <h2><span>브랜드앤유</span>는<br>어떤 회사인가요?</h2>
-        <p>인플루언서 공구 전문 에이전시입니다. 섭외부터 협의·계약·정산까지 A-Z를 담당합니다.</p>
-        <ul class="bny-pts">
-          <li><strong>역할 분담 명확</strong>브랜드앤유: 섭외·협의·계약·인플루언서 정산<br>제조사: 배송·소비자 CS 전담</li>
-          <li><strong>수수료 구조 투명</strong>인플루언서 수익을 먼저 계산합니다</li>
-          <li><strong>인스타그램 최저가 보장</strong>타 채널 대비 팔로워 우대가격 보장</li>
-          <li><strong>샘플 선제공</strong>직접 써보고 결정하세요</li>
-        </ul>
-      </div>
-      <div>
-        <div class="bny-stats">
-          <div class="bny-stat">
-            <div class="bn">83+</div>
-            <div class="bl">협력 제조사</div>
+<div class="sec-bny2">
+  <div class="bny2-inner">
+    <div class="bny2-tag">ABOUT BRAND&amp;YOU</div>
+    <h2 class="bny2-headline">면세점 MD 8년,<br>그 경험이 <em>공구로 이어졌습니다</em></h2>
+    <p class="bny2-sub">브랜드를 보는 눈, 제품을 고르는 기준, 인플루언서와 일하는 방식 — 전부 현장에서 쌓았어요.</p>
+
+    <!-- 대표 소개 카드 -->
+    <div class="ceo-card">
+      <div class="ceo-badge">🧑‍💼</div>
+      <div class="ceo-info">
+        <div class="ceo-name">박상권 대표</div>
+        <div class="ceo-title">BRAND&amp;YOU · 인플루언서 공구 에이전시</div>
+        <div class="ceo-career">
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <p><strong>면세점 MD 8년 경력</strong> — 브랜드 발굴·제품 선정·유통 구조를 몸으로 익혔어요</p>
           </div>
-          <div class="bny-stat">
-            <div class="bn">67+</div>
-            <div class="bl">협력 인플루언서</div>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <p><strong>제조사 83곳 이상 협력</strong> — 뷰티·헤어케어·이너뷰티·생활용품 카테고리 중심</p>
           </div>
-          <div class="bny-stat">
-            <div class="bn">A-Z</div>
-            <div class="bl">공구 전 과정 지원</div>
-          </div>
-          <div class="bny-stat">
-            <div class="bn">2주</div>
-            <div class="bl">정산 완료 보장</div>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <p><strong>"팔로워와 카테고리에 맞는 제품만, 일정·정산은 제때"</strong> — 인플루언서와 일하는 원칙</p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 강점 4가지 -->
+    <div class="bny2-strengths">
+      <div class="str-card gold">
+        <div class="str-icon">🎯</div>
+        <div class="str-title"><em>카테고리 매칭</em></div>
+        <div class="str-desc">MD 출신이 직접 판단합니다. "이 제품이 이 팔로워에게 맞는가" — 억지 공구 없어요.</div>
+      </div>
+      <div class="str-card">
+        <div class="str-icon">🛡️</div>
+        <div class="str-title">배송·CS <em>인플루언서 무관</em></div>
+        <div class="str-desc">배송·환불·클레임은 제조사가 전담. 인플루언서는 콘텐츠에만 집중하면 됩니다.</div>
+      </div>
+      <div class="str-card">
+        <div class="str-icon">📅</div>
+        <div class="str-title">정산 <em>제때, 명확하게</em></div>
+        <div class="str-desc">구두 약속 없이 계약서로. 제조사 정산 완료 후 2주 이내 지급 보장합니다.</div>
+      </div>
+      <div class="str-card gold">
+        <div class="str-icon">💎</div>
+        <div class="str-title"><em>인스타 최저가</em> 보장</div>
+        <div class="str-desc">타 채널 대비 팔로워 우대가격을 보장합니다. 팔로워에게 특별한 가격을 드릴 수 있어요.</div>
+      </div>
+    </div>
+
+    <!-- 숫자 -->
+    <div class="bny2-stats">
+      <div class="bny2-stat">
+        <div class="bn">8년</div>
+        <div class="bl">면세점 MD 경력</div>
+      </div>
+      <div class="bny2-stat">
+        <div class="bn">83+</div>
+        <div class="bl">협력 제조사</div>
+      </div>
+      <div class="bny2-stat">
+        <div class="bn">A-Z</div>
+        <div class="bl">공구 전 과정 지원</div>
+      </div>
+      <div class="bny2-stat">
+        <div class="bn">2주</div>
+        <div class="bl">정산 완료 보장</div>
+      </div>
+    </div>
   </div>
 </div>
-
 <!-- ══ CTA ══ -->
 <div class="sec-cta" id="cta">
   <h2>지금 바로 문의해 주세요</h2>
