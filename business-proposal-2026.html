@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드앤유 — 최적 사업 제안서 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans KR', sans-serif; background:#0a0a0a; color:#fff; }
+
+  .slide {
+    width:100%; max-width:1280px; min-height:720px;
+    margin:0 auto 4px; padding:64px 88px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+    page-break-after: always;
+  }
+
+  /* 커버 */
+  .cover { background:linear-gradient(135deg,#080808 0%,#141414 50%,#1a1500 100%); }
+  .gold { color:#c9a84c; }
+  .badge {
+    display:inline-block; background:#c9a84c; color:#000;
+    font-size:12px; font-weight:700; padding:5px 16px;
+    border-radius:20px; letter-spacing:1.5px; margin-bottom:28px; width:fit-content;
+  }
+  .cover h1 { font-size:54px; font-weight:900; line-height:1.1; margin-bottom:18px; }
+  .cover .sub { font-size:19px; color:#999; margin-bottom:52px; line-height:1.6; }
+  .meta-row { display:flex; gap:48px; }
+  .meta-row div { font-size:13px; color:#666; }
+  .meta-row div strong { color:#c9a84c; display:block; font-size:15px; margin-bottom:2px; }
+
+  /* 공통 */
+  .dark  { background:#0d0d0d; }
+  .dark2 { background:#080808; }
+  .gold-divider {
+    background:linear-gradient(135deg,#c9a84c,#8b6914);
+    min-height:280px;
+  }
+  .gold-divider h2 { font-size:60px; font-weight:900; color:#000; line-height:1.15; }
+  .gold-divider p  { font-size:20px; color:#000; opacity:0.65; margin-top:12px; }
+  .sec-bg { font-size:110px; font-weight:900; color:rgba(0,0,0,0.12); position:absolute; right:80px; bottom:10px; }
+  .sec-tag { font-size:11px; font-weight:700; color:#000; opacity:0.5; letter-spacing:2px; margin-bottom:16px; }
+
+  .tag  { font-size:11px; font-weight:700; color:#c9a84c; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+  .h1   { font-size:38px; font-weight:900; line-height:1.2; margin-bottom:10px; }
+  .h2   { font-size:28px; font-weight:700; line-height:1.25; margin-bottom:10px; }
+  .sub  { font-size:15px; color:#777; margin-bottom:32px; }
+
+  .footer {
+    position:absolute; bottom:24px; left:88px; right:88px;
+    display:flex; justify-content:space-between;
+    border-top:1px solid #1e1e1e; padding-top:12px;
+  }
+  .footer span { font-size:11px; color:#333; }
+  .pn { font-size:11px; color:#c9a84c; font-weight:700; }
+
+  /* 카드 */
+  .card {
+    background:#141414; border-radius:14px; padding:24px 22px;
+    border:1px solid #1e1e1e;
+  }
+  .card-gold { border-left:4px solid #c9a84c; }
+  .card-blue { border-left:4px solid #4fc3f7; }
+  .card-green{ border-left:4px solid #66bb6a; }
+  .card-red  { border-left:4px solid #ef5350; }
+
+  /* 그리드 */
+  .g2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; }
+  .g4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; }
+
+  /* 스탯 */
+  .stat { background:#111; border-radius:12px; padding:20px; text-align:center; border:1px solid #1e1e1e; }
+  .stat-n { font-size:34px; font-weight:900; }
+  .stat-l { font-size:12px; color:#555; margin-top:4px; }
+
+  /* 표 */
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { padding:12px 16px; text-align:left; color:#666; font-weight:600; border-bottom:1px solid #1e1e1e; }
+  td { padding:11px 16px; border-bottom:1px solid #111; color:#ccc; }
+  tr:hover td { background:#111; }
+  .tc { text-align:center; }
+
+  /* 타임라인 */
+  .timeline { display:flex; gap:0; }
+  .tl-step {
+    flex:1; padding:20px 16px;
+    border-top:3px solid #c9a84c; position:relative;
+  }
+  .tl-step::after {
+    content:'▶'; position:absolute; right:-14px; top:50%; transform:translateY(-50%);
+    color:#c9a84c; font-size:16px; z-index:1;
+  }
+  .tl-step:last-child::after { display:none; }
+  .tl-ph  { font-size:11px; color:#c9a84c; font-weight:700; margin-bottom:4px; }
+  .tl-mo  { font-size:12px; color:#555; margin-bottom:10px; }
+  .tl-h   { font-size:14px; font-weight:700; margin-bottom:8px; }
+  .tl-ul  { list-style:none; }
+  .tl-ul li { font-size:11px; color:#888; padding:2px 0; }
+  .tl-ul li::before { content:'• '; color:#c9a84c; }
+
+  /* 인사이트 박스 */
+  .insight {
+    background:linear-gradient(135deg,#120f00,#1e1800);
+    border:1px solid #c9a84c33; border-radius:12px;
+    padding:18px 22px; margin-top:20px;
+    font-size:13px; color:#e8c96d; line-height:1.75;
+  }
+
+  /* HL 밴드 */
+  .hl { background:#c9a84c; color:#000; border-radius:8px; padding:14px 20px; font-size:15px; font-weight:700; margin-bottom:18px; }
+
+  /* 리스트 */
+  .ul { list-style:none; }
+  .ul li { font-size:13px; color:#bbb; padding:5px 0 5px 16px; position:relative; line-height:1.55; }
+  .ul li::before { content:''; position:absolute; left:0; top:11px; width:6px; height:6px; border-radius:50%; background:#c9a84c; }
+  .ul li.red::before { background:#ef5350; }
+  .ul li.green::before { background:#66bb6a; }
+
+  /* 번호 */
+  .num-big { font-size:44px; font-weight:900; color:#c9a84c; opacity:0.25; line-height:1; }
+
+  /* 체크 리스트 */
+  .check { font-size:13px; color:#aaa; padding:6px 0; }
+  .check .y { color:#66bb6a; margin-right:8px; }
+  .check .n { color:#ef5350; margin-right:8px; }
+
+  @media print {
+    .slide { page-break-after:always; min-height:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════ SLIDE 1 — 표지 ══════ -->
+<div class="slide cover">
+  <div class="badge">BRAND&YOU · BUSINESS PROPOSAL 2026</div>
+  <h1>브랜드앤유,<br><span class="gold">지금 이렇게</span><br>해야 합니다</h1>
+  <p class="sub">청담캔디 컨설팅 + 실전 공구 경험 기반<br>브랜드앤유 최적 사업 방향 종합 제안</p>
+  <div class="meta-row">
+    <div><strong>작성일</strong>2026년 5월 20일</div>
+    <div><strong>작성</strong>Genspark AI (브랜드앤유 전담)</div>
+    <div><strong>기반 데이터</strong>청담캔디 1~3주차 + 기프티스트 공구 실전 결과</div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL — 내부용</span><span class="pn">01</span></div>
+</div>
+
+<!-- ══════ SLIDE 2 — 현재 위치 진단 ══════ -->
+<div class="slide dark">
+  <div class="tag">DIAGNOSIS · 현재 위치</div>
+  <div class="h1">브랜드앤유, 지금 어디 있나</div>
+  <div class="sub">청담캔디 피드백 + 실전 데이터 기반 냉정한 진단</div>
+
+  <div class="g2" style="gap:20px;">
+    <div>
+      <div class="card card-green" style="margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#66bb6a; margin-bottom:12px;">✅ 잘 하고 있는 것</div>
+        <div class="check"><span class="y">✓</span>면세점 MD 8년 — 실제 경력, 진짜 강점</div>
+        <div class="check"><span class="y">✓</span>상표권 출원 완료 (2026-05-19, 35류)</div>
+        <div class="check"><span class="y">✓</span>제조사 83개사 실제 이메일 발송</div>
+        <div class="check"><span class="y">✓</span>기프티스트 1차 공구 실전 경험 확보</div>
+        <div class="check"><span class="y">✓</span>홈페이지·카드뉴스·판별기 시스템 구축</div>
+        <div class="check"><span class="y">✓</span>시니어 공구 신규 시장 선제 발굴</div>
+      </div>
+      <div class="card card-red">
+        <div style="font-size:13px; font-weight:700; color:#ef5350; margin-bottom:12px;">❌ 아직 부족한 것</div>
+        <div class="check"><span class="n">✗</span>보조카피 모든 접점 미통일</div>
+        <div class="check"><span class="n">✗</span>인플루언서 DB 67명 (목표 1,000명)</div>
+        <div class="check"><span class="n">✗</span>첫 공구 수익 적자 (광고비 > 수수료)</div>
+        <div class="check"><span class="n">✗</span>제조사 83개사 회신율 미파악</div>
+        <div class="check"><span class="n">✗</span>뉴트리디데이 팔로업 미발송</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="background:#0f0f00; border:1px solid #c9a84c33;">
+        <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:14px;">💡 청담캔디가 말한 핵심 3가지</div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:15px; font-weight:700; margin-bottom:4px;">① 상표권이 먼저다</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">브랜드로 가려면 보호받아야 함. 62,000원짜리 이 투자가 제일 중요. → ✅ 완료</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:15px; font-weight:700; margin-bottom:4px;">② 첫 공구 결과가 다음 영업 무기</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">수익보다 레퍼런스. 기프티스트 공구 결과보고서 = 다음 제조사가 계약하는 이유.</div>
+        </div>
+        <div>
+          <div style="font-size:15px; font-weight:700; margin-bottom:4px;">③ 보조카피 한 줄 통일</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">"면세점 MD 8년이 직접 매칭하는 공동구매 중계" — 모든 접점에 동일하게.</div>
+        </div>
+      </div>
+      <div class="insight" style="margin-top:16px;">
+        지금 브랜드앤유는 <strong>1단계(기능) 브랜드</strong>의 끝자락에 있어요. 상표권·실전경험·시스템을 갖췄고, 이제 <strong>결과 레퍼런스 하나</strong>만 있으면 2단계(신뢰) 브랜드로 점프할 수 있어요.
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>DIAGNOSIS</span><span class="pn">02</span></div>
+</div>
+
+<!-- ══════ SLIDE 3 — 섹션 01 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 01</div>
+  <h2>지금 당장<br>해야 할 것</h2>
+  <p>이번 주 안에 실행 가능한 액션</p>
+  <div class="sec-bg">01</div>
+</div>
+
+<!-- ══════ SLIDE 4 — 즉시 실행 ══════ -->
+<div class="slide dark2">
+  <div class="tag">SECTION 01 · IMMEDIATE ACTION</div>
+  <div class="h1">이번 주 안에 끝낼 것 5가지</div>
+
+  <div class="g2" style="margin-top:8px;">
+
+    <div class="card card-gold" style="margin-bottom:16px;">
+      <div class="num-big">01</div>
+      <div style="font-size:16px; font-weight:700; margin:-8px 0 10px;">기프티스트 공구 결과보고서 작성</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">
+        5/22(목) 마감 직후 즉시 작성.<br>
+        <strong style="color:#c9a84c;">총 매출 · 주문 건수 · 가글/치약 판매 수량 · 인스타 광고 데이터 · 브랜드앤유 수수료</strong> 전부 포함.<br>
+        이게 다음 제조사 미팅 때 "우리 실제로 해봤습니다" 증거.
+      </div>
+      <div style="font-size:12px; color:#c9a84c; margin-top:10px; border-top:1px solid #222; padding-top:8px;">⚡ 5/22 마감 후 AI가 즉시 작성</div>
+    </div>
+
+    <div class="card card-gold" style="margin-bottom:16px;">
+      <div class="num-big">02</div>
+      <div style="font-size:16px; font-weight:700; margin:-8px 0 10px;">보조카피 전 접점 통일</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">
+        <strong style="color:#fff;">제조사용:</strong> "면세점 MD 8년이 직접 매칭하는 가성비 인플루언서 공구"<br>
+        <strong style="color:#fff;">인플루언서용:</strong> "팔로워와 카테고리에 맞는 제품만, 일정·정산은 제때"<br><br>
+        → 홈페이지 · 인스타 바이오 · 제안서 첫 장 · DM 첫 줄 전부 동일하게
+      </div>
+      <div style="font-size:12px; color:#c9a84c; margin-top:10px; border-top:1px solid #222; padding-top:8px;">⚡ AI가 홈페이지 수정 즉시 가능</div>
+    </div>
+
+    <div class="card card-gold" style="margin-bottom:0;">
+      <div class="num-big">03</div>
+      <div style="font-size:16px; font-weight:700; margin:-8px 0 10px;">뉴트리디데이 팔로업 메일 발송</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">
+        이성욱 주임(lsu.0516@thebagel.kr)이 회신한 제조사.<br>
+        <strong style="color:#ef5350;">가장 뜨거운 리드인데 팔로업이 안 되어 있어요.</strong><br>
+        "인플루언서 리스트 + 수수료 구조" 답신 후 미침묵 — 지금 연락 안 하면 식어요.
+      </div>
+      <div style="font-size:12px; color:#c9a84c; margin-top:10px; border-top:1px solid #222; padding-top:8px;">⚡ 지금 바로 발송 가능 (대표님 확인만)</div>
+    </div>
+
+    <div class="card card-gold" style="margin-bottom:0;">
+      <div class="num-big">04</div>
+      <div style="font-size:16px; font-weight:700; margin:-8px 0 10px;">상표권 출원번호 홈페이지 반영</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">
+        특허로에서 출원번호 확인 후 AI에게 알려주시면<br>홈페이지·제안서에 즉시 반영해드려요.<br>
+        "상표 출원 완료" 한 줄이 제조사 신뢰도를 올려줌.
+      </div>
+      <div style="font-size:12px; color:#c9a84c; margin-top:10px; border-top:1px solid #222; padding-top:8px;">⚡ 대표님이 번호만 알려주시면 됨</div>
+    </div>
+
+  </div>
+
+  <div class="card card-gold" style="margin-top:16px; padding:18px 22px;">
+    <div class="num-big" style="font-size:32px; display:inline;">05</div>
+    <span style="font-size:16px; font-weight:700; margin-left:8px;">약사 인플루언서 3명 시니어 DM 발송</span>
+    <div style="font-size:13px; color:#aaa; margin-top:8px; line-height:1.6;">@d.pharmacist(D약사·18만) · @supermom_yaksa(수퍼맘약사·5만+) · @nocnoc_beauty(노크노크홍언니·18.2만) — 시니어 건강기능식품 컨셉으로 DM 초안 AI가 바로 작성 가능</div>
+  </div>
+
+  <div class="footer"><span>SECTION 01 — IMMEDIATE</span><span class="pn">04</span></div>
+</div>
+
+<!-- ══════ SLIDE 5 — 섹션 02 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 02</div>
+  <h2>수익 구조<br>어떻게 만들 것인가</h2>
+  <p>월 1,000만원까지 가는 현실적 경로</p>
+  <div class="sec-bg">02</div>
+</div>
+
+<!-- ══════ SLIDE 6 — 수익 구조 ══════ -->
+<div class="slide dark">
+  <div class="tag">SECTION 02 · REVENUE MODEL</div>
+  <div class="h1">브랜드앤유 수익 구조 설계</div>
+  <div class="sub">공구 1건당 구조 + 월별 목표 역산</div>
+
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:16px; background:#0a0f0a; border:1px solid #66bb6a33;">
+        <div style="font-size:13px; font-weight:700; color:#66bb6a; margin-bottom:14px;">공구 1건 수익 구조</div>
+        <table>
+          <tr><td style="color:#888;">공구 총 매출</td><td class="tc" style="color:#fff; font-weight:700;">예: 500만원</td></tr>
+          <tr><td style="color:#888;">인플루언서 수수료</td><td class="tc" style="color:#aaa;">25% = 125만원</td></tr>
+          <tr><td style="color:#888;">제조사 정산</td><td class="tc" style="color:#aaa;">67% = 335만원</td></tr>
+          <tr style="background:#111;"><td style="color:#c9a84c; font-weight:700;">브랜드앤유 수수료 8%</td><td class="tc" style="color:#c9a84c; font-weight:900; font-size:16px;">40만원</td></tr>
+        </table>
+        <div style="font-size:12px; color:#555; margin-top:10px;">월 1,000만원 = 월 총 공구 매출 1.25억 필요</div>
+      </div>
+
+      <div class="card card-gold">
+        <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:12px;">공구 1건 매출 500만원 만들려면</div>
+        <ul class="ul">
+          <li>인플루언서 팔로워 최소 5만명 이상</li>
+          <li>팔로워 구매전환율 1~2% = 500~1,000명 구매</li>
+          <li>평균 객단가 5,000~10,000원 제품</li>
+          <li>공구 기간 7일 이상 + 스토리 3회 이상 리마인드</li>
+          <li>인플루언서 팔로워가 제품 카테고리와 일치</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="background:#0a0a14; border:1px solid #4fc3f733; margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#4fc3f7; margin-bottom:14px;">월별 수익 로드맵 (보수적)</div>
+        <table>
+          <tr><th>시기</th><th class="tc">공구 건수</th><th class="tc">예상 수익</th></tr>
+          <tr><td>5월 (현재)</td><td class="tc">1건</td><td class="tc" style="color:#ef5350;">~33만원</td></tr>
+          <tr><td>6월</td><td class="tc">2건</td><td class="tc" style="color:#ffa726;">~80만원</td></tr>
+          <tr><td>7월</td><td class="tc">4~5건</td><td class="tc" style="color:#ffa726;">~240만원</td></tr>
+          <tr><td>8월</td><td class="tc">6~8건</td><td class="tc" style="color:#66bb6a;">~400만원</td></tr>
+          <tr><td>12월</td><td class="tc">15~20건</td><td class="tc" style="color:#c9a84c; font-weight:700;">~1,000만원</td></tr>
+        </table>
+      </div>
+
+      <div class="card card-blue">
+        <div style="font-size:13px; font-weight:700; color:#4fc3f7; margin-bottom:10px;">월 10건 공구 만들기 — 카테고리 분산 전략</div>
+        <ul class="ul">
+          <li class="green">뷰티·스킨케어 공구 3건/월 (핵심)</li>
+          <li class="green">생활용품·홈케어 공구 3건/월</li>
+          <li class="green">시니어 건강기능식품 공구 2건/월 (신규)</li>
+          <li>이너뷰티·건강 공구 2건/월</li>
+        </ul>
+        <div style="font-size:12px; color:#555; margin-top:10px;">카테고리 분산 = 한 카테고리 침체 시 리스크 분산</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>SECTION 02 — REVENUE</span><span class="pn">06</span></div>
+</div>
+
+<!-- ══════ SLIDE 7 — 섹션 03 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 03</div>
+  <h2>카테고리 전략<br>무엇을 팔 것인가</h2>
+  <p>지금 브랜드앤유에 맞는 최적 카테고리</p>
+  <div class="sec-bg">03</div>
+</div>
+
+<!-- ══════ SLIDE 8 — 카테고리 전략 ══════ -->
+<div class="slide dark2">
+  <div class="tag">SECTION 03 · CATEGORY STRATEGY</div>
+  <div class="h1">3개 카테고리 집중 전략</div>
+  <div class="sub">면세점 MD 8년 경력이 실제로 통하는 카테고리만</div>
+
+  <div class="g3">
+
+    <div class="card" style="border-top:3px solid #c9a84c; background:#0f0f00;">
+      <div style="font-size:24px; margin-bottom:8px;">💄</div>
+      <div style="font-size:17px; font-weight:700; color:#c9a84c; margin-bottom:6px;">① 뷰티·스킨케어</div>
+      <div style="font-size:12px; background:#1a1500; border-radius:6px; padding:4px 10px; display:inline-block; margin-bottom:12px; color:#c9a84c;">핵심 카테고리</div>
+      <ul class="ul">
+        <li>면세점 MD 8년 — 가장 깊은 전문성</li>
+        <li>인플루언서 가장 많은 카테고리</li>
+        <li>공구 전환율 가장 높음</li>
+        <li>제조사 DB 이미 다수 확보</li>
+      </ul>
+      <div style="margin-top:14px; padding-top:10px; border-top:1px solid #222;">
+        <div style="font-size:12px; color:#666;">타겟 인플루언서</div>
+        <div style="font-size:13px; color:#aaa; margin-top:4px;">뷰티·스킨케어 10만+ 팔로워, 공구 이력 있는 계정</div>
+      </div>
+    </div>
+
+    <div class="card" style="border-top:3px solid #66bb6a; background:#060f06;">
+      <div style="font-size:24px; margin-bottom:8px;">🏠</div>
+      <div style="font-size:17px; font-weight:700; color:#66bb6a; margin-bottom:6px;">② 생활용품·홈케어</div>
+      <div style="font-size:12px; background:#0a150a; border-radius:6px; padding:4px 10px; display:inline-block; margin-bottom:12px; color:#66bb6a;">안정적 카테고리</div>
+      <ul class="ul">
+        <li>재구매율 높아 장기 협업 가능</li>
+        <li>가격 구간 다양 — 공구 설계 유리</li>
+        <li>기프티스트 공구로 첫 경험 확보</li>
+        <li>올리브영 비종속 중소 브랜드 다수</li>
+      </ul>
+      <div style="margin-top:14px; padding-top:10px; border-top:1px solid #222;">
+        <div style="font-size:12px; color:#666;">주의사항</div>
+        <div style="font-size:13px; color:#aaa; margin-top:4px;">인플루언서 팔로워와 제품 카테고리 반드시 사전 확인</div>
+      </div>
+    </div>
+
+    <div class="card" style="border-top:3px solid #4fc3f7; background:#060a10;">
+      <div style="font-size:24px; margin-bottom:8px;">👴</div>
+      <div style="font-size:17px; font-weight:700; color:#4fc3f7; margin-bottom:6px;">③ 시니어 건강기능식품</div>
+      <div style="font-size:12px; background:#060a14; border-radius:6px; padding:4px 10px; display:inline-block; margin-bottom:12px; color:#4fc3f7;">신규 블루오션</div>
+      <ul class="ul">
+        <li>2030년 실버시장 168조원</li>
+        <li>2025년 초고령사회 (21.21%) 진입</li>
+        <li>경쟁자 거의 없는 공구 카테고리</li>
+        <li>약사 인플루언서 = 즉시 활용 가능</li>
+      </ul>
+      <div style="margin-top:14px; padding-top:10px; border-top:1px solid #222;">
+        <div style="font-size:12px; color:#666;">타겟 구매자</div>
+        <div style="font-size:13px; color:#aaa; margin-top:4px;">노인 본인 ❌ → 40~50대 자녀 ✅ "부모님께 드릴 제품"</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insight" style="margin-top:20px;">
+    <strong>카테고리 선택 원칙:</strong> "면세점에서 내가 직접 다뤄본 것 or 전문성 있는 인플루언서가 있는 것만." 모르는 카테고리에 손대면 제조사도 인플루언서도 신뢰를 안 줘요.
+  </div>
+  <div class="footer"><span>SECTION 03 — CATEGORY</span><span class="pn">08</span></div>
+</div>
+
+<!-- ══════ SLIDE 9 — 섹션 04 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 04</div>
+  <h2>인플루언서<br>어떻게 확보할 것인가</h2>
+  <p>실제 계정 1,000명까지 가는 현실적 방법</p>
+  <div class="sec-bg">04</div>
+</div>
+
+<!-- ══════ SLIDE 10 — 인플루언서 전략 ══════ -->
+<div class="slide dark">
+  <div class="tag">SECTION 04 · INFLUENCER STRATEGY</div>
+  <div class="h1">인플루언서 풀 1,000명 — 현실적 경로</div>
+
+  <div class="g2">
+    <div>
+      <div class="card card-gold" style="margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:12px;">현재 상황</div>
+        <div class="g2" style="gap:12px;">
+          <div class="stat">
+            <div class="stat-n" style="color:#c9a84c;">67명</div>
+            <div class="stat-l">현재 실제 확인된 DB</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n" style="color:#ef5350;">933명</div>
+            <div class="stat-l">목표까지 부족한 수</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-blue">
+        <div style="font-size:13px; font-weight:700; color:#4fc3f7; margin-bottom:12px;">수집 방법 — 현실적으로</div>
+        <ul class="ul">
+          <li><strong style="color:#fff;">대표님 인스타 직접 탐색</strong> — #공구 #공동구매 해시태그, 계정명 알려주면 AI 즉시 DB 등록</li>
+          <li><strong style="color:#fff;">공구 진행 중인 게시물 발견</strong> → 해당 인플루언서 팔로워·카테고리 확인 후 등록</li>
+          <li><strong style="color:#fff;">기존 계약 인플루언서 추천</strong> → "비슷한 규모 분 아시나요?" 소개 요청</li>
+          <li><strong style="color:#fff;">제조사 회신 시</strong> → "선호하는 인플루언서 있으세요?" 역으로 수집</li>
+        </ul>
+        <div style="font-size:12px; color:#555; margin-top:10px; border-top:1px solid #222; padding-top:8px;">목표: 매주 +20명 실제 계정 추가</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="background:#0f0f00; border:1px solid #c9a84c33; margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:12px;">즉시 활용 가능한 인플루언서 (시니어)</div>
+        <table>
+          <tr><th>계정</th><th class="tc">팔로워</th><th class="tc">특징</th></tr>
+          <tr><td style="color:#4fc3f7;">@d.pharmacist</td><td class="tc">18만</td><td class="tc" style="color:#66bb6a;">D약사, 건강 전문</td></tr>
+          <tr><td style="color:#4fc3f7;">@nocnoc_beauty</td><td class="tc">18.2만</td><td class="tc" style="color:#66bb6a;">노크노크홍언니</td></tr>
+          <tr><td style="color:#4fc3f7;">@supermom_yaksa</td><td class="tc">5만+</td><td class="tc" style="color:#66bb6a;">수퍼맘약사</td></tr>
+        </table>
+        <div style="font-size:12px; color:#c9a84c; margin-top:10px;">→ 시니어 건기식 공구 DM 바로 발송 가능</div>
+      </div>
+
+      <div class="card card-red">
+        <div style="font-size:13px; font-weight:700; color:#ef5350; margin-bottom:10px;">절대 원칙 — 인플루언서 DB</div>
+        <ul class="ul">
+          <li class="red">추정·AI 생성 계정 절대 금지</li>
+          <li class="red">실제 인스타그램에서 눈으로 확인한 계정만</li>
+          <li class="red">팔로워 1만 미만 계정 제외</li>
+          <li class="red">공구 이력 없는 계정 1순위 제외</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>SECTION 04 — INFLUENCER</span><span class="pn">10</span></div>
+</div>
+
+<!-- ══════ SLIDE 11 — 섹션 05 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 05</div>
+  <h2>브랜드앤유<br>어떻게 보여야 하나</h2>
+  <p>청담캔디 브랜딩 원칙 적용</p>
+  <div class="sec-bg">05</div>
+</div>
+
+<!-- ══════ SLIDE 12 — 브랜딩 전략 ══════ -->
+<div class="slide dark2">
+  <div class="tag">SECTION 05 · BRANDING</div>
+  <div class="h1">브랜드앤유 브랜딩 — 청담캔디 원칙 적용</div>
+
+  <div class="g2">
+    <div>
+      <div class="hl">🎯 핵심 메시지 — 모든 접점에 이 한 줄</div>
+
+      <div class="card" style="background:#0f0f00; border:1px solid #c9a84c55; margin-bottom:16px; padding:22px;">
+        <div style="font-size:13px; color:#888; margin-bottom:6px;">제조사에게</div>
+        <div style="font-size:18px; font-weight:700; color:#c9a84c; line-height:1.5;">"면세점 MD 8년이 직접 매칭하는<br>가성비 인플루언서 공구"</div>
+      </div>
+
+      <div class="card" style="background:#060a10; border:1px solid #4fc3f755; padding:22px;">
+        <div style="font-size:13px; color:#888; margin-bottom:6px;">인플루언서에게</div>
+        <div style="font-size:18px; font-weight:700; color:#4fc3f7; line-height:1.5;">"팔로워와 카테고리에 맞는 제품만,<br>일정·정산은 제때"</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="background:#0a0a0a; border:1px solid #1e1e1e; margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:12px;">청담캔디 핵심 가이드 — 브랜드앤유 적용</div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:14px; font-weight:700; margin-bottom:4px;">본질 = "사람 (경력)"</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">브랜드앤유의 차별화는 AI도, 시스템도 아니에요. <strong style="color:#fff;">면세점 MD 8년 경력의 박상권 대표가 직접 한다</strong>는 것.</div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:14px; font-weight:700; margin-bottom:4px;">한 단어 = "MD기획"</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">마케팅 에이전시? 인플루언서 에이전시? → 아니요. <strong style="color:#fff;">"MD기획 기반 공구 중계"</strong>로 포지셔닝.</div>
+        </div>
+        <div>
+          <div style="font-size:14px; font-weight:700; margin-bottom:4px;">AI 자랑 금지</div>
+          <div style="font-size:13px; color:#888; line-height:1.6;">AI 매칭 도구는 내부 1차 스크리닝용. <strong style="color:#fff;">외부 접점에 "AI가 합니다" 표현 일절 금지.</strong></div>
+        </div>
+      </div>
+
+      <div class="card card-red">
+        <div style="font-size:13px; font-weight:700; color:#ef5350; margin-bottom:10px;">브랜드앤유가 하지 않는 것 (공개 원칙)</div>
+        <div class="check"><span class="n">✗</span>식약처 인증 없는 건강식품 취급 안 함</div>
+        <div class="check"><span class="n">✗</span>효능 과장 콘텐츠 진행 안 함</div>
+        <div class="check"><span class="n">✗</span>공구 이력 없는 인플루언서 연결 안 함</div>
+        <div class="check"><span class="n">✗</span>확인되지 않은 판매 예측치 제시 안 함</div>
+        <div class="check"><span class="n">✗</span>추정 이메일 발송 안 함</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>SECTION 05 — BRANDING</span><span class="pn">12</span></div>
+</div>
+
+<!-- ══════ SLIDE 13 — 섹션 06 ══════ -->
+<div class="slide gold-divider">
+  <div class="sec-tag">SECTION 06</div>
+  <h2>6개월 실행<br>로드맵</h2>
+  <p>5월~12월, 단계별 집중 포인트</p>
+  <div class="sec-bg">06</div>
+</div>
+
+<!-- ══════ SLIDE 14 — 로드맵 ══════ -->
+<div class="slide dark">
+  <div class="tag">SECTION 06 · ROADMAP</div>
+  <div class="h1">브랜드앤유 6개월 로드맵</div>
+  <div class="sub">수익 · 레퍼런스 · 브랜드 3축 동시 성장</div>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-ph">PHASE 1</div>
+      <div class="tl-mo">5월 말</div>
+      <div class="tl-h">🔴 레퍼런스<br>확보</div>
+      <ul class="tl-ul">
+        <li>기프티스트 결과보고서</li>
+        <li>뉴트리디데이 팔로업</li>
+        <li>보조카피 전 접점 통일</li>
+        <li>상표권 출원번호 반영</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="tl-ph">PHASE 2</div>
+      <div class="tl-mo">6~7월</div>
+      <div class="tl-h">🟡 공구<br>파이프라인</div>
+      <ul class="tl-ul">
+        <li>2차 공구 2건 오픈</li>
+        <li>약사 인플루언서 DM</li>
+        <li>시니어 제조사 7개↑ 발굴</li>
+        <li>인플루언서 DB 300명</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="tl-ph">PHASE 3</div>
+      <div class="tl-mo">8~9월</div>
+      <div class="tl-h">🟢 시니어<br>공구 론칭</div>
+      <ul class="tl-ul">
+        <li>약사 인플루언서 첫 공구</li>
+        <li>시니어 브랜드 스토리 완성</li>
+        <li>월 공구 4~5건 체계화</li>
+        <li>결과보고서 레퍼런스 누적</li>
+      </ul>
+    </div>
+    <div class="tl-step">
+      <div class="tl-ph">PHASE 4</div>
+      <div class="tl-mo">10~12월</div>
+      <div class="tl-h">🏆 월 1,000만<br>목표</div>
+      <ul class="tl-ul">
+        <li>연말 효도선물 시즌 공구</li>
+        <li>월 15~20건 공구 운영</li>
+        <li>인플루언서 DB 500명+</li>
+        <li>다비치 부업 → 퇴사 검토</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; margin-top:20px;">
+    <div class="stat">
+      <div class="stat-n" style="color:#ef5350;">33만</div>
+      <div class="stat-l">5월 예상 수익(원)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" style="color:#ffa726;">80만</div>
+      <div class="stat-l">6월 목표 수익(원)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" style="color:#66bb6a;">400만</div>
+      <div class="stat-l">8월 목표 수익(원)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" style="color:#c9a84c;">1,000만</div>
+      <div class="stat-l">12월 목표 수익(원)</div>
+    </div>
+  </div>
+  <div class="footer"><span>SECTION 06 — ROADMAP</span><span class="pn">14</span></div>
+</div>
+
+<!-- ══════ SLIDE 15 — 결론 ══════ -->
+<div class="slide" style="background:linear-gradient(135deg,#080808 0%,#141400 60%,#0a0a00 100%);">
+  <div class="badge" style="background:#c9a84c;">CONCLUSION</div>
+  <div class="h1" style="font-size:42px;">지금 브랜드앤유에<br>필요한 건 딱 하나예요</div>
+
+  <div style="background:#c9a84c; border-radius:10px; padding:20px 28px; margin:24px 0; font-size:22px; font-weight:900; color:#000; line-height:1.5;">
+    "결과 레퍼런스 하나"<br>
+    <span style="font-size:15px; font-weight:400;">기프티스트 공구 결과보고서 → 다음 제조사가 계약하는 이유</span>
+  </div>
+
+  <div class="g3" style="margin-bottom:24px;">
+    <div class="card card-gold">
+      <div style="font-size:13px; font-weight:700; color:#c9a84c; margin-bottom:8px;">이미 가진 것</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">면세점 MD 8년 경력<br>상표권 출원 완료<br>시스템·홈페이지·DB 구축<br>실전 공구 경험</div>
+    </div>
+    <div class="card card-blue">
+      <div style="font-size:13px; font-weight:700; color:#4fc3f7; margin-bottom:8px;">이번 달 끝낼 것</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">결과보고서 작성<br>뉴트리디데이 팔로업<br>보조카피 전 접점 통일<br>약사 DM 발송</div>
+    </div>
+    <div class="card card-green">
+      <div style="font-size:13px; font-weight:700; color:#66bb6a; margin-bottom:8px;">다음 분기 목표</div>
+      <div style="font-size:13px; color:#aaa; line-height:1.7;">월 공구 4~5건<br>시니어 공구 첫 론칭<br>인플루언서 DB 300명<br>월 수익 240만원</div>
+    </div>
+  </div>
+
+  <div style="font-size:14px; color:#555; text-align:center;">
+    브랜드앤유 · 최적 사업 제안서 · 2026.05.20 · Genspark AI 작성 · 내부용
+  </div>
+  <div class="footer"><span>CONCLUSION</span><span class="pn">15</span></div>
+</div>
+
+</body>
+</html>
